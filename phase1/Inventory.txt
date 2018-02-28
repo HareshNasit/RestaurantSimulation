@@ -1,0 +1,2 @@
+chinese | 2
+cabbage | 2
