@@ -9,12 +9,7 @@ public class MenuItem {
   private HashMap<String, Integer> allowedComplements;
   private HashMap<String, Integer> allowedSubtractions;
 
-  public MenuItem(
-      String name,
-      int id,
-      HashMap<String, Integer> ingredients,
-      HashMap<String, Integer> allowedComplements, HashMap<String, Integer> allowedSubtractions,
-      int timeToPrepare) {
+  public MenuItem(String menuLine) {
     this.name = name;
     this.id = id;
     this.ingredients = ingredients;
