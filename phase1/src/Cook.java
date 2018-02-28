@@ -16,10 +16,12 @@ public class Cook {
     }
 
     /**
-     * Adds the dish to dishesInMaking which is being prepared.
-     * @param dish The Dish that is to be added to dishesInMaking.
+     * Adds the dishes from the order to dishesInMaking which are being prepared.
+     * @param order The Dish that is to be added to dishesInMaking.
      */
-    public void prepareDish(Dish dish){}
+    public void prepareDish(Order order){
+
+    }
 
     /**
      * Adds the dish to dishesReady after being prepared.
