@@ -14,8 +14,17 @@ public class Cook {
         this.dishesReady = new ArrayList<>();
         this.dishesInMaking = new ArrayList<>();
     }
+
+    /**
+     * Adds the dish to dishesInMaking which is being prepared.
+     * @param dish The Dish that is to be added to dishesInMaking.
+     */
     public void prepareDish(Dish dish){}
 
+    /**
+     * Adds the dish to dishesReady after being prepared.
+     * @param dish The Dish that is to be added.
+     */
     public void dishReady(Dish dish){
         dishesReady.add(dish);
     }
