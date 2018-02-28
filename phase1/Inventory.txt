@@ -1,2 +1,2 @@
-chinese | 2
-cabbage | 2
+chinese#2
+cabbage#2

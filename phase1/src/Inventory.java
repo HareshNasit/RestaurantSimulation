@@ -1,7 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /**
  * Inventory uses a a HashMap data structure where the key is a String ingredient and value is the
@@ -20,7 +23,8 @@ public class Inventory {
   }
 
   /**
-   * Increases the current stock of String ingredient by int amount
+   * Increases the current stock of String ingredient by int amount if ingredient is initially
+   * present, else
    *
    * @param ingredient The ingredient that is to be added to
    * @param amount The amount by which the ingredient stock is going to be increased by
@@ -37,6 +41,7 @@ public class Inventory {
 
   /**
    * Reduces the current stock of String ingredient by int amount if available
+   *
    * @param ingredient The ingredient that is to be added to
    * @param amount The amount by which the ingredient stock is going to be reduced by
    */
@@ -46,12 +51,15 @@ public class Inventory {
     }
   }
 
+  /**
+   * Writes current inventory to the Inventory.txt file to
+   */
   public void writeToInventory() {
     // Open the file for writing and write to it.
     try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILENAME)))) {
       for (String ingredient : inventory.keySet()) {
         StringBuilder line = new StringBuilder(ingredient);
-        line.append(" | " + inventory.get(ingredient));
+        line.append("#" + inventory.get(ingredient));
         out.println(line);
       }
     } catch (Exception e) {
@@ -60,4 +68,31 @@ public class Inventory {
 
   }
 
+  /**
+   * Reads the inventory from Inventory.txt
+   */
+  public void readInventory() {
+    try (BufferedReader fileReader = new BufferedReader(new FileReader(FILENAME))) {
+      String line = fileReader.readLine();
+      while (line != null) {
+        System.out.println(line);
+        String ingredient = line.split("#")[0];
+        int amount = Integer.valueOf(line.split("#")[1]);
+        inventory.put(ingredient, amount);
+        line = fileReader.readLine();
+      }
+
+    } catch (Exception e) {
+    }
+  }
+
+  @Override
+  public String toString() {
+    String output = "";
+    for (String ingredient : inventory.keySet()) {
+      output = output + ingredient + "|" + String.valueOf(inventory.get(ingredient)) + System
+          .lineSeparator();
+    }
+    return output;
+  }
 }
