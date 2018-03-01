@@ -38,4 +38,9 @@ public class Cook {
     public boolean lessIngredients(Dish dish){
         return false;
     }
+    /**
+     * The server adds an ingredient to a dish which is displayed in the order
+     */
+    public void addIngredient(String ingredient) {
+    }
 }
