@@ -17,46 +17,41 @@ public class Menu {
 
   }
 
-    /**
-     * Iterates through all the lines in the txt file to produce each dish on the menu
-     */
-  private void createMenu(){
-      File file = new File(FILENAME);
+  /** Iterates through all the lines in the txt file to produce each dish on the menu */
+  private void createMenu() {
+    File file = new File(FILENAME);
 
-      try {
-          Scanner menu = new Scanner(file);
+    try {
+      Scanner menu = new Scanner(file);
 
-          while (menu.hasNextLine()) {
-              String line = menu.nextLine();
-              addDishToMenu(line);
-          }
-          menu.close();
+      while (menu.hasNextLine()) {
+        String line = menu.nextLine();
+        addDishToMenu(line);
       }
-      catch (FileNotFoundException e) {
-          e.printStackTrace();
-      }
+      menu.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
   }
-  /**
-   * Creates a dish using a line from the txt file
-   */
-  private void addDishToMenu(String line){
-      String[] separatedByHashTag = line.split("#\\s");
+  /** Creates a dish using a line from the txt file */
+  private void addDishToMenu(String line) {
+    String[] separatedByHashTag = line.split("#\\s");
 
-      String name = separatedByHashTag[1];
-      int id = Integer.parseInt(separatedByHashTag[0]);
-      int timeToPrepare = Integer.parseInt(separatedByHashTag[2]);
-      HashMap<String, int[]> ingredients = new HashMap<>();
+    String name = separatedByHashTag[1];
+    int id = Integer.parseInt(separatedByHashTag[0]);
+    int timeToPrepare = Integer.parseInt(separatedByHashTag[2]);
+    HashMap<String, int[]> ingredients = new HashMap<>();
 
-      for(int i = 3; i < separatedByHashTag.length; i++ ){
-          String[] ingredient = separatedByHashTag[i].split("|");
-          int[] bounds = new int[3];
-          for(int k = 0; k < 3; k++){
-              bounds[k] = Integer.parseInt(ingredient[k+1]);
-          }
-          ingredients.put(ingredient[0], bounds);
+    for (int i = 3; i < separatedByHashTag.length; i++) {
+      String[] ingredient = separatedByHashTag[i].split("|");
+      int[] bounds = new int[3];
+      for (int k = 0; k < 3; k++) {
+        bounds[k] = Integer.parseInt(ingredient[k + 1]);
       }
-      Dish dish = new Dish(name, id, timeToPrepare, ingredients);
-      menuItems.add(dish);
+      ingredients.put(ingredient[0], bounds);
+    }
+    Dish dish = new Dish(name, id, timeToPrepare, ingredients);
+    menuItems.add(dish);
   }
 
   public int getMenuSize() {
@@ -73,10 +68,9 @@ public class Menu {
         int cookTime = Integer.valueOf(line.split("#")[2].trim());
 
         HashMap<String, int[]> ingredients = new HashMap<String, int[]>();
-        //Create ingredients hashmap here
+        // Create ingredients hashmap here
 
         Dish dish = new Dish(name, itemID, cookTime, ingredients);
-
       }
 
     } catch (Exception e) {
