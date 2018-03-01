@@ -1,0 +1,3 @@
+-It should be possible for the manager to check the inventory and see a printout of all inventory items and their quantities.
+-It should also be possible for a receiver to scan each item or list of items back into the inventory when a new shipment of ingredients arrives.
+
