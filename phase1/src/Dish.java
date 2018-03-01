@@ -30,4 +30,13 @@ public class Dish {
   public String toString() {
     return this.name;
   }
+
+  /**
+   * Creates a non-alias copy of this Dish
+   * @return Dish
+   */
+  public Dish clone(){
+      return new Dish(this.name, this.id, this.timeToPrepare, this.ingredients);
+  }
+
 }
