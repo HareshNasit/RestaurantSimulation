@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * A cook decides whether the dish can be prepared and prepares the dish.
  */
 public class Cook {
+    private boolean isOccupied;
     private static int numOfCooks;
     private String name; // Name of the cook.
     private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
@@ -13,6 +14,7 @@ public class Cook {
         numOfCooks++;
         this.dishesReady = new ArrayList<>();
         this.dishesInMaking = new ArrayList<>();
+
     }
 
     /**
@@ -29,5 +31,11 @@ public class Cook {
      */
     public void dishReady(Dish dish){
         dishesReady.add(dish);
+    }
+    /**
+     * Checks if the dish has enough ingredients.
+     */
+    public boolean lessIngredients(Dish dish){
+        return false;
     }
 }
