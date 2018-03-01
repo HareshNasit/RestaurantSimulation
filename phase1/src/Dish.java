@@ -1,49 +1,32 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dish {
 
-  private MenuItem menuItem;
-  private HashMap<String, Integer> complements;
-  private HashMap<String, Integer> subtractions;
+  private String name;
+  private int id;
+  private int timeToPrepare;
+  private HashMap<String, int[]> ingredients;
+  private String tableNumber;
 
-  public Dish(MenuItem menuItem, HashMap<String, Integer> complements) {
-    this.menuItem = menuItem;
-    this.complements = complements;
+  public Dish(String name, int id, int time, HashMap<String, int[]> ingredients,
+      String tableNumber) {
+    this.name = name;
+    this.id = id;
+    this.timeToPrepare = time;
+    this.ingredients = ingredients;
+    this.tableNumber = tableNumber;
   }
 
-  public MenuItem getMenuItem() {
-    return menuItem;
-  }
-
-  // Getting all the ingredients for the Dish
-  public HashMap<String, Integer> getAllIngredients() {
-    HashMap<String, Integer> ingredients = new HashMap<>();
-
-    for (String key : menuItem.getIngredients().keySet()) {
-      ingredients.put(key, menuItem.getIngredients().get(key));
-    }
-
-    for (String key : complements.keySet()) {
-      if (ingredients.containsKey(key)) {
-        ingredients.put(key, ingredients.get(key) + complements.get(key));
-      } else {
-        ingredients.put(key, complements.get(key));
-      }
-    }
-
-    for (String key : subtractions.keySet()) {
-        ingredients.put(key, ingredients.get(key) - subtractions.get(key));
-    }
-    return ingredients;
+  public Dish(String name, int id, int time, HashMap<String, int[]> ingredients) {
+    this.name = name;
+    this.id = id;
+    this.timeToPrepare = time;
+    this.ingredients = ingredients;
+    this.tableNumber = "n/a";
   }
 
   @Override
   public String toString() {
-    String name = menuItem.toString() + " w/ ";
-    for (String key : complements.keySet()) {
-      name += Integer.toString(complements.get(key)) + " " + key + " ";
-    }
-    return name;
+    return this.name;
   }
 }
