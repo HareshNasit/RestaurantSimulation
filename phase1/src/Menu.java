@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Menu {
 
-  private ArrayList<MenuItem> menuItems;
+  private ArrayList<Dish> menuItems;
 
   public Menu(String menuText) {
     // Aggregate the data
