@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 /**
  * Server class records orders taken from customers and relays them to the chef.
@@ -8,14 +7,16 @@ import java.util.PriorityQueue;
 public class Server {
 
     public static ArrayList<Server> servers; // the list of servers in the restaurant
-    private static int numberOfServers;
+    private static int numberOfServers; // the number of servers in a restaurant
     private String name; // name of a server
     private boolean isOccupied; // whether the server is currently serving a table or not
-    protected ArrayList<Dish> dishes; // list of dishes the server has taken from a table
     protected ArrayList<Table> tables; // the list of tables in the restaurant
+    protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
+    protected Table table;
 
-    public Server(String name) {
+    public Server(String name, ArrayList<Server> servers) {
         this.name = name;
+        servers.add(this);
         numberOfServers++;
     }
 
@@ -23,9 +24,12 @@ public class Server {
      * The server takes the order from a table and adds it to the list of orders to be cooked
      *
      * @param table the table that places the order
-     * @param queue the queue of dishes to be cooked
+     * @param dishesInOrder the arraylist of dishes to be cooked
      */
-    public void addOrder(Table table, PriorityQueue queue) {
+    public void addOrder(Table table, Dish dish, ArrayList<Dish> dishesInOrder) {
+        for(int i = 0; i < table.numberOfDishesInOrder(); i++){
+            
+        }
     }
 
     /**
@@ -38,7 +42,7 @@ public class Server {
 
     /**
      * The server takes the dish from the table and returns it to the cook
-     * @param dish the dish that is to be returned 
+     * @param dish the dish that is to be returned
      */
     public void returnOrder(Dish dish){}
 
