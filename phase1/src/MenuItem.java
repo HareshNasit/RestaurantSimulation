@@ -6,24 +6,16 @@ public class MenuItem {
   private int id;
   private int timeToPrepare;
   private HashMap<String, Integer> ingredients;
-  private HashMap<String, Integer> allowedComplements;
-  private HashMap<String, Integer> allowedSubtractions;
 
-  public MenuItem(String menuLine) {
+  public MenuItem(String name, int id, int timeToPrepare, HashMap<String, Integer> ingredients) {
     this.name = name;
     this.id = id;
     this.ingredients = ingredients;
-    this.allowedComplements = allowedComplements;
-    this.allowedSubtractions = allowedSubtractions;
     this.timeToPrepare = timeToPrepare;
   }
 
   public HashMap<String, Integer> getIngredients() {
     return ingredients;
-  }
-
-  public HashMap<String, Integer> getAllowedComplements() {
-    return allowedComplements;
   }
 
   public String getName() {
