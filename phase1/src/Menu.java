@@ -43,7 +43,7 @@ public class Menu {
     HashMap<String, int[]> ingredients = new HashMap<>();
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
-      String[] ingredient = separatedByHashTag[i].split("|");
+      String[] ingredient = separatedByHashTag[i].split(",");
       int[] bounds = new int[3];
       for (int k = 0; k < 3; k++) {
         bounds[k] = Integer.parseInt(ingredient[k + 1]);
