@@ -21,7 +21,7 @@ public class ServingTable {
     dishesToBeServed.addAll(order);
   }
 
-  public Dish getDishFromServingTable() {
+  public Dish getCookedDishes() {
     return dishesToBeCooked.poll();
   }
 
