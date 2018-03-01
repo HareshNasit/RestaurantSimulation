@@ -13,6 +13,7 @@ public class Server {
     protected ArrayList<Table> tables; // the list of tables in the restaurant
     protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
     protected Table table;
+    protected ServingTable servingTable;
 
     public Server(String name, ArrayList<Server> servers) {
         this.name = name;
@@ -24,11 +25,11 @@ public class Server {
      * The server takes the order from a table and adds it to the list of orders to be cooked
      *
      * @param table the table that places the order
-     * @param dishesInOrder the arraylist of dishes to be cooked
      */
-    public void addOrder(Table table, Dish dish, ArrayList<Dish> dishesInOrder) {
+    public void addOrder(Table table) {
+        ArrayList<Dish> tempDishes = table.getTableOrder();
         for(int i = 0; i < table.numberOfDishesInOrder(); i++){
-            
+            servingTable.dishesToBeCooked.add(tempDishes.get(i));
         }
     }
 
