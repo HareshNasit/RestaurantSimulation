@@ -74,7 +74,6 @@ public class Inventory {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(FILENAME))) {
       String line = fileReader.readLine();
       while (line != null) {
-        System.out.println(line);
         String ingredient = line.split("#")[0];
         int amount = Integer.valueOf(line.split("#")[1]);
         inventory.put(ingredient, amount);

@@ -17,6 +17,7 @@ public class Dish {
     this.tableNumber = tableNumber;
   }
 
+  //constructor to be used for menu
   public Dish(String name, int id, int time, HashMap<String, int[]> ingredients) {
     this.name = name;
     this.id = id;
