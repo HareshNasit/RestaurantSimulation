@@ -38,6 +38,17 @@ public class Inventory {
     }
   }
 
+  public boolean hasEnoughIngredients(HashMap<String, Integer> dishIngredients) {
+    for (String ingredient : dishIngredients.keySet()) {
+      if (!inventory.containsKey(ingredient)) {
+        return false;
+      } else if (inventory.get(ingredient).getCurrentQuantity() < dishIngredients.get(ingredient)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /**
    * Reduces the current stock of String ingredient by int amount if available
    *
