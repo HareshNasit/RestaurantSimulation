@@ -39,8 +39,9 @@ public class Cook {
         return false;
     }
     /**
-     * The server adds an ingredient to a dish which is displayed in the order
+     * The server receives and adds ingredients to the inventory.
      */
-    public void addIngredient(String ingredient) {
+    public void addIngredients(Inventory inventory) {
     }
+
 }

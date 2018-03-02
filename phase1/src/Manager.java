@@ -20,5 +20,8 @@ public class Manager {
      * Reads the file about the new ingredients to be purchased and requests the distributor the amount given.
      */
     public void SendMail(int amount){}
-
+    /**
+     * The Manager can check the inventory.
+     */
+    public void checkInventory(Inventory inventory){}
 }
