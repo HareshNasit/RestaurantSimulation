@@ -12,6 +12,7 @@ public class Table {
     private boolean orderCompleted; // if the table's order has been completed or not
     private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
     protected Server server;
+    private int numberOfDishesServed; // the number of dishes served to the table
 
     public boolean isOrderCompleted() {
         return orderCompleted;
@@ -37,6 +38,7 @@ public class Table {
      */
     public void serveOrder(Table table){
         server.getCookedDishes(table);
+        numberOfDishesServed++;
     }
 
     /**
@@ -49,6 +51,10 @@ public class Table {
             numberOfDishes++;
         }
         return numberOfDishes;
+    }
+
+    public int getNumberOfDishesServed() {
+        return numberOfDishesServed;
     }
 
 

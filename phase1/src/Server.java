@@ -53,6 +53,13 @@ public class Server {
     public void addIngredient(String ingredient) {
     }
 
+    /**
+     * This method checks whether all the dishes the table ordered have been served or not.
+     * @return
+     */
+    public boolean isOrderComplete(){
+        return table.getNumberOfDishesServed() == table.numberOfDishesInOrder();
+    }
 
     public boolean isOccupied() {
         return isOccupied;
