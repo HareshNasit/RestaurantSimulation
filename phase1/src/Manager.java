@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /*
@@ -6,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Manager {
     private String name;
+    private String requestIngredients = "request.txt";
     /**
      * Calls a server or a cook to collect the received ingredients.
      */
@@ -15,11 +18,33 @@ public class Manager {
     /**
      * Reads the file about the new ingredients to be purchased and default value is 20.
      */
-    public void SendMail(){}
+    public String SendMail(){
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
+            String line = fileReader.readLine();
+            if (line != null) {
+                return line + " 20";
+            }
+            return null;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
     /**
      * Reads the file about the new ingredients to be purchased and requests the distributor the amount given.
      */
-    public void SendMail(int amount){}
+    public String SendMail(int amount){
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
+            String line = fileReader.readLine();
+            if (line != null) {
+                return line + " " + amount;
+            }
+            return null;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
     /**
      * The Manager can check the inventory.
      */
