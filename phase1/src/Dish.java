@@ -44,7 +44,11 @@ public class Dish {
     return new Dish(this.name, this.id, this.timeToPrepare, cloneIngredients());
   }
 
-  public HashMap<String, DishIngredient> cloneIngredients() {
+    /**
+     * Makes a non-alias copy of the ingredients.
+     * @return HashMap<String, DishIngredient> Ingredients hashmap
+     */
+  private HashMap<String, DishIngredient> cloneIngredients() {
 
     HashMap<String, DishIngredient> copy = new HashMap<>();
 
