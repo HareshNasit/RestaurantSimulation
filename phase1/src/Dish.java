@@ -44,10 +44,11 @@ public class Dish {
     return new Dish(this.name, this.id, this.timeToPrepare, cloneIngredients());
   }
 
-    /**
-     * Makes a non-alias copy of the ingredients.
-     * @return HashMap<String, DishIngredient> Ingredients hashmap
-     */
+  /**
+   * Makes a non-alias copy of the ingredients.
+   *
+   * @return HashMap<String , DishIngredient> Ingredients hashmap
+   */
   private HashMap<String, DishIngredient> cloneIngredients() {
 
     HashMap<String, DishIngredient> copy = new HashMap<>();
@@ -56,5 +57,17 @@ public class Dish {
       copy.put(key, this.ingredients.get(key).clone());
     }
     return copy;
+  }
+
+  public HashMap<String, DishIngredient> getIngredients() {
+    return this.ingredients;
+  }
+
+  public HashMap<String, Integer> getIngredientAmounts() {
+    HashMap<String, Integer> ingredientAmounts = new HashMap<>();
+    for (String key : this.ingredients.keySet()) {
+      ingredientAmounts.put(key, this.ingredients.get(key).getAmount());
+    }
+    return ingredientAmounts;
   }
 }
