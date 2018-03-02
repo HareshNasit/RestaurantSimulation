@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /*
  * A cook decides whether the dish can be prepared and prepares the dish.
  */
-public class Cook {
+public class Cook implements IWorker{
     private boolean isOccupied;
     private static int numOfCooks;
     private String name; // Name of the cook.
@@ -42,7 +42,10 @@ public class Cook {
     /**
      * The server receives and adds ingredients to the inventory.
      */
-    public void addIngredients(Inventory inventory) {
+    public void addIngredients(Inventory inventory, String ingredient, int amount) {
+        inventory.addStock(ingredient,amount);
     }
-
+    public boolean isOccupied(){
+        return isOccupied;
+    }
 }

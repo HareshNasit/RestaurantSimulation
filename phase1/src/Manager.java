@@ -8,12 +8,22 @@ import java.util.ArrayList;
  */
 public class Manager {
     private String name;
+    private Restaurant restaurant;
     private String requestIngredients = "request.txt";
+    public Manager(String name, Restaurant restaurant){
+        this.name = name;
+        this.restaurant = restaurant;
+    }
     /**
      * Calls a server or a cook to collect the received ingredients.
      */
-    public Server callWorker(){
-        return null;
+    public IWorker callWorker(){
+        for(IWorker worker: restaurant.getWorkers()){
+            if(!worker.isOccupied()){
+                return worker;
+            }
+        }
+        return null; // NEEDS TO BE CHECKED AGAIN.
     }
     /**
      * Reads the file about the new ingredients to be purchased and default value is 20.

@@ -5,18 +5,25 @@ import java.util.ArrayList;
  */
 public class Restaurant {
 
-  private Inventory inventory;
-  private Menu menu;
-  private static ArrayList<IWorker> workers;
-  public Restaurant() {
-    this.inventory = new Inventory();
-    this.menu = new Menu();
+  private Inventory inventory; // The inventory of the restaurant.
+  private Menu menu; // The menu of the restaurant.
+  private ArrayList<IWorker> workers; // All the workers in this restaurant.
+  public Restaurant(Menu menu,Inventory inventory) {
+    this.inventory = inventory;
+    this.menu = menu;
     workers = new ArrayList<>();
   }
+    /**
+     * Adds the worker to the list of workers.
+     * @param worker The worker.
+     */
   public void addWorker(IWorker worker){
       workers.add(worker);
   }
-
+    /**
+     * returns the list of workers.
+     * @return workers.
+     */
     public  ArrayList<IWorker> getWorkers() {
         return workers;
     }
