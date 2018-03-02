@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * The table is where the customers sit and order food and also where their cooked food arrives.
  */
 
-public class Table {
+public class Table extends Observable {
     private String tableNumber; // the id number of the table
     private int tableSize; // the number of people who can sit on this table
     private boolean isOccupied; // if the table already has customers

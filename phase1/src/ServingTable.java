@@ -1,9 +1,8 @@
-import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
 import java.util.PriorityQueue;
 
-public class ServingTable {
+public class ServingTable extends Observable {
 
   PriorityQueue<Dish> dishesToBeCooked;
   PriorityQueue<Dish> dishesToBeServed;
