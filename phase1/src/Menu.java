@@ -10,13 +10,14 @@ public class Menu {
   private ArrayList<Dish> menuItems;
 
   public Menu() {
-    // Aggregate the data
-    // Each MenuItem takes in a line from the menu.txt
 
+    createMenu();
   }
 
   /** Iterates through all the lines in the txt file to produce each dish on the menu */
   private void createMenu() {
+    // Aggregate the data
+    // Each MenuItem takes in a line from the menu.txt
     File file = new File(FILENAME);
 
     try {
@@ -38,7 +39,7 @@ public class Menu {
     String name = separatedByHashTag[1];
     int id = Integer.parseInt(separatedByHashTag[0]);
     int timeToPrepare = Integer.parseInt(separatedByHashTag[2]);
-    HashMap<String, int[]> ingredients = new HashMap<>();
+    HashMap<String, DishIngredient> ingredients = new HashMap<>();
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
       String[] ingredient = separatedByHashTag[i].split(",");
@@ -46,7 +47,13 @@ public class Menu {
       for (int k = 0; k < 3; k++) {
         bounds[k] = Integer.parseInt(ingredient[k + 1]);
       }
-      ingredients.put(ingredient[0], bounds);
+      String ingredientName = ingredient[0];
+      int amount = Integer.parseInt(ingredient[1]);
+      int lowerAmount = Integer.parseInt(ingredient[2]);
+      int upperAmount = Integer.parseInt(ingredient[3]);
+
+      ingredients.put(
+          ingredient[0], new DishIngredient(ingredientName, amount, lowerAmount, upperAmount));
     }
     Dish dish = new Dish(name, id, timeToPrepare, ingredients);
     menuItems.add(dish);
@@ -55,6 +62,4 @@ public class Menu {
   public int getMenuSize() {
     return menuItems.size();
   }
-
-
 }
