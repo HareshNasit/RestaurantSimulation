@@ -55,6 +55,8 @@ public class Cook implements IWorker{
      * @return boolean whether a dish can be prepared or no.
      */
     public boolean canBePrepared(Dish dish, Inventory inventory){
-    for(DishIngredient ingredient: )
+    for(String ingredient: dish.getIngredientAmounts().keySet()){
+        
+    }
     }
 }
