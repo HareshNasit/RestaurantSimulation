@@ -5,7 +5,7 @@ public class DishIngredient {
   private int upperAmount;
   private int lowerAmount;
 
-  public DishIngredient(String name, int amount, int upperAmount, int lowerAmount) {
+  public DishIngredient(String name, int amount, int lowerAmount, int upperAmount) {
     this.name = name;
     this.amount = amount;
     this.upperAmount = upperAmount;
@@ -50,6 +50,10 @@ public class DishIngredient {
     return this.amount - amount >= lowerAmount;
   }
 
+  @Override
+  public DishIngredient clone(){
+      return new DishIngredient(this.name, this.amount, this.lowerAmount, this.upperAmount);
+  }
   /** @return */
   @Override
   public String toString() {
