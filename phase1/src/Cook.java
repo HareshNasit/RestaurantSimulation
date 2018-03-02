@@ -10,25 +10,26 @@ public class Cook {
     private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
     private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
 
-    public Cook(){
+    public Cook(String name, Restaurant restaurant){
+        this.name = name;
         numOfCooks++;
-        this.dishesReady = new ArrayList<>();
-        this.dishesInMaking = new ArrayList<>();
-
+        this.dishesReady = new ArrayList<Dish>();
+        this.dishesInMaking = new ArrayList<Dish>();
+        restaurant.getWorkers().add((IWorker)this);
+        this.isOccupied = false;
     }
 
     /**
      * Adds the dishes from the order to dishesInMaking which are being prepared.
      * @param order The Dish that is to be added to dishesInMaking.
      */
-    public void prepareDish(Order order){
-
-    }
+    public void prepareDish(Order order){}
 
     /**
      * Adds the dish to dishesReady after being prepared.
      * @param dish The Dish that is to be added.
      */
+
     public void dishReady(Dish dish){
         dishesReady.add(dish);
     }
