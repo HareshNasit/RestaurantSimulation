@@ -12,6 +12,7 @@ public class Server {
     private boolean isOccupied; // whether the server is currently serving a table or not
     protected ArrayList<Table> tables; // the list of tables in the restaurant
     protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
+    protected ArrayList<Dish> cookedDishes; // the cooked dishes that should be served
     protected Table table;
     protected ServingTable servingTable;
 
@@ -23,7 +24,6 @@ public class Server {
 
     /**
      * The server takes the order from a table and adds it to the list of orders to be cooked
-     *
      * @param table the table that places the order
      */
     public void addOrder(Table table) {
@@ -35,10 +35,10 @@ public class Server {
 
     /**
      * The server serves the order to the table and removes it from the list of orders to be served
-     *
      * @param table the table whose order is being served
      */
-    public void serveOrder(Table table) {
+    public void getCookedDishes(Table table) {
+        servingTable.getDishesToBeServed();
     }
 
     /**

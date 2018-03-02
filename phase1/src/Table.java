@@ -10,6 +10,8 @@ public class Table {
     private boolean isOccupied; // if the table already has customers
     private ArrayList<Dish> tableOrder; // the dishes the table ordered
     private boolean orderCompleted; // if the table's order has been completed or not
+    private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
+    protected Server server;
 
     public boolean isOrderCompleted() {
         return orderCompleted;
@@ -30,7 +32,15 @@ public class Table {
     }
 
     /**
-     *
+     * The cooked dishes are served to the specified table
+     * @param table the table that ordered the dish
+     */
+    public void serveOrder(Table table){
+        server.getCookedDishes(table);
+    }
+
+    /**
+     * Returns the number of dishes that were ordered by a table.
      * @return returns the number of dishes in the order
      */
     public int numberOfDishesInOrder(){

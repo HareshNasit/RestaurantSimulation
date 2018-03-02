@@ -17,12 +17,13 @@ public class ServingTable {
     dishesToBeCooked.addAll(order);
   }
 
-  public void addToBeServed(ArrayList<Dish> order) {
-    dishesToBeServed.addAll(order);
+  public void addToBeServed(ArrayList<Dish> order) { dishesToBeServed.addAll(order);
   }
 
-  public Dish getCookedDishes() {
+  public Dish getDishesToBeCooked() {
     return dishesToBeCooked.poll();
   }
+
+  public Dish getDishesToBeServed(){ return dishesToBeServed.poll(); }
 
 }
