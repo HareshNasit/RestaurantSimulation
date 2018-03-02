@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.PriorityQueue;
 
-public class ServingTable extends Observable {
+public class ServingTable {
 
   PriorityQueue<Dish> dishesToBeCooked;
   PriorityQueue<Dish> dishesToBeServed;
