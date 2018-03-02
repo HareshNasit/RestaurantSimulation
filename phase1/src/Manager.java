@@ -6,18 +6,17 @@ import java.util.ArrayList;
  * A Manager manages the overall restaurant and gets the ingredients if there
  * is a shortage.
  */
-public class Manager {
+public class Manager implements IWorker{
+    private boolean isOccupied;
     private String name;
-    private Restaurant restaurant;
     private String requestIngredients = "request.txt";
     public Manager(String name, Restaurant restaurant){
         this.name = name;
-        this.restaurant = restaurant;
     }
     /**
      * Calls a server or a cook to collect the received ingredients.
      */
-    public IWorker callWorker(){
+    public IWorker callWorker(Restaurant restaurant){
         for(IWorker worker: restaurant.getWorkers()){
             if(!worker.isOccupied()){
                 return worker;
@@ -32,7 +31,7 @@ public class Manager {
         try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
             String line = fileReader.readLine();
             if (line != null) {
-                return line + " 20";
+                return line;
             }
             return null;
         }
@@ -54,6 +53,9 @@ public class Manager {
         catch (Exception e) {
             return null;
         }
+    }
+    public boolean isOccupied(){
+        return isOccupied;
     }
     /**
      * The Manager can check the inventory.

@@ -21,14 +21,15 @@ public class Cook implements IWorker{
 
     /**
      * Adds the dishes from the order to dishesInMaking which are being prepared.
-     * @param order The Dish that is to be added to dishesInMaking.
+     * @param dish The Dish that is to be added to dishesInMaking.
      */
-    public void prepareDish(Order order){}
+    public void prepareDish(Dish dish,Inventory inventory){}
 
     /**
      * Adds the dish to dishesReady after being prepared.
      * @param dish The Dish that is to be added.
      */
+
 
     public void dishReady(Dish dish){
         dishesReady.add(dish);
@@ -47,5 +48,13 @@ public class Cook implements IWorker{
     }
     public boolean isOccupied(){
         return isOccupied;
+    }
+    /**
+     * Returns a boolean whether a dish can be prepared or no.
+     * @param dish the dish.
+     * @return boolean whether a dish can be prepared or no.
+     */
+    public boolean canBePrepared(Dish dish, Inventory inventory){
+    for(DishIngredient ingredient: )
     }
 }
