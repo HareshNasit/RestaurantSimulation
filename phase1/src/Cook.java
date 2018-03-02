@@ -56,7 +56,7 @@ public class Cook implements IWorker{
      */
     public boolean canBePrepared(Dish dish, Inventory inventory){
     for(String ingredient: dish.getIngredientAmounts().keySet()){
-        
+
     }
     }
 }
