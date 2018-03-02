@@ -4,7 +4,7 @@ public class Dish {
 
   private String name;
   private int id;
-  private int timeToPrepare;
+  private int price;
   private HashMap<String, DishIngredient> ingredients;
   private String tableNumber;
 
@@ -16,7 +16,7 @@ public class Dish {
       String tableNumber) {
     this.name = name;
     this.id = id;
-    this.timeToPrepare = time;
+    this.price = time;
     this.ingredients = ingredients;
     this.tableNumber = tableNumber;
   }
@@ -25,7 +25,7 @@ public class Dish {
   public Dish(String name, int id, int time, HashMap<String, DishIngredient> ingredients) {
     this.name = name;
     this.id = id;
-    this.timeToPrepare = time;
+    this.price = time;
     this.ingredients = ingredients;
     this.tableNumber = "n/a";
   }
@@ -41,7 +41,7 @@ public class Dish {
    * @return Dish
    */
   public Dish clone() {
-    return new Dish(this.name, this.id, this.timeToPrepare, cloneIngredients());
+    return new Dish(this.name, this.id, this.price, cloneIngredients());
   }
 
   /**

@@ -38,7 +38,7 @@ public class Menu {
 
     String name = separatedByHashTag[1];
     int id = Integer.parseInt(separatedByHashTag[0]);
-    int timeToPrepare = Integer.parseInt(separatedByHashTag[2]);
+    int price = Integer.parseInt(separatedByHashTag[2]);
     HashMap<String, DishIngredient> ingredients = new HashMap<>();
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
@@ -55,7 +55,7 @@ public class Menu {
       ingredients.put(
           ingredient[0], new DishIngredient(ingredientName, amount, lowerAmount, upperAmount));
     }
-    Dish dish = new Dish(name, id, timeToPrepare, ingredients);
+    Dish dish = new Dish(name, id, price, ingredients);
     menuItems.add(dish);
   }
 
