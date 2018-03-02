@@ -22,6 +22,15 @@ public class DishIngredient {
   }
 
   /**
+   * Gets the amount of the Ingredient this DishIngredient has.
+   *
+   * @return
+   */
+  public int getAmount() {
+    return this.amount;
+  }
+
+  /**
    * Adds an amount to the ingredient.
    *
    * @param amount amount subtracted from the ingredient.
