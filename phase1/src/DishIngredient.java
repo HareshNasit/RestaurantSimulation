@@ -51,8 +51,8 @@ public class DishIngredient {
   }
 
   @Override
-  public DishIngredient clone(){
-      return new DishIngredient(this.name, this.amount, this.lowerAmount, this.upperAmount);
+  public DishIngredient clone() {
+    return new DishIngredient(this.name, this.amount, this.lowerAmount, this.upperAmount);
   }
   /** @return */
   @Override
