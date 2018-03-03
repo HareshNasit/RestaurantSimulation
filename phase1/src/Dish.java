@@ -5,7 +5,6 @@ public class Dish {
   private String name;
   private int id;
   private int price;
-  private int complementsPrice;
   private HashMap<String, DishIngredient> ingredients;
   private String tableId;
 
@@ -23,7 +22,6 @@ public class Dish {
     this.price = time;
     this.ingredients = ingredients;
     this.tableId = tableId;
-    this.complementsPrice = 0;
   }
 
   /**
@@ -40,7 +38,6 @@ public class Dish {
     this.price = time;
     this.ingredients = ingredients;
     this.tableId = "n/a";
-    this.complementsPrice = 0;
   }
 
   /**
@@ -86,7 +83,13 @@ public class Dish {
    * @return
    */
   public int getPrice() {
-    return this.price + this.complementsPrice;
+    int finalPrice = price;
+    for (String key : this.ingredients.keySet()) {
+      DishIngredient dishIngredient = this.ingredients.get(key);
+      int difference = dishIngredient.getAdditionAmount();
+      finalPrice += difference * dishIngredient.getPrice();
+    }
+    return finalPrice;
   }
 
   public HashMap<String, DishIngredient> getIngredients() {
@@ -101,7 +104,6 @@ public class Dish {
    * @param amount
    */
   public void addIngredient(String ingredient, int amount) {
-    this.complementsPrice += amount * this.ingredients.get(ingredient).getPrice();
     this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
@@ -113,17 +115,6 @@ public class Dish {
    * @param amount
    */
   public void subtractIngredient(String ingredient, int amount) {
-    DishIngredient dishIngredient = this.ingredients.get(ingredient);
-    // the price shouldn't go down if the customer removes a baseAmount of ingredients
-    // For example, if a customer removes a bun from the hamburger, the price shouldn't go down
-    // this is the reasoning for the if statement.
-    if (dishIngredient.getAmount() - amount >= dishIngredient.getBaseAmount()) {
-      this.complementsPrice -= amount * dishIngredient.getPrice();
-    } else {
-      this.complementsPrice -=
-          dishIngredient.getPrice() * (dishIngredient.getPrice() - dishIngredient.getBaseAmount());
-    }
-
     this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
