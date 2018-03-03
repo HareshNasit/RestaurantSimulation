@@ -1,12 +1,9 @@
 import java.util.ArrayList;
-import java.util.Observable;
 
-/**
- * The table is where the customers sit and order food and also where their cooked food arrives.
- */
+/** The table is where the customers sit and order food and also where their cooked food arrives. */
 public class Table {
 
-  private String tableNumber; // the id number of the table
+  private String tableName; // the id number of the table
   private int tableSize; // the number of people who can sit on this table
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
@@ -15,8 +12,8 @@ public class Table {
   private Dish servedDish; // the dish that has been served
   private int numberOfDishesServed; // the number of dishes served to the table
 
-  public Table(String tableNumber, int tableSize, boolean isOccupied) {
-    this.tableNumber = tableNumber;
+  public Table(String tableName, int tableSize, boolean isOccupied) {
+    this.tableName = tableName;
     this.tableSize = tableSize;
     this.isOccupied = isOccupied;
   }
@@ -83,13 +80,11 @@ public class Table {
     return numberOfDishesServed;
   }
 
-  public String getTableNumber() {
-    return tableNumber;
+  public String getTableName() {
+    return tableName;
   }
 
-  /**
-   * Returns the dishes order by a specifc customerNumber on this table
-   */
+  /** Returns the dishes order by a specifc customerNumber on this table */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
     ArrayList<Dish> customerDishes = new ArrayList<Dish>();
     for (Dish dish : tableOrder) {
@@ -98,5 +93,9 @@ public class Table {
       }
     }
     return customerDishes;
+  }
+
+  public String getName() {
+    return this.tableName;
   }
 }
