@@ -178,4 +178,21 @@ public class Dish {
 
     return billText;
   }
+    /**
+     * Getter for tableName
+     *
+     * @return String tableName.
+     */
+    public String getTableName() {
+        return tableName;
+    }
+
+    /**
+     * Getter for name of the dish.
+     *
+     * @return String name.
+     */
+    public String getName() {
+        return name;
+    }
 }

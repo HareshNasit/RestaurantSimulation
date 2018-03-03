@@ -76,6 +76,9 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Notify the cook that a dish needs to be prepared
    */
-  public void update() {
+  public void update(Dish dish) {
+    String text = "Table ";
+    text += dish.getTableName() + "dish: " + dish.getName() + " ready to be served.";
+    System.out.println(text);
   }
 }
