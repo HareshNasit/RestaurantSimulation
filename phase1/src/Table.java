@@ -37,9 +37,15 @@ public class Table {
      * The cooked dishes are served to the specified table
      * @param table the table that ordered the dish
      */
-    public void serveOrder(Table table){
+    public void serveDish(Table table, Dish dish){
         server.getCookedDishes(table);
         numberOfDishesServed++;
+    }
+
+    public void removeServedDish(Dish dish){
+        if(server.returnOrder(dish)){
+            numberOfDishesServed--;
+        }
     }
 
     /**
