@@ -96,6 +96,9 @@ public class Server implements IWorker, ServingTableListener {
    * Notify the server that the ServingTable has been changed. i.e Dish needs to be served
    */
   public void update(Dish dish) {
+      String text = "Table ";
+      text += dish.getTableName() + "dish: " + dish.getName() + " served.";
+    System.out.println(text);
   }
 
   // ------------------------------To Be Considered------------------------------------------------
