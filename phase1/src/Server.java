@@ -38,8 +38,9 @@ public class Server implements IWorker {
      * The server serves the order to the table and removes it from the list of orders to be served
      * @param table the table whose order is being served
      */
-    public void getCookedDishes(Table table) {
-
+    public void serveDish(Table table, Dish dish) {
+        dishesToBeServed.add(dish);
+        table.setCookedOrder(dishesToBeServed);
     }
 
     /**
@@ -54,7 +55,9 @@ public class Server implements IWorker {
     /**
      * The server adds an ingredient to a dish which is displayed in the order
      */
-    public void addIngredient(String ingredient) {
+    @Override
+    public void addIngredients(Inventory inventory, String ingredient, int amount) {
+
     }
 
     /**
