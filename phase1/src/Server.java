@@ -45,7 +45,10 @@ public class Server {
      * The server takes the dish from the table and returns it to the cook
      * @param dish the dish that is to be returned
      */
-    public void returnOrder(Dish dish){}
+    public boolean returnOrder(Dish dish){
+        servingTable.dishesToBeCooked.add(dish);
+        return true; // need to find a way to remove this. 
+    }
 
     /**
      * The server adds an ingredient to a dish which is displayed in the order
@@ -58,7 +61,13 @@ public class Server {
      * @return
      */
     public boolean isOrderComplete(){
-        return table.getNumberOfDishesServed() == table.numberOfDishesInOrder();
+        if (table.getNumberOfDishesServed() == table.numberOfDishesInOrder()){
+            return true;
+        }
+        // else if(){} have to check if the dish has been returned which then makes the order still incomplete
+        else{
+            return false;
+        }
     }
 
     public boolean isOccupied() {
