@@ -1,4 +1,4 @@
 public interface IWorker {
   boolean isOccupied();
-  // void scanItems();
+  void addIngredients();
 }
