@@ -6,31 +6,22 @@ import java.util.Observable;
  */
 public class Table {
 
-  private String tableNumber; // the id number of the table
+  private String tableName; // the id number of the table
   private int tableSize; // the number of people who can sit on this table
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
   private boolean orderCompleted; // if the table's order has been completed or not
   private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
-  private Dish servedDish; // the dish that has been served
   private int numberOfDishesServed; // the number of dishes served to the table
 
-  public Table(String tableNumber, int tableSize, boolean isOccupied) {
-    this.tableNumber = tableNumber;
+  public Table(String tableName, int tableSize, boolean isOccupied) {
+    this.tableName = tableName;
     this.tableSize = tableSize;
     this.isOccupied = isOccupied;
   }
 
   public void setTableOrder(ArrayList<Dish> tableOrder) {
     this.tableOrder = tableOrder;
-  }
-
-  public Dish getServedDish() {
-    return servedDish;
-  }
-
-  public void setServedDish(Dish servedDish) {
-    this.servedDish = servedDish;
   }
 
   public boolean isOrderCompleted() {
@@ -54,7 +45,7 @@ public class Table {
   }
 
   /** The cooked dishes are served to the specified table */
-  public void serveDish() {
+  public void dishesServed() {
     numberOfDishesServed++;
   }
 
@@ -83,8 +74,8 @@ public class Table {
     return numberOfDishesServed;
   }
 
-  public String getTableNumber() {
-    return tableNumber;
+  public String getTableName() {
+    return tableName;
   }
 
   /**
