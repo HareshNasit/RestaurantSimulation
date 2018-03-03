@@ -45,19 +45,18 @@ public class Menu {
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
       String[] ingredient = separatedByHashTag[i].split(",");
-      int[] bounds = new int[4];
-      for (int k = 0; k < 3; k++) {
-        bounds[k] = Integer.parseInt(ingredient[k + 1].trim());
-      }
+
       String ingredientName = ingredient[0];
       int amount = Integer.parseInt(ingredient[1].trim());
+      int baseAmount = Integer.parseInt(ingredient[1].trim());
       int lowerAmount = Integer.parseInt(ingredient[2].trim());
       int upperAmount = Integer.parseInt(ingredient[3].trim());
       int ingredientPrice = Integer.parseInt(ingredient[4].trim());
 
       ingredients.put(
           ingredient[0],
-          new DishIngredient(ingredientName, amount, lowerAmount, upperAmount, ingredientPrice));
+          new DishIngredient(
+              ingredientName, amount, baseAmount, lowerAmount, upperAmount, ingredientPrice));
     }
     Dish dish = new Dish(name, id, price, ingredients);
     menuItems.add(dish);

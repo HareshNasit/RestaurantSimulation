@@ -2,12 +2,15 @@ public class DishIngredient {
 
   private String name;
   private int amount;
+  private int baseAmount;
   private int upperAmount;
   private int lowerAmount;
   private int price;
 
-  public DishIngredient(String name, int amount, int lowerAmount, int upperAmount, int price) {
+  public DishIngredient(
+      String name, int baseAmount, int amount, int lowerAmount, int upperAmount, int price) {
     this.name = name;
+    this.baseAmount = baseAmount;
     this.amount = amount;
     this.upperAmount = upperAmount;
     this.lowerAmount = lowerAmount;
@@ -64,7 +67,7 @@ public class DishIngredient {
   @Override
   public DishIngredient clone() {
     return new DishIngredient(
-        this.name, this.amount, this.lowerAmount, this.upperAmount, this.price);
+        this.name, this.amount, this.baseAmount, this.lowerAmount, this.upperAmount, this.price);
   }
   /** @return */
   @Override
@@ -81,6 +84,10 @@ public class DishIngredient {
         + " price: "
         + this.price
         + ")";
+  }
+
+  public int getBaseAmount() {
+    return this.baseAmount;
   }
 
   public int getPrice() {
