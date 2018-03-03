@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Server class records orders taken from customers and relays them to the chef.
  */
 
-public class Server {
+public class Server implements IWorker {
 
     public static ArrayList<Server> servers; // the list of servers in the restaurant
     private static int numberOfServers; // the number of servers in a restaurant
@@ -30,25 +30,26 @@ public class Server {
       Cook.dishesToBeCooked.addAll(tableOrder);
     }
 
+  public void generateTableBill(Table table) {
+    Bill.outputBill(table.getTableNumber(), table.getTableOrder());
+  }
+
     /**
      * The server serves the order to the table and removes it from the list of orders to be served
      * @param table the table whose order is being served
      */
-    public void serveDish(Table table, Dish dish) {
-        table.setServedDish(dish);
+    public void getCookedDishes(Table table) {
+
     }
 
     /**
      * The server takes the dish from the table and returns it to the cook
      * @param dish the dish that is to be returned
      */
-    public boolean returnOrder(Dish dish, Table table){
+    public boolean returnOrder(Dish dish){
         Cook.dishesToBeCooked.add(dish);
-        table.setNumberOfDishesServed(table.getNumberOfDishesServed()+1);
         return true; // need to find a way to remove this.
     }
-
-
 
     /**
      * The server adds an ingredient to a dish which is displayed in the order
@@ -60,7 +61,7 @@ public class Server {
      * This method checks whether all the dishes the table ordered have been served or not.
      * @return
      */
-    public boolean isOrderComplete(Table table){
+    public boolean isOrderComplete(Table table) {
         if (table.getNumberOfDishesServed() == table.numberOfDishesInOrder()){
             return true;
         }
