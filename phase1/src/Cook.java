@@ -7,15 +7,15 @@ public class Cook implements IWorker{
     private boolean isOccupied;
     private static int numOfCooks;
     private String name; // Name of the cook.
-    private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
-    private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
+//    private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
+//    private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
     public static ArrayList<Dish> dishesToBeCooked;
 
     public Cook(String name, Restaurant restaurant){
         this.name = name;
         numOfCooks++;
-        this.dishesReady = new ArrayList<Dish>();
-        this.dishesInMaking = new ArrayList<Dish>();
+//        this.dishesReady = new ArrayList<Dish>();
+//        this.dishesInMaking = new ArrayList<Dish>();
         restaurant.getWorkers().add((IWorker)this);
         this.isOccupied = false;
     }
@@ -24,15 +24,17 @@ public class Cook implements IWorker{
      * Adds the dishes from the order to dishesInMaking which are being prepared.
      * @param dish The Dish that is to be added to dishesInMaking.
      */
-    public void prepareDish(Dish dish,Inventory inventory){
+    public boolean prepareDish(Dish dish,Inventory inventory){
         if(canBePrepared(dish,inventory)){
             // REMOVE THE INGREDIENTS FROM THE INVENTORY AND ADD DISH TO READY.
             for(String ingredient: dish.getIngredients().keySet()){
                 inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
             }
+            return true;
         }
         else{
             //  DOES COOK DECIDE IF A DISH CAN BE MADE OR COMPUTER IS A QUESTION.
+            return false;
         }
     }
 
@@ -41,7 +43,8 @@ public class Cook implements IWorker{
      * @param dish The Dish that is to be added.
      */
     public void dishReady(Dish dish){
-        dishesReady.add(dish);
+        // The dish  prepared is added to the Servers list of dishes ready to be served.
+        Server.dishesToBeServed.add(dish);
     }
 
     /**
