@@ -4,12 +4,14 @@ public class DishIngredient {
   private int amount;
   private int upperAmount;
   private int lowerAmount;
+  private int price;
 
-  public DishIngredient(String name, int amount, int lowerAmount, int upperAmount) {
+  public DishIngredient(String name, int amount, int lowerAmount, int upperAmount, int price) {
     this.name = name;
     this.amount = amount;
     this.upperAmount = upperAmount;
     this.lowerAmount = lowerAmount;
+    this.price = price;
   }
 
   /**
@@ -61,7 +63,8 @@ public class DishIngredient {
 
   @Override
   public DishIngredient clone() {
-    return new DishIngredient(this.name, this.amount, this.lowerAmount, this.upperAmount);
+    return new DishIngredient(
+        this.name, this.amount, this.lowerAmount, this.upperAmount, this.price);
   }
   /** @return */
   @Override
@@ -75,6 +78,12 @@ public class DishIngredient {
         + this.lowerAmount
         + " upper bound: "
         + this.upperAmount
+        + " price: "
+        + this.price
         + ")";
+  }
+
+  public int getPrice() {
+    return this.price;
   }
 }

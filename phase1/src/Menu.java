@@ -11,7 +11,7 @@ public class Menu {
 
   /** Creates a Menu from the FILENAME txt file and adds all the dishes to an array. */
   public Menu() {
-    this.menuItems = new ArrayList<Dish>();
+    this.menuItems = new ArrayList<>();
     createMenu();
   }
 
@@ -45,7 +45,7 @@ public class Menu {
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
       String[] ingredient = separatedByHashTag[i].split(",");
-      int[] bounds = new int[3];
+      int[] bounds = new int[4];
       for (int k = 0; k < 3; k++) {
         bounds[k] = Integer.parseInt(ingredient[k + 1].trim());
       }
@@ -53,9 +53,11 @@ public class Menu {
       int amount = Integer.parseInt(ingredient[1].trim());
       int lowerAmount = Integer.parseInt(ingredient[2].trim());
       int upperAmount = Integer.parseInt(ingredient[3].trim());
+      int ingredientPrice = Integer.parseInt(ingredient[4].trim());
 
       ingredients.put(
-          ingredient[0], new DishIngredient(ingredientName, amount, lowerAmount, upperAmount));
+          ingredient[0],
+          new DishIngredient(ingredientName, amount, lowerAmount, upperAmount, ingredientPrice));
     }
     Dish dish = new Dish(name, id, price, ingredients);
     menuItems.add(dish);

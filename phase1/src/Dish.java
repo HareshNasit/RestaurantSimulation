@@ -5,34 +5,42 @@ public class Dish {
   private String name;
   private int id;
   private int price;
+  private int complementsPrice;
   private HashMap<String, DishIngredient> ingredients;
-  private String tableNumber;
+  private String tableId;
 
+  /**
+   * @param name
+   * @param id
+   * @param time
+   * @param ingredients
+   * @param tableId
+   */
   public Dish(
-      String name,
-      int id,
-      int time,
-      HashMap<String, DishIngredient> ingredients,
-      String tableNumber) {
+      String name, int id, int time, HashMap<String, DishIngredient> ingredients, String tableId) {
     this.name = name;
     this.id = id;
     this.price = time;
     this.ingredients = ingredients;
-    this.tableNumber = tableNumber;
+    this.tableId = tableId;
+    this.complementsPrice = 0;
   }
 
-  // constructor to be used for menu
+  /**
+   * Constructor to be used for the Menu.
+   *
+   * @param name
+   * @param id
+   * @param time
+   * @param ingredients
+   */
   public Dish(String name, int id, int time, HashMap<String, DishIngredient> ingredients) {
     this.name = name;
     this.id = id;
     this.price = time;
     this.ingredients = ingredients;
-    this.tableNumber = "n/a";
-  }
-
-  @Override
-  public String toString() {
-    return this.name;
+    this.tableId = "n/a";
+    this.complementsPrice = 0;
   }
 
   /**
@@ -42,6 +50,19 @@ public class Dish {
    */
   public Dish clone() {
     return new Dish(this.name, this.id, this.price, cloneIngredients());
+  }
+
+  /**
+   * Creates a copy of this dish with the table id.
+   *
+   * @param tableName
+   * @param customerNumber
+   * @return
+   */
+  public Dish createCopyWithTableId(String tableName, int customerNumber) {
+    Dish dish = this.clone();
+    dish.tableId = tableName + customerNumber;
+    return dish;
   }
 
   /**
@@ -59,12 +80,41 @@ public class Dish {
     return copy;
   }
 
-  public int getPrice(){
-      return this.price;
+  /**
+   * Returns the price of the Dish
+   *
+   * @return
+   */
+  public int getPrice() {
+    return this.price + this.complementsPrice;
   }
 
   public HashMap<String, DishIngredient> getIngredients() {
     return this.ingredients;
+  }
+
+  /**
+   * Adds an ingredient to the dish. Precondition, the amount you are adding is within bounds of the
+   * ingredient's bounds.
+   *
+   * @param ingredient
+   * @param amount
+   */
+  public void addIngredient(String ingredient, int amount) {
+    this.complementsPrice += amount * this.ingredients.get(ingredient).getPrice();
+    this.ingredients.get(ingredient).subtractAmount(amount);
+  }
+
+  /**
+   * Subtracts an ingredient from the dish. Precondition, the amount you are subtracting is within
+   * bounds of the ingredient's bounds.
+   *
+   * @param ingredient
+   * @param amount
+   */
+  public void subtractIngredient(String ingredient, int amount) {
+    this.complementsPrice += amount * this.ingredients.get(ingredient).getPrice();
+    this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
   public HashMap<String, Integer> getIngredientAmounts() {
@@ -73,5 +123,10 @@ public class Dish {
       ingredientAmounts.put(key, this.ingredients.get(key).getAmount());
     }
     return ingredientAmounts;
+  }
+
+  @Override
+  public String toString() {
+    return this.name + " w/ price: " + this.price;
   }
 }
