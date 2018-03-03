@@ -44,7 +44,7 @@ public class Cook implements IWorker{
      */
     public void dishReady(Dish dish){
         // The dish  prepared is added to the Servers list of dishes ready to be served.
-        Server.dishesToBeServed.add(dish);
+      Server.addDishToBeServed(dish);
     }
 
     /**

@@ -12,7 +12,7 @@ public class Server implements IWorker {
     private boolean isOccupied; // whether the server is currently serving a table or not
     protected ArrayList<Table> tables; // the list of tables in the restaurant
     protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
-    public static ArrayList<Dish> dishesToBeServed;
+  private static ArrayList<Dish> dishesToBeServed = new ArrayList<Dish>();
     protected Cook cook;
 
     public Server(String name, ArrayList<Server> servers) {
@@ -21,7 +21,15 @@ public class Server implements IWorker {
         numberOfServers++;
     }
 
-    /**
+  public static void addDishToBeServed(Dish dish) {
+    dishesToBeServed.add(dish);
+  }
+
+  public static void removeDishToBeServed(Dish dish) {
+    dishesToBeServed.remove(dish);
+  }
+
+  /**
      * The server takes the order from a table and adds it to the list of orders to be cooked
      * @param table the table that places the order
      */
