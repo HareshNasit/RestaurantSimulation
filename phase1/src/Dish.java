@@ -113,7 +113,17 @@ public class Dish {
    * @param amount
    */
   public void subtractIngredient(String ingredient, int amount) {
-    this.complementsPrice += amount * this.ingredients.get(ingredient).getPrice();
+    DishIngredient dishIngredient = this.ingredients.get(ingredient);
+    // the price shouldn't go down if the customer removes a baseAmount of ingredients
+    // For example, if a customer removes a bun from the hamburger, the price shouldn't go down
+    // this is the reasoning for the if statement.
+    if (dishIngredient.getAmount() - amount >= dishIngredient.getBaseAmount()) {
+      this.complementsPrice -= amount * dishIngredient.getPrice();
+    } else {
+      this.complementsPrice -=
+          dishIngredient.getPrice() * (dishIngredient.getPrice() - dishIngredient.getBaseAmount());
+    }
+
     this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
