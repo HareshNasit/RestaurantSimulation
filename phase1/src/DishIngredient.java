@@ -90,13 +90,22 @@ public class DishIngredient {
     return this.baseAmount;
   }
 
-  public int getAdditionAmount(){
-      if(amount - baseAmount >= 0){
-          return amount - baseAmount;
-      }
-      return 0;
+  public int getAdditionAmount() {
+    if (amount - baseAmount >= 0) {
+      return amount - baseAmount;
+    }
+    return 0;
   }
+
+  public int getBaseDifference() {
+    return amount - baseAmount;
+  }
+
   public int getPrice() {
     return this.price;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }
