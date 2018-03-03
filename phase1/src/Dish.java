@@ -6,7 +6,8 @@ public class Dish {
   private int id;
   private int price;
   private HashMap<String, DishIngredient> ingredients;
-  private String tableId;
+  private String tableName;
+  private int customerNum;
 
   /**
    * @param name
@@ -16,12 +17,18 @@ public class Dish {
    * @param tableId
    */
   public Dish(
-      String name, int id, int time, HashMap<String, DishIngredient> ingredients, String tableId) {
+      String name,
+      int id,
+      int time,
+      HashMap<String, DishIngredient> ingredients,
+      String tableId,
+      int customerNum) {
     this.name = name;
     this.id = id;
     this.price = time;
     this.ingredients = ingredients;
-    this.tableId = tableId;
+    this.tableName = tableId;
+    this.customerNum = customerNum;
   }
 
   /**
@@ -37,7 +44,8 @@ public class Dish {
     this.id = id;
     this.price = time;
     this.ingredients = ingredients;
-    this.tableId = "n/a";
+    this.tableName = "n/a";
+    this.customerNum = -1;
   }
 
   /**
@@ -58,7 +66,8 @@ public class Dish {
    */
   public Dish createCopyWithTableId(String tableName, int customerNumber) {
     Dish dish = this.clone();
-    dish.tableId = tableName + customerNumber;
+    dish.tableName = tableName;
+    dish.customerNum = customerNumber;
     return dish;
   }
 
@@ -129,5 +138,37 @@ public class Dish {
   @Override
   public String toString() {
     return this.name + " w/ price: " + this.price;
+  }
+
+  private HashMap<String, Integer> getDifferenceAmounts() {
+    HashMap<String, Integer> differenceMap = new HashMap<>();
+    for (String key : this.ingredients.keySet()) {
+      int dif = this.ingredients.get(key).getBaseDifference();
+      differenceMap.put(key, dif);
+    }
+    return differenceMap;
+  }
+
+  public String getStringForBill() {
+    String billText = "";
+    billText += "Table: " + this.tableName + ", ";
+    billText += "CustomerNumber: " + this.customerNum + ", ";
+    billText += "Name: " + this.name + ", ";
+    billText += "Price " + this.getPrice() + ", ";
+    String extras = "";
+    String subtractions = "";
+    HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
+    for (String key : differenceMap.keySet()) {
+      if (differenceMap.get(key) > 0) {
+        extras += "+" + differenceMap.get(key) + " " + this.ingredients.get(key).getName() + ", ";
+      } else if (differenceMap.get(key) < 0) {
+        subtractions +=
+            "+" + differenceMap.get(key) + " " + this.ingredients.get(key).getName() + ", ";
+      }
+    }
+    billText += extras + subtractions;
+    billText = billText.substring(0, billText.length() - 2);
+
+    return billText;
   }
 }
