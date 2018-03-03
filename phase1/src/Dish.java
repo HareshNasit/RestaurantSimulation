@@ -161,7 +161,7 @@ public class Dish {
     String billText = "";
 
     billText += "Dish Name: " + this.name + ", ";
-    billText += "Price " + this.getPrice() + ", ";
+    billText += "Price $" + this.getPrice() + ", ";
     String extras = "";
     String subtractions = "";
     HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
