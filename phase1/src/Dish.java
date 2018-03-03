@@ -59,6 +59,10 @@ public class Dish {
     return copy;
   }
 
+  public int getPrice(){
+      return this.price;
+  }
+
   public HashMap<String, DishIngredient> getIngredients() {
     return this.ingredients;
   }
