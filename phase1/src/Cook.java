@@ -3,21 +3,23 @@ import java.util.ArrayList;
 /*
  * A cook decides whether the dish can be prepared and prepares the dish.
  */
-public class Cook implements IWorker{
+public class Cook implements IWorker, ServingTableListener {
     private boolean isOccupied;
     private static int numOfCooks;
     private String name; // Name of the cook.
 //    private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
 //    private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
     public static ArrayList<Dish> dishesToBeCooked;
+  ServingTable screen;
 
-    public Cook(String name, Restaurant restaurant){
+  public Cook(String name, Restaurant restaurant, ServingTable screen) {
         this.name = name;
         numOfCooks++;
 //        this.dishesReady = new ArrayList<Dish>();
 //        this.dishesInMaking = new ArrayList<Dish>();
         restaurant.getWorkers().add((IWorker)this);
         this.isOccupied = false;
+    this.screen = screen;
     }
 
     /**
@@ -30,6 +32,7 @@ public class Cook implements IWorker{
             for(String ingredient: dish.getIngredients().keySet()){
                 inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
             }
+          screen.addToBeServed(dish);
             return true;
         }
         else{
@@ -44,7 +47,7 @@ public class Cook implements IWorker{
      */
     public void dishReady(Dish dish){
         // The dish  prepared is added to the Servers list of dishes ready to be served.
-      Server.addDishToBeServed(dish);
+      screen.addToBeServed(dish);
     }
 
     /**
@@ -69,4 +72,10 @@ public class Cook implements IWorker{
     private boolean canBePrepared(Dish dish, Inventory inventory) {
         return inventory.hasEnoughIngredients(dish.getIngredientAmounts());
     }
+
+  /**
+   * Notify the cook that a dish needs to be prepared
+   */
+  public void update() {
+  }
 }

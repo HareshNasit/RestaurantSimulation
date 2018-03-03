@@ -23,11 +23,20 @@ public class ServingTable {
     dishesToBeCooked.addAll(order);
   }
 
+
   /**
-   * Add the n
-   * @param order
+   * Add dish to be served
+   * @param dish
    */
-  public void addToBeServed(ArrayList<Dish> order) { dishesToBeServed.addAll(order);
+  public void addToBeServed(Dish dish) {
+    dishesToBeServed.add(dish);
+    notifyServers();
+  }
+
+  public void notifyServers() {
+    for (ServingTableListener server : servers) {
+      server.update();
+    }
   }
 
   /**
