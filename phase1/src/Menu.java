@@ -40,7 +40,7 @@ public class Menu {
 
     String name = separatedByHashTag[1];
     int id = Integer.parseInt(separatedByHashTag[0].trim());
-    int price = Integer.parseInt(separatedByHashTag[2].trim());
+    Double price = Double.parseDouble(separatedByHashTag[2].trim());
     HashMap<String, DishIngredient> ingredients = new HashMap<>();
 
     for (int i = 3; i < separatedByHashTag.length; i++) {
