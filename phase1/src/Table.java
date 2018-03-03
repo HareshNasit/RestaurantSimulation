@@ -53,9 +53,7 @@ public class Table {
     return tableOrder;
   }
 
-  /**
-   * The cooked dishes are served to the specified table
-   */
+  /** The cooked dishes are served to the specified table */
   public void serveDish() {
     numberOfDishesServed++;
   }
@@ -89,5 +87,16 @@ public class Table {
     return tableNumber;
   }
 
-  public ArrayList<Dish> getCustomerOrder(int customerNumber) {}
+  /**
+   * Returns the dishes order by a specifc customerNumber on this table
+   */
+  public ArrayList<Dish> getCustomerOrder(int customerNumber) {
+    ArrayList<Dish> customerDishes = new ArrayList<Dish>();
+    for (Dish dish : tableOrder) {
+      if (dish.getCustomerNum() == customerNumber) {
+        customerDishes.add(dish);
+      }
+    }
+    return customerDishes;
+  }
 }
