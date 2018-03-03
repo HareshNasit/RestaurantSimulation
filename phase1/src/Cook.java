@@ -26,9 +26,12 @@ public class Cook implements IWorker{
     public void prepareDish(Dish dish,Inventory inventory){
         if(canBePrepared(dish,inventory)){
             // REMOVE THE INGREDIENTS FROM THE INVENTORY AND ADD DISH TO READY.
+            for(String ingredient: dish.getIngredients().keySet()){
+                inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
+            }
         }
         else{
-            // REQUEST FOR MORE INGREDIENTS TO THE MANAGER.
+            //  DOES COOK DECIDE IF A DISH CAN BE MADE OR COMPUTER IS A QUESTION.
         }
     }
 

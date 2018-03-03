@@ -38,6 +38,12 @@ public class Inventory {
     }
   }
 
+    /**
+     * Checks whether a particular dish has enough ingredients to cook that dish.
+     *
+     * @param dishIngredients The ingredient that is to be added to
+     * @return boolean returns true if the inventory has enough ingredients to prepare a dish.
+     */
   public boolean hasEnoughIngredients(HashMap<String, Integer> dishIngredients) {
     for (String ingredient : dishIngredients.keySet()) {
       if (!inventory.containsKey(ingredient)) {
