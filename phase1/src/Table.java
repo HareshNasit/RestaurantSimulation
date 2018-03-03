@@ -9,16 +9,29 @@ public class Table {
     private String tableNumber; // the id number of the table
     private int tableSize; // the number of people who can sit on this table
     private boolean isOccupied; // if the table already has customers
-
-  public void setTableOrder(ArrayList<Dish> tableOrder) {
-    this.tableOrder = tableOrder;
-  }
-
     private ArrayList<Dish> tableOrder; // the dishes the table ordered
     private boolean orderCompleted; // if the table's order has been completed or not
     private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
-    protected Server server;
+    private Dish servedDish; // the dish that has been served
     private int numberOfDishesServed; // the number of dishes served to the table
+
+    public Table(String tableNumber, int tableSize, boolean isOccupied){
+        this.tableNumber = tableNumber;
+        this.tableSize = tableSize;
+        this.isOccupied = isOccupied;
+    }
+
+    public void setTableOrder(ArrayList<Dish> tableOrder) {
+        this.tableOrder = tableOrder;
+    }
+
+    public Dish getServedDish() {
+        return servedDish;
+    }
+
+    public void setServedDish(Dish servedDish) {
+        this.servedDish = servedDish;
+    }
 
     public boolean isOrderCompleted() {
         return orderCompleted;
@@ -28,10 +41,12 @@ public class Table {
         this.orderCompleted = orderCompleted;
     }
 
-    public Table(String tableNumber, int tableSize, boolean isOccupied){
-        this.tableNumber = tableNumber;
-        this.tableSize = tableSize;
-        this.isOccupied = isOccupied;
+    public ArrayList<Dish> getCookedOrder() {
+        return cookedOrder;
+    }
+
+    public void setCookedOrder(ArrayList<Dish> cookedOrder) {
+        this.cookedOrder = cookedOrder;
     }
 
     public ArrayList<Dish> getTableOrder() {
@@ -40,17 +55,17 @@ public class Table {
 
     /**
      * The cooked dishes are served to the specified table
-     * @param table the table that ordered the dish
      */
-    public void serveDish(Table table, Dish dish){
-        server.getCookedDishes(table);
+    public void serveDish(){
         numberOfDishesServed++;
     }
 
     public void removeServedDish(Dish dish){
-        if(server.returnOrder(dish)){
             numberOfDishesServed--;
-        }
+    }
+
+    public void setNumberOfDishesServed(int numberOfDishesServed) {
+        this.numberOfDishesServed = numberOfDishesServed;
     }
 
     /**
