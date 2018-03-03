@@ -7,6 +7,11 @@ public class Dish {
   private int price;
   private HashMap<String, DishIngredient> ingredients;
   private String tableName;
+
+  public int getCustomerNum() {
+    return customerNum;
+  }
+
   private int customerNum;
 
   /**
