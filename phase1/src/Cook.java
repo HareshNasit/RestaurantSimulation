@@ -23,40 +23,43 @@ public class Cook implements IWorker{
      * Adds the dishes from the order to dishesInMaking which are being prepared.
      * @param dish The Dish that is to be added to dishesInMaking.
      */
-    public void prepareDish(Dish dish,Inventory inventory){}
+    public void prepareDish(Dish dish,Inventory inventory){
+        if(canBePrepared(dish,inventory)){
+            // REMOVE THE INGREDIENTS FROM THE INVENTORY AND ADD DISH TO READY.
+        }
+        else{
+            // REQUEST FOR MORE INGREDIENTS TO THE MANAGER.
+        }
+    }
 
     /**
      * Adds the dish to dishesReady after being prepared.
      * @param dish The Dish that is to be added.
      */
-
-
     public void dishReady(Dish dish){
         dishesReady.add(dish);
     }
-    /**
-     * Checks if the dish has enough ingredients.
-     */
-    public boolean lessIngredients(Dish dish){
-        return false;
-    }
+
     /**
      * The server receives and adds ingredients to the inventory.
      */
     public void addIngredients(Inventory inventory, String ingredient, int amount) {
         inventory.addStock(ingredient,amount);
     }
+
+    /**
+     * Getter for isOccupied to see if this cook is vacant or busy.
+     */
     public boolean isOccupied(){
         return isOccupied;
     }
+
     /**
      * Returns a boolean whether a dish can be prepared or no.
      * @param dish the dish.
      * @return boolean whether a dish can be prepared or no.
      */
-    public boolean canBePrepared(Dish dish, Inventory inventory){
-    for(String ingredient: dish.getIngredientAmounts().keySet()){
-
-    }
+    private boolean canBePrepared(Dish dish, Inventory inventory) {
+        return inventory.hasEnoughIngredients(dish.getIngredientAmounts());
     }
 }
