@@ -31,6 +31,10 @@ public class Server {
       Cook.dishesToBeCooked.addAll(tableOrder);
     }
 
+  public void generateTableBill(Table table) {
+    Bill.outputBill(table.getTableNumber(), table.getTableOrder());
+  }
+
     /**
      * The server serves the order to the table and removes it from the list of orders to be served
      * @param table the table whose order is being served
