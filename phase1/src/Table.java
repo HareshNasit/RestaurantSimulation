@@ -1,9 +1,6 @@
 import java.util.ArrayList;
-import java.util.Observable;
 
-/**
- * The table is where the customers sit and order food and also where their cooked food arrives.
- */
+/** The table is where the customers sit and order food and also where their cooked food arrives. */
 public class Table {
 
   private String tableName; // the id number of the table
@@ -78,9 +75,7 @@ public class Table {
     return tableName;
   }
 
-  /**
-   * Returns the dishes order by a specifc customerNumber on this table
-   */
+  /** Returns the dishes order by a specifc customerNumber on this table */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
     ArrayList<Dish> customerDishes = new ArrayList<Dish>();
     for (Dish dish : tableOrder) {
@@ -89,5 +84,9 @@ public class Table {
       }
     }
     return customerDishes;
+  }
+
+  public String getName() {
+    return this.tableName;
   }
 }
