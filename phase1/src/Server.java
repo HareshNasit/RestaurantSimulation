@@ -38,8 +38,8 @@ public class Server implements IWorker {
      * The server serves the order to the table and removes it from the list of orders to be served
      * @param table the table whose order is being served
      */
-    public void getCookedDishes(Table table) {
-
+    public void serveDishes(Table table) {
+        table.setCookedOrder(dishesToBeServed);
     }
 
     /**
