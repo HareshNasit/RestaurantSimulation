@@ -4,70 +4,77 @@ import java.util.Observable;
 /**
  * The table is where the customers sit and order food and also where their cooked food arrives.
  */
-
 public class Table {
-    private String tableNumber; // the id number of the table
-    private int tableSize; // the number of people who can sit on this table
-    private boolean isOccupied; // if the table already has customers
+
+  public String getTableNumber() {
+    return tableNumber;
+  }
+
+  public void setTableNumber(String tableNumber) {
+    this.tableNumber = tableNumber;
+  }
+
+  private String tableNumber; // the id number of the table
+  private int tableSize; // the number of people who can sit on this table
+  private boolean isOccupied; // if the table already has customers
+  private ArrayList<Dish> tableOrder; // the dishes the table ordered
+  private boolean orderCompleted; // if the table's order has been completed or not
+  private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
+  protected Server server;
+  private int numberOfDishesServed; // the number of dishes served to the table
 
   public void setTableOrder(ArrayList<Dish> tableOrder) {
     this.tableOrder = tableOrder;
   }
 
-    private ArrayList<Dish> tableOrder; // the dishes the table ordered
-    private boolean orderCompleted; // if the table's order has been completed or not
-    private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
-    protected Server server;
-    private int numberOfDishesServed; // the number of dishes served to the table
+  public boolean isOrderCompleted() {
+    return orderCompleted;
+  }
 
-    public boolean isOrderCompleted() {
-        return orderCompleted;
+  public void setOrderCompleted(boolean orderCompleted) {
+    this.orderCompleted = orderCompleted;
+  }
+
+  public Table(String tableNumber, int tableSize, boolean isOccupied) {
+    this.tableNumber = tableNumber;
+    this.tableSize = tableSize;
+    this.isOccupied = isOccupied;
+  }
+
+  public ArrayList<Dish> getTableOrder() {
+    return tableOrder;
+  }
+
+  /**
+   * The cooked dishes are served to the specified table
+   *
+   * @param table the table that ordered the dish
+   */
+  public void serveDish(Table table, Dish dish) {
+    server.getCookedDishes(table);
+    numberOfDishesServed++;
+  }
+
+  public void removeServedDish(Dish dish) {
+    if (server.returnOrder(dish)) {
+      numberOfDishesServed--;
     }
+  }
 
-    public void setOrderCompleted(boolean orderCompleted) {
-        this.orderCompleted = orderCompleted;
+  /**
+   * Returns the number of dishes that were ordered by a table.
+   *
+   * @return returns the number of dishes in the order
+   */
+  public int numberOfDishesInOrder() {
+    int numberOfDishes = 0;
+    for (int i = 0; i < tableOrder.size(); i++) {
+      numberOfDishes++;
     }
+    return numberOfDishes;
+  }
 
-    public Table(String tableNumber, int tableSize, boolean isOccupied){
-        this.tableNumber = tableNumber;
-        this.tableSize = tableSize;
-        this.isOccupied = isOccupied;
-    }
-
-    public ArrayList<Dish> getTableOrder() {
-        return tableOrder;
-    }
-
-    /**
-     * The cooked dishes are served to the specified table
-     * @param table the table that ordered the dish
-     */
-    public void serveDish(Table table, Dish dish){
-        server.getCookedDishes(table);
-        numberOfDishesServed++;
-    }
-
-    public void removeServedDish(Dish dish){
-        if(server.returnOrder(dish)){
-            numberOfDishesServed--;
-        }
-    }
-
-    /**
-     * Returns the number of dishes that were ordered by a table.
-     * @return returns the number of dishes in the order
-     */
-    public int numberOfDishesInOrder(){
-        int numberOfDishes = 0;
-        for(int i = 0; i < tableOrder.size(); i++){
-            numberOfDishes++;
-        }
-        return numberOfDishes;
-    }
-
-    public int getNumberOfDishesServed() {
-        return numberOfDishesServed;
-    }
-
-
+  public int getNumberOfDishesServed() {
+    return numberOfDishesServed;
+  }
 }
