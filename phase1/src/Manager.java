@@ -22,7 +22,7 @@ public class Manager implements IWorker{
                 return worker;
             }
         }
-        return null; // NEEDS TO BE CHECKED AGAIN.
+        return this; // NEEDS TO BE CHECKED AGAIN.
     }
     /**
      * Reads the file about the new ingredients to be purchased and default value is 20.
@@ -61,4 +61,11 @@ public class Manager implements IWorker{
      * The Manager can check the inventory.
      */
     public void checkInventory(Inventory inventory){}
+
+    /**
+     * The server receives and adds ingredients to the inventory.
+     */
+    public void addIngredients(Inventory inventory, String ingredient, int amount) {
+        inventory.addStock(ingredient,amount);
+    }
 }

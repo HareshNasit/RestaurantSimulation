@@ -140,11 +140,6 @@ public class Dish {
     return ingredientAmounts;
   }
 
-  @Override
-  public String toString() {
-    return this.name + " w/ price: " + this.price;
-  }
-
   private HashMap<String, Integer> getDifferenceAmounts() {
     HashMap<String, Integer> differenceMap = new HashMap<>();
     for (String key : this.ingredients.keySet()) {
@@ -154,11 +149,18 @@ public class Dish {
     return differenceMap;
   }
 
-  public String getStringForBill() {
+  public String toString() {
     String billText = "";
     billText += "Table: " + this.tableName + ", ";
     billText += "CustomerNumber: " + this.customerNum + ", ";
-    billText += "Name: " + this.name + ", ";
+    billText += getStringForBill();
+    return billText;
+  }
+
+  public String getStringForBill() {
+    String billText = "";
+
+    billText += "Dish Name: " + this.name + ", ";
     billText += "Price " + this.getPrice() + ", ";
     String extras = "";
     String subtractions = "";
