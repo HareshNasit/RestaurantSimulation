@@ -12,9 +12,9 @@ public class Server {
     private boolean isOccupied; // whether the server is currently serving a table or not
     protected ArrayList<Table> tables; // the list of tables in the restaurant
     protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
-    protected ArrayList<Dish> cookedDishes; // the cooked dishes that should be served
     protected Table table;
-    protected ServingTable servingTable;
+    public static ArrayList<Dish> dishesToBeServed;
+    protected Cook cook;
 
     public Server(String name, ArrayList<Server> servers) {
         this.name = name;
@@ -29,7 +29,7 @@ public class Server {
     public void addOrder(Table table) {
         ArrayList<Dish> tempDishes = table.getTableOrder();
         for(int i = 0; i < table.numberOfDishesInOrder(); i++){
-            servingTable.dishesToBeCooked.add(tempDishes.get(i));
+            Cook.dishesToBeCooked.add(tempDishes.get(i));
         }
     }
 
@@ -38,7 +38,7 @@ public class Server {
      * @param table the table whose order is being served
      */
     public void getCookedDishes(Table table) {
-        servingTable.getDishesToBeServed();
+
     }
 
     /**
@@ -46,8 +46,8 @@ public class Server {
      * @param dish the dish that is to be returned
      */
     public boolean returnOrder(Dish dish){
-        servingTable.dishesToBeCooked.add(dish);
-        return true; // need to find a way to remove this. 
+        Cook.dishesToBeCooked.add(dish);
+        return true; // need to find a way to remove this.
     }
 
     /**

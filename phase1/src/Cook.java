@@ -9,6 +9,7 @@ public class Cook implements IWorker{
     private String name; // Name of the cook.
     private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
     private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
+    public static ArrayList<Dish> dishesToBeCooked;
 
     public Cook(String name, Restaurant restaurant){
         this.name = name;
