@@ -4,14 +4,14 @@ import java.util.PriorityQueue;
 
 public class ServingTable {
 
-  PriorityQueue<Dish> dishesToBeCooked;
-  PriorityQueue<Dish> dishesToBeServed;
+  ArrayList<Dish> dishesToBeCooked;
+  ArrayList<Dish> dishesToBeServed;
   ArrayList<ServingTableListener> servers;
   ArrayList<ServingTableListener> cooks;
 
   ServingTable(ArrayList<ServingTableListener> servers, ArrayList<ServingTableListener> cooks) {
-    dishesToBeCooked = new PriorityQueue<>();
-    dishesToBeServed = new PriorityQueue<>();
+    dishesToBeCooked = new ArrayList<Dish>();
+    dishesToBeServed = new ArrayList<Dish>();
     this.servers = servers;
     this.cooks = cooks;
   }
@@ -23,6 +23,13 @@ public class ServingTable {
     dishesToBeCooked.addAll(order);
   }
 
+  /**
+   * Returns dish to serving table. Sets it as top priority
+   */
+  public void returnDish(Dish dish, String comment) {
+    dishesToBeCooked.add(0, dish);
+    System.out.println("Dish Returned: " + comment);
+  }
 
   /**
    * Add dish to be served
@@ -30,12 +37,15 @@ public class ServingTable {
    */
   public void addToBeServed(Dish dish) {
     dishesToBeServed.add(dish);
-    notifyServers();
+    notifyServers(dish);
   }
 
-  public void notifyServers() {
+  /**
+   * Notfiy servers about current dish state
+   */
+  public void notifyServers(Dish dish) {
     for (ServingTableListener server : servers) {
-      server.update();
+      server.update(dish);
     }
   }
 
@@ -44,7 +54,7 @@ public class ServingTable {
    * @return
    */
   public Dish getNextDishToBeCooked() {
-    return dishesToBeCooked.poll();
+    return dishesToBeCooked.remove(0);
   }
 
 
@@ -55,7 +65,7 @@ public class ServingTable {
    * @return the Dish that has been cooked, and needs to be served to the customer
    */
   public Dish getDishToBeServed(Dish dish) {
-    return dishesToBeServed.poll();
+    return dishesToBeServed.remove(0);
   }
 
 }
