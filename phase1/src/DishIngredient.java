@@ -90,6 +90,12 @@ public class DishIngredient {
     return this.baseAmount;
   }
 
+  public int getAdditionAmount(){
+      if(amount - baseAmount >= 0){
+          return amount - baseAmount;
+      }
+      return 0;
+  }
   public int getPrice() {
     return this.price;
   }
