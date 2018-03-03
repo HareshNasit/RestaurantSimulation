@@ -60,7 +60,13 @@ public class Server {
      * @return
      */
     public boolean isOrderComplete(){
-        return table.getNumberOfDishesServed() == table.numberOfDishesInOrder();
+        if (table.getNumberOfDishesServed() == table.numberOfDishesInOrder()){
+            return true;
+        }
+        // else if(){} have to check if the dish has been returned which then makes the order still incomplete
+        else{
+            return false;
+        }
     }
 
     public boolean isOccupied() {
