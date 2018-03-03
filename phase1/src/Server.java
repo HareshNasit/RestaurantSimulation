@@ -45,7 +45,9 @@ public class Server {
      * The server takes the dish from the table and returns it to the cook
      * @param dish the dish that is to be returned
      */
-    public void returnOrder(Dish dish){}
+    public void returnOrder(Dish dish){
+        servingTable.dishesToBeCooked.add(dish);
+    }
 
     /**
      * The server adds an ingredient to a dish which is displayed in the order
