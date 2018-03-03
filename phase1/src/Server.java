@@ -31,15 +31,15 @@ public class Server implements IWorker {
     }
 
   public void generateTableBill(Table table) {
-    Bill.outputBill(table.getTableNumber(), table.getTableOrder());
+    Bill.outputBill(table.getTableOrder());
   }
 
     /**
      * The server serves the order to the table and removes it from the list of orders to be served
      * @param table the table whose order is being served
      */
-    public void getCookedDishes(Table table) {
-
+    public void serveDishes(Table table) {
+        table.setCookedOrder(dishesToBeServed);
     }
 
     /**
@@ -51,13 +51,12 @@ public class Server implements IWorker {
         return true; // need to find a way to remove this.
     }
 
-    /**
-     * The server adds an ingredient to a dish which is displayed in the order
-     */
-    public void addIngredient(String ingredient) {
-    }
+  @Override
+  public void scanStock(Inventory inventory, String ingredient, int amount) {
+    inventory.addStock(ingredient, amount);
+  }
 
-    /**
+  /**
      * This method checks whether all the dishes the table ordered have been served or not.
      * @return
      */
