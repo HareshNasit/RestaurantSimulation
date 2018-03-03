@@ -26,11 +26,9 @@ public class Server {
      * The server takes the order from a table and adds it to the list of orders to be cooked
      * @param table the table that places the order
      */
-    public void addOrder(Table table) {
-        ArrayList<Dish> tempDishes = table.getTableOrder();
-        for(int i = 0; i < table.numberOfDishesInOrder(); i++){
-            Cook.dishesToBeCooked.add(tempDishes.get(i));
-        }
+    public void addOrder(Table table, ArrayList<Dish> tableOrder) {
+      table.setTableOrder(tableOrder);
+      Cook.dishesToBeCooked.addAll(tableOrder);
     }
 
     /**

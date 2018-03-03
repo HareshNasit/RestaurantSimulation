@@ -9,6 +9,11 @@ public class Table {
     private String tableNumber; // the id number of the table
     private int tableSize; // the number of people who can sit on this table
     private boolean isOccupied; // if the table already has customers
+
+  public void setTableOrder(ArrayList<Dish> tableOrder) {
+    this.tableOrder = tableOrder;
+  }
+
     private ArrayList<Dish> tableOrder; // the dishes the table ordered
     private boolean orderCompleted; // if the table's order has been completed or not
     private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
