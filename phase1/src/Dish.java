@@ -3,8 +3,8 @@ import java.util.HashMap;
 public class Dish {
 
   private String name;
-  private int id;
-  private int price;
+  private double id;
+  private double price;
   private HashMap<String, DishIngredient> ingredients;
   private String tableName;
 
@@ -17,20 +17,20 @@ public class Dish {
   /**
    * @param name
    * @param id
-   * @param time
+   * @param price
    * @param ingredients
    * @param tableId
    */
   public Dish(
       String name,
-      int id,
-      int time,
+      double id,
+      double price,
       HashMap<String, DishIngredient> ingredients,
       String tableId,
       int customerNum) {
     this.name = name;
     this.id = id;
-    this.price = time;
+    this.price = price;
     this.ingredients = ingredients;
     this.tableName = tableId;
     this.customerNum = customerNum;
@@ -41,13 +41,13 @@ public class Dish {
    *
    * @param name
    * @param id
-   * @param time
+   * @param price
    * @param ingredients
    */
-  public Dish(String name, int id, int time, HashMap<String, DishIngredient> ingredients) {
+  public Dish(String name, double id, double price, HashMap<String, DishIngredient> ingredients) {
     this.name = name;
     this.id = id;
-    this.price = time;
+    this.price = price;
     this.ingredients = ingredients;
     this.tableName = "n/a";
     this.customerNum = -1;
@@ -96,8 +96,8 @@ public class Dish {
    *
    * @return
    */
-  public int getPrice() {
-    int finalPrice = price;
+  public double getPrice() {
+    double finalPrice = price;
     for (String key : this.ingredients.keySet()) {
       DishIngredient dishIngredient = this.ingredients.get(key);
       int difference = dishIngredient.getAdditionAmount();
