@@ -50,7 +50,7 @@ public class Cook implements IWorker{
     /**
      * The server receives and adds ingredients to the inventory.
      */
-    public void addIngredients(Inventory inventory, String ingredient, int amount) {
+    public void scanStock(Inventory inventory, String ingredient, int amount) {
         inventory.addStock(ingredient,amount);
     }
 
