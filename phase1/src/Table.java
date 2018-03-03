@@ -54,9 +54,9 @@ public class Table {
     }
 
     /**
-     * The cooked dishes are served to the specified table
+     * The number of cooked dishes that have been served to a table
      */
-    public void serveDish(){
+    public void dishedServed(){
         numberOfDishesServed++;
     }
 
