@@ -26,7 +26,7 @@ public class InventoryIngredient {
   /**
    * Sets the quantity of the ingredient.
    *
-   * @param currentQuantity
+   * @param currentQuantity the current quantity of this ingredient.
    */
   public void setCurrentQuantity(int currentQuantity) {
     this.currentQuantity = currentQuantity;
@@ -35,7 +35,7 @@ public class InventoryIngredient {
   /**
    * Increases the quantity by an amount.
    *
-   * @param amount
+   * @param amount the amount to be increased by.
    */
   public void increaseQuantity(int amount) {
     this.currentQuantity += amount;
@@ -44,7 +44,7 @@ public class InventoryIngredient {
   /**
    * Decreases the quantity by an amount.
    *
-   * @param amount
+   * @param amount the amount to be decreased by.
    */
   public void decreaseQuantity(int amount) {
     this.currentQuantity -= amount;
@@ -53,7 +53,7 @@ public class InventoryIngredient {
   /**
    * Gets the name of Ingredient.
    *
-   * @return
+   * @return String name
    */
   public String getName() {
     return name;
@@ -62,7 +62,7 @@ public class InventoryIngredient {
   /**
    * Sets the name of the InventoryIngredient.
    *
-   * @param name
+   * @param name The new name to be set.
    */
   public void setName(String name) {
     this.name = name;
@@ -71,7 +71,7 @@ public class InventoryIngredient {
   /**
    * Gets the restock package quantity.
    *
-   * @return
+   * @return int restockQuantity
    */
   public int getRestockQuantity() {
     return restockQuantity;
@@ -80,7 +80,7 @@ public class InventoryIngredient {
   /**
    * Sets the restock package quantity.
    *
-   * @param restockQuantity
+   * @param restockQuantity Set the restockQuantity.
    */
   public void setRestockQuantity(int restockQuantity) {
     this.restockQuantity = restockQuantity;
@@ -98,7 +98,7 @@ public class InventoryIngredient {
   /**
    * Sets the lower threshold.
    *
-   * @param lowerThreshold
+   * @param lowerThreshold Set the lowerThreshold for this ingredient.
    */
   public void setLowerThreshold(int lowerThreshold) {
     this.lowerThreshold = lowerThreshold;

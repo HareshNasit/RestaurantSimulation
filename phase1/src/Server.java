@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Server class records orders taken from customers and relays them to the chef.
  */
 
-public class Server {
+public class Server implements IWorker {
 
     public static ArrayList<Server> servers; // the list of servers in the restaurant
     private static int numberOfServers; // the number of servers in a restaurant
@@ -12,7 +12,6 @@ public class Server {
     private boolean isOccupied; // whether the server is currently serving a table or not
     protected ArrayList<Table> tables; // the list of tables in the restaurant
     protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
-    protected Table table;
     public static ArrayList<Dish> dishesToBeServed;
     protected Cook cook;
 
@@ -26,12 +25,14 @@ public class Server {
      * The server takes the order from a table and adds it to the list of orders to be cooked
      * @param table the table that places the order
      */
-    public void addOrder(Table table) {
-        ArrayList<Dish> tempDishes = table.getTableOrder();
-        for(int i = 0; i < table.numberOfDishesInOrder(); i++){
-            Cook.dishesToBeCooked.add(tempDishes.get(i));
-        }
+    public void addOrder(Table table, ArrayList<Dish> tableOrder) {
+      table.setTableOrder(tableOrder);
+      Cook.dishesToBeCooked.addAll(tableOrder);
     }
+
+  public void generateTableBill(Table table) {
+    Bill.outputBill(table.getTableNumber(), table.getTableOrder());
+  }
 
     /**
      * The server serves the order to the table and removes it from the list of orders to be served
@@ -60,7 +61,7 @@ public class Server {
      * This method checks whether all the dishes the table ordered have been served or not.
      * @return
      */
-    public boolean isOrderComplete(){
+    public boolean isOrderComplete(Table table) {
         if (table.getNumberOfDishesServed() == table.numberOfDishesInOrder()){
             return true;
         }
