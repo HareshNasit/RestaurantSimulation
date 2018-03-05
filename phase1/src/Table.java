@@ -64,9 +64,10 @@ public class Table {
 
   /**
    * Removes the served dish and reduces the number of dishes served by 1
-   * @param dish
+   * @param dish to be removed from the list.
    */
   public void removeServedDish(Dish dish) {
+    // NEEDS TO BE CHECKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     numberOfDishesServed--;
   }
 
@@ -97,7 +98,7 @@ public class Table {
 
   /** Returns the dishes ordered by a specifc customerNumber on this table */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
-    ArrayList<Dish> customerDishes = new ArrayList<Dish>();
+    ArrayList<Dish> customerDishes = new ArrayList<>();
     for (Dish dish : tableOrder) {
       if (dish.getCustomerNum() == customerNumber) {
         customerDishes.add(dish);
