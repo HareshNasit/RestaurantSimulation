@@ -11,13 +11,22 @@ public class Restaurant {
   private Inventory inventory; // The inventory of the restaurant.
   private Menu menu; // The menu of the restaurant.
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
+  private ArrayList<ServingTableListener> servers;
+  private ArrayList<ServingTableListener> cooks;
   private ArrayList<Table> tables;
+  private ServingTable servingTable;
 
   public Restaurant(Menu menu, Inventory inventory, ServingTable servingTable) {
     this.inventory = inventory;
     this.menu = menu;
-    workers = new ArrayList<IWorker>();
-    tables = new ArrayList<Table>();
+    tables = generateTables("tables.txt");
+    this.servingTable = servingTable;
+    ArrayList<ArrayList> sumWorkers = generateWorkers("Workers.txt");
+    workers = sumWorkers.get(0);
+    servers = sumWorkers.get(1);
+    cooks = sumWorkers.get(2);
+    servingTable.setServers(servers);
+    servingTable.setCooks(cooks);
   }
 
   /**
@@ -61,6 +70,38 @@ public class Restaurant {
 
     return tables;
 
+  }
 
+  private ArrayList<ArrayList> generateWorkers(String fileName) {
+    ArrayList<IWorker> workers = new ArrayList<IWorker>();
+    ArrayList<ServingTableListener> servers = new ArrayList<ServingTableListener>();
+    ArrayList<ServingTableListener> cooks = new ArrayList<ServingTableListener>();
+    ArrayList<ArrayList> output = new ArrayList<ArrayList>();
+    try {
+      Scanner line = new Scanner(new File(fileName));
+      while (line.hasNextLine()) {
+        String tableLine = line.nextLine();
+        String[] splitString = tableLine.split("\\|");
+        if (splitString[0].equals("Server")) {
+          Server server = new Server(splitString[1]);
+          servers.add(server);
+          workers.add(server);
+        } else if (splitString[0].equals("Manager")) {
+          Manager manager = new Manager(splitString[1]);
+          workers.add(manager);
+        } else if (splitString[0].equals("Cook")) {
+          Cook cook = new Cook(splitString[1], servingTable);
+          cooks.add(cook);
+          workers.add(cook);
+        }
+      }
+      line.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    output.add(workers);
+    output.add(servers);
+    output.add(cooks);
+    return output;
   }
 }
