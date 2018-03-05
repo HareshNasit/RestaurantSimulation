@@ -9,7 +9,6 @@ public class Server implements IWorker, ServingTableListener {
   private static int numberOfServers; // the number of servers in a restaurant
   private String name; // name of a server
   private boolean isOccupied; // whether the server is currently serving a table or not
-
   ServingTable servingTable;
 
   /**
@@ -64,8 +63,8 @@ public class Server implements IWorker, ServingTableListener {
     return true; // need to find a way to remove this.
   }
 
-  @Override
   /** When new stock has been received, update the stock */
+  @Override
   public void scanStock(Inventory inventory, String ingredient, int amount) {
     inventory.addStock(ingredient, amount);
   }
@@ -99,6 +98,29 @@ public class Server implements IWorker, ServingTableListener {
       String text = "Table ";
       text += dish.getTableName() + "dish: " + dish.getName() + " served.";
     System.out.println(text);
+  }
+
+  /**
+   * The server calls the manager incase there is a problem with a customer
+   */
+  public void callManager(){
+    // RETURN A MANAGER?
+  }
+
+  /**
+   * The server serves a dish to the table that ordered it
+   * @param table the table that ordered the dish
+   * @param dish the dish that was served
+   */
+  public void serveTable(Table table, Dish dish){
+
+  }
+
+  /**
+   * Sends a confirmation to the cook when the dish has been served, i.e. picked up from the servingTable
+   */
+  public void confirmDishServed(){
+
   }
 
   // ------------------------------To Be Considered------------------------------------------------
