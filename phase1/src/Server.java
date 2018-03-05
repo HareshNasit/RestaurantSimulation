@@ -109,7 +109,7 @@ public class Server implements IWorker, ServingTableListener {
    * @param table the table that ordered the dish
    * @param dish the dish that was served
    */
-  public void serveTable(Table table, Dish dish){
+  public void serveTable(Table table, Dish dish, ServingTable servingTable) {
       table.getCookedOrder().add(dish);
       servingTable.dishesToBeServed.remove(dish);
   }

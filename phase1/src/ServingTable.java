@@ -4,12 +4,12 @@ import java.util.PriorityQueue;
 
 public class ServingTable {
 
-  ArrayList<Dish> dishesToBeCooked;
-  ArrayList<Dish> dishesToBeServed;
-  ArrayList<ServingTableListener> servers;
-  ArrayList<ServingTableListener> cooks;
+  private ArrayList<Dish> dishesToBeCooked;
+  private ArrayList<Dish> dishesToBeServed;
+  private ArrayList<ServingTableListener> servers;
+  private ArrayList<ServingTableListener> cooks;
 
-  ServingTable(ArrayList<ServingTableListener> servers, ArrayList<ServingTableListener> cooks) {
+  ServingTable() {
     dishesToBeCooked = new ArrayList<Dish>();
     dishesToBeServed = new ArrayList<Dish>();
     this.servers = servers;
@@ -66,6 +66,14 @@ public class ServingTable {
    */
   public Dish getDishToBeServed(Dish dish) {
     return dishesToBeServed.remove(0);
+  }
+
+  public void addServers(ArrayList<ServingTableListener> servers) {
+    this.servers = servers;
+  }
+
+  public void addCooks(ArrayList<ServingTableListener> cooks) {
+    this.cooks = cooks;
   }
 
 }

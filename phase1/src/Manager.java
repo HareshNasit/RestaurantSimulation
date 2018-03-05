@@ -10,14 +10,15 @@ public class Manager implements IWorker{
     private boolean isOccupied;
     private String name;
     private String requestIngredients = "request.txt";
-    public Manager(String name, Restaurant restaurant){
+
+  public Manager(String name) {
         this.name = name;
     }
     /**
      * Calls a server or a cook to collect the received ingredients.
      */
-    public IWorker callWorker(Restaurant restaurant){
-        for(IWorker worker: restaurant.getWorkers()){
+    public IWorker callWorker(ArrayList<IWorker> workers) {
+      for (IWorker worker : workers) {
             if(!worker.isOccupied()){
                 return worker;
             }

@@ -1,5 +1,11 @@
-import java.util.Observer;
+import java.util.ArrayList;
 
-public interface TableListener extends Observer {
+public interface TableListener {
+
+  public ArrayList<Dish> getTableOrder(String name);
+
+  public void getBill();
+
+  public void returnDish(Dish dish);
 
 }
