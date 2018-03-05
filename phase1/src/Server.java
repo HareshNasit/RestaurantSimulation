@@ -15,9 +15,9 @@ public class Server implements IWorker, ServingTableListener {
   /**
    * Creates a new server for this restaurant
    *
-   * @param name
-   * @param servers
-   * @param servingTable
+   * @param name The name of the server
+   * @param servers The list of servers in the restaurant
+   * @param servingTable The table from where servers get their cooked dishes
    */
   public Server(String name, ArrayList<Server> servers, ServingTable servingTable) {
     this.name = name;
@@ -48,7 +48,7 @@ public class Server implements IWorker, ServingTableListener {
   /**
    * Generates a bill for the table
    *
-   * @param table
+   * @param table The table that asked for the bill
    */
   public void generateTableBill(Table table) {
     Bill.outputBill(table.getTableOrder());
