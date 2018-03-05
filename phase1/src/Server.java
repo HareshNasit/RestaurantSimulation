@@ -110,14 +110,8 @@ public class Server implements IWorker, ServingTableListener {
    * @param dish the dish that was served
    */
   public void serveTable(Table table, Dish dish){
-
-  }
-
-  /**
-   * Sends a confirmation to the cook when the dish has been served, i.e. picked up from the servingTable
-   */
-  public void confirmDishServed(){
-
+      table.getCookedOrder().add(dish);
+      servingTable.dishesToBeServed.remove(dish);
   }
 
   // ------------------------------To Be Considered------------------------------------------------
