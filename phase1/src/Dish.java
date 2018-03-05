@@ -15,11 +15,11 @@ public class Dish {
   private int customerNum;
 
   /**
-   * @param name
-   * @param id
-   * @param price
-   * @param ingredients
-   * @param tableId
+   * @param name The name of the dish
+   * @param id The id assigned to the dish
+   * @param price The price of the dish
+   * @param ingredients The ingredients needed to make the dish
+   * @param tableId The table that ordered the dish
    */
   public Dish(
       String name,
@@ -39,10 +39,10 @@ public class Dish {
   /**
    * Constructor to be used for the Menu.
    *
-   * @param name
-   * @param id
-   * @param price
-   * @param ingredients
+   * @param name The name of the dish on the menu
+   * @param id The id of the dish
+   * @param price The price of the dish
+   * @param ingredients The ingredients used to make the dish
    */
   public Dish(String name, double id, double price, HashMap<String, DishIngredient> ingredients) {
     this.name = name;
@@ -114,8 +114,8 @@ public class Dish {
    * Adds an ingredient to the dish. Precondition, the amount you are adding is within bounds of the
    * ingredient's bounds.
    *
-   * @param ingredient
-   * @param amount
+   * @param ingredient The ingredient being added to the dish
+   * @param amount The amount of that ingredient that is being added
    */
   public void addIngredient(String ingredient, int amount) {
     this.ingredients.get(ingredient).subtractAmount(amount);
@@ -125,13 +125,17 @@ public class Dish {
    * Subtracts an ingredient from the dish. Precondition, the amount you are subtracting is within
    * bounds of the ingredient's bounds.
    *
-   * @param ingredient
-   * @param amount
+   * @param ingredient the ingredient that is being removed from the dish
+   * @param amount the amount of that ingredient that is being removed
    */
   public void subtractIngredient(String ingredient, int amount) {
     this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
+  /**
+   *
+   * @return
+   */
   public HashMap<String, Integer> getIngredientAmounts() {
     HashMap<String, Integer> ingredientAmounts = new HashMap<>();
     for (String key : this.ingredients.keySet()) {
@@ -157,6 +161,10 @@ public class Dish {
     return billText;
   }
 
+  /**
+   * 
+   * @return
+   */
   public String getStringForBill() {
     String billText = "";
 
@@ -178,4 +186,21 @@ public class Dish {
 
     return billText;
   }
+    /**
+     * Getter for tableName
+     *
+     * @return String tableName.
+     */
+    public String getTableName() {
+        return tableName;
+    }
+
+    /**
+     * Getter for name of the dish.
+     *
+     * @return String name.
+     */
+    public String getName() {
+        return name;
+    }
 }

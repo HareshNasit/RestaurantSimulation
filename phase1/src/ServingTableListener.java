@@ -3,10 +3,12 @@ import java.util.Observer;
 
 public interface ServingTableListener {
 
+
   /**
-   * Notifies the appropriate ServingTableListener what to do
+   * That dish has been changed
+   * @param dish - Dish that has been changed (i.e cooked, update, served)
    */
-  public void update();
+  public void update(Dish dish);
 
 
 }
