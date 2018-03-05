@@ -5,13 +5,10 @@ import java.util.ArrayList;
  */
 public class Cook implements IWorker, ServingTableListener {
     private boolean isOccupied;
-    private static int numOfCooks;
     private String name; // Name of the cook.
-    public static ArrayList<Dish> dishesToBeCooked;
 
   public Cook(String name, ServingTable screen) {
         this.name = name;
-        numOfCooks++;
         this.isOccupied = false;
     }
 

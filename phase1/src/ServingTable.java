@@ -76,4 +76,7 @@ public class ServingTable {
     this.cooks = cooks;
   }
 
+  public ArrayList<Dish> getDishesToBeServed() {
+    return dishesToBeServed;
+  }
 }
