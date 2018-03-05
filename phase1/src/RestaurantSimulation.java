@@ -14,6 +14,13 @@ public class RestaurantSimulation {
           Scanner line = new Scanner(file);
           while (line.hasNextLine()) {
               String tableLine = line.nextLine();
+              String[] splitString = tableLine.split("\\|");
+              if (splitString[0].equals("Server")){
+                  workers.add(new Server(splitString[1],));
+              }
+              else if(splitString[0].equals("Manager")){}
+              else if(splitString[0].equals("Cook")){}
+
 
 
           }
