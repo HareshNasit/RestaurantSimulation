@@ -10,6 +10,7 @@ public class Table {
   private boolean orderCompleted; // if the table's order has been completed or not
   private ArrayList<Dish> cookedOrder; // the table's cooked dishes that have been served
   private int numberOfDishesServed; // the number of dishes served to the table
+    // NEED TO HAVE A LIST OF MANAGERS
 
   public Table(String tableName, int tableSize, boolean isOccupied) {
     this.tableName = tableName;
@@ -46,6 +47,10 @@ public class Table {
     numberOfDishesServed++;
   }
 
+  /**
+   * Removes the served dish and reduces the number of dishes served by 1
+   * @param dish
+   */
   public void removeServedDish(Dish dish) {
     numberOfDishesServed--;
   }
@@ -75,7 +80,7 @@ public class Table {
     return tableName;
   }
 
-  /** Returns the dishes order by a specifc customerNumber on this table */
+  /** Returns the dishes ordered by a specifc customerNumber on this table */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
     ArrayList<Dish> customerDishes = new ArrayList<Dish>();
     for (Dish dish : tableOrder) {
