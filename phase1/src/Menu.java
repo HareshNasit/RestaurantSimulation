@@ -65,4 +65,8 @@ public class Menu {
   public int getMenuSize() {
     return menuItems.size();
   }
+
+  public Dish getDish(Double id, String tableName, int customerNum) {
+    return this.menuItems.get(id).createCopyWithTableId(tableName, customerNum);
+  }
 }
