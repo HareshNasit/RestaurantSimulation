@@ -11,14 +11,14 @@ public class Server implements IWorker, ServingTableListener {
   private boolean isOccupied; // whether the server is currently serving a table or not
   ServingTable servingTable;
 
+
   /**
    * Creates a new server for this restaurant
    *
    * @param name The name of the server
-   * @param servers The list of servers in the restaurant
    * @param servingTable The table from where servers get their cooked dishes
    */
-  public Server(String name, ArrayList<Server> servers, ServingTable servingTable) {
+  public Server(String name, ServingTable servingTable) {
     this.name = name;
     servers.add(this);
     numberOfServers++;
@@ -101,10 +101,10 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * The server calls the manager incase there is a problem with a customer
+   * The server calls the manager in case there is a problem with a customer
    */
   public void callManager(){
-    // RETURN A MANAGER?
+
   }
 
   /**
