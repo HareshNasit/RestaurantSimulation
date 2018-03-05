@@ -7,26 +7,19 @@ public class Cook implements IWorker, ServingTableListener {
     private boolean isOccupied;
     private static int numOfCooks;
     private String name; // Name of the cook.
-//    private ArrayList<Dish> dishesInMaking; // Number of dishes this cook is preparing.
-//    private ArrayList<Dish> dishesReady; // Number of dishes ready to be delivered.
     public static ArrayList<Dish> dishesToBeCooked;
-  ServingTable screen;
 
-  public Cook(String name, Restaurant restaurant, ServingTable screen) {
+  public Cook(String name, ServingTable screen) {
         this.name = name;
         numOfCooks++;
-//        this.dishesReady = new ArrayList<Dish>();
-//        this.dishesInMaking = new ArrayList<Dish>();
-        restaurant.getWorkers().add((IWorker)this);
         this.isOccupied = false;
-    this.screen = screen;
     }
 
     /**
      * Adds the dishes from the order to dishesInMaking which are being prepared.
      * @param dish The Dish that is to be added to dishesInMaking.
      */
-    public boolean prepareDish(Dish dish,Inventory inventory){
+    public boolean prepareDish(Dish dish, Inventory inventory, ServingTable screen) {
         if(canBePrepared(dish,inventory)){
             // REMOVE THE INGREDIENTS FROM THE INVENTORY AND ADD DISH TO READY.
             for(String ingredient: dish.getIngredients().keySet()){
@@ -45,7 +38,7 @@ public class Cook implements IWorker, ServingTableListener {
      * Adds the dish to dishesReady after being prepared.
      * @param dish The Dish that is to be added.
      */
-    public void dishReady(Dish dish){
+    public void dishReady(Dish dish, ServingTable screen) {
         // The dish  prepared is added to the Servers list of dishes ready to be served.
       screen.addToBeServed(dish);
     }

@@ -9,20 +9,17 @@ public class Server implements IWorker, ServingTableListener {
   private static int numberOfServers; // the number of servers in a restaurant
   private String name; // name of a server
   private boolean isOccupied; // whether the server is currently serving a table or not
-  ServingTable servingTable;
 
 
   /**
    * Creates a new server for this restaurant
    *
    * @param name The name of the server
-   * @param servingTable The table from where servers get their cooked dishes
    */
-  public Server(String name, ServingTable servingTable) {
+  public Server(String name) {
     this.name = name;
     servers.add(this);
     numberOfServers++;
-    this.servingTable = servingTable;
   }
 
   /**
@@ -30,7 +27,7 @@ public class Server implements IWorker, ServingTableListener {
    *
    * @param dish - Dish that has been cooked
    */
-  public void removeDishToBeServed(Dish dish) {
+  public void removeDishToBeServed(Dish dish, ServingTable servingTable) {
     servingTable.getDishToBeServed(dish);
   }
 
@@ -39,7 +36,7 @@ public class Server implements IWorker, ServingTableListener {
    *
    * @param table the table that places the order
    */
-  public void addOrder(Table table, ArrayList<Dish> tableOrder) {
+  public void addOrder(Table table, ArrayList<Dish> tableOrder, ServingTable servingTable) {
     table.setTableOrder(tableOrder);
     servingTable.addToBeCooked(tableOrder);
   }
