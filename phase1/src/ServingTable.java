@@ -9,11 +9,25 @@ public class ServingTable {
   private ArrayList<ServingTableListener> servers;
   private ArrayList<ServingTableListener> cooks;
 
+  public ArrayList<ServingTableListener> getServers() {
+    return servers;
+  }
+
+  public void setServers(ArrayList<ServingTableListener> servers) {
+    this.servers = servers;
+  }
+
+  public ArrayList<ServingTableListener> getCooks() {
+    return cooks;
+  }
+
+  public void setCooks(ArrayList<ServingTableListener> cooks) {
+    this.cooks = cooks;
+  }
+
   ServingTable() {
     dishesToBeCooked = new ArrayList<Dish>();
     dishesToBeServed = new ArrayList<Dish>();
-    this.servers = servers;
-    this.cooks = cooks;
   }
 
   /**

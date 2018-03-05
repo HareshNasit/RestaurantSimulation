@@ -25,9 +25,8 @@ public class Restaurant {
     workers = sumWorkers.get(0);
     servers = sumWorkers.get(1);
     cooks = sumWorkers.get(2);
-
-
-
+    servingTable.setServers(servers);
+    servingTable.setCooks(cooks);
   }
 
   /**
