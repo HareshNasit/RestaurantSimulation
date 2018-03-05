@@ -12,11 +12,13 @@ public class Restaurant {
   private Menu menu; // The menu of the restaurant.
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
   private ArrayList<Table> tables;
+  private final String TABLEFILE = "tables.txt";
 
-  public Restaurant(Menu menu,Inventory inventory) {
+  public Restaurant(Menu menu, Inventory inventory) {
     this.inventory = inventory;
     this.menu = menu;
-    workers = new ArrayList<>();
+    workers = new ArrayList<IWorker>();
+    tables = new ArrayList<Table>();
   }
 
   /**
