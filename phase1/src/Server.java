@@ -111,7 +111,7 @@ public class Server implements IWorker, ServingTableListener {
    */
   public void serveTable(Table table, Dish dish, ServingTable servingTable) {
       table.getCookedOrder().add(dish);
-      servingTable.dishesToBeServed.remove(dish);
+      servingTable.getDishesToBeServed().remove(dish);
   }
 
   // ------------------------------To Be Considered------------------------------------------------
