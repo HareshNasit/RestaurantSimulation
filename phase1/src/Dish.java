@@ -58,19 +58,19 @@ public class Dish {
    *
    * @return Dish
    */
-  public Dish clone() {
+  private Dish cloneDish() {
     return new Dish(this.name, this.id, this.price, cloneIngredients());
   }
 
   /**
    * Creates a copy of this dish with the table id.
    *
-   * @param tableName
-   * @param customerNumber
-   * @return
+   * @param tableName The name of the table.
+   * @param customerNumber The customers number.
+   * @return The dish with the given tableId.
    */
   public Dish createCopyWithTableId(String tableName, int customerNumber) {
-    Dish dish = this.clone();
+    Dish dish = this.cloneDish();
     dish.tableName = tableName;
     dish.customerNum = customerNumber;
     return dish;
@@ -94,7 +94,7 @@ public class Dish {
   /**
    * Returns the price of the Dish
    *
-   * @return
+   * @return the finalPrice of the dish.
    */
   public double getPrice() {
     double finalPrice = price;
@@ -132,9 +132,9 @@ public class Dish {
     this.ingredients.get(ingredient).subtractAmount(amount);
   }
 
-  /**
+  /** Returns a HashMap of ingredients and their amount.
    *
-   * @return
+   * @return Returns a HashMap of ingredients and their amount.
    */
   public HashMap<String, Integer> getIngredientAmounts() {
     HashMap<String, Integer> ingredientAmounts = new HashMap<>();
@@ -152,7 +152,10 @@ public class Dish {
     }
     return differenceMap;
   }
-
+    /** Returns the String representation of the dish with the table and customer information.
+     *
+     * @return String
+     */
   public String toString() {
     String billText = "";
     billText += "Table: " + this.tableName + ", ";
@@ -161,9 +164,9 @@ public class Dish {
     return billText;
   }
 
-  /**
+  /** Returns the String representation of the dish for the bill.
    * 
-   * @return
+   * @return String
    */
   public String getStringForBill() {
     String billText = "";
