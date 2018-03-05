@@ -5,6 +5,15 @@ public class Table {
 
   private String tableName; // the id number of the table
   private int tableSize; // the number of people who can sit on this table
+
+  public boolean isOccupied() {
+    return isOccupied;
+  }
+
+  public void setOccupied(boolean occupied) {
+    isOccupied = occupied;
+  }
+
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
   private boolean orderCompleted; // if the table's order has been completed or not
@@ -15,6 +24,12 @@ public class Table {
     this.tableName = tableName;
     this.tableSize = tableSize;
     this.isOccupied = isOccupied;
+  }
+
+  public Table(String tableName, int tableSize) {
+    this.tableName = tableName;
+    this.tableSize = tableSize;
+    this.isOccupied = false;
   }
 
   public void setTableOrder(ArrayList<Dish> tableOrder) {
