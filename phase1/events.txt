@@ -1,0 +1,16 @@
+A|4|Occupied
+John|order|A|1|1.1|Lettuce,1#Tomato,-1|
+John|order|A|2|1.0|Lettuce,2|
+John|order|A|3|3.0|
+Harsh|read|0|
+Harsh|read|0|
+Harsh|read|0|
+Miguel|order|B|1|1.1|Lettuce,1#Tomato,-1|
+Miguel|order|B|1|9.0|
+Miguel|order|B|2|3.0|Cheese,1#Onions,-1#Beef,1|
+Harsh|cooked|1|
+Harsh|cooked|0|
+Harsh|cooked|0|
+John|serve|0
+John|serve|0
+John|serve|0
