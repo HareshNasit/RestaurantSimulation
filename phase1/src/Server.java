@@ -23,7 +23,7 @@ public class Server implements IWorker, ServingTableListener {
    */
   public Server(String name) {
     this.name = name;
-    servers.add(this);
+    //servers.add(this);
     numberOfServers++;
   }
 
