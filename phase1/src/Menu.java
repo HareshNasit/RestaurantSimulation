@@ -66,6 +66,6 @@ public class Menu {
   }
 
   public MenuItem getDish(Double id, String tableName, int customerNum) {
-    return this.menuItems.get(id).createCopyWithTableId(tableName, customerNum);
+    return Dish.getDishFromMenuItem(menuItems.get(id), tableName, customerNum);
   }
 }
