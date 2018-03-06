@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Menu {
 
   private final String FILENAME = "menu.txt";
-  private HashMap<Integer, MenuItem> menuItems;
+  private HashMap<Double, MenuItem> menuItems;
 
   /** Creates a Menu from the FILENAME txt file and adds all the dishes to an array. */
   public Menu() {
@@ -38,7 +38,7 @@ public class Menu {
     String[] separatedByHashTag = line.split("#");
 
     String name = separatedByHashTag[1];
-    int id = Integer.parseInt(separatedByHashTag[0].trim());
+    Double id = Double.parseDouble(separatedByHashTag[0].trim());
     Double price = Double.parseDouble(separatedByHashTag[2].trim());
     HashMap<String, DishIngredient> ingredients = new HashMap<>();
 
