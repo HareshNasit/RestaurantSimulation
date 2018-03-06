@@ -25,7 +25,7 @@ public class Server implements IWorker, ServingTableListener {
   /**
    * Server has accepted the cooked dish and delivered it to customer
    *
-   * @param dish - Dish that has been cooked
+   * @param dish - MenuItem that has been cooked
    */
   public void removeDishToBeServed(Dish dish, ServingTable servingTable) {
     servingTable.getDishToBeServed(dish);
@@ -56,7 +56,7 @@ public class Server implements IWorker, ServingTableListener {
    * @param dish the dish that is to be returned
    */
   public boolean returnOrder(Dish dish) {
-    Cook.dishesToBeCooked.add(dish);
+    //Cook.dishesToBeCooked.add(dish);
     return true; // need to find a way to remove this.
   }
 
@@ -89,7 +89,7 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Notify the server that the ServingTable has been changed. i.e Dish needs to be served
+   * Notify the server that the ServingTable has been changed. i.e MenuItem needs to be served
    */
   public void update(Dish dish) {
       String text = "Table ";
@@ -117,8 +117,8 @@ public class Server implements IWorker, ServingTableListener {
   // ------------------------------To Be Considered------------------------------------------------
 
   ////    protected ArrayList<Table> tables; // the list of tables in the restaurant
-  ////    protected ArrayList<Dish> dishesInOrder; // the dishes of a tables order
-  ////  private static ArrayList<Dish> dishesToBeServed = new ArrayList<Dish>();
+  ////    protected ArrayList<MenuItem> dishesInOrder; // the dishes of a tables order
+  ////  private static ArrayList<MenuItem> dishesToBeServed = new ArrayList<MenuItem>();
   //    protected Cook cook;
 
   /**
@@ -130,7 +130,7 @@ public class Server implements IWorker, ServingTableListener {
   //        table.setCookedOrder(dishesToBeServed);
   //    }
 
-  //  public static void addDishToBeServed(Dish dish) {
+  //  public static void addDishToBeServed(MenuItem dish) {
   //    dishesToBeServed.add(dish);
   //  }
 

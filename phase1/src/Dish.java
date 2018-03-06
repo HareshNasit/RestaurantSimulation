@@ -1,129 +1,71 @@
 import java.util.HashMap;
 
-public class Dish {
+public class Dish extends MenuItem {
 
-    private String name;
-    private double id;
-    private double price;
-    private HashMap<String, DishIngredient> ingredients;
+  private String tableName;
+  private int customerNum;
+  private String comment;
 
-    /**
-     * @param name The name of the dish
-     * @param id The id assigned to the dish
-     * @param price The price of the dish
-     * @param ingredients The ingredients needed to make the dish
-     */
-    public Dish(String name, double id, double price, HashMap<String, DishIngredient> ingredients) {
-        this.name = name;
-        this.id = id;
-        this.price = price;
-        this.ingredients = ingredients;
+  public Dish(MenuItem dish, String tableName, int customerNum) {
+
+    super(dish.getName(), dish.getId(), dish.getPrice(), dish.getIngredients());
+    this.tableName = tableName;
+    this.customerNum = customerNum;
+    this.comment = "";
+  }
+  /**
+   * Adds a comment to the dish for the Cook. The server will add specs in the comment that the
+   * customer requests.
+   *
+   * @param comment
+   */
+  public void addComment(String comment) {
+    this.comment = comment;
+  }
+  /*
+   */
+
+  public int getCustomerNum() {
+    return customerNum;
+  }
+
+  public String toString() {
+    String billText = "";
+    billText += "Table: " + this.tableName + ", ";
+    billText += "CustomerNumber: " + this.customerNum + ", ";
+    billText += getStringForBill();
+    return billText;
+  }
+
+  /** @return */
+  public String getStringForBill() {
+    String billText = "";
+
+    billText += "MenuItem Name: " + this.getName() + ", ";
+    billText += "Price $" + this.getPrice() + ", ";
+    String extras = "";
+    String subtractions = "";
+    HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
+    for (String key : differenceMap.keySet()) {
+      if (differenceMap.get(key) > 0) {
+        extras +=
+            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+      } else if (differenceMap.get(key) < 0) {
+        subtractions +=
+            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+      }
     }
-    /**
-     * Creates a copy of this dish with the table id.
-     *
-     * @param tableName
-     * @param customerNumber
-     * @return
-     */
-    public ActualDish createCopyWithTableId(String tableName, int customerNumber) {
-        Dish newDish = this.clone();
-        ActualDish dish = new ActualDish(newDish, tableName, customerNumber);
-        return dish;
-    }
+    billText += extras + subtractions;
+    billText = billText.substring(0, billText.length() - 2);
 
-    public Double getId(){
-        return this.id;
-    }
-    /**
-     * Creates a non-alias copy of this Dish
-     *
-     * @return Dish
-     */
-    public Dish clone() {
-        return new Dish(this.name, this.id, this.price, cloneIngredients());
-    }
-
-    /**
-     * Makes a non-alias copy of the ingredients.
-     *
-     * @return HashMap<String , DishIngredient> Ingredients hashmap
-     */
-    private HashMap<String, DishIngredient> cloneIngredients() {
-
-        HashMap<String, DishIngredient> copy = new HashMap<>();
-
-        for (String key : this.ingredients.keySet()) {
-            copy.put(key, this.ingredients.get(key).clone());
-        }
-        return copy;
-    }
-
-    /**
-     * Returns the price of the Dish
-     *
-     * @return
-     */
-    public double getPrice() {
-        double finalPrice = price;
-        for (String key : this.ingredients.keySet()) {
-            DishIngredient dishIngredient = this.ingredients.get(key);
-            int difference = dishIngredient.getAdditionAmount();
-            finalPrice += difference * dishIngredient.getPrice();
-        }
-        return finalPrice;
-    }
-
-    public HashMap<String, DishIngredient> getIngredients() {
-        return this.ingredients;
-    }
-
-    /**
-     * Adds an ingredient to the dish. Precondition, the amount you are adding is within bounds of the
-     * ingredient's bounds.
-     *
-     * @param ingredient The ingredient being added to the dish
-     * @param amount The amount of that ingredient that is being added
-     */
-    public void addIngredient(String ingredient, int amount) {
-        this.ingredients.get(ingredient).subtractAmount(amount);
-    }
-
-    /**
-     * Subtracts an ingredient from the dish. Precondition, the amount you are subtracting is within
-     * bounds of the ingredient's bounds.
-     *
-     * @param ingredient the ingredient that is being removed from the dish
-     * @param amount the amount of that ingredient that is being removed
-     */
-    public void subtractIngredient(String ingredient, int amount) {
-        this.ingredients.get(ingredient).subtractAmount(amount);
-    }
-
-    /** @return */
-    public HashMap<String, Integer> getIngredientAmounts() {
-        HashMap<String, Integer> ingredientAmounts = new HashMap<>();
-        for (String key : this.ingredients.keySet()) {
-            ingredientAmounts.put(key, this.ingredients.get(key).getAmount());
-        }
-        return ingredientAmounts;
-    }
-
-    protected HashMap<String, Integer> getDifferenceAmounts() {
-        HashMap<String, Integer> differenceMap = new HashMap<>();
-        for (String key : this.ingredients.keySet()) {
-            int dif = this.ingredients.get(key).getBaseDifference();
-            differenceMap.put(key, dif);
-        }
-        return differenceMap;
-    }
-
-    /**
-     * Getter for name of the dish.
-     *
-     * @return String name.
-     */
-    public String getName() {
-        return name;
-    }
+    return billText;
+  }
+  /**
+   * Getter for tableName
+   *
+   * @return String tableName.
+   */
+  public String getTableName() {
+    return tableName;
+  }
 }

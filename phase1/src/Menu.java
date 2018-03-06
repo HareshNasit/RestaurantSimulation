@@ -1,13 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Menu {
 
   private final String FILENAME = "menu.txt";
-  private HashMap<Integer, Dish> menuItems;
+  private HashMap<Integer, MenuItem> menuItems;
 
   /** Creates a Menu from the FILENAME txt file and adds all the dishes to an array. */
   public Menu() {
@@ -58,7 +57,7 @@ public class Menu {
           new DishIngredient(
               ingredientName, amount, baseAmount, lowerAmount, upperAmount, ingredientPrice));
     }
-    Dish dish = new Dish(name, id, price, ingredients);
+    MenuItem dish = new MenuItem(name, id, price, ingredients);
     menuItems.put(id, dish);
   }
 
@@ -66,7 +65,7 @@ public class Menu {
     return menuItems.size();
   }
 
-  public Dish getDish(Double id, String tableName, int customerNum) {
+  public MenuItem getDish(Double id, String tableName, int customerNum) {
     return this.menuItems.get(id).createCopyWithTableId(tableName, customerNum);
   }
 }

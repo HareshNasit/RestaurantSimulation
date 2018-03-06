@@ -6,6 +6,6 @@ public interface TableListener {
 
   public void getBill();
 
-  public void returnDish(Dish dish);
+  public void returnDish(MenuItem dish);
 
 }

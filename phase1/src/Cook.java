@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /*
  * A cook decides whether the dish can be prepared and prepares the dish.
  */
@@ -14,7 +12,7 @@ public class Cook implements IWorker, ServingTableListener {
 
     /**
      * Adds the dishes from the order to dishesInMaking which are being prepared.
-     * @param dish The Dish that is to be added to dishesInMaking.
+     * @param dish The MenuItem that is to be added to dishesInMaking.
      */
     public boolean prepareDish(Dish dish, Inventory inventory, ServingTable screen) {
         if(canBePrepared(dish,inventory)){
@@ -33,7 +31,7 @@ public class Cook implements IWorker, ServingTableListener {
 
     /**
      * Adds the dish to dishesReady after being prepared.
-     * @param dish The Dish that is to be added.
+     * @param dish The MenuItem that is to be added.
      */
     public void dishReady(Dish dish, ServingTable screen) {
         // The dish  prepared is added to the Servers list of dishes ready to be served.

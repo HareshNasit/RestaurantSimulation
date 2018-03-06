@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.PriorityQueue;
 
 public class ServingTable {
 
@@ -42,7 +40,7 @@ public class ServingTable {
    */
   public void returnDish(Dish dish, String comment) {
     dishesToBeCooked.add(0, dish);
-    System.out.println("Dish Returned: " + comment);
+    System.out.println("MenuItem Returned: " + comment);
   }
 
   /**
@@ -67,18 +65,18 @@ public class ServingTable {
    * Returns the next dish that needs to be returned by the chef
    * @return
    */
-  public Dish getNextDishToBeCooked() {
+  public MenuItem getNextDishToBeCooked() {
     return dishesToBeCooked.remove(0);
   }
 
 
   /**
-   * Remove Dish dish from list of dishes to be served. Doing so will mean that dish has been
+   * Remove MenuItem dish from list of dishes to be served. Doing so will mean that dish has been
    * delivered to the table
    * @param dish
-   * @return the Dish that has been cooked, and needs to be served to the customer
+   * @return the MenuItem that has been cooked, and needs to be served to the customer
    */
-  public Dish getDishToBeServed(Dish dish) {
+  public MenuItem getDishToBeServed(MenuItem dish) {
     return dishesToBeServed.remove(0);
   }
 
