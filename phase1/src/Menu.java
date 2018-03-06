@@ -65,7 +65,7 @@ public class Menu {
     return menuItems.size();
   }
 
-  public MenuItem getDish(Double id, String tableName, int customerNum) {
+  public Dish getDish(Double id, String tableName, int customerNum) {
     return Dish.getDishFromMenuItem(menuItems.get(id), tableName, customerNum);
   }
 }
