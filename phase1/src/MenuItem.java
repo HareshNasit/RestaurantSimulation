@@ -19,18 +19,7 @@ public class MenuItem {
         this.price = price;
         this.ingredients = ingredients;
     }
-    /**
-     * Creates a copy of this dish with the table id.
-     *
-     * @param tableName
-     * @param customerNumber
-     * @return
-     */
-    public Dish createCopyWithTableId(String tableName, int customerNumber) {
-        MenuItem newDish = this.clone();
-        Dish dish = new Dish(newDish, tableName, customerNumber);
-        return dish;
-    }
+
 
     public Double getId(){
         return this.id;
