@@ -1,2 +1,23 @@
-chinese#1.5#10#5#10
-cabbage#1.5#1#2#5#10
+name#amount#lower bound#restock amount
+garlic#150#25#125
+cabbage#50#20#30
+flour#200#50#150
+tomato#150#50#100
+lettuce#120#30#90
+cheese#200#50#150
+pepperoni#100#30#70
+bell pepper(green)#100#30#70
+bell pepper(red)#100#30#70
+water#300#100#200
+beef#100#30#70
+pork#100#30#70
+salmon#100#30#70
+tuna#100#30#70
+bread#200#50#150
+burger buns#200#50#150
+chicken#200#50#150
+tortilla wraps#100#20#80
+pizza base#70#20#50
+
+
+
