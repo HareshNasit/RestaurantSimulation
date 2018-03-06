@@ -46,6 +46,11 @@ public class Server implements IWorker, ServingTableListener {
     servingTable.addToBeCooked(tableOrder);
   }
 
+  public void addOrder(Table table, Dish singleOrder, ServingTable servingTable) {
+    table.addSingleOrder(singleOrder);
+    servingTable.addToBeCooked(singleOrder);
+  }
+
   /**
    * Generates a bill for the table
    *

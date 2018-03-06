@@ -35,6 +35,10 @@ public class ServingTable {
     dishesToBeCooked.addAll(order);
   }
 
+  public void addToBeCooked(Dish order) {
+    dishesToBeCooked.add(order);
+  }
+
   /**
    * Returns dish to serving table. Sets it as top priority
    */

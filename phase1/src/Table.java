@@ -37,6 +37,10 @@ public class Table {
     this.tableOrder = tableOrder;
   }
 
+  public void addSingleOrder(Dish dish) {
+    this.tableOrder.add(dish);
+  }
+
   public boolean isOrderCompleted() {
     return orderCompleted;
   }
