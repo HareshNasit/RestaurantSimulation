@@ -107,11 +107,11 @@ public class ServingTable {
   public String toString(){
     String finalString = "Dishes to be cooked: ";
     for(Dish d : dishesToBeCooked){
-      finalString += d.getId() + "|" + d.getTableName() + "|" + d.getCustomerNum() + "# ";
+      finalString += d.getId() + "|" + d.getTableName() + "|" + d.getCustomerNum() + " # ";
     }
-    finalString += System.lineSeparator() + "Dishes to be Served";
+    finalString += System.lineSeparator() + "Dishes to be Served: ";
     for(Dish e : dishesToBeServed){
-      finalString += e.getId() + "|" + e.getTableName() + "|" + e.getCustomerNum() + "#";
+      finalString += e.getId() + "|" + e.getTableName() + "|" + e.getCustomerNum() + " # ";
     }
     return finalString;
   }
