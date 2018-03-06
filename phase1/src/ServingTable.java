@@ -26,6 +26,8 @@ public class ServingTable {
   ServingTable() {
     dishesToBeCooked = new ArrayList<Dish>();
     dishesToBeServed = new ArrayList<Dish>();
+    servers = new ArrayList<ServingTableListener>();
+    cooks = new ArrayList<ServingTableListener>();
   }
 
   /**
