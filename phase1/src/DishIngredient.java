@@ -5,10 +5,10 @@ public class DishIngredient {
   private int baseAmount;
   private int upperAmount;
   private int lowerAmount;
-  private int price;
+  private double price;
 
   public DishIngredient(
-      String name, int baseAmount, int amount, int lowerAmount, int upperAmount, int price) {
+      String name, int baseAmount, int amount, int lowerAmount, int upperAmount, Double price) {
     this.name = name;
     this.baseAmount = baseAmount;
     this.amount = amount;
@@ -101,7 +101,7 @@ public class DishIngredient {
     return amount - baseAmount;
   }
 
-  public int getPrice() {
+  public double getPrice() {
     return this.price;
   }
 

@@ -50,7 +50,7 @@ public class Menu {
       int baseAmount = Integer.parseInt(ingredient[1].trim());
       int lowerAmount = Integer.parseInt(ingredient[2].trim());
       int upperAmount = Integer.parseInt(ingredient[3].trim());
-      int ingredientPrice = Integer.parseInt(ingredient[4].trim());
+      double ingredientPrice = Double.parseDouble(ingredient[4].trim());
 
       ingredients.put(
           ingredient[0],
