@@ -78,7 +78,7 @@ public class Dish extends MenuItem {
      * @param customerNumber
      * @return
      */
-    public Dish getDishFromMenuItem(MenuItem menu, String tableName, int customerNumber) {
+    public static Dish getDishFromMenuItem(MenuItem menu, String tableName, int customerNumber) {
         MenuItem newDish = menu.clone();
         Dish dish = new Dish(newDish, tableName, customerNumber);
         return dish;
