@@ -65,7 +65,15 @@ public class Menu {
     return menuItems.size();
   }
 
-  public Dish getDish(Double id, String tableName, int customerNum) {
+  /**
+   * Returns a menuitem which is a dish which includes the dish's id, the table that
+   * ordered it and the customer that placed the order
+   * @param id the id of the dish
+   * @param tableName the table that ordered the dish
+   * @param customerNum the number of the customer who ordered the dish
+   * @return the dish with the given details
+   */
+  public MenuItem getDish(Double id, String tableName, int customerNum) {
     return Dish.getDishFromMenuItem(menuItems.get(id), tableName, customerNum);
   }
 }
