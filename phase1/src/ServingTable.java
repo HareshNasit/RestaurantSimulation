@@ -84,6 +84,14 @@ public class ServingTable {
     this.servers = servers;
   }
 
+  public void addServer(ServingTableListener server) {
+    servers.add(server);
+  }
+
+  public void addCook(ServingTableListener cook) {
+    cooks.add(cook);
+  }
+
   public void addCooks(ArrayList<ServingTableListener> cooks) {
     this.cooks = cooks;
   }

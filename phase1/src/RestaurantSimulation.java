@@ -24,11 +24,11 @@ public class RestaurantSimulation {
       while (events.hasNextLine()) {
         String[] line = events.nextLine().split("|");
         if (line[0].equals("Server")) {
-
+          readServerAction(line);
         } else if (line[0].equals("Cook")) {
-
+          readCookAction(line);
         } else if (line[0].equals("Manager")) {
-
+          readManagerAction(line);
         }
 
       }
@@ -38,13 +38,13 @@ public class RestaurantSimulation {
     }
   }
 
-  public void readServerAction(String[] input) {
+  private void readServerAction(String[] input) {
   }
 
-  public void readCookAction(String[] input) {
+  private void readCookAction(String[] input) {
   }
 
-  public void readManagerAction(String[] input) {
+  private void readManagerAction(String[] input) {
   }
 
 }

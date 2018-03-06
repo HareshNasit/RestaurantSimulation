@@ -3,9 +3,14 @@
  */
 public class Cook implements IWorker, ServingTableListener {
     private boolean isOccupied;
-    private String name; // Name of the cook.
 
-  public Cook(String name, ServingTable screen) {
+  public String getName() {
+    return name;
+  }
+
+  private String name; // Name of the cook.
+
+  public Cook(String name) {
         this.name = name;
         this.isOccupied = false;
     }

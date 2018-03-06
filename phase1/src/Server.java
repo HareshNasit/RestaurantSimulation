@@ -7,6 +7,11 @@ public class Server implements IWorker, ServingTableListener {
 
   public static ArrayList<Server> servers; // the list of servers in the restaurant
   private static int numberOfServers; // the number of servers in a restaurant
+
+  public String getName() {
+    return name;
+  }
+
   private String name; // name of a server
   private boolean isOccupied; // whether the server is currently serving a table or not
 
