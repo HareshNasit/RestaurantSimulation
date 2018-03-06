@@ -53,7 +53,7 @@ public class ServingTable {
   }
 
   /**
-   * Notfiy servers about current dish state
+   * Notify servers about current dish state
    */
   public void notifyServers(Dish dish) {
     for (ServingTableListener server : servers) {
@@ -90,5 +90,17 @@ public class ServingTable {
 
   public ArrayList<Dish> getDishesToBeServed() {
     return dishesToBeServed;
+  }
+
+  public String toString(){
+    String finalString = "Dishes to be cooked: ";
+    for(Dish d : dishesToBeCooked){
+      finalString += d.getId() + "|" + d.getTableName() + "|" + d.getCustomerNum() + "# ";
+    }
+    finalString += System.lineSeparator() + "Dishes to be Served";
+    for(Dish e : dishesToBeServed){
+      finalString += e.getId() + "|" + e.getTableName() + "|" + e.getCustomerNum() + "#";
+    }
+    return finalString;
   }
 }
