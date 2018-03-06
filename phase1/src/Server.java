@@ -70,14 +70,7 @@ public class Server implements IWorker, ServingTableListener {
    * This method checks whether all the dishes the table ordered have been served or not.
    */
   public boolean isOrderComplete(Table table) {
-    if (table.getNumberOfDishesServed() == table.numberOfDishesInOrder()) {
-      return true;
-    }
-    // else if(){} have to check if the dish has been returned which then makes the order still
-    // incomplete
-    else {
-      return false;
-    }
+    return (table.getNumberOfDishesServed() == table.numberOfDishesInOrder());
   }
 
   public boolean isOccupied() {
@@ -113,25 +106,5 @@ public class Server implements IWorker, ServingTableListener {
       table.getCookedOrder().add(dish);
       servingTable.getDishesToBeServed().remove(dish);
   }
-
-  // ------------------------------To Be Considered------------------------------------------------
-
-  ////    protected ArrayList<Table> tables; // the list of tables in the restaurant
-  ////    protected ArrayList<MenuItem> dishesInOrder; // the dishes of a tables order
-  ////  private static ArrayList<MenuItem> dishesToBeServed = new ArrayList<MenuItem>();
-  //    protected Cook cook;
-
-  /**
-   * The server serves the order to the table and removes it from the list of orders to be served
-   *
-   * @param table the table whose order is being served
-   */
-  //    public void serveDishes(Table table) {
-  //        table.setCookedOrder(dishesToBeServed);
-  //    }
-
-  //  public static void addDishToBeServed(MenuItem dish) {
-  //    dishesToBeServed.add(dish);
-  //  }
 
 }
