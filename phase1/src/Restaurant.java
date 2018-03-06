@@ -14,15 +14,35 @@ public class Restaurant {
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
   private HashMap<String, Server> servers;
   private HashMap<String, Cook> cooks;
-  private ArrayList<Table> tables;
+  private HashMap<String, Table> tables;
   private ServingTable servingTable;
 
   public Restaurant(Menu menu, Inventory inventory, ServingTable servingTable) {
     this.inventory = inventory;
     this.menu = menu;
-    tables = generateTables("tables.txt");
+    generateTables("tables.txt");
     this.servingTable = servingTable;
     this.generateWorkers("Workers.txt", this.servingTable);
+  }
+
+  public Server getServer(String name) {
+    return servers.get(name);
+  }
+
+  public Cook getCook(String name) {
+    return cooks.get(name);
+  }
+
+  public Table getTable(String id) {
+    return tables.get(id);
+  }
+
+  public Menu getMenu() {
+    return menu;
+  }
+
+  public Inventory getInventory() {
+    return inventory;
   }
 
   /**
@@ -44,10 +64,10 @@ public class Restaurant {
   /**
    * Returns a new list of tables from fileName Format: TableID,tableSize
    */
-  private ArrayList<Table> generateTables(String fileName) {
+  private void generateTables(String fileName) {
 
     File file = new File(fileName);
-    ArrayList<Table> tables = new ArrayList<Table>();
+    tables = new HashMap<String, Table>();
     try {
       Scanner line = new Scanner(file);
 
@@ -57,14 +77,13 @@ public class Restaurant {
         int tableSize = Integer.valueOf(tableLine.split(",")[1]);
 
         Table table = new Table(tableID, tableSize);
-        tables.add(table);
+        tables.put(tableID, table);
       }
       line.close();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     }
 
-    return tables;
 
   }
 
