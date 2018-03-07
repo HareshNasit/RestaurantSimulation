@@ -25,11 +25,13 @@ public class Cook implements IWorker, ServingTableListener {
             for(String ingredient: dish.getIngredients().keySet()){
                 inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
             }
-          screen.addToBeServed(dish);
+            System.out.println("Dish read and ready to be cooked.");
+            screen.addToBeServed(dish);
             return true;
         }
         else{
-            //  DOES COOK DECIDE IF A DISH CAN BE MADE OR COMPUTER IS A QUESTION.
+      //  DOES COOK DECIDE IF A DISH CAN BE MADE OR COMPUTER IS A QUESTION.
+            System.out.println("Dish rejected");
             return false;
         }
     }
