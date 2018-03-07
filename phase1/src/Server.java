@@ -97,13 +97,6 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * The server calls the manager in case there is a problem with a customer
-   */
-  public void callManager(){
-
-  }
-
-  /**
    * The server serves a dish to the table that ordered it
    */
   public void serveDish(int index, ServingTable servingTable) {

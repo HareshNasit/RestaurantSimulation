@@ -88,16 +88,24 @@ public class Dish extends MenuItem {
     return differences;
   }
 
-  /**
-   * Creates a copy of this dish with the table id.
-   *
-   * @param tableName
-   * @param customerNumber
-   * @return
-   */
-  public static Dish getDishFromMenuItem(MenuItem menu, String tableName, int customerNumber) {
-    MenuItem newDish = menu.clone();
-    Dish dish = new Dish(newDish, tableName, customerNumber);
-    return dish;
-  }
+    /**
+     * Creates a copy of this dish with the table id.
+     *
+     * @param tableName the table that the dish is for
+     * @param customerNumber the customer that ordered the dish
+     * @return the dish that has been ordered
+     */
+    public static Dish getDishFromMenuItem(MenuItem menu, String tableName, int customerNumber) {
+        MenuItem newDish = menu.clone();
+        Dish dish = new Dish(newDish, tableName, customerNumber);
+        return dish;
+    }
+
+    public String changedIngredients(MenuItem dish){
+      String dishString = dish.getName() + "|" + dish.getId() + "|";
+      return dishString;
+      // NEED TO ADD METHOD BODY
+    }
+
+
 }

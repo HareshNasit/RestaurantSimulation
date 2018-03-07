@@ -18,6 +18,8 @@ burger buns#200#50#150
 chicken#200#50#150
 tortilla wraps#100#20#80
 pizza base#70#20#50
-
-
-
+Meat patty#100#20#80
+Veg patty#100#20#80
+Water#500#100#400
+Falafel balls#200#50#100
+Potato#200#70#130
