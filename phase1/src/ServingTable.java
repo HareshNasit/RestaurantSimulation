@@ -128,8 +128,6 @@ public class ServingTable {
   public Dish getDishToBeServed(int index) {
 
     Dish dish = dishesToBeServed.remove(index);
-    //String of dish
-
     return dish;
   }
     /**
@@ -201,5 +199,11 @@ public class ServingTable {
     dishesBeingCooked.add(dish);
     System.out.println(String.format("%s is now being cooked", dish.getName()));
     return dish;
+  }
+
+  public void serveDish(int index) {
+    Dish dish = dishesToBeServed.remove(index);
+    System.out.println(String.format("%s has been served", dish.getName()));
+
   }
 }

@@ -48,7 +48,7 @@ public class Manager implements IWorker, InventoryListener {
             String line = fileReader.readLine();
             String[] splitLine = line.split("\\|");
             if (line != null) {
-                orders.put(new InventoryIngredient())
+              //   orders.put(new InventoryIngredient())
             }
         }
         catch (Exception e) {
