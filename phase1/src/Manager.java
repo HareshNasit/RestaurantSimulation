@@ -70,4 +70,5 @@ public class Manager implements IWorker{
     public void scanStock(Inventory inventory, String ingredient, int amount) {
         inventory.addStock(ingredient,amount);
     }
+
 }
