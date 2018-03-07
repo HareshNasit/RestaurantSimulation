@@ -115,6 +115,7 @@ public class Restaurant {
           Manager manager = new Manager(splitString[1]);
           this.workers.add(manager);
           inventory.setManger(manager);
+          this.manager = manager;
 
         } else if (splitString[0].equals("Cook")) {
 

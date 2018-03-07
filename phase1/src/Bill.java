@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Bill {
 
   public static void outputBill(ArrayList<Dish> orders) {
+
     String billText = "";
     double subtotal = 0;
     for (Dish order : orders) {
@@ -15,6 +16,7 @@ public class Bill {
   }
 
   public static void outputSingleBill(Table table, int customerNum) {
+
     String billText = "";
     billText += "Table: " + table.getName() + ", ";
     billText += "CustomerNumber: " + customerNum + ", ";

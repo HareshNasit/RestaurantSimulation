@@ -35,7 +35,9 @@ public class Cook implements IWorker, ServingTableListener {
         for (String ingredient : dish.getIngredients().keySet()) {
           inventory.removeStock(ingredient, dish.getIngredientAmounts().get(ingredient));
         }
-        }
+      } else {
+        System.out.println(dish.getName() + " cannot be prepared");
+      }
 
     }
     /**
