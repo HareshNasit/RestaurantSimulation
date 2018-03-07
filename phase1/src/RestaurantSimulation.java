@@ -137,7 +137,6 @@ public class RestaurantSimulation {
         worker.scanStock(restaurant.getInventory(),input[3],Integer.valueOf(input[4]));
       }
       else if(input[2].equals("shutdown")){
-        System.out.println("System Shutdown");
         manager.shutDown(restaurant.getInventory());
     }
   }

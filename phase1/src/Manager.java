@@ -72,7 +72,8 @@ public class Manager implements IWorker, InventoryListener {
      * The Manager shuts the system and updates the inventory.txt file.
      */
     public void shutDown(Inventory inventory){
-        inventory.writeToInventory();
+      System.out.println("System Shutdown: Writing inventory to file");
+      inventory.writeToInventory();
     }
 
 }
