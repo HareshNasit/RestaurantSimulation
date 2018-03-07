@@ -85,8 +85,8 @@ public class Inventory {
       for (InventoryIngredient ingredient : inventory.values()) {
         String line = ingredient.getName() + "#"
             + String.valueOf(ingredient.getCurrentQuantity()) + "#"
-            + String.valueOf(ingredient.getLowerThreshold()) + "#"
-            + String.valueOf(ingredient.getRestockQuantity());
+            + String.valueOf(ingredient.getRestockQuantity()) + "#"
+            + String.valueOf(ingredient.getLowerThreshold());
         out.println(line);
 
       }
@@ -105,10 +105,10 @@ public class Inventory {
       while (line != null) {
         String name = line.split("#")[0].toLowerCase().trim();
         int amount = Integer.valueOf(line.split("#")[1].trim());
-        int lowerBound = Integer.valueOf(line.split("#")[2].trim());
-        int restockAmount = Integer.valueOf(line.split("#")[3].trim());
-        InventoryIngredient ingredient = new InventoryIngredient(name, amount, lowerBound,
-            restockAmount);
+        int restockAmount = Integer.valueOf(line.split("#")[2].trim());
+        int lowerBound = Integer.valueOf(line.split("#")[3].trim());
+        InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockAmount,
+            lowerBound);
         inventory.put(name, ingredient);
 
         line = fileReader.readLine();

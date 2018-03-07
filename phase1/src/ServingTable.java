@@ -174,13 +174,19 @@ public class ServingTable {
     return finalString;
   }
 
+  public Dish getRejectedDish(int index) {
+    Dish dish = dishesRejected.remove(index);
+    System.out.println(dish.getName() + " rejection has been informed to customer");
+    return dish;
+  }
+
   public Dish getDishToBeCooked(int index) {
     return dishesToBeCooked.get(index);
   }
 
   public void rejectDish(int index) {
     Dish dish = dishesToBeCooked.remove(index);
-    System.out.println(String.format("%s has been rejected", dish.getName()));
+    System.out.println(String.format("%s has been rejected by chef", dish.getName()));
     dishesRejected.add(dish);
 
   }
