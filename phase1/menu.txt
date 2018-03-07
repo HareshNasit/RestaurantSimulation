@@ -1,3 +1,12 @@
-1 #Small Hot Dog# 10 # Bun, 1, 2, 1, 1.1 # Sausage, 1, 2, 4, 3.2 #
-1.1 #Large Hot Dog# 15.23 # Bun, 1, 2, 1, 1.1 # Sausage, 1, 2, 4, 3.5 #
-2 #Hamburger# 31.05 # Bun, 1, 1, 3, 2.1 # Patty, 1, 2, 4, 3.4 # Tomato, 2, 1, 5, 4.4
+String name, int amount, int lowerAmount, int upperAmount, Double price
+1 #Small Hot Dog# 4.00 # Bun, 1, 2, 1, 1.1 # Sausage, 1, 1, 2, 3.2 #Tamarind Sauce, 2, 1, 4, 1.4 #
+1.1 #Large Hot Dog# 6.00 # Bun, 1, 2, 1, 1.1 # Sausage, 1, 2, 4, 3.5 #Tamarind Sauce, 3, 1, 5, 2.1 #
+2 #Non-veg Hamburger# 12.50 # Burger, 2, 1, 3, 2.1 # Meat Patty, 1, 2, 4, 3.4 # Tomato, 2, 1, 5, 2.2 #
+3 #Veg Hamburger# 10.50 # Burger, 1, 1, 3, 2.1 # Veg Patty, 1, 2, 4, 3.4 # Tomato, 2, 1, 5, 4.4 # Lettuce, 2, 1, 5, 2.2 #
+4 #Falafel Wrap# 10.00 # Tortilla wrap, 1, 1, 2, 2.05 # Falafel ball, 3, 1, 5, 3.05 # Tomato, 2, 1, 5, 4.4 # Lettuce, 2, 1, 5, 2.2 #
+5 #Pizza# 13.50 # Pizza base, 1, 1, 1, 5.00 # Cheese, 5, 2, 10, 6.05 # Tomato, 2, 1, 5, 4.4 #
+6 #Spaghetti and meatballs# 12.05 # Spaghetti, 30, 15, 50, 7.05 # Tomato, 2, 1, 5, 4.4 # Beef, 3, 1, 5, 5.5 #
+7 #Quesadilla# Tomato, 2, 1, 5, 4.4 # Beef, 3, 1, 5, 5.5 # Lettuce, 2, 1, 5, 2.2 #Tamarind Sauce, 2, 1, 4, 1.4 #
+8 #Chocolate Shake# Chocolate, 5, 2, 10, 5.5 # Milk, 10, 5, 15, 10 #
+9 #Chocolate brownie# Chocolate, 5, 2, 10, 5.5 # Milk, 1, 1, 2, 2 # Flour, 4, 2, 6, 2 #
+10 #Strawberry Shake# Strawberry, 5, 2, 10, 5.5 # Milk, 10, 5, 15, 10 #
