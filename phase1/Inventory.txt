@@ -23,3 +23,10 @@ Veg patty#100#20#80
 Water#500#100#400
 Falafel balls#200#50#100
 Potato#200#70#130
+Spaghetti#500#200#300
+Mint Sauce#200#100#100
+Coriander Sauce#200#100#100
+Tamarind Sauce#200#100#100
+Milk#300#100#200
+Chocolate#100#50#50
+Strawberry#100#50#50
