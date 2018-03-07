@@ -81,5 +81,11 @@ public class Manager implements IWorker, InventoryListener {
     public void scanStock(Inventory inventory, String ingredient, int amount) {
         inventory.addStock(ingredient,amount);
     }
+    /**
+     * The Manager shuts the system and updates the inventory.txt file.
+     */
+    public void shutDown(Inventory inventory){
+        inventory.writeToInventory();
+    }
 
 }
