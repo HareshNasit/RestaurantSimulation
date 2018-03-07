@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class ServingTable {
-
+  private ArrayList<Dish> dishesRejected;
   private ArrayList<Dish> dishesToBeCooked;
   private ArrayList<Dish> dishesToBeServed;
   private ArrayList<ServingTableListener> servers;
@@ -24,6 +24,7 @@ public class ServingTable {
   }
 
   ServingTable() {
+    dishesRejected = new ArrayList<>();
     dishesToBeCooked = new ArrayList<Dish>();
     dishesToBeServed = new ArrayList<Dish>();
     servers = new ArrayList<ServingTableListener>();
@@ -77,13 +78,20 @@ public class ServingTable {
 
 
   /**
-   * Remove MenuItem dish from list of dishes to be served. Doing so will mean that dish has been
-   * delivered to the table
-   * @param dish
-   * @return the MenuItem that has been cooked, and needs to be served to the customer
+   * Remove the dish at the given index
+   * @param index - index of the dish that needs to be served
+   * @return
    */
-  public MenuItem getDishToBeServed(MenuItem dish) {
-    return dishesToBeServed.remove(0);
+  public Dish getDishToBeServed(int index) {
+
+    Dish dish = dishesToBeServed.remove(index);
+    //String of dish
+    for (ServingTableListener cook : cooks) {
+      cook.notify();
+    }
+
+    return dish;
+
   }
 
   public void addServers(ArrayList<ServingTableListener> servers) {
@@ -117,4 +125,11 @@ public class ServingTable {
     }
     return finalString;
   }
+    /**
+     * Returns an ArrayList of dishes which are rejected.
+     * @return ArrayList of dishes which are rejected.
+     */
+    public ArrayList<Dish> getDishesRejected() {
+        return dishesRejected;
+    }
 }

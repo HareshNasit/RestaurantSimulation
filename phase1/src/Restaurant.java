@@ -15,6 +15,11 @@ public class Restaurant {
   private HashMap<String, Server> servers;
   private HashMap<String, Cook> cooks;
   private HashMap<String, Table> tables;
+
+  public ServingTable getServingTable() {
+    return servingTable;
+  }
+
   private ServingTable servingTable;
 
   public Restaurant(Menu menu, Inventory inventory, ServingTable servingTable) {

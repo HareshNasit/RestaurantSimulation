@@ -73,7 +73,7 @@ public class Menu {
    * @param customerNum the number of the customer who ordered the dish
    * @return the dish with the given details
    */
-  public MenuItem getDish(Double id, String tableName, int customerNum) {
+  public Dish getDish(Double id, String tableName, int customerNum) {
     return Dish.getDishFromMenuItem(menuItems.get(id), tableName, customerNum);
   }
 }
