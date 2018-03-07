@@ -115,6 +115,7 @@ public class RestaurantSimulation {
 
     if (input[2].equals("accept")) {
 
+      cook.prepareDish(dish, restaurant.getInventory());
       restaurant.getServingTable().setDishToCooking(Integer.valueOf(input[3]));
 
     } else if (input[2].equals("reject")) {

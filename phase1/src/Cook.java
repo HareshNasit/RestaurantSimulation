@@ -30,18 +30,13 @@ public class Cook implements IWorker, ServingTableListener {
      * @param dish The MenuItem that is to be added to dishesInMaking.
      * @return boolean Whether the dish can be prepared or no.
      */
-    public boolean prepareDish(Dish dish, Inventory inventory, ServingTable screen) {
-        if(canBePrepared(dish,inventory)){
-            for(String ingredient: dish.getIngredients().keySet()){
-                inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
-            }
-            screen.getDishesBeingCooked().add(dish);
-            return true;
+    public void prepareDish(Dish dish, Inventory inventory) {
+      if (canBePrepared(dish, inventory)) {
+        for (String ingredient : dish.getIngredients().keySet()) {
+          inventory.removeStock(ingredient, dish.getIngredientAmounts().get(ingredient));
         }
-        else{
-            screen.getDishesRejected().add(dish);
-            return false;
         }
+
     }
     /**
      * Adds the dish to dishesToBeServed after being prepared and removes it from dishesToBeCooked and dishBeingCooked.
