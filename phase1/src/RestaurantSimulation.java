@@ -96,6 +96,14 @@ public class RestaurantSimulation {
       restaurant.getTable(dish.getTableName()).removeDish(dish);
 
 
+    } else if (input[2].equals("return")) {
+
+      Dish dish = restaurant.getTable(input[3]).getDish(Integer.valueOf(input[4]));
+      dish.addComment(input[5]);
+      System.out.println(dish.getName() + " returned for: " + dish.getComment());
+      restaurant.getServingTable().addToBeCooked(dish);
+
+
     } else if (input[2].equals("bill")) {
       System.out
           .println(String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
@@ -123,6 +131,10 @@ public class RestaurantSimulation {
       Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
       cook.canBePrepared(dish, restaurant.getInventory());
       cook.prepareDish(dish, restaurant.getInventory());
+      restaurant.getServingTable().setDishToCooking(Integer.valueOf(input[3]));
+
+    } else if (input[2].equals("transfer")) {
+
       restaurant.getServingTable().setDishToCooking(Integer.valueOf(input[3]));
 
     } else if (input[2].equals("reject")) {
