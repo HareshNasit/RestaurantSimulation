@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A Manager manages the overall restaurant and gets the ingredients if there
  * is a shortage.
  */
-public class Manager implements IWorker{
+public class Manager implements IWorker, InventoryListener {
     private boolean isOccupied;
     private String name;
     private String requestIngredients = "request.txt";
@@ -25,7 +25,16 @@ public class Manager implements IWorker{
         }
         return this; // NEEDS TO BE CHECKED AGAIN.
     }
-    /**
+
+  @Override
+  public void notifyLowStock(String ingredient) {
+    System.out
+        .println(String.format("Manger has been notifed that %s is low on stock", ingredient));
+    System.out.println(String.format("request.txt has been updated"));
+
+  }
+
+  /**
      * Reads the file about the new ingredients to be purchased and default value is 20.
      */
     public String SendMail(){

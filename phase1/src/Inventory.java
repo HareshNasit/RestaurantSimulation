@@ -13,6 +13,7 @@ public class Inventory {
 
   private final String INVENTORYFILE = "Inventory.txt";
   private final String REQUESTSFILE = "request.txt";
+  private InventoryListener manager;
 
   private HashMap<String, InventoryIngredient> inventory;
 
@@ -68,6 +69,14 @@ public class Inventory {
   public void removeStock(String ingredient, int amount) {
     if (amount <= inventory.get(ingredient.trim()).getCurrentQuantity()) {
       inventory.get(ingredient.trim()).decreaseQuantity(amount);
+
+      if (inventory.get(ingredient.trim()).getCurrentQuantity() <
+          inventory.get(ingredient.trim()).getCurrentQuantity())
+
+      {
+        manager.notifyLowStock(ingredient);
+      }
+      this.getLowIngredients();
     }
   }
 
