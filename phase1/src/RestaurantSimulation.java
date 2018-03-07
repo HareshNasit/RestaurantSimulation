@@ -40,6 +40,7 @@ public class RestaurantSimulation {
   private static void readServerAction(String[] input, Restaurant restaurant) {
 
     Server server = restaurant.getServer(input[1]);
+
     if (input[2].equals("seatCustomer")) {
 
       restaurant.getTable(input[3]).setOccupied(true);
@@ -76,6 +77,15 @@ public class RestaurantSimulation {
 
       server.addOrder(restaurant.getTable(tableID), order, restaurant.getServingTable());
 
+    } else if (input[2].equals("passOrder")) {
+
+      System.out.println(String.format("Sending Table %s's orders to cooks", input[3]));
+      server.passOrder(restaurant.getTable(input[3]), restaurant.getServingTable());
+      System.out.println();
+      System.out.println("ServingTable:");
+      System.out.println(restaurant.getServingTable());
+      System.out.println();
+
     } else if (input[2].equals("serve")) {
 
       System.out.println(String.format("%s: serves order", server.getName()));
@@ -103,6 +113,9 @@ public class RestaurantSimulation {
         System.out.println(String.format("%s rejected.", order.getName()));
       }
     } else if (input[2].equals("cooked")) {
+
+      System.out
+          .println(String.format("%s has been cooked, Waiting to be served.", order.getName()));
       cook.dishReady(order, restaurant.getServingTable());
     }
   }
