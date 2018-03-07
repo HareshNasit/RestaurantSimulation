@@ -29,6 +29,7 @@ public class Manager implements IWorker{
      * Reads the file about the new ingredients to be purchased and default value is 20.
      */
     public String SendMail(){
+    System.out.println("Mail sent to the distributor.");
         try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
             String line = fileReader.readLine();
             if (line != null) {

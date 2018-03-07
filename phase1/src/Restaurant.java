@@ -15,6 +15,7 @@ public class Restaurant {
   private HashMap<String, Server> servers;
   private HashMap<String, Cook> cooks;
   private HashMap<String, Table> tables;
+  private Manager manager;
 
   public ServingTable getServingTable() {
     return servingTable;
@@ -129,4 +130,11 @@ public class Restaurant {
       e.printStackTrace();
     }
   }
+  public void setManager(String managerName){
+      this.manager = new Manager(managerName);
+  }
+
+    public Manager getManager() {
+        return manager;
+    }
 }
