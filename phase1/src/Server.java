@@ -103,7 +103,6 @@ public class Server implements IWorker, ServingTableListener {
 
     Dish dish = restaurant.getServingTable().getDishToBeServed(index);
     restaurant.getTable(dish.getTableName()).dishesServed();
-
     System.out.println(dish.getName());
     System.out.println();
 

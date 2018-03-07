@@ -64,7 +64,7 @@ public class Cook implements IWorker, ServingTableListener {
      * @param dish the dish which is to be cooked.
      * @return boolean whether a dish can be prepared or no.
      */
-    private boolean canBePrepared(Dish dish, Inventory inventory) {
+    public boolean canBePrepared(Dish dish, Inventory inventory) {
         return inventory.hasEnoughIngredients(dish.getIngredientAmounts());
     }
   /**

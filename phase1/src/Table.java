@@ -113,6 +113,10 @@ public class Table {
     return customerDishes;
   }
 
+  public Dish getDish(int index) {
+    return getTableOrder().get(index);
+  }
+
   public String getName() {
     return this.tableName;
   }

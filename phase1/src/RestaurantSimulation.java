@@ -62,7 +62,7 @@ public class RestaurantSimulation {
           if (change >= 0) {
             order.addIngredient(ingredientName, change);
           } else {
-            order.subtractIngredient(ingredientName, change);
+            order.subtractIngredient(ingredientName, Math.abs(change));
           }
         }
 
@@ -109,20 +109,21 @@ public class RestaurantSimulation {
   private static void readCookAction(String[] input, Restaurant restaurant) {
 
     Cook cook = restaurant.getCook(input[1]);
-    Dish order = (Dish) restaurant.getServingTable().getNextDishToBeCooked();
-    if (input[2].equals("read")) {
 
-      if (cook.prepareDish(order, restaurant.getInventory(), restaurant.getServingTable())) {
-        System.out.println(String.format("%s: %s read and being cooked.", cook.getName(), order.getName()));
-        System.out.println();
-      } else {
-        System.out.println(String.format("%s rejected.", order.getName()));
-      }
-    } else if (input[2].equals("cooked")) {
+    Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
+    cook.canBePrepared(dish, restaurant.getInventory());
 
-      System.out
-          .println(String.format("%s has been cooked", order.getName()));
-      cook.dishReady(order, restaurant.getServingTable());
+    if (input[2].equals("accept")) {
+
+      restaurant.getServingTable().setDishToCooking(Integer.valueOf(input[3]));
+
+    } else if (input[2].equals("reject")) {
+
+      restaurant.getServingTable().rejectDish(Integer.valueOf(input[3]));
+
+    } else if (input[2].equals("serve")) {
+
+      restaurant.getServingTable().setDishToServe(Integer.valueOf(input[3]));
     }
   }
 
