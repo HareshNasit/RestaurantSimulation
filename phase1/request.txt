@@ -1,1 +1,1 @@
-cabbage: 2
+sausage: 50

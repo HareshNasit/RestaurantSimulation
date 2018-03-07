@@ -42,6 +42,7 @@ public class Dish extends MenuItem {
     String billText = "";
 
     billText += "MenuItem Name: " + this.getName() + ", ";
+    billText += "ID: " + this.getId() + ", ";
     billText += "Price $" + this.getPrice() + ", ";
     String extras = "";
     String subtractions = "";
@@ -52,7 +53,7 @@ public class Dish extends MenuItem {
             "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
       } else if (differenceMap.get(key) < 0) {
         subtractions +=
-            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+            differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
       }
     }
     billText += extras + subtractions;

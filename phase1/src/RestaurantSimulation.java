@@ -28,6 +28,7 @@ public class RestaurantSimulation {
           readCookAction(line, restaurant);
         } else if (line[0].equals("Manager")) {
           readManagerAction(line, restaurant);
+          restaurant.setManager(line[1]);
         }
       }
       events.close();
@@ -61,7 +62,7 @@ public class RestaurantSimulation {
           if (change >= 0) {
             order.addIngredient(ingredientName, change);
           } else {
-            order.subtractIngredient(ingredientName, change);
+            order.subtractIngredient(ingredientName, Math.abs(change));
           }
         }
 
@@ -108,24 +109,35 @@ public class RestaurantSimulation {
   private static void readCookAction(String[] input, Restaurant restaurant) {
 
     Cook cook = restaurant.getCook(input[1]);
-    Dish order = (Dish) restaurant.getServingTable().getNextDishToBeCooked();
-    if (input[2].equals("read")) {
 
-      if (cook.prepareDish(order, restaurant.getInventory(), restaurant.getServingTable())) {
-        System.out.println(String.format("%s: %s read and being cooked.", cook.getName(), order.getName()));
-        System.out.println();
-      } else {
-        System.out.println(String.format("%s rejected.", order.getName()));
-      }
-    } else if (input[2].equals("cooked")) {
+    Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
+    cook.canBePrepared(dish, restaurant.getInventory());
 
-      System.out
-          .println(String.format("%s has been cooked", order.getName()));
-      cook.dishReady(order, restaurant.getServingTable());
+    if (input[2].equals("accept")) {
+
+      cook.prepareDish(dish, restaurant.getInventory());
+      restaurant.getServingTable().setDishToCooking(Integer.valueOf(input[3]));
+
+    } else if (input[2].equals("reject")) {
+
+      restaurant.getServingTable().rejectDish(Integer.valueOf(input[3]));
+
+    } else if (input[2].equals("serve")) {
+
+      restaurant.getServingTable().setDishToServe(Integer.valueOf(input[3]));
     }
   }
 
   private static void readManagerAction(String[] input, Restaurant restaurant) {
     Manager manager = restaurant.getManager();
+    if(input[2].equals("scan stock")){
+        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[3],input[4]));
+        IWorker worker = manager.callWorker(restaurant.getWorkers());
+        worker.scanStock(restaurant.getInventory(),input[3],Integer.valueOf(input[4]));
+      }
+      else if(input[2].equals("shutdown")){
+        System.out.println("System Shutdown");
+        manager.shutDown(restaurant.getInventory());
+    }
   }
 }

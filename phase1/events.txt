@@ -3,13 +3,6 @@ Server|Akarsh|order|A|1|1.0|
 Server|Akarsh|order|A|2|1.0|
 Server|Akarsh|order|A|3|1.1|sausage,1 # lettuce,-1|
 Server|Akarsh|passOrder|A|
-Cook|Harsh|read|
-Cook|Harsh|read|
-Cook|Harsh|read|
-Cook|Harsh|cooked|
-Cook|Harsh|cooked|
-Cook|Harsh|cooked
-Server|Akarsh|serve|0|
-Server|Akarsh|serve|0|
-Server|Akarsh|serve|0|
-Server|Akarsh|bill|A|split
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0
