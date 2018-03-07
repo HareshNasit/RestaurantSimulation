@@ -90,6 +90,12 @@ public class RestaurantSimulation {
 
       restaurant.getServingTable().serveDish(Integer.valueOf(input[3]));
 
+    } else if (input[2].equals("reject")) {
+
+      Dish dish = restaurant.getServingTable().getRejectedDish(Integer.valueOf(input[3]));
+      restaurant.getTable(dish.getTableName()).removeDish(dish);
+
+
     } else if (input[2].equals("bill")) {
       System.out
           .println(String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
