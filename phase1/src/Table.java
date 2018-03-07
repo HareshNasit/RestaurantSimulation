@@ -25,12 +25,14 @@ public class Table {
     this.tableName = tableName;
     this.tableSize = tableSize;
     this.isOccupied = isOccupied;
+    this.tableOrder = new ArrayList<Dish>();
   }
 
   public Table(String tableName, int tableSize) {
     this.tableName = tableName;
     this.tableSize = tableSize;
     this.isOccupied = false;
+    this.tableOrder = new ArrayList<Dish>();
   }
 
   public void setTableOrder(ArrayList<Dish> tableOrder) {

@@ -45,7 +45,7 @@ public class Menu {
     for (int i = 3; i < separatedByHashTag.length; i++) {
       String[] ingredient = separatedByHashTag[i].split(",");
 
-      String ingredientName = ingredient[0];
+      String ingredientName = ingredient[0].trim().toLowerCase();
       int amount = Integer.parseInt(ingredient[1].trim());
       int baseAmount = Integer.parseInt(ingredient[1].trim());
       int lowerAmount = Integer.parseInt(ingredient[2].trim());

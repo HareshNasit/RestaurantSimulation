@@ -106,7 +106,7 @@ public class Restaurant {
 
         if (splitString[0].equals("Server")) {
 
-          Server server = new Server(splitString[1]);
+          Server server = new Server(splitString[1].trim());
           servingTable.addServer(server);
           this.workers.add(server);
           this.servers.put(server.getName(), server);

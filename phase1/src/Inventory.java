@@ -46,9 +46,13 @@ public class Inventory {
      */
   public boolean hasEnoughIngredients(HashMap<String, Integer> dishIngredients) {
     for (String ingredient : dishIngredients.keySet()) {
-      if (!inventory.containsKey(ingredient)) {
+
+      if (!inventory.containsKey(ingredient.trim())) {
+        System.out.println("Not Available: " + ingredient);
         return false;
-      } else if (inventory.get(ingredient).getCurrentQuantity() < dishIngredients.get(ingredient)) {
+      } else if (inventory.get(ingredient.trim()).getCurrentQuantity() < dishIngredients
+          .get(ingredient)) {
+        System.out.println("Not Enough: " + ingredient);
         return false;
       }
     }
@@ -62,8 +66,8 @@ public class Inventory {
    * @param amount The amount by which the ingredient stock is going to be reduced by
    */
   public void removeStock(String ingredient, int amount) {
-    if (amount <= inventory.get(ingredient).getCurrentQuantity()) {
-      inventory.get(ingredient).decreaseQuantity(amount);
+    if (amount <= inventory.get(ingredient.trim()).getCurrentQuantity()) {
+      inventory.get(ingredient.trim()).decreaseQuantity(amount);
     }
   }
 
@@ -93,8 +97,7 @@ public class Inventory {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(INVENTORYFILE))) {
       String line = fileReader.readLine();
       while (line != null) {
-
-        String name = line.split("#")[0];
+        String name = line.split("#")[0].toLowerCase().trim();
         int amount = Integer.valueOf(line.split("#")[1].trim());
         int lowerBound = Integer.valueOf(line.split("#")[2].trim());
         int restockAmount = Integer.valueOf(line.split("#")[3].trim());
@@ -126,6 +129,10 @@ public class Inventory {
     } catch (java.io.IOException e) {
     }
 
+  }
+
+  public int getIngredientAmount(String name) {
+    return this.inventory.get(name).getCurrentQuantity();
   }
 
   @Override
