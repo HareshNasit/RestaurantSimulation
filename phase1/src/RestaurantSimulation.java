@@ -60,6 +60,10 @@ public class RestaurantSimulation {
   }
 
   private static void readCookAction(String[] input, Restaurant restaurant) {
+      Cook cook = restaurant.getCook(input[0]);
+    if(input[2].equals("read")){
+        if(cook.prepareDish())
+    }
   }
 
   private static void readManagerAction(String[] input, Restaurant restaurant) {
