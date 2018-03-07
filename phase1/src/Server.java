@@ -4,10 +4,6 @@ import java.util.ArrayList;
  * Server class records orders taken from customers and relays them to the chef.
  */
 public class Server implements IWorker, ServingTableListener {
-
-  public static ArrayList<Server> servers; // the list of servers in the restaurant
-  private static int numberOfServers; // the number of servers in a restaurant
-
   public String getName() {
     return name;
   }
@@ -23,17 +19,6 @@ public class Server implements IWorker, ServingTableListener {
    */
   public Server(String name) {
     this.name = name;
-    //servers.add(this);
-    numberOfServers++;
-  }
-
-  /**
-   * Server has accepted the cooked dish and delivered it to customer
-   *
-   * @param dish - MenuItem that has been cooked
-   */
-  public void removeDishToBeServed(Dish dish, ServingTable servingTable) {
-    servingTable.getDishToBeServed(dish);
   }
 
   /**
@@ -109,12 +94,8 @@ public class Server implements IWorker, ServingTableListener {
 
   /**
    * The server serves a dish to the table that ordered it
-   * @param table the table that ordered the dish
-   * @param dish the dish that was served
    */
-  public void serveTable(Table table, Dish dish, ServingTable servingTable) {
-      table.getCookedOrder().add(dish);
-      servingTable.getDishesToBeServed().remove(dish);
+  public void serveDish(int index, ServingTable servingTable) {
+    servingTable.getDishToBeServed(index);
   }
-
 }
