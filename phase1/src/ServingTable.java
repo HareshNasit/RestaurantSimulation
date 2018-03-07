@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class ServingTable {
-
+  private ArrayList<Dish> dishesRejected;
   private ArrayList<Dish> dishesToBeCooked;
   private ArrayList<Dish> dishesToBeServed;
   private ArrayList<ServingTableListener> servers;
@@ -24,6 +24,7 @@ public class ServingTable {
   }
 
   ServingTable() {
+    dishesRejected = new ArrayList<>();
     dishesToBeCooked = new ArrayList<Dish>();
     dishesToBeServed = new ArrayList<Dish>();
     servers = new ArrayList<ServingTableListener>();
@@ -117,4 +118,11 @@ public class ServingTable {
     }
     return finalString;
   }
+    /**
+     * Returns an ArrayList of dishes which are rejected.
+     * @return ArrayList of dishes which are rejected.
+     */
+    public ArrayList<Dish> getDishesRejected() {
+        return dishesRejected;
+    }
 }

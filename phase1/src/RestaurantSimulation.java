@@ -60,9 +60,18 @@ public class RestaurantSimulation {
   }
 
   private static void readCookAction(String[] input, Restaurant restaurant) {
-      Cook cook = restaurant.getCook(input[0]);
+      Cook cook = restaurant.getCook(input[1]);
+        Dish order = (Dish)restaurant.getServingTable().getNextDishToBeCooked();
     if(input[2].equals("read")){
-        if(cook.prepareDish())
+        if(cook.prepareDish(order,restaurant.getInventory(),restaurant.getServingTable())){
+            System.out.println("Dish read and ready to be cooked.");
+        }
+        else{
+            System.out.println("Dish rejected");
+        }
+    }
+    else if(input[2].equals("cooked")){
+        cook.dishReady(order,restaurant.getServingTable());
     }
   }
 
