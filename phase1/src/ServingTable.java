@@ -112,6 +112,12 @@ public class ServingTable {
       server.update(dish);
     }
   }
+
+  public void notifyCooks(Dish dish){
+    for (ServingTableListener cook : cooks) {
+      cook.update(dish);
+    }
+  }
   /**
    * Returns the next dish that needs to be returned by the chef
    * @return Dish.
@@ -128,9 +134,7 @@ public class ServingTable {
 
     Dish dish = dishesToBeServed.remove(index);
     //String of dish
-    for (ServingTableListener cook : cooks) {
-      cook.notify();
-    }
+
     return dish;
   }
     /**

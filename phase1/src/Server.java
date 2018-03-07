@@ -92,15 +92,20 @@ public class Server implements IWorker, ServingTableListener {
    * Notify the server that the ServingTable has been changed. i.e MenuItem needs to be served
    */
   public void update(Dish dish) {
-      String text = "Table ";
-      text += dish.getTableName() + "dish: " + dish.getName() + " served.";
-    System.out.println(text);
+    System.out.println(String.format("Table %s: %s is ready to be served", dish.getTableName(), dish.getName()));
+    System.out.println();
   }
 
   /**
    * The server serves a dish to the table that ordered it
    */
-  public void serveDish(int index, ServingTable servingTable) {
-    servingTable.getDishToBeServed(index);
+  public void serveDish(int index, Restaurant restaurant) {
+
+    Dish dish = restaurant.getServingTable().getDishToBeServed(index);
+    restaurant.getTable(dish.getTableName()).dishesServed();
+
+    System.out.println(dish.getName());
+    System.out.println();
+
   }
 }

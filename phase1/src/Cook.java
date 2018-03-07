@@ -68,11 +68,9 @@ public class Cook implements IWorker, ServingTableListener {
         return inventory.hasEnoughIngredients(dish.getIngredientAmounts());
     }
   /**
-   * Notify the servers that a dish is ready to be served.
+   * Notify the cook that dish has been served
    */
   public void update(Dish dish) {
-    String text = "Table ";
-    text += dish.getTableName() + "dish: " + dish.getName() + " ready to be served.";
-    System.out.println(text);
+      System.out.println(String.format("cook has been notified"));
   }
 }
