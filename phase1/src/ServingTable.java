@@ -132,4 +132,9 @@ public class ServingTable {
     public ArrayList<Dish> getDishesRejected() {
         return dishesRejected;
     }
+
+  public ArrayList<Dish> getDishesToBeCooked() {
+    return dishesToBeCooked;
+  }
+
 }
