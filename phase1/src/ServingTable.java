@@ -118,12 +118,16 @@ public class ServingTable {
       cook.update(dish);
     }
   }
+
   /**
-   * Returns the next dish that needs to be returned by the chef
-   * @return Dish.
+   * Removes the dish from index in dishestobecooked and added it to dishes being cooked
+   * @param index
+   * @return
    */
-  public MenuItem getNextDishToBeCooked() {
-    return dishesToBeCooked.get(0);
+  public Dish setDishToCooking(int index) {
+    Dish dish = dishesToBeCooked.remove(index);
+    dishesBeingCooked.add(dish);
+    return dish;
   }
   /**
    * Remove the dish at the given index
@@ -179,5 +183,20 @@ public class ServingTable {
       finalString += e.getId() + "|" + e.getTableName() + "|" + e.getCustomerNum() + " # ";
     }
     return finalString;
+  }
+
+  public Dish getDishToBeCooked(int index) {
+    return dishesToBeCooked.get(index);
+  }
+
+  public void rejectDish(int index) {
+    Dish dish = dishesToBeCooked.remove(index);
+    dishesRejected.add(dish);
+
+  }
+
+  public void setDishToServe(int index) {
+    Dish dish = dishesBeingCooked.remove(index);
+    dishesToBeServed.add(dish);
   }
 }

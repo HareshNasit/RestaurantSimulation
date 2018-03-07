@@ -52,7 +52,7 @@ public class Dish extends MenuItem {
             "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
       } else if (differenceMap.get(key) < 0) {
         subtractions +=
-            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+            differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
       }
     }
     billText += extras + subtractions;
