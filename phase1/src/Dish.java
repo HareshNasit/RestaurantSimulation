@@ -91,9 +91,9 @@ public class Dish extends MenuItem {
     /**
      * Creates a copy of this dish with the table id.
      *
-     * @param tableName
-     * @param customerNumber
-     * @return
+     * @param tableName the table that the dish is for
+     * @param customerNumber the customer that ordered the dish
+     * @return the dish that has been ordered
      */
     public static Dish getDishFromMenuItem(MenuItem menu, String tableName, int customerNumber) {
         MenuItem newDish = menu.clone();
