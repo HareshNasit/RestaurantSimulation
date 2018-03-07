@@ -52,6 +52,23 @@ public class RestaurantSimulation {
       int seatNum = Integer.parseInt(input[4]);
       Dish order = restaurant.getMenu().getDish(menuItemID, tableID, seatNum);
 
+      //Checks for the extras added or removed to order
+      try {
+        String[] extras = input[6].split("#");
+        for (String specifications : extras) {
+          String ingredientName = specifications.split(",")[0].toLowerCase().trim();
+          int change = Integer.valueOf(specifications.split(",")[1].trim());
+          if (change >= 0) {
+            order.addIngredient(ingredientName, change);
+          } else {
+            order.subtractIngredient(ingredientName, change);
+          }
+        }
+
+      } catch (ArrayIndexOutOfBoundsException e) {
+        //If No Extras are added or removed
+      }
+
       System.out.println(
           String.format(
               "%s takes order from Table%sSeat%d: %s",

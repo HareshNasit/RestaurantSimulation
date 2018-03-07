@@ -53,7 +53,7 @@ public class Menu {
       double ingredientPrice = Double.parseDouble(ingredient[4].trim());
 
       ingredients.put(
-          ingredient[0],
+          ingredientName,
           new DishIngredient(
               ingredientName, amount, baseAmount, lowerAmount, upperAmount, ingredientPrice));
     }

@@ -1,5 +1,5 @@
 1 #Small Hot Dog# 4.00 # bun, 1, 2, 1, 1.1 # sausage, 1, 1, 2, 3.2 #
-1.1 #Large Hot Dog# 6.00 # bun, 1, 2, 1, 1.1 # sausage, 1, 2, 4, 3.5 #
+1.1 #Large Hot Dog# 6.00 # bun, 1, 1, 2, 1.1 # sausage, 1, 1, 4, 3.5 # lettuce, 1, 0, 2, 3.3#
 2 #Non-veg Hamburger# 12.50 # Burger, 2, 1, 3, 2.1 # Meat Patty, 1, 2, 4, 3.4 # Tomato, 2, 1, 5, 2.2 #
 3 #Veg Hamburger# 10.50 # Burger, 1, 1, 3, 2.1 # Veg Patty, 1, 2, 4, 3.4 # Tomato, 2, 1, 5, 4.4 # Lettuce, 2, 1, 5, 2.2 #
 4 #Falafel Wrap# 10.00 # Tortilla wrap, 1, 1, 2, 2.05 # Falafel ball, 3, 1, 5, 3.05 # Tomato, 2, 1, 5, 4.4 # Lettuce, 2, 1, 5, 2.2 #

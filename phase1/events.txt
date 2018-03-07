@@ -1,7 +1,7 @@
 Server|Akarsh|seatCustomer|A|3|
 Server|Akarsh|order|A|1|1.0|
 Server|Akarsh|order|A|2|1.0|
-Server|Akarsh|order|A|3|1.1|
+Server|Akarsh|order|A|3|1.1|sausage,1 # lettuce,-1|
 Cook|Harsh|read|
 Cook|Harsh|read|
 Cook|Harsh|read|
