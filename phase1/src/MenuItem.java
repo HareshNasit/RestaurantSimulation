@@ -9,7 +9,7 @@ public class MenuItem {
 
     /**
      * @param name The name of the dish
-     * @param id The id assigned to the dish
+     * @param id The id assigned to the dis
      * @param price The price of the dish
      * @param ingredients The ingredients needed to make the dish
      */
