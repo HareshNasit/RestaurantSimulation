@@ -69,7 +69,24 @@ public class Dish extends MenuItem {
     return tableName;
   }
 
+  public String getStringDifferences() {
 
+    String extras = "";
+    String subtractions = "";
+    HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
+    for (String key : differenceMap.keySet()) {
+      if (differenceMap.get(key) > 0) {
+        extras +=
+            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+      } else if (differenceMap.get(key) < 0) {
+        subtractions +=
+            "+" + differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
+      }
+    }
+    String differences = extras + subtractions;
+    differences = differences.substring(0, differences.length()-2);
+    return differences;
+  }
 
     /**
      * Creates a copy of this dish with the table id.
