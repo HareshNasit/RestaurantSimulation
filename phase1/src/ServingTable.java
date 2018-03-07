@@ -77,13 +77,16 @@ public class ServingTable {
 
 
   /**
-   * Remove MenuItem dish from list of dishes to be served. Doing so will mean that dish has been
-   * delivered to the table
-   * @param dish
-   * @return the MenuItem that has been cooked, and needs to be served to the customer
+   * Remove the dish at the given index
+   * @param index - index of the dish that needs to be served
+   * @return
    */
-  public MenuItem getDishToBeServed(MenuItem dish) {
-    return dishesToBeServed.remove(0);
+  public Dish getDishToBeServed(int index) {
+
+    Dish dish = dishesToBeServed.remove(index);
+    //String of dish
+    return dish;
+
   }
 
   public void addServers(ArrayList<ServingTableListener> servers) {

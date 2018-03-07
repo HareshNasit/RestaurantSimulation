@@ -28,15 +28,6 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Server has accepted the cooked dish and delivered it to customer
-   *
-   * @param dish - MenuItem that has been cooked
-   */
-  public void removeDishToBeServed(Dish dish, ServingTable servingTable) {
-    servingTable.getDishToBeServed(dish);
-  }
-
-  /**
    * The server takes the order from a table and adds it to the list of orders to be cooked
    *
    * @param table the table that places the order
@@ -109,12 +100,9 @@ public class Server implements IWorker, ServingTableListener {
 
   /**
    * The server serves a dish to the table that ordered it
-   * @param table the table that ordered the dish
-   * @param dish the dish that was served
    */
-  public void serveTable(Table table, Dish dish, ServingTable servingTable) {
-      table.getCookedOrder().add(dish);
-      servingTable.getDishesToBeServed().remove(dish);
+  public void serveDish(int index, ServingTable servingTable) {
+    servingTable.getDishToBeServed(index);
   }
 
 }

@@ -46,6 +46,7 @@ public class RestaurantSimulation {
       System.out.println(String.format("Table %s: seated with %s", input[3], input[4]));
 
     } else if (input[2].equals("order")) {
+
       Double menuItemID = Double.parseDouble(input[5]);
       String tableID = input[4];
       int seatNum = Integer.parseInt(input[3]);
@@ -55,6 +56,9 @@ public class RestaurantSimulation {
       server.addOrder(restaurant.getTable(tableID), order, restaurant.getServingTable());
 
     } else if (input[2].equals("serve")) {
+
+      System.out.println(String.format("%s: serves order", server.getName()));
+      server.serveDish(Integer.parseInt(input[3]), restaurant.getServingTable());
 
     }
   }
