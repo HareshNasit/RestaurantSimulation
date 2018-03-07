@@ -1,11 +1,11 @@
 Server|Akarsh|seatCustomer|A|3|
-Server|Akarsh|order|A|1|5|
-Server|Akarsh|passOrder|A|
-Cook|Harsh|reject|0|
-Server|Akarsh|reject|0|
 Server|Akarsh|order|A|1|9|
 Server|Akarsh|passOrder|A|
 Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|return|A|0|too hot
+Cook|Harsh|transfer|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|bill|A|split
