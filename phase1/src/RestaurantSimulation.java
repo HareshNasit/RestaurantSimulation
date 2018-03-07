@@ -28,7 +28,6 @@ public class RestaurantSimulation {
         } else if (line[0].equals("Cook")) {
           readCookAction(line, restaurant);
         } else if (line[0].equals("Manager")) {
-            restaurant.setManager(line[1]);
           readManagerAction(line, restaurant);
         }
 
@@ -80,14 +79,6 @@ public class RestaurantSimulation {
   }
 
   private static void readManagerAction(String[] input, Restaurant restaurant) {
-      if(input[2].equals("send mail")){
-          System.out.println(restaurant.getManager().SendMail());
-      }
-      else if(input[2].equals("scan stock")){
-      System.out.println(String.format("Worker called to scan and add %s to the inventory ", input[3]));
-      IWorker worker = restaurant.getManager().callWorker(restaurant.getWorkers());
-      worker.scanStock(restaurant.getInventory(),input[3],Integer.valueOf(input[4]));
-      }
   }
 
 }
