@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
  * A Manager manages the overall restaurant and gets the ingredients if there
@@ -10,9 +11,11 @@ public class Manager implements IWorker, InventoryListener {
     private boolean isOccupied;
     private String name;
     private String requestIngredients = "request.txt";
+    private HashMap<InventoryIngredient,Integer> orders;
 
   public Manager(String name) {
         this.name = name;
+        orders = new HashMap<>();
     }
     /**
      * Calls a server or a cook to collect the received ingredients.
@@ -23,14 +26,14 @@ public class Manager implements IWorker, InventoryListener {
                 return worker;
             }
         }
-        return this; // NEEDS TO BE CHECKED AGAIN.
+        return this;
     }
 
   @Override
   public void notifyLowStock(String ingredient) {
     System.out.println();
     System.out
-        .println(String.format("Manger has been notifed that %s is low on stock", ingredient));
+        .println(String.format("Manager has been notified that %s is low on stock", ingredient));
     System.out.println(String.format("request.txt has been updated"));
     System.out.println();
 
@@ -39,32 +42,16 @@ public class Manager implements IWorker, InventoryListener {
   /**
      * Reads the file about the new ingredients to be purchased and default value is 20.
      */
-    public String SendMail(){
+    public void SendMail(){
     System.out.println("Mail sent to the distributor.");
         try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
             String line = fileReader.readLine();
+            String[] splitLine = line.split("\\|");
             if (line != null) {
-                return line;
+                orders.put(new InventoryIngredient())
             }
-            return null;
         }
         catch (Exception e) {
-            return null;
-        }
-    }
-    /**
-     * Reads the file about the new ingredients to be purchased and requests the distributor the amount given.
-     */
-    public String SendMail(int amount){
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
-            String line = fileReader.readLine();
-            if (line != null) {
-                return line + " " + amount;
-            }
-            return null;
-        }
-        catch (Exception e) {
-            return null;
         }
     }
     public boolean isOccupied(){
