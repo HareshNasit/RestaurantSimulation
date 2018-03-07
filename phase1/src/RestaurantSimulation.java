@@ -40,6 +40,7 @@ public class RestaurantSimulation {
   private static void readServerAction(String[] input, Restaurant restaurant) {
 
     Server server = restaurant.getServer(input[1]);
+
     if (input[2].equals("seatCustomer")) {
 
       restaurant.getTable(input[3]).setOccupied(true);
@@ -52,12 +53,38 @@ public class RestaurantSimulation {
       int seatNum = Integer.parseInt(input[4]);
       Dish order = restaurant.getMenu().getDish(menuItemID, tableID, seatNum);
 
+      //Checks for the extras added or removed to order
+      try {
+        String[] extras = input[6].split("#");
+        for (String specifications : extras) {
+          String ingredientName = specifications.split(",")[0].toLowerCase().trim();
+          int change = Integer.valueOf(specifications.split(",")[1].trim());
+          if (change >= 0) {
+            order.addIngredient(ingredientName, change);
+          } else {
+            order.subtractIngredient(ingredientName, change);
+          }
+        }
+
+      } catch (ArrayIndexOutOfBoundsException e) {
+        //If No Extras are added or removed
+      }
+
       System.out.println(
           String.format(
               "%s takes order from Table%sSeat%d: %s",
               server.getName(), tableID, seatNum, order.getStringForBill()));
 
       server.addOrder(restaurant.getTable(tableID), order, restaurant.getServingTable());
+
+    } else if (input[2].equals("passOrder")) {
+
+      System.out.println(String.format("Sending Table %s's orders to cooks", input[3]));
+      server.passOrder(restaurant.getTable(input[3]), restaurant.getServingTable());
+      System.out.println();
+      System.out.println("ServingTable:");
+      System.out.println(restaurant.getServingTable());
+      System.out.println();
 
     } else if (input[2].equals("serve")) {
 
@@ -86,6 +113,9 @@ public class RestaurantSimulation {
         System.out.println(String.format("%s rejected.", order.getName()));
       }
     } else if (input[2].equals("cooked")) {
+
+      System.out
+          .println(String.format("%s has been cooked, Waiting to be served.", order.getName()));
       cook.dishReady(order, restaurant.getServingTable());
     }
   }

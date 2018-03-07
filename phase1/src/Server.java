@@ -26,14 +26,15 @@ public class Server implements IWorker, ServingTableListener {
    *
    * @param table the table that places the order
    */
-  public void addOrder(Table table, ArrayList<Dish> tableOrder, ServingTable servingTable) {
-    table.setTableOrder(tableOrder);
-    servingTable.addToBeCooked(tableOrder);
+  public void passOrder(Table table, ServingTable servingTable) {
+    servingTable.addToBeCooked(table.getTableOrder());
   }
 
+  /**
+   * Adds a dish to a table's Order
+   */
   public void addOrder(Table table, Dish singleOrder, ServingTable servingTable) {
     table.addSingleOrder(singleOrder);
-    servingTable.addToBeCooked(singleOrder);
   }
 
   /**

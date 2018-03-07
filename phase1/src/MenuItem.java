@@ -75,7 +75,8 @@ public class MenuItem {
      * @param amount The amount of that ingredient that is being added
      */
     public void addIngredient(String ingredient, int amount) {
-        this.ingredients.get(ingredient).subtractAmount(amount);
+
+      this.ingredients.get(ingredient).addAmount(amount);
     }
 
     /**
