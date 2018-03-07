@@ -71,12 +71,11 @@ public class Inventory {
       inventory.get(ingredient.trim()).decreaseQuantity(amount);
 
       if (inventory.get(ingredient.trim()).getCurrentQuantity() <
-          inventory.get(ingredient.trim()).getCurrentQuantity())
-
-      {
+          inventory.get(ingredient.trim()).getLowerThreshold()) {
         manager.notifyLowStock(ingredient);
+        this.getLowIngredients();
       }
-      this.getLowIngredients();
+
     }
   }
 
@@ -153,5 +152,9 @@ public class Inventory {
               System.lineSeparator();
     }
     return output;
+  }
+
+  public void setManger(InventoryListener manager) {
+    this.manager = manager;
   }
 }

@@ -29,4 +29,4 @@ tamarind Sauce#200#100#100
 milk#300#100#200
 chocolate#100#50#50
 strawberry#100#50#50
-sausage#100#50#50
+sausage#52#50#50

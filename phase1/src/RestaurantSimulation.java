@@ -11,7 +11,6 @@ public class RestaurantSimulation {
     Menu menu = new Menu();
     Inventory inventory = new Inventory();
     inventory.readInventory();
-    System.out.println(inventory.getIngredientAmount("potato"));
 
     Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
     RestaurantSimulation.readEvents("events.txt", restaurant);

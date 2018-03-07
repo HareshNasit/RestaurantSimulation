@@ -28,9 +28,11 @@ public class Manager implements IWorker, InventoryListener {
 
   @Override
   public void notifyLowStock(String ingredient) {
+    System.out.println();
     System.out
         .println(String.format("Manger has been notifed that %s is low on stock", ingredient));
     System.out.println(String.format("request.txt has been updated"));
+    System.out.println();
 
   }
 

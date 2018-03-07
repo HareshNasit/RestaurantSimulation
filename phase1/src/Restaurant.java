@@ -112,9 +112,9 @@ public class Restaurant {
           this.servers.put(server.getName(), server);
 
         } else if (splitString[0].equals("Manager")) {
-
           Manager manager = new Manager(splitString[1]);
           this.workers.add(manager);
+          inventory.setManger(manager);
 
         } else if (splitString[0].equals("Cook")) {
 
