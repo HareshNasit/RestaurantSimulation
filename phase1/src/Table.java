@@ -116,4 +116,10 @@ public class Table {
   public String getName() {
     return this.tableName;
   }
+
+  public void clearTable(){
+    this.tableOrder = new ArrayList<Dish>();
+    this.isOccupied = false;
+
+  }
 }

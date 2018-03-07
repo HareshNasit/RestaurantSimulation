@@ -93,8 +93,6 @@ public class RestaurantSimulation {
     } else if (input[2].equals("bill")) {
       System.out.println(String.format("Table %s requested bill:", input[3]));
 
-
-
       if (input[4].equals("single")) {
         System.out.println(String.format("Printing single bill"));
         server.generateSingleBill(restaurant.getTable(input[3]), 3);
@@ -102,6 +100,8 @@ public class RestaurantSimulation {
         System.out.println(String.format("Printing split bill"));
         server.generateTableBill(restaurant.getTable(input[3]));
       }
+        System.out.println();
+        System.out.println("Customers have paid. Table has been cleared for new customers");
     }
   }
 
