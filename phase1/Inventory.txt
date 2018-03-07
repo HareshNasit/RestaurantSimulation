@@ -1,4 +1,3 @@
-name#amount#lower bound#restock amount
 garlic#150#25#125
 cabbage#50#20#30
 flour#200#50#150
@@ -14,19 +13,20 @@ pork#100#30#70
 salmon#100#30#70
 tuna#100#30#70
 bread#200#50#150
-burger buns#200#50#150
+bun#200#50#150
 chicken#200#50#150
 tortilla wraps#100#20#80
 pizza base#70#20#50
-Meat patty#100#20#80
-Veg patty#100#20#80
+meat patty#100#20#80
+veg patty#100#20#80
 Water#500#100#400
-Falafel balls#200#50#100
-Potato#200#70#130
-Spaghetti#500#200#300
-Mint Sauce#200#100#100
-Coriander Sauce#200#100#100
-Tamarind Sauce#200#100#100
-Milk#300#100#200
-Chocolate#100#50#50
-Strawberry#100#50#50
+falafel balls#200#50#100
+potato#200#70#130
+spaghetti#500#200#300
+mint sauce#200#100#100
+coriander Sauce#200#100#100
+tamarind Sauce#200#100#100
+milk#300#100#200
+chocolate#100#50#50
+strawberry#100#50#50
+sausage#100#50#50
