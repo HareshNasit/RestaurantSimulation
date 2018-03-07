@@ -46,6 +46,17 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
+   * Generates a bill for the table
+   *
+   * @param table The table that asked for the bill
+   */
+  public void generateSingleBill(Table table, int size) {
+    for (int i = 0; i < size; i++) {
+      Bill.outputSingleBill(table, i++);
+    }
+  }
+
+  /**
    * The server takes the dish from the table and returns it to the cook
    *
    * @param dish the dish that is to be returned
