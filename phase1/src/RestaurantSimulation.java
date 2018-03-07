@@ -16,7 +16,7 @@ public class RestaurantSimulation {
     RestaurantSimulation.readEvents("events.txt", restaurant);
   }
 
-  public static void readEvents(String fileName, Restaurant restaurant) {
+  private static void readEvents(String fileName, Restaurant restaurant) {
     File file = new File(fileName);
     try {
       Scanner events = new Scanner(file);
