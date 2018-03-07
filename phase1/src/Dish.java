@@ -42,6 +42,7 @@ public class Dish extends MenuItem {
     String billText = "";
 
     billText += "MenuItem Name: " + this.getName() + ", ";
+    billText += "ID: " + this.getId() + ", ";
     billText += "Price $" + this.getPrice() + ", ";
     String extras = "";
     String subtractions = "";
