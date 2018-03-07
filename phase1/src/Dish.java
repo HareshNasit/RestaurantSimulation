@@ -83,4 +83,12 @@ public class Dish extends MenuItem {
         Dish dish = new Dish(newDish, tableName, customerNumber);
         return dish;
     }
+
+    public String changedIngredients(MenuItem dish){
+      String dishString = dish.getName() + "|" + dish.getId() + "|";
+      return dishString;
+      // NEED TO ADD METHOD BODY
+    }
+
+
 }
