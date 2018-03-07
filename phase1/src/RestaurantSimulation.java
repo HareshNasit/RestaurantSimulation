@@ -41,25 +41,24 @@ public class RestaurantSimulation {
   private static void readServerAction(String[] input, Restaurant restaurant) {
     Server server = restaurant.getServer(input[1]);
     if (input[2].equals("seatCustomer")) {
-
       restaurant.getTable(input[3]).setOccupied(true);
       System.out.println(String.format("Table %s: seated with %s", input[3], input[4]));
-
     } else if (input[2].equals("order")) {
-
       Double menuItemID = Double.parseDouble(input[5]);
       String tableID = input[4];
       int seatNum = Integer.parseInt(input[3]);
       Dish order = restaurant.getMenu().getDish(menuItemID, tableID, seatNum);
-
       System.out.println("%s takes order from Table%sSeat%i: %s");
       server.addOrder(restaurant.getTable(tableID), order, restaurant.getServingTable());
-
     } else if (input[2].equals("serve")) {
-
       System.out.println(String.format("%s: serves order", server.getName()));
       server.serveDish(Integer.parseInt(input[3]), restaurant.getServingTable());
-
+    } else if (input[2].equals("Bill")) {
+      if (input[4].equals("single")) {
+        server.generateSingleBill(restaurant.getTable(input[3]), 3);
+      } else if (input[4].equals("split")) {
+        server.generateTableBill(restaurant.getTable(input[3]));
+      }
     }
   }
 
