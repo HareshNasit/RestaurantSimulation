@@ -25,7 +25,8 @@ public class Cook implements IWorker, ServingTableListener {
         return isOccupied;
     }
     /**
-     * Checks if the dish can be prepared and subtracts ingredients accordingly and returns a boolean.
+     * Checks if the dish can be prepared and subtracts ingredients accordingly and returns a boolean and
+     * adds it to the list of dishes being cooked currently.
      * @param dish The MenuItem that is to be added to dishesInMaking.
      * @return boolean Whether the dish can be prepared or no.
      */
@@ -34,6 +35,7 @@ public class Cook implements IWorker, ServingTableListener {
             for(String ingredient: dish.getIngredients().keySet()){
                 inventory.removeStock(ingredient,dish.getIngredientAmounts().get(ingredient));
             }
+            screen.getDishesBeingCooked().add(dish);
             return true;
         }
         else{
@@ -42,12 +44,13 @@ public class Cook implements IWorker, ServingTableListener {
         }
     }
     /**
-     * Adds the dish to dishesToBeServed after being prepared and removes it from dishesToBeCooked
+     * Adds the dish to dishesToBeServed after being prepared and removes it from dishesToBeCooked and dishBeingCooked.
      * @param dish The MenuItem that is to be added.
      */
     public void dishReady(Dish dish, ServingTable screen) {
         // The dish  prepared is added to the Servers list of dishes ready to be served.
         screen.getDishesToBeCooked().remove(dish);
+        screen.getDishesBeingCooked().remove(dish);
         screen.addToBeServed(dish);
     }
     /**
