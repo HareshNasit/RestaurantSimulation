@@ -2,15 +2,15 @@ import java.util.HashMap;
 
 public class MenuItem {
 
-    private String name;
-    private double id;
-    private double price;
-    private HashMap<String, DishIngredient> ingredients;
+    private String name; // name of the dish
+    private double id; // id of the dish
+    private double price; // price of the dish
+    private HashMap<String, DishIngredient> ingredients; // the ingredients of this dish.
 
     /**
-     * @param name The name of the dish
-     * @param id The id assigned to the dis
-     * @param price The price of the dish
+     * @param name        The name of the dish
+     * @param id          The id assigned to the dis
+     * @param price       The price of the dish
      * @param ingredients The ingredients needed to make the dish
      */
     public MenuItem(String name, double id, double price, HashMap<String, DishIngredient> ingredients) {
@@ -22,11 +22,13 @@ public class MenuItem {
 
     /**
      * Returns the id of this menu item
+     *
      * @return the id of the menu itema
      */
-    public double getId(){
+    public double getId() {
         return this.id;
     }
+
     /**
      * Creates a non-alias copy of this MenuItem
      *
@@ -39,7 +41,7 @@ public class MenuItem {
     /**
      * Makes a non-alias copy of the ingredients.
      *
-     * @return HashMap<String , DishIngredient> Ingredients hashmap
+     * @return HashMap<String   ,   DishIngredient> Ingredients hashmap
      */
     private HashMap<String, DishIngredient> cloneIngredients() {
 
@@ -54,7 +56,7 @@ public class MenuItem {
     /**
      * Returns the price of the MenuItem
      *
-     * @return
+     * @return double
      */
     public double getPrice() {
         double finalPrice = price;
@@ -75,11 +77,11 @@ public class MenuItem {
      * ingredient's bounds.
      *
      * @param ingredient The ingredient being added to the dish
-     * @param amount The amount of that ingredient that is being added
+     * @param amount     The amount of that ingredient that is being added
      */
     public void addIngredient(String ingredient, int amount) {
 
-      this.ingredients.get(ingredient).addAmount(amount);
+        this.ingredients.get(ingredient).addAmount(amount);
     }
 
     /**
@@ -87,14 +89,16 @@ public class MenuItem {
      * bounds of the ingredient's bounds.
      *
      * @param ingredient the ingredient that is being removed from the dish
-     * @param amount the amount of that ingredient that is being removed
+     * @param amount     the amount of that ingredient that is being removed
      */
     public void subtractIngredient(String ingredient, int amount) {
         this.ingredients.get(ingredient).subtractAmount(amount);
     }
 
-    /** returns a HashMap of the ingredient name and its amount.
-     *  @return HashMap<String,Integer>
+    /**
+     * returns a HashMap of the ingredient name and its amount.
+     *
+     * @return HashMap<String   ,   Integer>
      */
     public HashMap<String, Integer> getIngredientAmounts() {
         HashMap<String, Integer> ingredientAmounts = new HashMap<>();
@@ -103,8 +107,11 @@ public class MenuItem {
         }
         return ingredientAmounts;
     }
-    /** returns a HashMap of the ingredient name and its amount.
-     *  @return HashMap<String,Integer>
+
+    /**
+     * returns a HashMap of the ingredient name and its amount.
+     *
+     * @return HashMap<String   ,   Integer>
      */
     protected HashMap<String, Integer> getDifferenceAmounts() {
         HashMap<String, Integer> differenceMap = new HashMap<>();
