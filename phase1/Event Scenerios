@@ -38,3 +38,14 @@ Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|bill|A|split
+
+Notifying manager that ingredient is below threshhold
+
+Server|Akarsh|seatCustomer|A|3|
+Server|Akarsh|order|A|1|8|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|split
