@@ -4,7 +4,7 @@ cabbage#50#30#20
 spaghetti#500#300#200
 mint sauce#200#100#100
 beef#100#70#30
-sausage#42#50#50
+sausage#100#50#50
 tomato#150#100#50
 pork#100#70#30
 coriander sauce#200#100#100
@@ -26,6 +26,6 @@ falafel balls#200#100#50
 lettuce#120#90#30
 water#500#400#100
 bell pepper(green)#100#70#30
-bun#190#150#50
+bun#148#150#50
 tortilla wraps#100#80#20
-chocolate#100#50#50
+chocolate#52#50#50

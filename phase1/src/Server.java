@@ -116,12 +116,8 @@ public class Server implements IWorker, ServingTableListener {
     isOccupied = occupied;
   }
 
-  /**
-   * Notify the server that the ServingTable has been changed. i.e MenuItem needs to be served
-   */
-  public void update(Dish dish) {
-    System.out.println(String.format("Table %s: %s is ready to be served", dish.getTableName(), dish.getName()));
-    System.out.println();
+  @Override
+  public void update(String message) {
+    //Notify server on GUI
   }
-
 }

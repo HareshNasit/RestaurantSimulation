@@ -1,5 +1,5 @@
 public interface InventoryListener {
 
-  public void notifyLowStock(String ingredient);
+  public void notifyLowStock(String message);
 
 }

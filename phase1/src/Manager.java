@@ -27,12 +27,9 @@ public class Manager implements IWorker, InventoryListener {
   }
 
   @Override
-  public void notifyLowStock(String ingredient) {
-    System.out.println();
-    System.out.println(
-        String.format("Manager has been notified that %s is low on stock", ingredient));
-    System.out.println(String.format("request.txt has been updated"));
-    System.out.println();
+  public void notifyLowStock(String message) {
+    //to be replaced with gui notification
+    System.out.println(message);
   }
 
   /** Reads the file about the new ingredients to be purchased and default value is 20. */

@@ -29,7 +29,7 @@ public class Cook implements IWorker, ServingTableListener {
      * adds it to the list of dishes being cooked currently.
      * @param dish The MenuItem that is to be added to dishesInMaking.
      */
-    public void prepareDish(Dish dish, Inventory inventory) {
+    private void prepareDish(Dish dish, Inventory inventory) {
       if (canBePrepared(dish, inventory)) {
         for (String ingredient : dish.getIngredients().keySet()) {
           inventory.removeStock(ingredient, dish.getIngredientAmounts().get(ingredient));
@@ -56,14 +56,14 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Notify the cook that dish has been served
    */
-  public void update(Dish dish) {
-      System.out.println("cook has been notified");
+  public void update(String message) {
+    //message notification on GUI
   }
 
   public void acceptCook(int index, ServingTable servingTable, Inventory inventory) {
     Dish dish = servingTable.getDishToBeCooked(index);
     prepareDish(dish, inventory);
-    servingTable.setDishToCooking(index);
+    servingTable.addToBeCooking(index);
     System.out.println(String.format("%s has agreed to cook Table%s%d %s", getName(),
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(servingTable);
@@ -71,7 +71,7 @@ public class Cook implements IWorker, ServingTableListener {
 
   public void acceptNoCook(int index, ServingTable servingTable) {
     Dish dish = servingTable.getDishToBeCooked(index);
-    servingTable.setDishToCooking(index);
+    servingTable.addToBeCooking(index);
     System.out.println(String.format("%s has agreed to cook Table%s%d %s", getName(),
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(servingTable);
@@ -86,6 +86,6 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   public void serveDish(int index, ServingTable servingTable) {
-    servingTable.setDishToServe(index);
+    servingTable.addToBeServe(index);
   }
 }

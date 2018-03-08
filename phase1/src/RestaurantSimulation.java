@@ -127,7 +127,7 @@ public class RestaurantSimulation {
 
     } else if (input[2].equals("check")) {
 
-      Dish dish = restaurant.getServingTable().getDishesToBeCooked().get(Integer.valueOf(input[3]));
+      Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
       if (!cook.canBePrepared(dish, restaurant.getInventory())) {
         System.out.println(String.format("Table%s%d %s cannot be prepared", dish.getTableName(),
             dish.getCustomerNum(), dish.getName()));

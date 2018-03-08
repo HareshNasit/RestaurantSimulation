@@ -71,7 +71,13 @@ public class Inventory {
 
       if (inventory.get(ingredient.trim()).getCurrentQuantity() <
           inventory.get(ingredient.trim()).getLowerThreshold()) {
-        manager.notifyLowStock(ingredient);
+
+        String message = System.lineSeparator() +
+            String.format("%s is less than lower threshold: %d units",
+                ingredient, inventory.get(ingredient.trim()).getLowerThreshold())
+            + System.lineSeparator() + "manager has been notified, request.txt updated" +
+            System.lineSeparator();
+        manager.notifyLowStock(message);
         this.getLowIngredients();
       }
 
@@ -122,7 +128,6 @@ public class Inventory {
   /**
    * Writes the list of ingredients that need to be requested in request.txt
    *
-   * @return String list of ingredients that need to be restocked
    */
   public void getLowIngredients() {
     try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(REQUESTSFILE)))) {
