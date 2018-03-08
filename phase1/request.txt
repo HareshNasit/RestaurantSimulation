@@ -1,1 +1,1 @@
-sausage: 50
+sausage#50#notreceived#notscanned
