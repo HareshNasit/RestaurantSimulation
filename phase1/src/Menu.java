@@ -61,13 +61,19 @@ public class Menu {
     menuItems.put(id, dish);
   }
 
+  /**
+   * Gets the size of the menu. Useful for GUI and creating the scroll menu.
+   *
+   * @return int
+   */
   public int getMenuSize() {
     return menuItems.size();
   }
 
   /**
-   * Returns a menuitem which is a dish which includes the dish's id, the table that
-   * ordered it and the customer that placed the order
+   * Returns a menuitem which is a dish which includes the dish's id, the table that ordered it and
+   * the customer that placed the order.
+   *
    * @param id the id of the dish
    * @param tableName the table that ordered the dish
    * @param customerNum the number of the customer who ordered the dish
