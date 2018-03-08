@@ -71,7 +71,7 @@ public class RestaurantSimulation {
         //If No Extras are added or removed
       }
 
-      server.addOrder(restaurant.getTable(tableID), order, restaurant.getServingTable());
+      server.addOrder(restaurant.getTable(tableID), order);
 
     } else if (input[2].equals("passOrder")) {
 
