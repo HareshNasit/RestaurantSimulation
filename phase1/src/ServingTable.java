@@ -76,7 +76,7 @@ public class ServingTable {
    *
    * @param index - index of dish on dishesBeingCooked list
    */
-  public void addToBeServe(int index) {
+  public void addToBeServed(int index) {
     Dish dish = dishesBeingCooked.remove(index);
     dishesToBeServed.add(dish);
     notifyServers(
@@ -120,7 +120,7 @@ public class ServingTable {
   /**
    * Adds the cook.
    *
-   * @param cook ArrayList<ServingTableListener>
+   * @param cook cook
    */
   public void addCook(ServingTableListener cook) {
     cooks.add(cook);

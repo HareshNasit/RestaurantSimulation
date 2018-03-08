@@ -117,6 +117,6 @@ public class Cook implements IWorker, ServingTableListener {
    * @param servingTable serving table of restaurant
    */
   public void serveDish(int index, ServingTable servingTable) {
-    servingTable.addToBeServe(index);
+    servingTable.addToBeServed(index);
   }
 }
