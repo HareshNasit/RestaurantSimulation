@@ -59,4 +59,29 @@ public class Cook implements IWorker, ServingTableListener {
   public void update(Dish dish) {
       System.out.println("cook has been notified");
   }
+
+  public void acceptCook(int index, ServingTable servingTable, Inventory inventory) {
+    Dish dish = servingTable.getDishToBeCooked(index);
+    prepareDish(dish, inventory);
+    servingTable.setDishToCooking(index);
+    System.out.println(String.format("%s has agreed to cook Table%s%d %s", getName(),
+        dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    System.out.println(servingTable);
+  }
+
+  public void acceptNoCook(int index, ServingTable servingTable) {
+    Dish dish = servingTable.getDishToBeCooked(index);
+    servingTable.setDishToCooking(index);
+    System.out.println(String.format("%s has agreed to cook Table%s%d %s", getName(),
+        dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    System.out.println(servingTable);
+  }
+
+  public void rejectDish(int index, ServingTable servingTable) {
+    servingTable.rejectDish(index);
+  }
+
+  public void serveDish(int index, ServingTable servingTable) {
+    servingTable.setDishToServe(index);
+  }
 }

@@ -163,20 +163,25 @@ public class ServingTable {
      */
     @Override
   public String toString(){
-    String finalString = "Dishes to be cooked: ";
+      String finalString =
+          System.lineSeparator() + "ServingTable: " + System.lineSeparator()
+              + "Dishes to be cooked: ";
     for(Dish d : dishesToBeCooked){
-      finalString += d.getId() + "|" + d.getTableName() + "|" + d.getCustomerNum() + " # ";
+      finalString += d.getTableName() + d.getCustomerNum() + "|" + d.getId() + " # ";
     }
+      finalString += System.lineSeparator() + "Dishes currently cooking: ";
+      for (Dish e : dishesBeingCooked) {
+        finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
+      }
     finalString += System.lineSeparator() + "Dishes to be Served: ";
     for(Dish e : dishesToBeServed){
-      finalString += e.getId() + "|" + e.getTableName() + "|" + e.getCustomerNum() + " # ";
+      finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
     }
-    return finalString;
+      return finalString + System.lineSeparator();
   }
 
   public Dish getRejectedDish(int index) {
     Dish dish = dishesRejected.remove(index);
-    System.out.println(dish.getName() + " rejection has been informed to customer");
     return dish;
   }
 
@@ -186,15 +191,18 @@ public class ServingTable {
 
   public void rejectDish(int index) {
     Dish dish = dishesToBeCooked.remove(index);
-    System.out.println(String.format("%s has been rejected by chef", dish.getName()));
     dishesRejected.add(dish);
 
   }
 
   public void setDishToServe(int index) {
     Dish dish = dishesBeingCooked.remove(index);
-    System.out.println(String.format("%s is ready to be served", dish.getName()));
     dishesToBeServed.add(dish);
+    System.out.println(String
+        .format("Table %s%d %s is ready to be served", dish.getTableName(), dish.getCustomerNum(),
+            dish.getName()));
+    System.out.println(this);
+
   }
 
   /**
@@ -203,13 +211,13 @@ public class ServingTable {
   public Dish setDishToCooking(int index) {
     Dish dish = dishesToBeCooked.remove(index);
     dishesBeingCooked.add(dish);
-    System.out.println(String.format("%s is now being cooked", dish.getName()));
     return dish;
   }
 
-  public void serveDish(int index) {
+  public Dish serveDish(int index) {
     Dish dish = dishesToBeServed.remove(index);
-    System.out.println(String.format("%s has been served", dish.getName()));
+
+    return dish;
 
   }
 }
