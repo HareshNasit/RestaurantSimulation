@@ -73,7 +73,7 @@ public class Restaurant {
   private void generateTables(String fileName) {
 
     File file = new File(fileName);
-    tables = new HashMap<String, Table>();
+    tables = new HashMap<>();
     try {
       Scanner line = new Scanner(file);
 
@@ -99,9 +99,9 @@ public class Restaurant {
      * @param servingTable the serving table that they belong to
      */
   private void generateWorkers(String fileName, ServingTable servingTable) {
-    this.workers = new ArrayList<IWorker>();
-    this.servers = new HashMap<String, Server>();
-    this.cooks = new HashMap<String, Cook>();
+    this.workers = new ArrayList<>();
+    this.servers = new HashMap<>();
+    this.cooks = new HashMap<>();
     try {
       Scanner line = new Scanner(new File(fileName));
       while (line.hasNextLine()) {
