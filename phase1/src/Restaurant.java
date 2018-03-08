@@ -50,7 +50,17 @@ public class Restaurant {
   public Inventory getInventory() {
     return inventory;
   }
-
+    /**
+     * Returns a HashMap of workers name as the key and IWorker as value.
+     * @return HashMap<String,IWorker>
+     */
+  public HashMap<String,IWorker> MapOfWorkers(){
+      HashMap<String,IWorker> workersMap = new HashMap<>();
+    for(IWorker worker: this.workers){
+        workersMap.put(worker.getName(),worker);
+    }
+    return workersMap;
+  }
   /**
    * Adds the worker to the list of workers.
    * @param worker The worker.
