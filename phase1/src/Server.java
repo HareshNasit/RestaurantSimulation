@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 /**
  * Server class records orders taken from customers and relays them to the chef.
@@ -73,9 +72,8 @@ public class Server implements IWorker, ServingTableListener {
    * Adds a dish to a table's Order.
    * @param table table to which dish will be added.
    * @param dish dish to be added to the tables order.
-   * @param servingTable the serving table.
    */
-  public void addOrder(Table table, Dish dish, ServingTable servingTable) {
+  public void addOrder(Table table, Dish dish) {
     System.out.println(String.format(
         "%s takes order from Table%sSeat%d: %s",
         getName(), dish.getTableName(), dish.getCustomerNum(), dish.getStringForBill()));
@@ -116,14 +114,6 @@ public class Server implements IWorker, ServingTableListener {
   @Override
   public void scanStock(Inventory inventory, String ingredient, int amount) {
     inventory.addStock(ingredient, amount);
-  }
-
-  /**
-   * This method checks whether all the dishes the table ordered have been served or not.
-   * @return boolean
-   */
-  public boolean isOrderComplete(Table table) {
-    return (table.getNumberOfDishesServed() == table.numberOfDishesInOrder());
   }
   @Override
   public void update(String message) {
