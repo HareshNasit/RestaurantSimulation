@@ -62,7 +62,7 @@ public class Table {
   }
 
   /**
-   * Removes the served dish and reduces the number of dishes served by 1
+   * Removes the served dish
    *
    * @param dish to be removed from the list.
    */
@@ -103,13 +103,15 @@ public class Table {
   /**
    * Get name id of table
    *
-   * @return string of tabel id
+   * @return string of table id
    */
-  public String getName() {
+  public String getTableName() {
     return this.tableName;
   }
 
-  /** Clear the tabel order and set isOccupied to false when customer leaves */
+  /**
+   * Clear the table order and set isOccupied to false when customer leaves
+   */
   public void clearTable() {
     this.tableOrder = new ArrayList<Dish>();
     this.isOccupied = false;
