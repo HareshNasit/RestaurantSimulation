@@ -93,7 +93,9 @@ public class MenuItem {
         this.ingredients.get(ingredient).subtractAmount(amount);
     }
 
-    /** @return */
+    /** returns a HashMap of the ingredient name and its amount.
+     *  @return HashMap<String,Integer>
+     */
     public HashMap<String, Integer> getIngredientAmounts() {
         HashMap<String, Integer> ingredientAmounts = new HashMap<>();
         for (String key : this.ingredients.keySet()) {
@@ -101,7 +103,9 @@ public class MenuItem {
         }
         return ingredientAmounts;
     }
-
+    /** returns a HashMap of the ingredient name and its amount.
+     *  @return HashMap<String,Integer>
+     */
     protected HashMap<String, Integer> getDifferenceAmounts() {
         HashMap<String, Integer> differenceMap = new HashMap<>();
         for (String key : this.ingredients.keySet()) {
