@@ -38,20 +38,20 @@ public class Inventory {
     }
   }
 
-    /**
-     * Checks whether a particular dish has enough ingredients to cook that dish.
-     *
-     * @param dishIngredients The ingredient that is to be added to
-     * @return boolean returns true if the inventory has enough ingredients to prepare a dish.
-     */
+  /**
+   * Checks whether a particular dish has enough ingredients to cook that dish.
+   *
+   * @param dishIngredients The ingredient that is to be added to
+   * @return boolean returns true if the inventory has enough ingredients to prepare a dish.
+   */
   public boolean hasEnoughIngredients(HashMap<String, Integer> dishIngredients) {
     for (String ingredient : dishIngredients.keySet()) {
 
       if (!inventory.containsKey(ingredient.trim())) {
         System.out.println("Not Available: " + ingredient);
         return false;
-      } else if (inventory.get(ingredient.trim()).getCurrentQuantity() < dishIngredients
-          .get(ingredient)) {
+      } else if (inventory.get(ingredient.trim()).getCurrentQuantity()
+          < dishIngredients.get(ingredient)) {
         System.out.println("Not Enough: " + ingredient);
         return false;
       }
@@ -69,43 +69,43 @@ public class Inventory {
     if (amount <= inventory.get(ingredient.trim()).getCurrentQuantity()) {
       inventory.get(ingredient.trim()).decreaseQuantity(amount);
 
-      if (inventory.get(ingredient.trim()).getCurrentQuantity() <
-          inventory.get(ingredient.trim()).getLowerThreshold()) {
+      if (inventory.get(ingredient.trim()).getCurrentQuantity()
+          < inventory.get(ingredient.trim()).getLowerThreshold()) {
 
-        String message = System.lineSeparator() +
-            String.format("%s is less than lower threshold: %d units",
+        String message =
+            System.lineSeparator()
+                + String.format(
+                "%s is less than lower threshold: %d units",
                 ingredient, inventory.get(ingredient.trim()).getLowerThreshold())
-            + System.lineSeparator() + "manager has been notified, request.txt updated" +
-            System.lineSeparator();
+                + System.lineSeparator()
+                + "manager has been notified, request.txt updated"
+                + System.lineSeparator();
         manager.notifyLowStock(message);
         this.getLowIngredients();
       }
-
     }
   }
 
-  /**
-   * Writes current inventory to the Inventory.txt file
-   */
+  /** Writes current inventory to the Inventory.txt file */
   public void writeToInventory() {
     try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(INVENTORYFILE)))) {
       for (InventoryIngredient ingredient : inventory.values()) {
-        String line = ingredient.getName() + "#"
-            + String.valueOf(ingredient.getCurrentQuantity()) + "#"
-            + String.valueOf(ingredient.getRestockQuantity()) + "#"
-            + String.valueOf(ingredient.getLowerThreshold());
+        String line =
+            ingredient.getName()
+                + "#"
+                + String.valueOf(ingredient.getCurrentQuantity())
+                + "#"
+                + String.valueOf(ingredient.getRestockQuantity())
+                + "#"
+                + String.valueOf(ingredient.getLowerThreshold());
         out.println(line);
-
       }
     } catch (Exception e) {
 
     }
-
   }
 
-  /**
-   * Reads the inventory from Inventory.txt
-   */
+  /** Reads the inventory from Inventory.txt */
   public void readInventory() {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(INVENTORYFILE))) {
       String line = fileReader.readLine();
@@ -114,8 +114,8 @@ public class Inventory {
         int amount = Integer.valueOf(line.split("#")[1].trim());
         int restockAmount = Integer.valueOf(line.split("#")[2].trim());
         int lowerBound = Integer.valueOf(line.split("#")[3].trim());
-        InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockAmount,
-            lowerBound);
+        InventoryIngredient ingredient =
+            new InventoryIngredient(name, amount, restockAmount, lowerBound);
         inventory.put(name, ingredient);
 
         line = fileReader.readLine();
@@ -127,38 +127,53 @@ public class Inventory {
 
   /**
    * Writes the list of ingredients that need to be requested in request.txt
-   *
    */
-  public void getLowIngredients() {
+  private void getLowIngredients() {
     try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(REQUESTSFILE)))) {
       for (InventoryIngredient ingredient : inventory.values()) {
         if (ingredient.getCurrentQuantity() < ingredient.getLowerThreshold()) {
           out.println(ingredient.getName() + ": " + ingredient.getRestockQuantity());
         }
-
       }
 
     } catch (java.io.IOException e) {
     }
-
   }
 
+  /**
+   * Returns the amount of ingredient
+   *
+   * @param name name of ingredient
+   * @return amount in inventory
+   */
   public int getIngredientAmount(String name) {
     return this.inventory.get(name).getCurrentQuantity();
   }
 
+  /**
+   * Returns the a string of the inventory which includes ingredient name and amount
+   * @return string of inventory stock
+   */
   @Override
   public String toString() {
     String output = "";
     for (InventoryIngredient ingredient : inventory.values()) {
       output =
-          output + ingredient.getName() + "|" + String.valueOf(ingredient.getCurrentQuantity()) +
-              System.lineSeparator();
+          output
+              + ingredient.getName()
+              + "|"
+              + String.valueOf(ingredient.getCurrentQuantity())
+              + System.lineSeparator();
     }
     return output;
   }
 
-  public void setManger(InventoryListener manager) {
+  /**
+   * Set the manager as a listener of this class
+   *
+   * @param manager manager of restaurant
+   */
+  public void setManager(InventoryListener manager) {
     this.manager = manager;
   }
 }
