@@ -139,7 +139,7 @@ public class DishIngredient {
    * Checks if an amount can be added to the dish's ingredient.
    *
    * @param amount amount being added
-   * @return
+   * @return if amount can be added
    */
   public boolean amountCanBeAdded(int amount) {
     return this.amount + amount <= upperAmount;
@@ -149,7 +149,7 @@ public class DishIngredient {
    * Checks if an amount can be subtracted to the dish's ingredient.
    *
    * @param amount amount being subtracted
-   * @return
+   * @return if amount can be subtracted
    */
   public boolean amountCanBeSubtracted(int amount) {
     return this.amount - amount >= lowerAmount;
