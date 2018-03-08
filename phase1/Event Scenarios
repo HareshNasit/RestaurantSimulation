@@ -1,3 +1,4 @@
+Paste events and inventory in the respective text files to simulate scenarios
 
 Returning a dish:
 
@@ -11,7 +12,7 @@ Server|Akarsh|return|A|0|too hot
 Cook|Harsh|transfer|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
-Server|Akarsh|bill|A|split
+Server|Akarsh|bill|A|single
 
 Rejecting a dish:
 
@@ -21,7 +22,7 @@ Server|Akarsh|passOrder|A|
 Cook|Harsh|check|0|
 Cook|Harsh|reject|0|
 Server|Akarsh|reject|0|
-Server|Akarsh|bill|A|split
+Server|Akarsh|bill|A|single
 
 Compliments:
 
@@ -37,7 +38,7 @@ Cook|Harsh|serve|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|serve|0|
-Server|Akarsh|bill|A|split
+Server|Akarsh|bill|A|single
 
 Notifying manager that ingredient is below threshhold
 
@@ -48,10 +49,11 @@ Cook|Harsh|check|0|
 Cook|Harsh|accept|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
-Server|Akarsh|bill|A|split
+Server|Akarsh|bill|A|single
 
 Manager calls a worker and he scans the ingredient and the amount
 
+Manager|Adam|receive|chocolate|1000
 Manager|Adam|scan stock|Harsh|chocolate|1000
 
 Mixed Events

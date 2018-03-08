@@ -48,5 +48,6 @@ Cook|Harsh|accept|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|bill|A|single
+Manager|Adam|receive|chocolate|1000
 Manager|Adam|scan stock|Harsh|chocolate|1000
 Manager|Adam|shutdown|
