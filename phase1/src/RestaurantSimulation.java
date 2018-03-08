@@ -9,9 +9,8 @@ public class RestaurantSimulation {
     ServingTable servingTable = new ServingTable();
     Menu menu = new Menu();
     Inventory inventory = new Inventory();
-    inventory.readInventory();
-
     Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
+
     RestaurantSimulation.readEvents("events.txt", restaurant);
   }
 
@@ -19,7 +18,9 @@ public class RestaurantSimulation {
     File file = new File(fileName);
     try {
       Scanner events = new Scanner(file);
+      int lineNumber = 1;
       while (events.hasNextLine()) {
+        System.out.println(String.format("----------%d---------", lineNumber));
         String[] line = events.nextLine().split("\\|");
         if (line[0].equals("Server")) {
           readServerAction(line, restaurant);
@@ -29,6 +30,7 @@ public class RestaurantSimulation {
           readManagerAction(line, restaurant);
           restaurant.setManager(line[1]);
         }
+        lineNumber += 1;
       }
       events.close();
     } catch (FileNotFoundException e) {
@@ -98,8 +100,12 @@ public class RestaurantSimulation {
         server.generateTableBill(restaurant.getTable(input[3]));
 
       }
-      System.out.println(
-          System.lineSeparator() + "Customers have paid. Table has been cleared for new customers");
+
+    } else if (input[2].equals("clear")) {
+
+      Table table = restaurant.getTable(input[3]);
+      server.clearTable(table);
+
     }
   }
 
@@ -145,9 +151,13 @@ public class RestaurantSimulation {
         System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[4],input[5]));
         IWorker worker = manager.callWorker(restaurant,input[3]);
         worker.scanStock(restaurant.getInventory(),input[4],Integer.valueOf(input[5]));
-      }
-      else if(input[2].equals("shutdown")){
-        manager.shutDown(restaurant.getInventory());
+      } else if(input[2].equals("shutdown")){
+      manager.shutDown(restaurant.getInventory());
+    } else if (input[2].equals("startup")) {
+      
+      System.out.println("Ingredients Registered from previous day");
+      restaurant.getInventory().readInventory();
+
     }
   }
 }

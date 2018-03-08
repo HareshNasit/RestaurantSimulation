@@ -93,6 +93,11 @@ public class Server implements IWorker, ServingTableListener {
     Bill.outputSingleBill(table, seatNum);
   }
 
+  public void clearTable(Table table) {
+    System.out.println(String.format("Table %s is now free", table.getName()));
+    table.clearTable();
+  }
+
   /** When new stock has been received, update the stock */
   @Override
   public void scanStock(Inventory inventory, String ingredient, int amount) {

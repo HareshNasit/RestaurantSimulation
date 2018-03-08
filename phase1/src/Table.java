@@ -123,6 +123,6 @@ public class Table {
   public void clearTable(){
     this.tableOrder = new ArrayList<Dish>();
     this.isOccupied = false;
-
   }
+
 }
