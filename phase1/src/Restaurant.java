@@ -16,12 +16,12 @@ public class Restaurant {
   private HashMap<String, Cook> cooks;
   private HashMap<String, Table> tables;
   private Manager manager;
+  private ServingTable servingTable;
 
   public ServingTable getServingTable() {
     return servingTable;
   }
 
-  private ServingTable servingTable;
 
   public Restaurant(Menu menu, Inventory inventory, ServingTable servingTable) {
     this.inventory = inventory;
@@ -93,6 +93,11 @@ public class Restaurant {
 
   }
 
+    /**
+     * Generates workers by taking input from a .txt file
+     * @param fileName the file that has the info of the workers
+     * @param servingTable the serving table that they belong to
+     */
   private void generateWorkers(String fileName, ServingTable servingTable) {
     this.workers = new ArrayList<IWorker>();
     this.servers = new HashMap<String, Server>();
@@ -131,11 +136,12 @@ public class Restaurant {
       e.printStackTrace();
     }
   }
+
   public void setManager(String managerName){
       this.manager = new Manager(managerName);
   }
 
-    public Manager getManager() {
+  public Manager getManager() {
         return manager;
     }
 }
