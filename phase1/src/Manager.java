@@ -10,11 +10,9 @@ public class Manager implements IWorker, InventoryListener {
   private boolean isOccupied;
   private String name;
   private String requestIngredients = "request.txt";
-  private HashMap<InventoryIngredient, Integer> orders;
 
   public Manager(String name) {
     this.name = name;
-    orders = new HashMap<>();
   }
     @Override
     public String getName() {
@@ -30,26 +28,9 @@ public class Manager implements IWorker, InventoryListener {
     //to be replaced with gui notification
     System.out.println(message);
   }
-
-  /** Reads the file about the new ingredients to be purchased and default value is 20. */
-  public void SendMail() {
-    System.out.println("Mail sent to the distributor.");
-    try (BufferedReader fileReader = new BufferedReader(new FileReader(requestIngredients))) {
-      String line = fileReader.readLine();
-      String[] splitLine = line.split("\\|");
-      if (line != null) {
-        //   orders.put(new InventoryIngredient())
-      }
-    } catch (Exception e) {
-    }
-  }
-
   public boolean isOccupied() {
     return isOccupied;
   }
-  /** The Manager can check the inventory. */
-  public void checkInventory(Inventory inventory) {}
-
   /** The server receives and adds ingredients to the inventory. */
   public void scanStock(Inventory inventory, String ingredient, int amount) {
     inventory.addStock(ingredient, amount);
