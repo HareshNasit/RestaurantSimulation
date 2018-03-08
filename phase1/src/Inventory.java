@@ -14,7 +14,6 @@ public class Inventory {
   private final String INVENTORYFILE = "Inventory.txt";
   private final String REQUESTSFILE = "request.txt";
   private InventoryListener manager;
-
   private HashMap<String, InventoryIngredient> inventory;
 
   /**

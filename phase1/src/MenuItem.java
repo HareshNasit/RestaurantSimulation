@@ -9,7 +9,7 @@ public class MenuItem {
 
     /**
      * @param name The name of the dish
-     * @param id The id assigned to the dish
+     * @param id The id assigned to the dis
      * @param price The price of the dish
      * @param ingredients The ingredients needed to make the dish
      */
@@ -20,8 +20,11 @@ public class MenuItem {
         this.ingredients = ingredients;
     }
 
-
-    public Double getId(){
+    /**
+     * Returns the id of this menu item
+     * @return the id of the menu itema
+     */
+    public double getId(){
         return this.id;
     }
     /**

@@ -7,8 +7,7 @@ public class DishIngredient {
   private int lowerAmount;
   private double price;
 
-  public DishIngredient(
-      String name, int baseAmount, int amount, int lowerAmount, int upperAmount, Double price) {
+  public DishIngredient(String name, int baseAmount, int amount, int lowerAmount, int upperAmount, Double price) {
     this.name = name;
     this.baseAmount = baseAmount;
     this.amount = amount;

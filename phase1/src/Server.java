@@ -4,13 +4,9 @@ import java.util.ArrayList;
  * Server class records orders taken from customers and relays them to the chef.
  */
 public class Server implements IWorker, ServingTableListener {
-  public String getName() {
-    return name;
-  }
 
   private String name; // name of a server
   private boolean isOccupied; // whether the server is currently serving a table or not
-
 
   /**
    * Creates a new server for this restaurant
@@ -19,6 +15,10 @@ public class Server implements IWorker, ServingTableListener {
    */
   public Server(String name) {
     this.name = name;
+  }
+
+  public String getName() {
+    return name;
   }
 
   /**
