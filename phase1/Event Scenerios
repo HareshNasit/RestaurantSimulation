@@ -49,3 +49,7 @@ Cook|Harsh|accept|0|
 Cook|Harsh|serve|0|
 Server|Akarsh|serve|0|
 Server|Akarsh|bill|A|split
+
+Manager calls a worker and he scans the ingredient and the amount
+
+Manager|Adam|scan stock|Harsh|tomato|12

@@ -143,9 +143,9 @@ public class RestaurantSimulation {
   private static void readManagerAction(String[] input, Restaurant restaurant) {
     Manager manager = restaurant.getManager();
     if(input[2].equals("scan stock")){
-        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[3],input[4]));
-        IWorker worker = manager.callWorker(restaurant.getWorkers());
-        worker.scanStock(restaurant.getInventory(),input[3],Integer.valueOf(input[4]));
+        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[4],input[5]));
+        IWorker worker = manager.callWorker(restaurant,input[3]);
+        worker.scanStock(restaurant.getInventory(),input[4],Integer.valueOf(input[5]));
       }
       else if(input[2].equals("shutdown")){
         manager.shutDown(restaurant.getInventory());
