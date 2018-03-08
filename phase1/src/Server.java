@@ -31,7 +31,8 @@ public class Server implements IWorker, ServingTableListener {
      */
     public void passOrder(Table table, ServingTable servingTable) {
         System.out.println(
-                String.format("%s sending Table %s's orders to cooks", getName(), table.getName()));
+            String
+                .format("%s sending Table %s's orders to cooks", getName(), table.getTableName()));
         servingTable.addToBeCooked(table.getTableOrder());
         System.out.println(servingTable);
     }
@@ -124,7 +125,7 @@ public class Server implements IWorker, ServingTableListener {
     }
 
     public void clearTable(Table table) {
-        System.out.println(String.format("Table %s is now free", table.getName()));
+      System.out.println(String.format("Table %s is now free", table.getTableName()));
         table.clearTable();
     }
 

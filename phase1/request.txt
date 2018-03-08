@@ -1,2 +1,0 @@
-pizza base: 50
-chocolate: 50
