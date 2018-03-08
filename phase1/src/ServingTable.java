@@ -7,6 +7,7 @@ public class ServingTable {
   private ArrayList<Dish> dishesBeingCooked; // List of dishes which are being cooked currently for extra feature later.
   private ArrayList<ServingTableListener> servers; // List of all the servers.
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
+
      ServingTable() {
         dishesBeingCooked = new ArrayList<>();
         dishesRejected = new ArrayList<>();
@@ -15,62 +16,7 @@ public class ServingTable {
         servers = new ArrayList<>();
         cooks = new ArrayList<>();
     }
-    /**
-     * Returns an ArrayList of servers.
-     * @return ArrayList<ServingTableListener>
-     */
-    public ArrayList<ServingTableListener> getServers() {
-    return servers;
-  }
-    /**
-     * Sets the servers.
-     * @param servers An ArrayList of all the servers.
-     */
-     public void setServers(ArrayList<ServingTableListener> servers) {
-    this.servers = servers;
-  }
-    /**
-     * Returns an ArrayList of cooks.
-     * @return ArrayList<ServingTableListener>
-     */
-     public ArrayList<ServingTableListener> getCooks() {
-    return cooks;
-  }
-    /**
-     * Sets the cooks.
-     * @param cooks An ArrayList of all the cooks.
-     */
-    public void setCooks(ArrayList<ServingTableListener> cooks) {
-    this.cooks = cooks;
-  }
-    /**
-     * Returns an ArrayList of dishes which are rejected.
-     * @return ArrayList
-     */
-    public ArrayList<Dish> getDishesRejected() {
-        return dishesRejected;
-    }
-    /**
-     * Returns an ArrayList of dishes which are to be cooked.
-     * @return ArrayList
-     */
-    public ArrayList<Dish> getDishesToBeCooked() {
-        return dishesToBeCooked;
-    }
-    /**
-     * Returns an ArrayList of dishes which are being cooked currently.
-     * @return ArrayList
-     */
-    public ArrayList<Dish> getDishesBeingCooked() {
-        return dishesBeingCooked;
-    }
-    /**
-     * Returns an ArrayList of dishes to be served.
-     * @return ArrayList
-     */
-    public ArrayList<Dish> getDishesToBeServed() {
-        return dishesToBeServed;
-    }
+
     /**
    * Adds a table order to the list of dishes that needs to be cooked.
    * @param order An ArrayList of dishes being ordered.
@@ -85,40 +31,20 @@ public class ServingTable {
   public void addToBeCooked(Dish order) {
     dishesToBeCooked.add(order);
   }
-  /**
-   * Returns dish to serving table. Sets it as top priority
-   * This is when the customer sends back the dish due to some problem.
-   * @param dish the dish being sent back.
-   * @param comment the reason why the customer sent back the dish.
-   */
-  public void returnDish(Dish dish, String comment) {
-    dishesToBeCooked.add(0, dish);
-    System.out.println("MenuItem Returned: " + comment);
-  }
-  /**
-   * Add dish to be served.
-   * @param dish the dish which is cooked and ready to be served.
-   */
-  public void addToBeServed(Dish dish) {
-    dishesToBeServed.add(dish);
-    notifyServers(dish);
-  }
-  /**
-   * Notify servers about current dish state
-   * @param dish the dish.
-   */
-  public void notifyServers(Dish dish) {
+
+  private void notifyServers(String message) {
+    System.out.println("Servers notified that " + message);
     for (ServingTableListener server : servers) {
-      server.update(dish);
+      server.update(message);
     }
   }
 
-  public void notifyCooks(Dish dish){
+  private void notifyCooks(String message) {
+    System.out.println("Cooks notified that " + message);
     for (ServingTableListener cook : cooks) {
-      cook.update(dish);
+      cook.update(message);
     }
   }
-
 
   /**
    * Remove the dish at the given index
@@ -158,31 +84,7 @@ public class ServingTable {
   public void addCooks(ArrayList<ServingTableListener> cooks) {
     this.cooks = cooks;
   }
-    /**
-     * prints the ServingTable information.
-     */
-    @Override
-  public String toString(){
-      String finalString =
-          System.lineSeparator() + "ServingTable: " + System.lineSeparator()
-              + "Dishes to be cooked: ";
-    for(Dish d : dishesToBeCooked){
-      finalString += d.getTableName() + d.getCustomerNum() + "|" + d.getId() + " # ";
-    }
-      finalString += System.lineSeparator() + "Dishes currently cooking: ";
-      for (Dish e : dishesBeingCooked) {
-        finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
-      }
-    finalString += System.lineSeparator() + "Dishes to be Served: ";
-    for(Dish e : dishesToBeServed){
-      finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
-    }
-      finalString += System.lineSeparator() + "Dishes rejected: ";
-      for (Dish e : dishesRejected) {
-        finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
-      }
-      return finalString + System.lineSeparator();
-  }
+
 
   public Dish getRejectedDish(int index) {
     Dish dish = dishesRejected.remove(index);
@@ -199,10 +101,15 @@ public class ServingTable {
 
   }
 
-  public void setDishToServe(int index) {
+  /**
+   * Dish at index has been cooked. Dish is moved to list of dishes that need to be served
+   *
+   * @param index - index of dish on dishesBeingCooked list
+   */
+  public void addToBeServe(int index) {
     Dish dish = dishesBeingCooked.remove(index);
     dishesToBeServed.add(dish);
-    System.out.println(String
+    notifyServers(String
         .format("Table %s%d %s is ready to be served", dish.getTableName(), dish.getCustomerNum(),
             dish.getName()));
     System.out.println(this);
@@ -210,18 +117,51 @@ public class ServingTable {
   }
 
   /**
-   * Removes the dish from index in dishestobecooked and added it to dishes being cooked
+   * Dish at index is moved from needing to be cooked to being cooked
    */
-  public Dish setDishToCooking(int index) {
+  public void addToBeCooking(int index) {
     Dish dish = dishesToBeCooked.remove(index);
     dishesBeingCooked.add(dish);
+  }
+
+  /**
+   * Removes and returns dish at index on dishesToBeServed. Cooks are notified that the dish has
+   * been served
+   *
+   * @param index index of dish on dishesToBeServed
+   * @return dish at index of dishesToBeServed
+   */
+  public Dish serveDish(int index) {
+    Dish dish = dishesToBeServed.remove(index);
+    notifyCooks(String
+        .format("Table %s%d %s has been served", dish.getTableName(), dish.getCustomerNum(),
+            dish.getName()));
     return dish;
   }
 
-  public Dish serveDish(int index) {
-    Dish dish = dishesToBeServed.remove(index);
-
-    return dish;
-
+  /**
+   * prints the ServingTable information.
+   */
+  @Override
+  public String toString() {
+    String finalString =
+        System.lineSeparator() + "ServingTable: " + System.lineSeparator()
+            + "Dishes to be cooked: ";
+    for(Dish d : dishesToBeCooked){
+      finalString += d.getTableName() + d.getCustomerNum() + "|" + d.getId() + " # ";
+    }
+    finalString += System.lineSeparator() + "Dishes currently cooking: ";
+    for (Dish e : dishesBeingCooked) {
+      finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
+    }
+    finalString += System.lineSeparator() + "Dishes to be Served: ";
+    for(Dish e : dishesToBeServed){
+      finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
+    }
+    finalString += System.lineSeparator() + "Dishes rejected: ";
+    for (Dish e : dishesRejected) {
+      finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
+    }
+    return finalString + System.lineSeparator();
   }
 }
