@@ -50,7 +50,17 @@ public class Restaurant {
   public Inventory getInventory() {
     return inventory;
   }
-
+    /**
+     * Returns a HashMap of workers name as the key and IWorker as value.
+     * @return HashMap<String,IWorker>
+     */
+  public HashMap<String,IWorker> MapOfWorkers(){
+      HashMap<String,IWorker> workersMap = new HashMap<>();
+    for(IWorker worker: this.workers){
+        workersMap.put(worker.getName(),worker);
+    }
+    return workersMap;
+  }
   /**
    * Adds the worker to the list of workers.
    * @param worker The worker.
@@ -73,7 +83,7 @@ public class Restaurant {
   private void generateTables(String fileName) {
 
     File file = new File(fileName);
-    tables = new HashMap<String, Table>();
+    tables = new HashMap<>();
     try {
       Scanner line = new Scanner(file);
 
@@ -99,9 +109,9 @@ public class Restaurant {
      * @param servingTable the serving table that they belong to
      */
   private void generateWorkers(String fileName, ServingTable servingTable) {
-    this.workers = new ArrayList<IWorker>();
-    this.servers = new HashMap<String, Server>();
-    this.cooks = new HashMap<String, Cook>();
+    this.workers = new ArrayList<>();
+    this.servers = new HashMap<>();
+    this.cooks = new HashMap<>();
     try {
       Scanner line = new Scanner(new File(fileName));
       while (line.hasNextLine()) {

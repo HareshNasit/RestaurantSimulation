@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RestaurantSimulation {
@@ -10,17 +9,19 @@ public class RestaurantSimulation {
     ServingTable servingTable = new ServingTable();
     Menu menu = new Menu();
     Inventory inventory = new Inventory();
-    inventory.readInventory();
-
     Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
-    RestaurantSimulation.readEvents("events.txt", restaurant);
+
+    RestaurantSimulation rs = new RestaurantSimulation();
+    rs.readEvents("events.txt", restaurant);
   }
 
-  private static void readEvents(String fileName, Restaurant restaurant) {
+  public void readEvents(String fileName, Restaurant restaurant) {
     File file = new File(fileName);
     try {
       Scanner events = new Scanner(file);
+      int lineNumber = 1;
       while (events.hasNextLine()) {
+        System.out.println(String.format("----------%d---------", lineNumber));
         String[] line = events.nextLine().split("\\|");
         if (line[0].equals("Server")) {
           readServerAction(line, restaurant);
@@ -30,6 +31,7 @@ public class RestaurantSimulation {
           readManagerAction(line, restaurant);
           restaurant.setManager(line[1]);
         }
+        lineNumber += 1;
       }
       events.close();
     } catch (FileNotFoundException e) {
@@ -37,7 +39,7 @@ public class RestaurantSimulation {
     }
   }
 
-  private static void readServerAction(String[] input, Restaurant restaurant) {
+  private void readServerAction(String[] input, Restaurant restaurant) {
 
     Server server = restaurant.getServer(input[1]);
 
@@ -90,21 +92,30 @@ public class RestaurantSimulation {
     } else if (input[2].equals("bill")) {
       System.out
           .println(String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
-      if (input[4].equals("single")) {
+      if (input[4].equals("split")) {
         System.out.println(("Printing bill"));
-        server.generateSingleBill(restaurant.getTable(input[3]), 3);
+        server.generateSingleBill(restaurant.getTable(input[3]), Integer.valueOf(input[5]));
 
-      } else if (input[4].equals("split")) {
+      } else if (input[4].equals("single")) {
         System.out.println(("Printing split bill"));
         server.generateTableBill(restaurant.getTable(input[3]));
 
       }
-      System.out.println(
-          System.lineSeparator() + "Customers have paid. Table has been cleared for new customers");
+
+    } else if (input[2].equals("clear")) {
+
+      Table table = restaurant.getTable(input[3]);
+      server.clearTable(table);
+
+    } else if (input[2].equals("cancel")) {
+
+      Table table = restaurant.getTable(input[3]);
+      server.removeDish(Integer.valueOf(input[4]), table);
+
     }
   }
 
-  private static void readCookAction(String[] input, Restaurant restaurant) {
+  private void readCookAction(String[] input, Restaurant restaurant) {
 
     Cook cook = restaurant.getCook(input[1]);
 
@@ -127,7 +138,7 @@ public class RestaurantSimulation {
 
     } else if (input[2].equals("check")) {
 
-      Dish dish = restaurant.getServingTable().getDishesToBeCooked().get(Integer.valueOf(input[3]));
+      Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
       if (!cook.canBePrepared(dish, restaurant.getInventory())) {
         System.out.println(String.format("Table%s%d %s cannot be prepared", dish.getTableName(),
             dish.getCustomerNum(), dish.getName()));
@@ -143,12 +154,16 @@ public class RestaurantSimulation {
   private static void readManagerAction(String[] input, Restaurant restaurant) {
     Manager manager = restaurant.getManager();
     if(input[2].equals("scan stock")){
-        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[3],input[4]));
-        IWorker worker = manager.callWorker(restaurant.getWorkers());
-        worker.scanStock(restaurant.getInventory(),input[3],Integer.valueOf(input[4]));
-      }
-      else if(input[2].equals("shutdown")){
-        manager.shutDown(restaurant.getInventory());
+        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[4],input[5]));
+        IWorker worker = manager.callWorker(restaurant,input[3]);
+        worker.scanStock(restaurant.getInventory(),input[4],Integer.valueOf(input[5]));
+      } else if(input[2].equals("shutdown")){
+      manager.shutDown(restaurant.getInventory());
+    } else if (input[2].equals("startup")) {
+
+      System.out.println("Ingredients Registered from previous day");
+      restaurant.getInventory().readInventory();
+
     }
   }
 }

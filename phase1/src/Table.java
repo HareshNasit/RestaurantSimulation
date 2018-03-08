@@ -74,6 +74,15 @@ public class Table {
     tableOrder.remove(dish);
   }
 
+  /**
+   * Removes the served dish and reduces the number of dishes served by 1
+   *
+   * @param index to be removed from the list.
+   */
+  public Dish removeDish(int index) {
+    return tableOrder.remove(index);
+  }
+
   public void setNumberOfDishesServed(int numberOfDishesServed) {
     this.numberOfDishesServed = numberOfDishesServed;
   }
@@ -121,6 +130,6 @@ public class Table {
   public void clearTable(){
     this.tableOrder = new ArrayList<Dish>();
     this.isOccupied = false;
-
   }
+
 }

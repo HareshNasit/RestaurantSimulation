@@ -12,5 +12,5 @@ public interface IWorker {
    * @param amount How much of that ingredient is being added
    */
   void scanStock(Inventory inventory, String ingredient, int amount);
-
+  String getName();
 }

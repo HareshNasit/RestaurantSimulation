@@ -76,7 +76,7 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Generates a bill for the table
+   * Generates a bill one table
    *
    * @param table The table that asked for the bill
    */
@@ -85,14 +85,17 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Generates a bill for the table
+   * Generates a bill for the table customer
    *
    * @param table The table that asked for the bill
    */
-  public void generateSingleBill(Table table, int size) {
-    for (int i = 0; i < size; i++) {
-      Bill.outputSingleBill(table, i++);
-    }
+  public void generateSingleBill(Table table, int seatNum) {
+    Bill.outputSingleBill(table, seatNum);
+  }
+
+  public void clearTable(Table table) {
+    System.out.println(String.format("Table %s is now free", table.getName()));
+    table.clearTable();
   }
 
   /** When new stock has been received, update the stock */
@@ -116,12 +119,14 @@ public class Server implements IWorker, ServingTableListener {
     isOccupied = occupied;
   }
 
-  /**
-   * Notify the server that the ServingTable has been changed. i.e MenuItem needs to be served
-   */
-  public void update(Dish dish) {
-    System.out.println(String.format("Table %s: %s is ready to be served", dish.getTableName(), dish.getName()));
-    System.out.println();
+  @Override
+  public void update(String message) {
+    //Notify server on GUI
   }
 
+  public void removeDish(int index, Table table) {
+    Dish dish = table.removeDish(index);
+    System.out.println(String.format("Cancelled %s from Table%s%d",
+        dish.getName(), dish.getTableName(), dish.getCustomerNum()));
+  }
 }
