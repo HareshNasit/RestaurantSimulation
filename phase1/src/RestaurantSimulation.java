@@ -11,10 +11,11 @@ public class RestaurantSimulation {
     Inventory inventory = new Inventory();
     Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
 
-    RestaurantSimulation.readEvents("events.txt", restaurant);
+    RestaurantSimulation rs = new RestaurantSimulation();
+    rs.readEvents("events.txt", restaurant);
   }
 
-  private static void readEvents(String fileName, Restaurant restaurant) {
+  public void readEvents(String fileName, Restaurant restaurant) {
     File file = new File(fileName);
     try {
       Scanner events = new Scanner(file);
@@ -38,7 +39,7 @@ public class RestaurantSimulation {
     }
   }
 
-  private static void readServerAction(String[] input, Restaurant restaurant) {
+  private void readServerAction(String[] input, Restaurant restaurant) {
 
     Server server = restaurant.getServer(input[1]);
 
@@ -114,7 +115,7 @@ public class RestaurantSimulation {
     }
   }
 
-  private static void readCookAction(String[] input, Restaurant restaurant) {
+  private void readCookAction(String[] input, Restaurant restaurant) {
 
     Cook cook = restaurant.getCook(input[1]);
 
