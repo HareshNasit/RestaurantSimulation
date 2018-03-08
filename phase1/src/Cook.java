@@ -78,7 +78,11 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   public void rejectDish(int index, ServingTable servingTable) {
+    Dish dish = servingTable.getDishToBeCooked(index);
     servingTable.rejectDish(index);
+    System.out.println(String.format("%s has rejected to cook Table%s%d %s", getName(),
+        dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    System.out.println(servingTable);
   }
 
   public void serveDish(int index, ServingTable servingTable) {

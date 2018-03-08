@@ -45,8 +45,9 @@ public class Server implements IWorker, ServingTableListener {
   public void rejectDish(int index, Restaurant restaurant) {
     Dish dish = restaurant.getServingTable().getRejectedDish(index);
     restaurant.getTable(dish.getTableName()).removeDish(dish);
-    System.out.println(String.format("%s informs Table%s%d that dish has been rejected by kitchen",
-        getName(), dish.getTableName(), dish.getCustomerNum()));
+    System.out.println(String.format("%s informs Table%s%d that %s has been rejected by kitchen",
+        getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    System.out.println(restaurant.getServingTable());
   }
 
   public void returnDish(int index, String tableID, Restaurant restaurant, String comment) {

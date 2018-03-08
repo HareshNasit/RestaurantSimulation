@@ -177,6 +177,10 @@ public class ServingTable {
     for(Dish e : dishesToBeServed){
       finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
     }
+      finalString += System.lineSeparator() + "Dishes rejected: ";
+      for (Dish e : dishesRejected) {
+        finalString += e.getTableName() + e.getCustomerNum() + "|" + e.getId() + " # ";
+      }
       return finalString + System.lineSeparator();
   }
 

@@ -124,6 +124,19 @@ public class RestaurantSimulation {
     } else if (input[2].equals("serve")) {
 
       cook.serveDish(Integer.valueOf(input[3]), restaurant.getServingTable());
+
+    } else if (input[2].equals("check")) {
+
+      Dish dish = restaurant.getServingTable().getDishesToBeCooked().get(Integer.valueOf(input[3]));
+      if (!cook.canBePrepared(dish, restaurant.getInventory())) {
+        System.out.println(String.format("Table%s%d %s cannot be prepared", dish.getTableName(),
+            dish.getCustomerNum(), dish.getName()));
+      } else {
+        System.out.println(String.format("Table%s%d %s can be prepared", dish.getTableName(),
+            dish.getCustomerNum(), dish.getName()));
+      }
+
+
     }
   }
 
