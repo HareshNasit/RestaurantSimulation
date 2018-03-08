@@ -56,7 +56,7 @@ public class MenuItem {
     /**
      * Returns the price of the MenuItem
      *
-     * @return
+     * @return double
      */
     public double getPrice() {
         double finalPrice = price;
