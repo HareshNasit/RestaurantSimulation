@@ -76,7 +76,7 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Generates a bill for the table
+   * Generates a bill one table
    *
    * @param table The table that asked for the bill
    */
@@ -85,14 +85,12 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Generates a bill for the table
+   * Generates a bill for the table customer
    *
    * @param table The table that asked for the bill
    */
-  public void generateSingleBill(Table table, int size) {
-    for (int i = 0; i < size; i++) {
-      Bill.outputSingleBill(table, i++);
-    }
+  public void generateSingleBill(Table table, int seatNum) {
+    Bill.outputSingleBill(table, seatNum);
   }
 
   /** When new stock has been received, update the stock */
