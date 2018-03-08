@@ -7,7 +7,8 @@ public class ServingTable {
   private ArrayList<Dish> dishesBeingCooked; // List of dishes which are being cooked currently for extra feature later.
   private ArrayList<ServingTableListener> servers; // List of all the servers.
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
-     ServingTable() {
+
+  ServingTable() {
         dishesBeingCooked = new ArrayList<>();
         dishesRejected = new ArrayList<>();
         dishesToBeCooked = new ArrayList<>();
