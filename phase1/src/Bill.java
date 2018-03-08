@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
 public class Bill {
-
+  /**
+   * Creates a bill from a given set of orders. This bill will be used for creating a full bill
+   * where one person pays.
+   *
+   * @param orders The dishes from the table.
+   */
   public static void outputBill(ArrayList<Dish> orders) {
 
     String billText = "";
@@ -15,6 +20,12 @@ public class Bill {
     System.out.println(billText);
   }
 
+  /**
+   * Creates a bill for one customer at a table.
+   *
+   * @param table The table the customer is seated at.
+   * @param customerNum The customer number.s
+   */
   public static void outputSingleBill(Table table, int customerNum) {
 
     String billText = "";
