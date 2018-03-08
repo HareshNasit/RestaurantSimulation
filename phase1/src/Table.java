@@ -62,7 +62,7 @@ public class Table {
   }
 
   /**
-   * Removes the served dish and reduces the number of dishes served by 1
+   * Removes the served dish
    *
    * @param dish to be removed from the list.
    */
