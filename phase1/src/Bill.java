@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-/**
- * Bill object prints to screen the total price of orders
- */
 public class Bill {
 
   /**
