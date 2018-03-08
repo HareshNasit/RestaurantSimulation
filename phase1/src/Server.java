@@ -14,11 +14,12 @@ public class Server implements IWorker, ServingTableListener {
   public Server(String name) {
     this.name = name;
   }
-
+    /** return name of the server.
+     *  @return String
+     */
   public String getName() {
     return name;
   }
-
   /**
    * The server takes the order from a table and adds it to the list of orders to be cooked
    *
@@ -30,7 +31,10 @@ public class Server implements IWorker, ServingTableListener {
     servingTable.addToBeCooked(table.getTableOrder());
     System.out.println(servingTable);
   }
-
+    /** Serves a dish to the customer.
+     *  @param index index of the dish.
+     *  @param restaurant the restaurant.
+     */
   public void serveDish(int index, Restaurant restaurant) {
     Dish dish = restaurant.getServingTable().serveDish(index);
     restaurant.getTable(dish.getTableName()).dishesServed();
@@ -39,7 +43,10 @@ public class Server implements IWorker, ServingTableListener {
     ));
     System.out.println(restaurant.getServingTable());
   }
-
+    /** The server informs the customer that a particular dish has been rejected.
+     *  @param index index of the dish.
+     *  @param restaurant the restaurant.
+     */
   public void rejectDish(int index, Restaurant restaurant) {
     Dish dish = restaurant.getServingTable().getRejectedDish(index);
     restaurant.getTable(dish.getTableName()).removeDish(dish);
@@ -47,7 +54,12 @@ public class Server implements IWorker, ServingTableListener {
         getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
   }
-
+    /** The customer returns a dish for a particular reason.
+     *  @param restaurant the restaurant.
+     *  @param index the index of the dish.
+     *  @param comment the reason the customer returned the dish.
+     *  @param tableID the table id.
+     */
   public void returnDish(int index, String tableID, Restaurant restaurant, String comment) {
     Dish dish = restaurant.getTable(tableID).getDish(index);
     dish.addComment(comment);
@@ -58,21 +70,25 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   /**
-   * Adds a dish to a table's Order
+   * Adds a dish to a table's Order.
+   * @param table table to which dish will be added.
+   * @param dish dish to be added to the tables order.
+   * @param servingTable the serving table.
    */
   public void addOrder(Table table, Dish dish, ServingTable servingTable) {
     System.out.println(String.format(
         "%s takes order from Table%sSeat%d: %s",
         getName(), dish.getTableName(), dish.getCustomerNum(), dish.getStringForBill()));
     table.addSingleOrder(dish);
-
   }
-
+    /** sets a table to be occupied.
+     *  @param tableID id of the table.
+     *  @param restaurant restaurant.
+     */
   public void seatCustomer(String tableID, Restaurant restaurant) {
     restaurant.getTable(tableID).setOccupied(true);
     System.out.println(String.format("%s seats Table %s", getName(), tableID));
   }
-
   /**
    * Generates a bill one table
    *
@@ -104,6 +120,7 @@ public class Server implements IWorker, ServingTableListener {
 
   /**
    * This method checks whether all the dishes the table ordered have been served or not.
+   * @return boolean
    */
   public boolean isOrderComplete(Table table) {
     return (table.getNumberOfDishesServed() == table.numberOfDishesInOrder());
@@ -112,7 +129,10 @@ public class Server implements IWorker, ServingTableListener {
   public void update(String message) {
     //Notify server on GUI
   }
-
+    /** Removes a dish from the given table
+     *  @param index of the dish in the list.
+     *  @param table the given table from which dish is removed.
+     */
   public void removeDish(int index, Table table) {
     Dish dish = table.removeDish(index);
     System.out.println(String.format("Cancelled %s from Table%s%d",
