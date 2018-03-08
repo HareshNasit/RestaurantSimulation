@@ -2,9 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-/**
- * Runs a simulation for the restaurant
- */
+/** Runs a simulation for the restaurant */
 public class RestaurantSimulation {
 
   public static void main(String[] args) {

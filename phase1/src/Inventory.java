@@ -16,9 +16,7 @@ public class Inventory {
   private InventoryListener manager;
   private HashMap<String, InventoryIngredient> inventory;
 
-  /**
-   * Constructs a new Inventory object
-   */
+  /** Constructs a new Inventory object */
   Inventory() {
     inventory = new HashMap<String, InventoryIngredient>();
   }
@@ -75,8 +73,8 @@ public class Inventory {
         String message =
             System.lineSeparator()
                 + String.format(
-                "%s is less than lower threshold: %d units",
-                ingredient, inventory.get(ingredient.trim()).getLowerThreshold())
+                    "%s is less than lower threshold: %d units",
+                    ingredient, inventory.get(ingredient.trim()).getLowerThreshold())
                 + System.lineSeparator()
                 + "manager has been notified, request.txt updated"
                 + System.lineSeparator();
@@ -125,9 +123,7 @@ public class Inventory {
     }
   }
 
-  /**
-   * Writes the list of ingredients that need to be requested in request.txt
-   */
+  /** Writes the list of ingredients that need to be requested in request.txt */
   private void getLowIngredients() {
     try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(REQUESTSFILE)))) {
       for (InventoryIngredient ingredient : inventory.values()) {
@@ -152,6 +148,7 @@ public class Inventory {
 
   /**
    * Returns the a string of the inventory which includes ingredient name and amount
+   *
    * @return string of inventory stock
    */
   @Override

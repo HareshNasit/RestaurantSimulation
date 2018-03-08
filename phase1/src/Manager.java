@@ -18,9 +18,7 @@ public class Manager implements IWorker, InventoryListener {
     return name;
   }
 
-  /**
-   * Calls a server or a cook to collect the received ingredients.
-   */
+  /** Calls a server or a cook to collect the received ingredients. */
   public IWorker callWorker(Restaurant restaurant, String name) {
     return restaurant.MapOfWorkers().get(name);
   }
@@ -31,16 +29,12 @@ public class Manager implements IWorker, InventoryListener {
     System.out.println(message);
   }
 
-  /**
-   * The server receives and adds ingredients to the inventory.
-   */
+  /** The server receives and adds ingredients to the inventory. */
   public void scanStock(Inventory inventory, String ingredient, int amount) {
     inventory.addStock(ingredient, amount);
   }
 
-  /**
-   * The Manager shuts the system and updates the inventory.txt file.
-   */
+  /** The Manager shuts the system and updates the inventory.txt file. */
   public void shutDown(Inventory inventory) {
     System.out.println("System Shutdown: Writing inventory to file");
     inventory.writeToInventory();

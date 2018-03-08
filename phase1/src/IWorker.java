@@ -1,6 +1,4 @@
-/**
- * Worker of the restaurant
- */
+/** Worker of the restaurant */
 public interface IWorker {
 
   /**
