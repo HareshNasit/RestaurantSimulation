@@ -1,10 +1,4 @@
 public interface IWorker {
-
-  /**
-   * Check if this IWorker is currently occupied or not
-   */
-  boolean isOccupied();
-
   /**
    * Records what ingredient is being added to the inventory and how many units are being added
    * @param inventory The stored ingredients in the restaurant

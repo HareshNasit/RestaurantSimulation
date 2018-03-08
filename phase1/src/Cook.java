@@ -3,12 +3,10 @@
  * the server if the dish can be prepared and prepares the dish.
  */
 public class Cook implements IWorker, ServingTableListener {
-    private boolean isOccupied; // Boolean for if the cook is working or vacant.
     private String name; // Name of the cook.
 
   public Cook(String name) {
         this.name = name;
-        this.isOccupied = false;
     }
     /**
      * Getter for the name of the cook.
@@ -17,13 +15,6 @@ public class Cook implements IWorker, ServingTableListener {
     public String getName() {
         return name;
     } // Name of the Cook.
-    /**
-     * Getter for isOccupied to see if this cook is vacant or busy.
-     * @return boolean.
-     */
-    public boolean isOccupied(){
-        return isOccupied;
-    }
     /**
      * Checks if the dish can be prepared and subtracts ingredients accordingly and returns a boolean and
      * adds it to the list of dishes being cooked currently.

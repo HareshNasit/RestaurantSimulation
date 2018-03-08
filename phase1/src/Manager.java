@@ -7,7 +7,6 @@ import java.util.HashMap;
  * is a shortage.
  */
 public class Manager implements IWorker, InventoryListener {
-  private boolean isOccupied;
   private String name;
   private String requestIngredients = "request.txt";
 
@@ -27,9 +26,6 @@ public class Manager implements IWorker, InventoryListener {
   public void notifyLowStock(String message) {
     //to be replaced with gui notification
     System.out.println(message);
-  }
-  public boolean isOccupied() {
-    return isOccupied;
   }
   /** The server receives and adds ingredients to the inventory. */
   public void scanStock(Inventory inventory, String ingredient, int amount) {
