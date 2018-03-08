@@ -7,8 +7,7 @@ import java.io.*;
 public class Manager implements IWorker, InventoryListener {
 
   private String name;
-  private String requestIngredients = "request.txt";
-  private String receivedShipments = "receivedShipments.txt";
+  private final String RECEIVEDFILE = "receivedShipments.txt";
 
   public Manager(String name) {
     this.name = name;
@@ -57,7 +56,7 @@ public class Manager implements IWorker, InventoryListener {
    * @param amount amount of ingredient that is received
    */
   public void confirmReceived(String ingredient, int amount) {
-    try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(receivedShipments)))) {
+    try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(RECEIVEDFILE)))) {
 
       String shipmentMessage = ingredient + ": " + amount;
       out.println(shipmentMessage);
