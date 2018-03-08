@@ -93,24 +93,6 @@ public class Restaurant {
     }
 
     /**
-     * Adds the worker to the list of workers.
-     *
-     * @param worker The worker.
-     */
-    public void addWorker(IWorker worker) {
-        workers.add(worker);
-    }
-
-    /**
-     * returns the list of workers.
-     *
-     * @return ArrayList of workers.
-     */
-    public ArrayList<IWorker> getWorkers() {
-        return workers;
-    }
-
-    /**
      * generates a new list of tables from fileName Format: TableID,tableSize
      */
     private void generateTables(String fileName) {
@@ -123,9 +105,8 @@ public class Restaurant {
             while (line.hasNextLine()) {
                 String tableLine = line.nextLine();
                 String tableID = tableLine.split(",")[0].trim();
-                int tableSize = Integer.valueOf(tableLine.split(",")[1]);
 
-                Table table = new Table(tableID, tableSize);
+              Table table = new Table(tableID);
                 tables.put(tableID, table);
             }
             line.close();

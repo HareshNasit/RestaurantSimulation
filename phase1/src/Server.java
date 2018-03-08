@@ -44,7 +44,6 @@ public class Server implements IWorker, ServingTableListener {
      */
     public void serveDish(int index, Restaurant restaurant) {
         Dish dish = restaurant.getServingTable().serveDish(index);
-        restaurant.getTable(dish.getTableName()).dishesServed();
         System.out.println(String.format("%s serving Table%s%d order: %s",
                 getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()
         ));
