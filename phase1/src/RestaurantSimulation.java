@@ -90,11 +90,11 @@ public class RestaurantSimulation {
     } else if (input[2].equals("bill")) {
       System.out
           .println(String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
-      if (input[4].equals("single")) {
+      if (input[4].equals("split")) {
         System.out.println(("Printing bill"));
-        server.generateSingleBill(restaurant.getTable(input[3]), 3);
+        server.generateSingleBill(restaurant.getTable(input[3]), Integer.valueOf(input[5]));
 
-      } else if (input[4].equals("split")) {
+      } else if (input[4].equals("single")) {
         System.out.println(("Printing split bill"));
         server.generateTableBill(restaurant.getTable(input[3]));
 
