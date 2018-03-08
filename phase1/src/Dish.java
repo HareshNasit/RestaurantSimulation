@@ -4,6 +4,11 @@ public class Dish extends MenuItem {
 
   private String tableName;
   private int customerNum;
+
+  public String getComment() {
+    return comment;
+  }
+
   private String comment;
 
   public Dish(MenuItem dish, String tableName, int customerNum) {

@@ -1,13 +1,6 @@
 Server|Akarsh|seatCustomer|A|3|
-Server|Akarsh|order|A|1|1.0|
-Server|Akarsh|order|A|1|1.0|
-Server|Akarsh|order|A|2|1.1|sausage,1 # lettuce,-1|
+Server|Akarsh|order|A|1|1|
 Server|Akarsh|passOrder|A|
-Cook|Harsh|accept|0|
-Cook|Harsh|accept|0|
-Cook|Harsh|serve|0|
-Cook|Harsh|serve|0|
-Server|Akarsh|serve|0|
-Server|Akarsh|serve|0|
-Server|Akarsh|bill|A|split|1|
-Manager|Adam|shutdown|
+Cook|Harsh|check|0|
+Cook|Harsh|reject|0|
+Server|Akarsh|reject|0|

@@ -72,9 +72,8 @@ public class Table {
    * Removes the served dish and reduces the number of dishes served by 1
    * @param dish to be removed from the list.
    */
-  public void removeServedDish(MenuItem dish) {
-    // NEEDS TO BE CHECKED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    numberOfDishesServed--;
+  public void removeDish(Dish dish) {
+    tableOrder.remove(dish);
   }
 
   public void setNumberOfDishesServed(int numberOfDishesServed) {
