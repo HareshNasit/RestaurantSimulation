@@ -54,7 +54,7 @@ public class RestaurantSimulation {
       int seatNum = Integer.parseInt(input[4]);
       Dish order = restaurant.getMenu().getDish(menuItemID, tableID, seatNum);
 
-      //Checks for the extras added or removed to order
+      // Checks for the extras added or removed to order
       try {
         String[] extras = input[6].split("#");
         for (String specifications : extras) {
@@ -68,7 +68,7 @@ public class RestaurantSimulation {
         }
 
       } catch (ArrayIndexOutOfBoundsException e) {
-        //If No Extras are added or removed
+        // If No Extras are added or removed
       }
 
       server.addOrder(restaurant.getTable(tableID), order);
@@ -90,8 +90,8 @@ public class RestaurantSimulation {
       server.returnDish(Integer.valueOf(input[4]), input[3], restaurant, input[5]);
 
     } else if (input[2].equals("bill")) {
-      System.out
-          .println(String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
+      System.out.println(
+          String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
       if (input[4].equals("split")) {
         System.out.println(("Printing bill"));
         server.generateSingleBill(restaurant.getTable(input[3]), Integer.valueOf(input[5]));
@@ -99,7 +99,6 @@ public class RestaurantSimulation {
       } else if (input[4].equals("single")) {
         System.out.println(("Printing split bill"));
         server.generateTableBill(restaurant.getTable(input[3]));
-
       }
 
     } else if (input[2].equals("clear")) {
@@ -111,7 +110,6 @@ public class RestaurantSimulation {
 
       Table table = restaurant.getTable(input[3]);
       server.removeDish(Integer.valueOf(input[4]), table);
-
     }
   }
 
@@ -121,8 +119,8 @@ public class RestaurantSimulation {
 
     if (input[2].equals("accept")) {
 
-      cook.acceptCook(Integer.valueOf(input[3]), restaurant.getServingTable(),
-          restaurant.getInventory());
+      cook.acceptCook(
+          Integer.valueOf(input[3]), restaurant.getServingTable(), restaurant.getInventory());
 
     } else if (input[2].equals("transfer")) {
 
@@ -140,29 +138,44 @@ public class RestaurantSimulation {
 
       Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
       if (!cook.canBePrepared(dish, restaurant.getInventory())) {
-        System.out.println(String.format("Table%s%d %s cannot be prepared", dish.getTableName(),
-            dish.getCustomerNum(), dish.getName()));
+        System.out.println(
+            String.format(
+                "Table%s%d %s cannot be prepared",
+                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
       } else {
-        System.out.println(String.format("Table%s%d %s can be prepared", dish.getTableName(),
-            dish.getCustomerNum(), dish.getName()));
+        System.out.println(
+            String.format(
+                "Table%s%d %s can be prepared",
+                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
       }
-
-
     }
   }
 
   private static void readManagerAction(String[] input, Restaurant restaurant) {
     Manager manager = restaurant.getManager();
-    if(input[2].equals("scan stock")){
-        System.out.println(String.format("Ingredient: %s scanned and amount: %s added to inventory", input[4],input[5]));
-        IWorker worker = manager.callWorker(restaurant,input[3]);
-        worker.scanStock(restaurant.getInventory(),input[4],Integer.valueOf(input[5]));
-      } else if(input[2].equals("shutdown")){
+    if (input[2].equals("scan stock")) {
+
+      System.out.println(
+          String.format(
+              "Ingredient: %s scanned and amount: %s added to inventory", input[4], input[5]));
+      IWorker worker = manager.callWorker(restaurant, input[3]);
+      worker.scanStock(restaurant.getInventory(), input[4], Integer.valueOf(input[5]));
+
+    } else if (input[2].equals("shutdown")) {
+
       manager.shutDown(restaurant.getInventory());
+
     } else if (input[2].equals("startup")) {
 
       System.out.println("Ingredients Registered from previous day");
       restaurant.getInventory().readInventory();
+
+    } else if (input[2].equals("receive")) {
+
+      manager.confirmReceived(input[3], Integer.valueOf(input[4]));
+      System.out.println(String.format("Shipment of %s has been received", input[3]));
+      System.out.println("Waiting to be scanned");
+
 
     }
   }
