@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Bill object prints to screen the total price of orders
+ */
 public class Bill {
+
   /**
    * Creates a bill from a given set of orders. This bill will be used for creating a full bill
    * where one person pays.
