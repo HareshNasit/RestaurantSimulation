@@ -8,7 +8,7 @@ public class Table {
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
 
   /**
-   * Creates a new table
+   * Creates a new table.
    *
    * @param tableName table identifier
    */
@@ -19,7 +19,7 @@ public class Table {
   }
 
   /**
-   * Check if this table is occupied
+   * Check if this table is occupied.
    *
    * @return if table is occupied
    */
@@ -27,15 +27,13 @@ public class Table {
     return isOccupied;
   }
 
-  /**
-   * set if the table is occupied or not
-   */
+  /** set if the table is occupied or not. */
   public void setOccupied(boolean occupied) {
     isOccupied = occupied;
   }
 
   /**
-   * Set the table order to this array of dishes
+   * Set the table order to this array of dishes.
    *
    * @param tableOrder set table order to this array of dishes
    */
@@ -44,7 +42,7 @@ public class Table {
   }
 
   /**
-   * Adds a single dish to array of orders
+   * Adds a single dish to array of orders.
    *
    * @param dish
    */
@@ -53,7 +51,7 @@ public class Table {
   }
 
   /**
-   * Returns the table order
+   * Returns the table order.
    *
    * @return the entire table order of dishes
    */
@@ -62,7 +60,7 @@ public class Table {
   }
 
   /**
-   * Removes the served dish
+   * Removes the served dish.
    *
    * @param dish to be removed from the list.
    */
@@ -71,7 +69,7 @@ public class Table {
   }
 
   /**
-   * Removes the served dish and reduces the number of dishes served by 1
+   * Removes the served dish and reduces the number of dishes served by 1.
    *
    * @param index to be removed from the list.
    */
@@ -79,7 +77,7 @@ public class Table {
     return tableOrder.remove(index);
   }
 
-  /** Returns the dishes ordered by a specifc customerNumber on this table */
+  /** Returns the dishes ordered by a specifc customerNumber on this table. */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
     ArrayList<Dish> customerDishes = new ArrayList<>();
     for (Dish dish : tableOrder) {
@@ -91,7 +89,7 @@ public class Table {
   }
 
   /**
-   * get dish from table's order
+   * get dish from table's order.
    *
    * @param index index of dish
    * @return dish at index
@@ -101,7 +99,7 @@ public class Table {
   }
 
   /**
-   * Get name id of table
+   * Get name id of table.
    *
    * @return string of table id
    */
@@ -109,9 +107,7 @@ public class Table {
     return this.tableName;
   }
 
-  /**
-   * Clear the table order and set isOccupied to false when customer leaves
-   */
+  /** Clear the table order and set isOccupied to false when customer leaves. */
   public void clearTable() {
     this.tableOrder = new ArrayList<Dish>();
     this.isOccupied = false;

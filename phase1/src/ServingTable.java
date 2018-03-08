@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 
-/**
- * A Serving Table is used between all chefs and servers. It depicts the state of the dish
- */
+/** A Serving Table is used between all chefs and servers. It depicts the state of the dish */
 public class ServingTable {
 
   private ArrayList<Dish> dishesRejected; // List of dishes being rejected
@@ -12,9 +10,7 @@ public class ServingTable {
   private ArrayList<ServingTableListener> servers; // List of all the servers.
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
 
-  /**
-   * Creates a new serving table
-   */
+  /** Creates a new serving table. */
   ServingTable() {
     dishesBeingCooked = new ArrayList<>();
     dishesRejected = new ArrayList<>();
@@ -43,7 +39,7 @@ public class ServingTable {
   }
 
   /**
-   * Removes and return the dish at index of rejected dishes list
+   * Removes and return the dish at index of rejected dishes list.
    *
    * @param index index of dish
    * @return dish
@@ -54,14 +50,14 @@ public class ServingTable {
   }
 
   /**
-   * Get the dish that needs to be cooked at index from the list of dishes that need to be cooked
+   * Get the dish that needs to be cooked at index from the list of dishes that need to be cooked.
    */
   public Dish getDishToBeCooked(int index) {
     return dishesToBeCooked.get(index);
   }
 
   /**
-   * Reject a dish at index of dishes that need to be cooked It is added to the list of rejected
+   * Reject a dish at index of dishes that need to be cooked It is added to the list of rejected.
    * dishes to be informed to the servers
    *
    * @param index - index of dish
@@ -86,7 +82,7 @@ public class ServingTable {
     System.out.println(this);
   }
 
-  /** Dish at index is moved from needing to be cooked to being cooked */
+  /** Dish at index is moved from needing to be cooked to being cooked. */
   public void addToBeCooking(int index) {
     Dish dish = dishesToBeCooked.remove(index);
     dishesBeingCooked.add(dish);
@@ -94,7 +90,7 @@ public class ServingTable {
 
   /**
    * Removes and returns dish at index on dishesToBeServed. Cooks are notified that the dish has
-   * been served
+   * been served.
    *
    * @param index index of dish on dishesToBeServed
    * @return dish at index of dishesToBeServed
@@ -109,7 +105,7 @@ public class ServingTable {
   }
 
   /**
-   * Adds the server as a ServingTableListener for this serving table
+   * Adds the server as a ServingTableListener for this serving table.
    *
    * @param server the server.
    */
@@ -127,7 +123,7 @@ public class ServingTable {
   }
 
   /**
-   * Notifies all servers with message
+   * Notifies all servers with message.
    *
    * @param message Message that needs to be passed to servers
    */
@@ -139,7 +135,7 @@ public class ServingTable {
   }
 
   /**
-   * Notifies all cooks with message
+   * Notifies all cooks with message.
    *
    * @param message Message that needs to be passed
    */
@@ -150,15 +146,14 @@ public class ServingTable {
     }
   }
 
-  /**
-   * prints the ServingTable information.
-   */
+  /** prints the ServingTable information. */
   @Override
   public String toString() {
-    String finalString = System.lineSeparator()
-        + "ServingTable: "
-        + System.lineSeparator()
-        + "Dishes to be cooked: ";
+    String finalString =
+        System.lineSeparator()
+            + "ServingTable: "
+            + System.lineSeparator()
+            + "Dishes to be cooked: ";
     for (Dish d : dishesToBeCooked) {
       finalString += d.getTableName() + d.getCustomerNum() + "|" + d.getId() + " # ";
     }

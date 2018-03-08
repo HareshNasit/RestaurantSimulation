@@ -53,15 +53,13 @@ public class Cook implements IWorker, ServingTableListener {
     return inventory.hasEnoughIngredients(dish.getIngredientAmounts());
   }
 
-  /**
-   * Notify the cook that dish has been served
-   */
+  /** Notify the cook that dish has been served. */
   public void update(String message) {
     // message notification on GUI
   }
 
   /**
-   * Cook accepts to cook the dish and removes ingredients
+   * Cook accepts to cook the dish and removes ingredients.
    *
    * @param index index of dish that needs to be cooked
    * @param servingTable serving table that needs to be changed
@@ -95,7 +93,7 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   /**
-   * Reject a dish that needs to be cooked
+   * Reject a dish that needs to be cooked.
    *
    * @param index index of dish at the list of dishes that need to be cooked
    * @param servingTable serving table of the restaurant
@@ -111,7 +109,7 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   /**
-   * Dish has been cooked and is placed in list of dishes that needs to be served
+   * Dish has been cooked and is placed in list of dishes that needs to be served.
    *
    * @param index index of dish that is currently cooking
    * @param servingTable serving table of restaurant

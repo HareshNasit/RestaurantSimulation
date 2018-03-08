@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-/**
- * This is the Restaurant class. This is where all the moving parts move around.
- */
+/** This is the Restaurant class. This is where all the moving parts move around. */
 public class Restaurant {
 
   private Inventory inventory; // The inventory of the restaurant.
@@ -86,7 +84,7 @@ public class Restaurant {
   /**
    * Returns a HashMap of workers name as the key and IWorker as value.
    *
-   * @return HashMap<String   ,   IWorker>
+   * @return HashMap<String , IWorker>
    */
   public HashMap<String, IWorker> MapOfWorkers() {
     HashMap<String, IWorker> workersMap = new HashMap<>();
@@ -96,9 +94,7 @@ public class Restaurant {
     return workersMap;
   }
 
-  /**
-   * generates a new list of tables from fileName Format: TableID,tableSize
-   */
+  /** generates a new list of tables from fileName Format: TableID,tableSize */
   private void generateTables(String fileName) {
 
     File file = new File(fileName);
@@ -181,9 +177,7 @@ public class Restaurant {
     return manager;
   }
 
-  /**
-   * Returns the serving table of the restaurant
-   */
+  /** Returns the serving table of the restaurant */
   public ServingTable getServingTable() {
     return servingTable;
   }
