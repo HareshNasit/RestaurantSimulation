@@ -16,14 +16,13 @@ public class Manager implements IWorker, InventoryListener {
     this.name = name;
     orders = new HashMap<>();
   }
-  /** Calls a server or a cook to collect the received ingredients. */
-  public IWorker callWorker(ArrayList<IWorker> workers) {
-    for (IWorker worker : workers) {
-      if (!worker.isOccupied()) {
-        return worker;
-      }
+    @Override
+    public String getName() {
+        return name;
     }
-    return this;
+    /** Calls a server or a cook to collect the received ingredients. */
+  public IWorker callWorker(Restaurant restaurant, String name) {
+      return restaurant.MapOfWorkers().get(name);
   }
 
   @Override
