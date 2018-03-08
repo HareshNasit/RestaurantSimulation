@@ -1,3 +1,4 @@
+Paste events and inventory in the respective text files to simulate scenarios
 
 Returning a dish:
 
@@ -52,6 +53,7 @@ Server|Akarsh|bill|A|single
 
 Manager calls a worker and he scans the ingredient and the amount
 
+Manager|Adam|receive|chocolate|1000
 Manager|Adam|scan stock|Harsh|chocolate|1000
 
 Mixed Events
