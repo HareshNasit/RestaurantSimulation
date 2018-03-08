@@ -12,11 +12,11 @@ public class Restaurant {
   private Inventory inventory; // The inventory of the restaurant.
   private Menu menu; // The menu of the restaurant.
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
-  private HashMap<String, Server> servers;
-  private HashMap<String, Cook> cooks;
-  private HashMap<String, Table> tables;
-  private Manager manager;
-  private ServingTable servingTable;
+  private HashMap<String, Server> servers; // HashMap of servers name and the server.
+  private HashMap<String, Cook> cooks; // HashMap of cooks name and the cook.
+  private HashMap<String, Table> tables; // HashMap of table name and the table.
+  private Manager manager; // The manager of the restaurant.
+  private ServingTable servingTable; // The serving table of this restaurant.
 
   public ServingTable getServingTable() {
     return servingTable;
@@ -30,23 +30,41 @@ public class Restaurant {
     this.servingTable = servingTable;
     this.generateWorkers("Workers.txt", this.servingTable);
   }
-
+    /**
+     * Returns a server with the given name.
+     * @param name of the server.
+     * @return Server.
+     */
   public Server getServer(String name) {
     return servers.get(name);
   }
-
+    /**
+     * Returns a cook with the given name.
+     * @param name of the cook.
+     * @return Cook.
+     */
   public Cook getCook(String name) {
     return cooks.get(name);
   }
-
+    /**
+     * Returns the table with the given id.
+     * @param id of the Table.
+     * @return Table.
+     */
   public Table getTable(String id) {
     return tables.get(id);
   }
-
+    /**
+     * Returns the menu.
+     * @return Menu.
+     */
   public Menu getMenu() {
     return menu;
   }
-
+    /**
+     * Returns the Inventory.
+     * @return Inventory.
+     */
   public Inventory getInventory() {
     return inventory;
   }
@@ -71,14 +89,14 @@ public class Restaurant {
 
   /**
    * returns the list of workers.
-   * @return workers.
+   * @return ArrayList of workers.
    */
   public  ArrayList<IWorker> getWorkers() {
     return workers;
   }
 
   /**
-   * Returns a new list of tables from fileName Format: TableID,tableSize
+   * generates a new list of tables from fileName Format: TableID,tableSize
    */
   private void generateTables(String fileName) {
 
@@ -146,11 +164,17 @@ public class Restaurant {
       e.printStackTrace();
     }
   }
-
+    /**
+     * Returns Manager with the given name.
+     * @param managerName name of the Manager.
+     */
   public void setManager(String managerName){
       this.manager = new Manager(managerName);
   }
-
+    /**
+     * Returns the manager.
+     * @return Manager.
+     */
   public Manager getManager() {
         return manager;
     }
