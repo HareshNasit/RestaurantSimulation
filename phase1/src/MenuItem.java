@@ -20,8 +20,11 @@ public class MenuItem {
         this.ingredients = ingredients;
     }
 
-
-    public Double getId(){
+    /**
+     * Returns the id of this menu item
+     * @return the id of the menu itema
+     */
+    public double getId(){
         return this.id;
     }
     /**
