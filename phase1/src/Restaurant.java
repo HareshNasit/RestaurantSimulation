@@ -163,7 +163,7 @@ public class Restaurant {
                 } else if (splitString[0].equals("Manager")) {
                     Manager manager = new Manager(splitString[1]);
                     this.workers.add(manager);
-                    inventory.setManger(manager);
+                    inventory.setManager(manager);
                     this.manager = manager;
 
                 } else if (splitString[0].equals("Cook")) {

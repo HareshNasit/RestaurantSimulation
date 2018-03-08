@@ -24,7 +24,7 @@ public class RestaurantSimulation {
    * @param fileName text file of events
    * @param restaurant restaurant where event is being called
    */
-  public void readEvents(String fileName, Restaurant restaurant) {
+  private void readEvents(String fileName, Restaurant restaurant) {
     File file = new File(fileName);
     try {
       Scanner events = new Scanner(file);
@@ -50,6 +50,7 @@ public class RestaurantSimulation {
 
   /**
    * Reads server actions from a given line input
+   *
    * @param input event line
    * @param restaurant restaurant
    */
@@ -57,11 +58,11 @@ public class RestaurantSimulation {
 
     Server server = restaurant.getServer(input[1]);
 
-    if (input[2].equals("seatCustomer")) { //seats the customer on table
+    if (input[2].equals("seatCustomer")) { // seats the customer on table
 
       server.seatCustomer(input[3], restaurant);
 
-    } else if (input[2].equals("order")) { //takes an order from table customer
+    } else if (input[2].equals("order")) { // takes an order from table customer
 
       Double menuItemID = Double.parseDouble(input[5]);
       String tableID = input[3];
@@ -87,23 +88,23 @@ public class RestaurantSimulation {
 
       server.addOrder(restaurant.getTable(tableID), order);
 
-    } else if (input[2].equals("passOrder")) { //passes the order of a table to serving table
+    } else if (input[2].equals("passOrder")) { // passes the order of a table to serving table
 
       server.passOrder(restaurant.getTable(input[3]), restaurant.getServingTable());
 
-    } else if (input[2].equals("serve")) { //serves a dish to their respective table
+    } else if (input[2].equals("serve")) { // serves a dish to their respective table
 
       server.serveDish(Integer.valueOf(input[3]), restaurant);
 
-    } else if (input[2].equals("reject")) { //reject a dish on behalf of cook
+    } else if (input[2].equals("reject")) { // reject a dish on behalf of cook
 
       server.rejectDish(Integer.valueOf(input[3]), restaurant);
 
-    } else if (input[2].equals("return")) { //return a dish on behalf of customer
+    } else if (input[2].equals("return")) { // return a dish on behalf of customer
 
       server.returnDish(Integer.valueOf(input[4]), input[3], restaurant, input[5]);
 
-    } else if (input[2].equals("bill")) { //generate a bill either split or single
+    } else if (input[2].equals("bill")) { // generate a bill either split or single
       System.out.println(
           String.format(System.lineSeparator() + "Table %s requested bill:", input[3]));
       if (input[4].equals("split")) {
@@ -115,12 +116,13 @@ public class RestaurantSimulation {
         server.generateTableBill(restaurant.getTable(input[3]));
       }
 
-    } else if (input[2].equals("clear")) { //clear all the order from a table to make it unoccupied.
+    } else if (input[2].equals(
+        "clear")) { // clear all the order from a table to make it unoccupied.
 
       Table table = restaurant.getTable(input[3]);
       server.clearTable(table);
 
-    } else if (input[2].equals("cancel")) { //cancels an order made by a customer
+    } else if (input[2].equals("cancel")) { // cancels an order made by a customer
 
       Table table = restaurant.getTable(input[3]);
       server.removeDish(Integer.valueOf(input[4]), table);
@@ -129,6 +131,7 @@ public class RestaurantSimulation {
 
   /**
    * reads cook events from a given input line
+   *
    * @param input input
    * @param restaurant restaurant
    */
@@ -172,6 +175,7 @@ public class RestaurantSimulation {
 
   /**
    * reads a manager input from input line
+   *
    * @param input line input
    * @param restaurant restaurant
    */
@@ -199,8 +203,6 @@ public class RestaurantSimulation {
       manager.confirmReceived(input[3], Integer.valueOf(input[4]));
       System.out.println(String.format("Shipment of %s has been received", input[3]));
       System.out.println("Waiting to be scanned");
-
-
     }
   }
 }

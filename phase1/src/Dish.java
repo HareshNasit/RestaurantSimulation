@@ -1,5 +1,8 @@
 import java.util.HashMap;
 
+/**
+ * A dish inherits the properties of a menuitem but is tailored to a table
+ */
 public class Dish extends MenuItem {
 
   private String tableName;
