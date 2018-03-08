@@ -49,9 +49,11 @@ public class Inventory {
     for (String ingredient : dishIngredients.keySet()) {
 
       if (!inventory.containsKey(ingredient.trim())) {
+        System.out.println("Not Available: " + ingredient);
         return false;
       } else if (inventory.get(ingredient.trim()).getCurrentQuantity() < dishIngredients
           .get(ingredient)) {
+        System.out.println("Not Enough: " + ingredient);
         return false;
       }
     }
