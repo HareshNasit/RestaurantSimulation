@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class Server implements IWorker, ServingTableListener {
 
   private String name; // name of a server
-  private boolean isOccupied; // whether the server is currently serving a table or not
-
   /**
    * Creates a new server for this restaurant
    *
@@ -110,15 +108,6 @@ public class Server implements IWorker, ServingTableListener {
   public boolean isOrderComplete(Table table) {
     return (table.getNumberOfDishesServed() == table.numberOfDishesInOrder());
   }
-
-  public boolean isOccupied() {
-    return isOccupied;
-  }
-
-  public void setOccupied(boolean occupied) {
-    isOccupied = occupied;
-  }
-
   @Override
   public void update(String message) {
     //Notify server on GUI
