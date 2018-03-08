@@ -106,6 +106,11 @@ public class RestaurantSimulation {
       Table table = restaurant.getTable(input[3]);
       server.clearTable(table);
 
+    } else if (input[2].equals("cancel")) {
+
+      Table table = restaurant.getTable(input[3]);
+      server.removeDish(Integer.valueOf(input[4]), table);
+
     }
   }
 
@@ -154,7 +159,7 @@ public class RestaurantSimulation {
       } else if(input[2].equals("shutdown")){
       manager.shutDown(restaurant.getInventory());
     } else if (input[2].equals("startup")) {
-      
+
       System.out.println("Ingredients Registered from previous day");
       restaurant.getInventory().readInventory();
 

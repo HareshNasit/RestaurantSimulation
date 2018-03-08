@@ -123,4 +123,10 @@ public class Server implements IWorker, ServingTableListener {
   public void update(String message) {
     //Notify server on GUI
   }
+
+  public void removeDish(int index, Table table) {
+    Dish dish = table.removeDish(index);
+    System.out.println(String.format("Cancelled %s from Table%s%d",
+        dish.getName(), dish.getTableName(), dish.getCustomerNum()));
+  }
 }
