@@ -17,6 +17,7 @@ public class TestSuite extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
     TableScreen tb = new TableScreen();
+
     tb.displayScreen();
 
   }

@@ -1,13 +1,22 @@
 package TableScreen;
-import com.sun.tools.javac.util.Name.Table;
+
+import Restaurant.Table;
+import java.util.ArrayList;
+import java.util.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import java.util.ArrayList;
-import java.util.Map;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -15,25 +24,39 @@ import javafx.stage.Stage;
 
 public class TableScreen implements EventHandler<ActionEvent> {
 
-  public Button button;
   public VBox vBox;
-  Map<String, Object> fxmlNamespace; //Map of All UI components in this fxml
+  public TableView tableView; //Table of tables
+  public Button tableButton; //Button that will open the Table's menu
+  public Button servingTableButton; // Button that will open the ServingTableMenu
+  public Button managerButton; //Button that will call the manager
+  public TableColumn tableStatusColumn;
+  public TableColumn occupiedTableColumn;
+  public TableColumn tableIDColumn;
   FXMLLoader loader; //Loader of the fxml
-  ArrayList<Table> tables;
+  private ArrayList<Table> tables;
 
   //Controllers need to be public
   public TableScreen(){
 
     try {
-      this.tables = tables;
       loader = new FXMLLoader(getClass().getResource("TableScreen.fxml"));
-      this.fxmlNamespace = loader.getNamespace();
-
+      ObservableList<Table> test = FXCollections.observableArrayList();
+      test.add(new Table("A"));
+      tableView.setItems(test);
     } catch (Exception e){
 
 
     }
   }
+
+  public ArrayList<Table> getTables() {
+    return tables;
+  }
+
+  public void setTables(ArrayList<Table> tables) {
+    this.tables = tables;
+  }
+
 
   public void displayScreen() throws Exception{
     Stage window = new Stage();
