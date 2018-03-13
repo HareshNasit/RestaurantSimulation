@@ -74,5 +74,9 @@ public class Controller implements EventHandler<ActionEvent> {
 
     }
 
+    public void addButtFunction(){
+        System.out.println("hey");
+    }
+
 
 }

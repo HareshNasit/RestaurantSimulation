@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ComplementScreen.Controller">
+<GridPane fx:id="" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ComplementScreen.Controller">
   <children>
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -16,13 +16,13 @@
           </content>
         </ScrollPane>
         <Button fx:id="accept" layoutX="379.0" layoutY="60.0" mnemonicParsing="false" text="Accept" />
-        <Button id="add" fx:id="addition" layoutX="380.0" layoutY="139.0" mnemonicParsing="false" prefHeight="56.951171875" text="Add">
+        <Button id="add" fx:id="addition" layoutX="380.0" layoutY="139.0" mnemonicParsing="false" onAction="#addButtFunction" prefHeight="56.951171875" text="Add">
           <font>
             <Font size="20.0" fx:id="x1" />
           </font>
         </Button>
         <Button fx:id="cancel" layoutX="380.0" layoutY="100.0" mnemonicParsing="false" text="Cancel" />
-        <Button fx:id="subtract" font="$x1" layoutX="379.0" layoutY="212.0" mnemonicParsing="false" prefHeight="56.951171875" prefWidth="70.0" text="Sub" />
+        <Button fx:id="subtract" font="$x1" layoutX="379.0" layoutY="212.0" mnemonicParsing="false" onAction="#addButtFunction" prefHeight="56.951171875" prefWidth="70.0" text="Sub" />
         <TextArea layoutX="379.0" layoutY="287.0" prefHeight="176.0" prefWidth="85.0" text="+3 Mayo&#10;-2 Pickle&#10;&#10;" wrapText="true" />
       </children>
     </Pane>
