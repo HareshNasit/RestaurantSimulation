@@ -5,17 +5,17 @@ import java.util.ArrayList;
 /** The table is where the customers sit and order food and also where their cooked food arrives. */
 public class Table {
 
-  private String tableName; // the id number of the table
+  private String tableID; // the id number of the table
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
 
   /**
    * Creates a new table.
    *
-   * @param tableName table identifier
+   * @param tableID table identifier
    */
-  public Table(String tableName) {
-    this.tableName = tableName;
+  public Table(String tableID) {
+    this.tableID = tableID;
     this.isOccupied = false;
     this.tableOrder = new ArrayList<Dish>();
   }
@@ -105,8 +105,8 @@ public class Table {
    *
    * @return string of table id
    */
-  public String getTableName() {
-    return this.tableName;
+  public String getTableID() {
+    return this.tableID;
   }
 
   /** Clear the table order and set isOccupied to false when customer leaves. */

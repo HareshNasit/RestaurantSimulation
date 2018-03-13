@@ -32,7 +32,7 @@ public class Bill {
   public static void outputSingleBill(Table table, int customerNum) {
 
     String billText = "";
-    billText += "Table: " + table.getTableName() + ", ";
+    billText += "Table: " + table.getTableID() + ", ";
     billText += "CustomerNumber: " + customerNum + ", ";
     double subtotal = 0;
     for (Dish order : table.getCustomerOrder(customerNum)) {
