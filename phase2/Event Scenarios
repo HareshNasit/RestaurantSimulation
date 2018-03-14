@@ -1,0 +1,145 @@
+Paste events and inventory in the respective text files to simulate scenarios
+
+Returning a dish:
+
+Server|Akarsh|seatCustomer|A|3|
+Server|Akarsh|order|A|1|9|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|return|A|0|too hot
+Cook|Harsh|transfer|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|single
+
+Rejecting a dish:
+
+Server|Akarsh|seatCustomer|A|3|
+Server|Akarsh|order|A|1|1|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|reject|0|
+Server|Akarsh|reject|0|
+Server|Akarsh|bill|A|single
+
+Compliments:
+
+Server|Akarsh|seatCustomer|A|3|
+Server|Akarsh|order|A|1|1.1|sausage,1#lettuce,-1
+Server|Akarsh|order|A|2|1.1|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|check|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|single
+
+Notifying manager that ingredient is below threshhold
+
+Server|Akarsh|seatCustomer|A|3|
+Server|Akarsh|order|A|1|8|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|single
+
+Manager calls a worker and he scans the ingredient and the amount
+
+Manager|Adam|receive|chocolate|1000
+Manager|Adam|scan stock|Harsh|chocolate|1000
+
+Mixed Events
+
+Manager|Adam|startup
+Server|Akarsh|seatCustomer|A|2|
+Server|Akarsh|order|A|1|1.1|sausage,1#lettuce,-1
+Server|Akarsh|order|A|2|1.1|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|check|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|accept|0|
+Server|Yosef|seatCustomer|B|1|
+Server|Yosef|order|B|1|8|
+Server|Yosef|passOrder|B|
+Server|Yosef|seatCustomer|C|1|
+Server|Yosef|order|C|1|9|
+Server|Yosef|passOrder|C|
+Cook|Harsh|check|0|
+Cook|Harsh|check|1|
+Cook|John|accept|0|
+Cook|John|accept|0|
+Cook|John|serve|2|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|B|single
+Cook|Harsh|serve|0|
+Cook|Harsh|serve|1|
+Server|Akarsh|serve|0|
+Server|Yosef|serve|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|split|1|
+Server|Akarsh|bill|A|split|2|
+Server|Akarsh|clear|A|
+Server|Akarsh|clear|B|
+Server|Akarsh|return|C|0|Too Hot
+Cook|Harsh|transfer|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|C|single
+Server|Akarsh|seatCustomer|A|1|
+Server|Akarsh|order|A|1|5|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|reject|0|
+Server|Akarsh|reject|0|
+Server|Akarsh|order|A|1|1|
+Server|Akarsh|passOrder|A|
+Cook|Harsh|check|0|
+Cook|Harsh|accept|0|
+Cook|Harsh|serve|0|
+Server|Akarsh|serve|0|
+Server|Akarsh|bill|A|single
+Manager|Adam|scan stock|Harsh|chocolate|1000
+Manager|Adam|shutdown|
+
+inventory:
+tuna#100#70#30
+chicken#200#150#50
+cabbage#50#30#20
+spaghetti#500#300#200
+mint sauce#200#100#100
+beef#100#70#30
+sausage#100#50#50
+tomato#150#100#50
+pork#100#70#30
+coriander sauce#200#100#100
+meat patty#100#80#20
+cheese#200#150#50
+tamarind sauce#200#100#100
+flour#200#150#50
+bell pepper(red)#100#70#30
+veg patty#100#80#20
+potato#200#130#70
+pizza base#0#50#20
+garlic#150#125#25
+bread#200#150#50
+salmon#100#70#30
+milk#300#200#100
+strawberry#100#50#50
+pepperoni#100#70#30
+falafel balls#200#100#50
+lettuce#120#90#30
+water#500#400#100
+bell pepper(green)#100#70#30
+bun#148#150#50
+tortilla wraps#100#80#20
+chocolate#52#50#50
