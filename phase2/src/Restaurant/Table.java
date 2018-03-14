@@ -6,6 +6,11 @@ import java.util.ArrayList;
 public class Table {
 
   private String tableID; // the id number of the table
+
+  public boolean getIsOccupied() {
+    return isOccupied;
+  }
+
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
 
