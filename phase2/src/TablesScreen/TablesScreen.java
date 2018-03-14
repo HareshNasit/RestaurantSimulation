@@ -28,7 +28,7 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
   public TableColumn tableStatusColumn;
   public TableColumn occupiedTableColumn;
   public TableColumn tableIDColumn;
-  public HBox hBox;
+  public HBox hBox; //The container that contains all of this
   private ArrayList<Table> tables;
 
   /**
@@ -41,17 +41,26 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
     tableView.setItems(getTable());
   }
 
+  /**
+   * Opens the selected restaurant table's menu from the TablesScreen tables
+   */
   public void openTableMenu(){
-    System.out.println("Open Table (TableID) Menu.......");
-    //get selected table option
-    //pass table to other window
-    //open other window
+    Table table = tableView.getSelectionModel().getSelectedItem();
+    System.out.println(String.format("Open Table (%s) Menu.......", table.getTableID()));
+    //Pass this table to the new window that needs to pop up
+
   }
 
+  /**
+   * Opens the serving table for the server to see
+   */
   public void openServingTable(){
     System.out.println("Loading Serving Table.....");
   }
 
+  /**
+   * Calls the manager for special events
+   */
   public void callManager(){
     System.out.println("Calling Manager......");
   }
