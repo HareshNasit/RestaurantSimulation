@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,14 +22,22 @@ import javafx.scene.layout.HBox;
  */
 public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
 
-  public TableView<Table> tableView; //Table of tables
-  public Button tableButton; //Button that will open the Table's menu
-  public Button servingTableButton; // Button that will open the ServingTableMenu
-  public Button managerButton; //Button that will call the manager
-  public TableColumn tableStatusColumn;
-  public TableColumn occupiedTableColumn;
-  public TableColumn tableIDColumn;
-  public HBox hBox; //The container that contains all of this
+  @FXML
+  private TableView<Table> tableView; //Table of tables
+  @FXML
+  private Button tableButton; //Button that will open the Table's menu
+  @FXML
+  private Button servingTableButton; // Button that will open the ServingTableMenu
+  @FXML
+  private Button managerButton; //Button that will call the manager
+  @FXML
+  private TableColumn tableStatusColumn;
+  @FXML
+  private TableColumn occupiedTableColumn;
+  @FXML
+  private TableColumn tableIDColumn;
+  @FXML
+  private HBox hBox; //The container that contains all of this
   private ArrayList<Table> tables;
 
   /**
@@ -38,17 +47,22 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
    */
   public void setTables(ArrayList tables) {
     this.tables = tables;
-    tableView.setItems(getTable());
+    getTableView().setItems(getTable());
   }
 
   /**
    * Opens the selected restaurant table's menu from the TablesScreen tables
    */
   public void openTableMenu(){
-    Table table = tableView.getSelectionModel().getSelectedItem();
-    System.out.println(String.format("Open Table (%s) Menu.......", table.getTableID()));
-    //Pass this table to the new window that needs to pop up
 
+    try {
+      Table table = getTableView().getSelectionModel().getSelectedItem();
+      System.out.println(String.format("Open Table (%s) Menu.......", table.getTableID()));
+    } catch (NullPointerException e){
+      System.out.println("Select a table bro");
+
+    }
+    
   }
 
   /**
@@ -70,9 +84,9 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    tableIDColumn.setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
-    occupiedTableColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
-    System.out.println(tableView);
+    getTableIDColumn().setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
+    getOccupiedTableColumn().setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
+    System.out.println(getTableView());
   }
 
   /**
@@ -82,7 +96,7 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
    */
   private ObservableList<Table> getTable() {
     ObservableList<Table> people = FXCollections.observableArrayList();
-    people.addAll(tables);
+    people.addAll(getTables());
     return people;
   }
 
@@ -91,5 +105,73 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
     if (((Button) event.getSource()).getText().equals("memes")) {
       System.out.println("more memes");
     }
+  }
+
+  public TableView<Table> getTableView() {
+    return tableView;
+  }
+
+  public void setTableView(TableView<Table> tableView) {
+    this.tableView = tableView;
+  }
+
+  public HBox gethBox() {
+    return hBox;
+  }
+
+  public void sethBox(HBox hBox) {
+    this.hBox = hBox;
+  }
+
+  public ArrayList<Table> getTables() {
+    return tables;
+  }
+
+  public Button getTableButton() {
+    return tableButton;
+  }
+
+  public void setTableButton(Button tableButton) {
+    this.tableButton = tableButton;
+  }
+
+  public Button getServingTableButton() {
+    return servingTableButton;
+  }
+
+  public void setServingTableButton(Button servingTableButton) {
+    this.servingTableButton = servingTableButton;
+  }
+
+  public Button getManagerButton() {
+    return managerButton;
+  }
+
+  public void setManagerButton(Button managerButton) {
+    this.managerButton = managerButton;
+  }
+
+  public TableColumn getTableStatusColumn() {
+    return tableStatusColumn;
+  }
+
+  public void setTableStatusColumn(TableColumn tableStatusColumn) {
+    this.tableStatusColumn = tableStatusColumn;
+  }
+
+  public TableColumn getOccupiedTableColumn() {
+    return occupiedTableColumn;
+  }
+
+  public void setOccupiedTableColumn(TableColumn occupiedTableColumn) {
+    this.occupiedTableColumn = occupiedTableColumn;
+  }
+
+  public TableColumn getTableIDColumn() {
+    return tableIDColumn;
+  }
+
+  public void setTableIDColumn(TableColumn tableIDColumn) {
+    this.tableIDColumn = tableIDColumn;
   }
 }
