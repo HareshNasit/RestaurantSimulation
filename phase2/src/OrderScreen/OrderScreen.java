@@ -1,8 +1,10 @@
 package OrderScreen;
 
-import java.awt.*;
+import javafx.scene.control.Label;
+
+
 
 public class OrderScreen {
-   public Label tableOrderLabel;
 
+    public Label tableOrderTitle;
 }
