@@ -10,20 +10,22 @@
   <children>
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <ScrollPane fx:id="scrollWindow" layoutX="23.0" layoutY="51.0" prefHeight="430.0" prefWidth="316.0">
-          <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="401.0" prefWidth="316.0" />
-          </content>
-        </ScrollPane>
         <Button fx:id="accept" layoutX="353.0" layoutY="60.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Accept" />
-        <Button id="add" fx:id="addition" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Add">
+        <Button id="add" fx:id="addition" disable="false" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Add">
           <font>
             <Font size="20.0" fx:id="x1" />
           </font>
         </Button>
         <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Cancel" />
         <Button fx:id="subtract" font="$x1" layoutX="353.0" layoutY="165.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Sub" />
-        <TextArea editable="false" layoutX="353.0" layoutY="271.0" prefWidth="118.0" wrapText="true" />
+        <TextArea editable="false" layoutX="353.0" layoutY="271.0" prefHeight="169.0" prefWidth="117.99990000000253" wrapText="true" />
+        <TableView fx:id="tableView" layoutX="46.0" layoutY="60.0" prefHeight="421.0" prefWidth="270.0">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Ingredient" fx:id="ingredientColumn" />
+            <TableColumn prefWidth="75.0" text="Amount" fx:id="amountColumn" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="92.0" text="Amount Left" fx:id="amountLeftColumn" />
+          </columns>
+        </TableView>
       </children>
     </Pane>
   </children>
