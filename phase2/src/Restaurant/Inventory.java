@@ -19,7 +19,7 @@ public class Inventory {
   private HashMap<String, InventoryIngredient> inventory;
 
   /** Constructs a new Inventory object */
-  Inventory() {
+  public Inventory() {
     inventory = new HashMap<String, InventoryIngredient>();
   }
 
@@ -58,6 +58,11 @@ public class Inventory {
     }
     return true;
   }
+
+  public InventoryIngredient getInventoryIngredient(String ingredient){
+      return this.inventory.get(ingredient);
+  }
+
 
   /**
    * Reduces the current stock of String ingredient by int amount if available

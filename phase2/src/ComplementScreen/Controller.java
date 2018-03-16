@@ -1,10 +1,9 @@
 package ComplementScreen;
 
-import Restaurant.Dish;
-import Restaurant.DishIngredient;
-import Restaurant.Menu;
-import Restaurant.Table;
+import Restaurant.*;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,9 +23,7 @@ import javafx.stage.Stage;
 
 import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements EventHandler<ActionEvent>, Initializable {
 
@@ -39,6 +36,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public TableColumn ingredientColumn;
     public TableColumn amountColumn;
     public TableColumn amountLeftColumn;
+    public Inventory inventory;
 
     private HashMap<String, DishIngredient> ingredients;
     FXMLLoader loader;
@@ -119,8 +117,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         getIngredientColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
         getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
-        getAmountLeftColumn().setCellValueFactory(new PropertyValueFactory<Table, Integer>(""));
-
+        getAmountLeftColumn().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
     }
 
     /**
@@ -130,6 +127,42 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
      */
     public void setIngredients() {
         getTableView().setItems(getDishIngredient());
+
+    }
+
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
+    }
+
+    /**
+     *
+     *
+     *
+     */
+
+    public void setBoth(){
+        ObservableList<Object> ingredients = FXCollections.observableArrayList();
+        ingredients.addAll(getInventoryIngredient());
+        ingredients.addAll(getDishIngredient());
+        getTableView().setItems(ingredients);
+    }
+    public void setInventoryIngredients(){
+        getTableView().setItems(getInventoryIngredient());
+    }
+
+
+    public ObservableList<InventoryIngredient> getInventoryIngredient(){
+        ObservableList<InventoryIngredient> inventoryIngredients = FXCollections.observableArrayList();
+        inventoryIngredients.addAll(getInventoryIngredients());
+        return inventoryIngredients;
+    }
+
+    public ArrayList<InventoryIngredient> getInventoryIngredients(){
+        ArrayList<InventoryIngredient> ingredients = new ArrayList<>();
+        for(String key: this.ingredients.keySet()){
+            ingredients.add(this.inventory.getInventoryIngredient(key));
+        }
+        return ingredients;
     }
 
     /**
