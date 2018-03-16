@@ -10,20 +10,20 @@
   <children>
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <ScrollPane fx:id="scrollWindow" layoutX="47.0" layoutY="51.0" prefHeight="400.0" prefWidth="316.0">
+        <ScrollPane fx:id="scrollWindow" layoutX="23.0" layoutY="51.0" prefHeight="430.0" prefWidth="316.0">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="401.0" prefWidth="316.0" />
           </content>
         </ScrollPane>
-        <Button fx:id="accept" layoutX="379.0" layoutY="60.0" mnemonicParsing="false" onAction="#handle" text="Accept" />
-        <Button id="add" fx:id="addition" layoutX="380.0" layoutY="139.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" text="Add">
+        <Button fx:id="accept" layoutX="353.0" layoutY="60.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Accept" />
+        <Button id="add" fx:id="addition" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Add">
           <font>
             <Font size="20.0" fx:id="x1" />
           </font>
         </Button>
-        <Button fx:id="cancel" layoutX="380.0" layoutY="100.0" mnemonicParsing="false" onAction="#handle" text="Cancel" />
-        <Button fx:id="subtract" font="$x1" layoutX="379.0" layoutY="212.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="70.0" text="Sub" />
-        <TextArea layoutX="379.0" layoutY="287.0" prefHeight="176.0" prefWidth="85.0" text="+3 Mayo&#10;-2 Pickle&#10;&#10;" wrapText="true" />
+        <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Cancel" />
+        <Button fx:id="subtract" font="$x1" layoutX="353.0" layoutY="165.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Sub" />
+        <TextArea editable="false" layoutX="353.0" layoutY="271.0" prefWidth="118.0" wrapText="true" />
       </children>
     </Pane>
   </children>

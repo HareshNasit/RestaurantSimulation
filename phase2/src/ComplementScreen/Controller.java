@@ -30,8 +30,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public Button addition;
     public Button accept;
     public Button subtract;
-    public Menu menu = new Menu();
-    public Dish dish = menu.getDish(1.1, "A", 2);
+    public Dish dish;
     public ScrollPane scrollWindow;
     private HashMap<String, DishIngredient> ingredients;
     FXMLLoader loader;
@@ -39,23 +38,40 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
 
     @Override
     public void handle(ActionEvent event) {
+
         if ((event.getSource()) == addition) {
             this.dish.getIngredients().containsKey(this.selectedIngredient);
             if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
                 this.dish.addIngredient(selectedIngredient, 1);
             }
             System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
-        } else if (((Button) event.getSource()).getId().equals("subtract")) {
+        } else if ((event.getSource()) == subtract) {
             if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
                 this.dish.subtractIngredient(selectedIngredient, 1);
             }
             System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
-        } else if (((Button) event.getSource()).getId().equals("accept")) {
+        } else if ((event.getSource()) == accept) {
 
             System.out.println(this.selectedIngredient);
-        } else if (((Button) event.getSource()).getId().equals("cancel")) {
+        } else if ((event.getSource()) == cancel) {
 
         }
+
+        if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
+            addition.setDisable(false);
+            System.out.println("enabled bro add");
+        } else {
+            addition.setDisable(true);
+            System.out.println("disabled bro add");
+        }
+        if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
+            subtract.setDisable(false);
+            System.out.println("enabled bro subtract");
+        } else {
+            System.out.println("disabled bro subtract");
+            subtract.setDisable(true);
+        }
+
     }
 
     public void addUserData(Dish dish) {
