@@ -27,6 +27,7 @@ public class ComplementTestSuite extends Application {
 
         controller.setDish(dish);
         controller.setSelectedIngredient("sausage");
+        controller.setIngredients();
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Table Screen");
