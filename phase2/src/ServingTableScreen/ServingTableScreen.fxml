@@ -6,33 +6,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TableView layoutX="14.0" layoutY="100.0" prefHeight="200.0" prefWidth="142.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Table" />
-          <TableColumn prefWidth="75.0" text="Dish" />
-        </columns>
-      </TableView>
-      <TableView layoutX="203.0" layoutY="100.0" prefHeight="200.0" prefWidth="142.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Table" />
-          <TableColumn prefWidth="75.0" text="Dish" />
-        </columns>
-      </TableView>
-      <TableView layoutX="409.0" layoutY="100.0" prefHeight="200.0" prefWidth="154.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Table" />
-          <TableColumn prefWidth="75.0" text="Dish" />
-        </columns>
-      </TableView>
-      <ScrollBar layoutX="156.0" layoutY="98.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="17.0" />
-      <ScrollBar layoutX="345.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="17.0" />
-      <ScrollBar layoutX="563.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="17.0" />
-      <Label layoutX="31.0" layoutY="81.0" prefHeight="17.0" prefWidth="135.0" text="Dishes to be Cooked" textFill="#e80909" />
-      <Label layoutX="220.0" layoutY="81.0" prefHeight="17.0" prefWidth="135.0" text="Dishes being Cooked" textFill="#e81111" />
-      <Label layoutX="426.0" layoutY="81.0" prefHeight="17.0" prefWidth="127.0" text="Dishes to be Served" textFill="#f20c0c" />
-      <Label layoutX="274.0" prefHeight="41.0" prefWidth="60.0" text="Dish Log" textFill="#ee0a0a" />
-   </children>
-</Pane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab text="Dishes to be Cooked">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="85.0" layoutY="45.0" prefHeight="321.0" prefWidth="160.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Table" />
+                      <TableColumn prefWidth="75.0" text="Dish" />
+                    </columns>
+                  </TableView>
+                  <Pane layoutX="302.0" layoutY="1.0" prefHeight="365.0" prefWidth="310.0" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Dishes being Cooked">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TabPane layoutX="265.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Dishes to be Served">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
