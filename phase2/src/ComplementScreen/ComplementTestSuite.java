@@ -1,12 +1,14 @@
 package ComplementScreen;
 
 import Restaurant.Dish;
+import Restaurant.DishIngredient;
 import Restaurant.Inventory;
 import Restaurant.Menu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableRow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -32,6 +34,9 @@ public class ComplementTestSuite extends Application {
         controller.setDish(dish);
         controller.setInventory(inventory);
         controller.setIngredients();
+
+
+
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Complement Screen");

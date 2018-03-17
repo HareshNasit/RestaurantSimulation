@@ -19,7 +19,7 @@
         <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Cancel" />
         <Button fx:id="subtract" font="$x1" layoutX="353.0" layoutY="165.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Sub" />
         <TextArea editable="false" layoutX="353.0" layoutY="271.0" prefHeight="169.0" prefWidth="117.99990000000253" wrapText="true" />
-        <TableView fx:id="tableView" layoutX="46.0" layoutY="60.0" onMouseClicked="#updateButtonAddSubDisabled" prefHeight="421.0" prefWidth="270.0">
+        <TableView fx:id="tableView" layoutX="46.0" layoutY="60.0" onMouseClicked="#setRowAction" prefHeight="421.0" prefWidth="270.0">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Ingredient" fx:id="ingredientColumn" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="166.0" text="Amount" fx:id="amountColumn" />

@@ -12,12 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -50,6 +48,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         getIngredientColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
         getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
         this.selectedIngredient = "";
+        this.setRowAction();
     }
 
 
@@ -76,7 +75,6 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     }
 
 
-
     public void addAndSubtractEvent(ActionEvent event) {
 
         if ((event.getSource()) == addition) {
@@ -92,7 +90,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         System.out.println(this.dish);
     }
 
-    public void updateSelectedIngredient(){
+    public void updateSelectedIngredient() {
         DishIngredient ingredient = (DishIngredient) getTableView().getSelectionModel().getSelectedItem();
         this.selectedIngredient = ingredient.getName();
     }
@@ -111,6 +109,22 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
             }
         }
     }
+
+    public void setRowAction() {
+        getTableView().setRowFactory(tv -> {
+            TableRow<DishIngredient> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (! row.isEmpty()) {
+                    DishIngredient rowData = row.getItem();
+                    System.out.println("Double click on: "+rowData.getName());
+                    updateSelectedIngredient();
+                    updateButtonAddSubDisabled();
+                }
+            });
+            return row ;
+        });
+    }
+
 
     public void closeWindow(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
@@ -199,7 +213,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         return inventoryIngredients;
     }
 
-    public void update(){
+    public void update() {
 
     }
 
