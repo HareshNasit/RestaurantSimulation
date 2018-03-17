@@ -4,10 +4,12 @@ import Restaurant.Restaurant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Restaurant.Dish;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,7 +21,11 @@ public class ServingScreen implements Initializable {
     public TableView cookTable;
     public TableColumn TableCol;
     public TableColumn DishCol;
+    public Button check;
+    public Button accept;
+    public Button reject;
     private ObservableList<Dish> dishes;
+    private Dish dishSelected;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
         this.DishCol.getTableView().setItems(getDishes(Dishes));
@@ -45,5 +51,9 @@ public class ServingScreen implements Initializable {
 
     public TableView getCookTable() {
         return cookTable;
+    }
+
+    public void rowSelected(MouseEvent mouseEvent) {
+        this.dishSelected = (Dish) cookTable.getSelectionModel().getSelectedItem();
     }
 }

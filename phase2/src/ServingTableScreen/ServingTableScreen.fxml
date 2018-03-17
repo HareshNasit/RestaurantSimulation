@@ -6,19 +6,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="ServingTableScreen.ServingScreen">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServingTableScreen.ServingScreen">
   <tabs>
     <Tab text="Dishes to be Cooked">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="cookTable" layoutX="21.0" layoutY="30.0" prefHeight="336.0" prefWidth="311.0">
+                  <TableView fx:id="cookTable" layoutX="21.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="311.0">
                     <columns>
                       <TableColumn fx:id="TableCol" prefWidth="110.0" text="Table" />
                       <TableColumn fx:id="DishCol" prefWidth="200.0" text="Dish" />
                     </columns>
                   </TableView>
-                  <Pane layoutX="376.0" layoutY="1.0" prefHeight="365.0" prefWidth="236.0" />
+                  <Button fx:id="check" layoutX="452.0" layoutY="57.0" mnemonicParsing="false" text="Check" />
+                  <Button fx:id="accept" layoutX="399.0" layoutY="268.0" mnemonicParsing="false" text="Accept" />
+                  <Button fx:id="reject" layoutX="509.0" layoutY="268.0" mnemonicParsing="false" text="Reject" />
+                  <ScrollBar layoutX="332.0" layoutY="31.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="17.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -27,12 +30,28 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TabPane layoutX="265.0" layoutY="22.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" />
+                  <TableView layoutX="157.0" layoutY="48.0" prefHeight="303.0" prefWidth="297.0">
+                    <columns>
+                      <TableColumn prefWidth="132.0" text="Table" />
+                      <TableColumn prefWidth="205.0" text="Dish" />
+                    </columns>
+                  </TableView>
+                  <ScrollBar layoutX="457.0" layoutY="49.0" orientation="VERTICAL" prefHeight="302.0" prefWidth="17.0" />
                </children></AnchorPane>
       </content>
     </Tab>
       <Tab text="Dishes to be Served">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="149.0" layoutY="47.0" prefHeight="297.0" prefWidth="288.0">
+                    <columns>
+                      <TableColumn prefWidth="116.0" text="Table" />
+                      <TableColumn prefWidth="171.0" text="Dish" />
+                    </columns>
+                  </TableView>
+                  <ScrollBar layoutX="437.0" layoutY="48.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="17.0" />
+               </children></AnchorPane>
         </content>
       </Tab>
   </tabs>

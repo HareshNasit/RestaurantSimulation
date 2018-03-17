@@ -31,7 +31,7 @@ public class ServingTestSuite extends Application{
         ingredients.put("tomato",new DishIngredient("tomato",12,12,12,12,12.0));
         ArrayList<Dish> dishes = new ArrayList<>();
         dishes.add(new Dish(new MenuItem("Pizza",5.0,5.0,ingredients),"A",24));
-        dishes.add(new Dish(new MenuItem("Hamus",5.0,5.0,ingredients),"B",24));
+        dishes.add(new Dish(new MenuItem("Burritos",5.0,5.0,ingredients),"B",24));
         controller.setCookTable(dishes);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Serving Screen");
