@@ -37,18 +37,49 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public TableView tableView;
     public TableColumn ingredientColumn;
     public TableColumn amountColumn;
-    public TableColumn amountLeftColumn;
     public Inventory inventory;
 
     private HashMap<String, DishIngredient> ingredients;
-    FXMLLoader loader;
     private String selectedIngredient;
+
+    /**
+     * After the constructor is called, this is called.
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        getIngredientColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
+        getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
+        this.selectedIngredient = "";
+    }
+
 
     @Override
     public void handle(ActionEvent event) {
+        try {
+            this.updateSelectedIngredient();
+            this.updateButtonAddSubDisabled();
+            this.addAndSubtractEvent(event);
+        } catch (NullPointerException e) {
+            System.out.println("Select a complement!");
+        }
+
+        if ((event.getSource()) == accept) {
+            this.closeWindow(accept);
+        } else if ((event.getSource()) == cancel) {
+            this.dish.setToBaseIngredients();
+            this.closeWindow(cancel);
+            System.out.println(this.dish);
+        }
+
+        this.updateButtonAddSubDisabled();
+        this.tableView.refresh();
+    }
+
+
+
+    public void addAndSubtractEvent(ActionEvent event) {
 
         if ((event.getSource()) == addition) {
-            this.dish.getIngredients().containsKey(this.selectedIngredient);
             if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
                 this.dish.addIngredient(selectedIngredient, 1);
             }
@@ -57,36 +88,36 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
             if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
                 this.dish.subtractIngredient(selectedIngredient, 1);
             }
-            System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
-        } else if ((event.getSource()) == accept) {
-
-            Stage stage = (Stage) cancel.getScene().getWindow();
-            stage.close();
-        } else if ((event.getSource()) == cancel) {
-            Stage stage = (Stage) cancel.getScene().getWindow();
-            stage.close();
         }
-
-        if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
-            addition.setDisable(false);
-        } else {
-            addition.setDisable(true);
-        }
-        if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
-            subtract.setDisable(false);
-        } else {
-            subtract.setDisable(true);
-        }
-
-        this.tableView.refresh();
-    }
-
-    public void addUserData(Dish dish) {
-        this.dish = dish;
         System.out.println(this.dish);
-        this.selectedIngredient = "sausage";
     }
 
+    public void updateSelectedIngredient(){
+        DishIngredient ingredient = (DishIngredient) getTableView().getSelectionModel().getSelectedItem();
+        this.selectedIngredient = ingredient.getName();
+    }
+
+    public void updateButtonAddSubDisabled() {
+        if (!this.selectedIngredient.equals("")) {
+            if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
+                addition.setDisable(false);
+            } else {
+                addition.setDisable(true);
+            }
+            if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
+                subtract.setDisable(false);
+            } else {
+                subtract.setDisable(true);
+            }
+        }
+    }
+
+    public void closeWindow(Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+    }
+
+/*
     public void displayScreen() throws Exception {
         Stage window = new Stage();
 
@@ -97,6 +128,45 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         window.setScene(new Scene(root));
         window.show();
 
+    }*/
+
+
+    public ArrayList<InventoryIngredient> getInventoryIngredients() {
+        ArrayList<InventoryIngredient> ingredients = new ArrayList<>();
+        for (String key : this.ingredients.keySet()) {
+            ingredients.add(this.inventory.getInventoryIngredient(key));
+        }
+        return ingredients;
+    }
+
+
+    public TableColumn getAmountColumn() {
+        return amountColumn;
+    }
+
+
+    public TableColumn getIngredientColumn() {
+        return ingredientColumn;
+    }
+
+    public TableView getTableView() {
+        return tableView;
+    }
+
+
+    /**
+     * Returns an ObservableList of the Restaurant's table list
+     *
+     * @return ObservableList of Tables
+     */
+    private ObservableList<DishIngredient> getDishIngredient() {
+        ObservableList<DishIngredient> dishIngredients = FXCollections.observableArrayList();
+        ArrayList<DishIngredient> ingredients = new ArrayList<>();
+        for (String key : this.ingredients.keySet()) {
+            ingredients.add(this.ingredients.get(key));
+        }
+        dishIngredients.addAll(ingredients);
+        return dishIngredients;
     }
 
     public void setDish(Dish dish) {
@@ -109,17 +179,6 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     }
 
 
-
-    /**
-     * After the constructor is called, this is called.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        getIngredientColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
-        getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
-        getAmountLeftColumn().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
-    }
-
     /**
      * Sets the UI tables to show the Restaurant list of tables
      *
@@ -130,74 +189,18 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
 
     }
 
-    public void setInventory(Inventory inventory){
+    public void setInventory(Inventory inventory) {
         this.inventory = inventory;
     }
 
-    /**
-     *
-     *
-     *
-     */
-
-    public void setBoth(){
-        ObservableList<Object> ingredients = FXCollections.observableArrayList();
-        ingredients.addAll(getInventoryIngredient());
-        ingredients.addAll(getDishIngredient());
-        getTableView().setItems(ingredients);
-    }
-    public void setInventoryIngredients(){
-        getTableView().setItems(getInventoryIngredient());
-    }
-
-
-    public ObservableList<InventoryIngredient> getInventoryIngredient(){
+    public ObservableList<InventoryIngredient> getInventoryIngredient() {
         ObservableList<InventoryIngredient> inventoryIngredients = FXCollections.observableArrayList();
         inventoryIngredients.addAll(getInventoryIngredients());
         return inventoryIngredients;
     }
 
-    public ArrayList<InventoryIngredient> getInventoryIngredients(){
-        ArrayList<InventoryIngredient> ingredients = new ArrayList<>();
-        for(String key: this.ingredients.keySet()){
-            ingredients.add(this.inventory.getInventoryIngredient(key));
-        }
-        return ingredients;
+    public void update(){
+
     }
 
-    /**
-     * Returns an ObservableList of the Restaurant's table list
-     *
-     * @return ObservableList of Tables
-     */
-    private ObservableList<DishIngredient> getDishIngredient() {
-        ObservableList<DishIngredient> dishIngredients = FXCollections.observableArrayList();
-        dishIngredients.addAll(getDishIngredients());
-        return dishIngredients;
-    }
-
-    private ArrayList<DishIngredient> getDishIngredients(){
-        ArrayList<DishIngredient> ingredients = new ArrayList<>();
-        for(String key: this.ingredients.keySet()){
-            ingredients.add(this.ingredients.get(key));
-        }
-        return ingredients;
-    }
-
-
-    public TableColumn getAmountColumn() {
-        return amountColumn;
-    }
-
-    public TableColumn getAmountLeftColumn() {
-        return amountLeftColumn;
-    }
-
-    public TableColumn getIngredientColumn() {
-        return ingredientColumn;
-    }
-
-    public TableView getTableView() {
-        return tableView;
-    }
 }
