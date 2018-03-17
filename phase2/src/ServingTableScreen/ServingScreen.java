@@ -19,34 +19,55 @@ public class ServingScreen implements Initializable {
 
 
     public TableView cookTable;
-    public TableColumn TableCol;
-    public TableColumn DishCol;
+    public TableColumn cookTableId;
+    public TableColumn cookDish;
     public Button check;
     public Button accept;
     public Button reject;
-    private ObservableList<Dish> dishes;
+    public TableView beingCookedTable;
+    public TableColumn CookedTableId;
+    public TableColumn CookedDish;
+    public TableView readyTable;
+    public TableColumn readyTableId;
+    public TableColumn DishReady;
+    private ObservableList<Dish> dishesToBeCooked;
+    private ObservableList<Dish> dishesBeingCooked;
+    private ObservableList<Dish> dishesToBeServed;
     private Dish dishSelected;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
-        this.DishCol.getTableView().setItems(getDishes(Dishes));
+        this.dishesToBeCooked = FXCollections.observableArrayList();
+        dishesToBeCooked.addAll(Dishes);
+        this.cookDish.getTableView().setItems(dishesToBeCooked);
     }
-    private ObservableList<Dish> getDishes(ArrayList<Dish> Dishes) {
-        this.dishes = FXCollections.observableArrayList();
-        dishes.addAll(Dishes);
-        return dishes;
+    public void setBeingCookedTable(ArrayList<Dish> Dishes){
+            this.dishesBeingCooked = FXCollections.observableArrayList();
+            dishesBeingCooked.addAll(Dishes);
+            this.CookedDish.getTableView().setItems(dishesBeingCooked);
+    }
+    public void setReadyTable(ArrayList<Dish> Dishes){
+        this.dishesToBeServed = FXCollections.observableArrayList();
+        dishesToBeServed.addAll(Dishes);
+        this.DishReady.getTableView().setItems(dishesToBeServed);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        TableCol.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
-        DishCol.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        cookTableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
+        cookDish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+
+        CookedTableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
+        CookedDish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+
+        readyTableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
+        DishReady.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     }
 
     public <T, S> TableColumn<S, T> getTableIDColumn() {
-        return TableCol;
+        return cookTableId;
     }
 
     public <T, S> TableColumn<S, T> getDishCol() {
-        return DishCol;
+        return cookDish;
     }
 
     public TableView getCookTable() {
