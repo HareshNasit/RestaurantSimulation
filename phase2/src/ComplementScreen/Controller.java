@@ -36,6 +36,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public TableColumn ingredientColumn;
     public TableColumn amountColumn;
     public Inventory inventory;
+    public TableColumn priceColumn;
 
     private HashMap<String, DishIngredient> ingredients;
     private String selectedIngredient;
@@ -47,6 +48,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         getIngredientColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
         getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
+        getPriceColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("price"));
         this.selectedIngredient = "";
         this.setRowAction();
     }
@@ -63,17 +65,28 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         }
 
         if ((event.getSource()) == accept) {
-            this.closeWindow(accept);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
+                    ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                this.closeWindow(accept);
+            }
+
         } else if ((event.getSource()) == cancel) {
-            this.dish.setToBaseIngredients();
-            this.closeWindow(cancel);
-            System.out.println(this.dish);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
+                    ButtonType.OK, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                this.dish.setToBaseIngredients();
+                this.closeWindow(cancel);
+                System.out.println(this.dish);
+            }
+
         }
 
         this.updateButtonAddSubDisabled();
         this.tableView.refresh();
     }
-
 
     public void addAndSubtractEvent(ActionEvent event) {
 
@@ -114,14 +127,14 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         getTableView().setRowFactory(tv -> {
             TableRow<DishIngredient> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (! row.isEmpty()) {
+                if (!row.isEmpty()) {
                     DishIngredient rowData = row.getItem();
-                    System.out.println("Double click on: "+rowData.getName());
+                    System.out.println("Double click on: " + rowData.getName());
                     updateSelectedIngredient();
                     updateButtonAddSubDisabled();
                 }
             });
-            return row ;
+            return row;
         });
     }
 
@@ -213,8 +226,7 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
         return inventoryIngredients;
     }
 
-    public void update() {
-
+    public TableColumn getPriceColumn() {
+        return priceColumn;
     }
-
 }

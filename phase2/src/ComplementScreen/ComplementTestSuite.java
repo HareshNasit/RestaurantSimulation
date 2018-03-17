@@ -35,9 +35,6 @@ public class ComplementTestSuite extends Application {
         controller.setInventory(inventory);
         controller.setIngredients();
 
-
-
-
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Complement Screen");
         window.setScene(new Scene(root));
