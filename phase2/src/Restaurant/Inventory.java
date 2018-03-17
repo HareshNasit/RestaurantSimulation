@@ -59,6 +59,11 @@ public class Inventory {
     return true;
   }
 
+  public InventoryIngredient getInventoryIngredient(String ingredient){
+      return this.inventory.get(ingredient);
+  }
+
+
   /**
    * Reduces the current stock of String ingredient by int amount if available
    *
