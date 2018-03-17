@@ -19,7 +19,7 @@ public class Inventory {
   private HashMap<String, InventoryIngredient> inventory;
 
   /** Constructs a new Inventory object */
-  Inventory() {
+  public Inventory() {
     inventory = new HashMap<String, InventoryIngredient>();
   }
 
