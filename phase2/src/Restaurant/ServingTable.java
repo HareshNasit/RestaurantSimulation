@@ -13,7 +13,7 @@ public class ServingTable {
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
 
   /** Creates a new serving table. */
-  ServingTable() {
+  public ServingTable() {
     dishesBeingCooked = new ArrayList<>();
     dishesRejected = new ArrayList<>();
     dishesToBeCooked = new ArrayList<>();
@@ -173,4 +173,12 @@ public class ServingTable {
     }
     return finalString + System.lineSeparator();
   }
+    /**
+     * Getter for Dishes to be cooked.
+     *
+     * @return ArrayList<Dish>
+     */
+    public ArrayList<Dish> getDishesToBeCooked() {
+        return dishesToBeCooked;
+    }
 }
