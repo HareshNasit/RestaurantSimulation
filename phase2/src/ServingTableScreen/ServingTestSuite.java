@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ServingTestSuite extends Application{
 
@@ -25,9 +26,12 @@ public class ServingTestSuite extends Application{
         Parent root = loader.load();
 
         ServingScreen controller = loader.getController();
-
+        HashMap<String,DishIngredient>  ingredients = new HashMap<>();
+        Restaurant restaurant = new Restaurant(new Menu(),new Inventory(),new ServingTable());
+        ingredients.put("tomato",new DishIngredient("tomato",12,12,12,12,12.0));
         ArrayList<Dish> dishes = new ArrayList<>();
-
+        dishes.add(new Dish(new MenuItem("Pizza",5.0,5.0,ingredients),"A",24));
+        dishes.add(new Dish(new MenuItem("Hamus",5.0,5.0,ingredients),"B",24));
         controller.setCookTable(dishes);
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Serving Screen");

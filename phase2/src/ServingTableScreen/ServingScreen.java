@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Restaurant.Dish;
-import Restaurant.Table;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -19,21 +18,21 @@ public class ServingScreen implements Initializable {
 
     public TableView cookTable;
     public TableColumn TableCol;
-    public TableColumn DishCol1;
+    public TableColumn DishCol;
     private ObservableList<Dish> dishes;
 
-    public void setCookTable(Restaurant restaurant) {
-        this.DishCol1.getTableView().setItems(getDishes(restaurant));
+    public void setCookTable(ArrayList<Dish> Dishes) {
+        this.DishCol.getTableView().setItems(getDishes(Dishes));
     }
-    private ObservableList<Dish> getDishes(Restaurant restaurant) {
+    private ObservableList<Dish> getDishes(ArrayList<Dish> Dishes) {
         this.dishes = FXCollections.observableArrayList();
-        dishes.addAll(restaurant.getServingTable().getDishesToBeCooked());
+        dishes.addAll(Dishes);
         return dishes;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         TableCol.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
-        //System.out.println(getCookTable());
+        DishCol.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     }
 
     public <T, S> TableColumn<S, T> getTableIDColumn() {
@@ -41,7 +40,7 @@ public class ServingScreen implements Initializable {
     }
 
     public <T, S> TableColumn<S, T> getDishCol() {
-        return DishCol1;
+        return DishCol;
     }
 
     public TableView getCookTable() {
