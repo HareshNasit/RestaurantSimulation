@@ -1,6 +1,7 @@
 package ComplementScreen;
 
 import Restaurant.*;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 
 import java.lang.reflect.Array;
@@ -58,23 +60,21 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
             System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
         } else if ((event.getSource()) == accept) {
 
-            System.out.println(this.selectedIngredient);
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            stage.close();
         } else if ((event.getSource()) == cancel) {
-
+            Stage stage = (Stage) cancel.getScene().getWindow();
+            stage.close();
         }
 
         if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
             addition.setDisable(false);
-            System.out.println("enabled bro add");
         } else {
             addition.setDisable(true);
-            System.out.println("disabled bro add");
         }
         if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
             subtract.setDisable(false);
-            System.out.println("enabled bro subtract");
         } else {
-            System.out.println("disabled bro subtract");
             subtract.setDisable(true);
         }
 
