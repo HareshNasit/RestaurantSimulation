@@ -6,17 +6,17 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ComplementScreen.Controller">
+<GridPane fx:id="" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ComplementScreen.ComplementScreenController">
   <children>
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <Button fx:id="accept" layoutX="353.0" layoutY="60.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Accept" />
+        <Button fx:id="accept" layoutX="353.0" layoutY="60.0" mnemonicParsing="false" onAction="#acceptEvent" prefWidth="118.0" text="Accept" />
         <Button id="add" fx:id="addition" disable="false" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Add">
           <font>
             <Font size="20.0" fx:id="x1" />
           </font>
         </Button>
-        <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#handle" prefWidth="118.0" text="Cancel" />
+        <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#cancelEvent" prefWidth="118.0" text="Cancel" />
         <Button fx:id="subtract" font="$x1" layoutX="353.0" layoutY="165.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Sub" />
         <TextArea editable="false" layoutX="353.0" layoutY="271.0" prefHeight="169.0" prefWidth="117.99990000000253" wrapText="true" />
         <TableView fx:id="tableView" layoutX="37.0" layoutY="60.0" prefHeight="421.0" prefWidth="290.0">

@@ -1,18 +1,16 @@
 package ComplementScreen;
 
 import Restaurant.Dish;
-import Restaurant.DishIngredient;
 import Restaurant.Inventory;
 import Restaurant.Menu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableRow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ComplementTestSuite extends Application {
+public class ComplementScreen extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -28,7 +26,7 @@ public class ComplementTestSuite extends Application {
         Stage window = new Stage();
         FXMLLoader loader = new  FXMLLoader(getClass().getResource("complements.fxml"));
         Parent root = loader.load();
-        Controller controller = loader.getController();
+        ComplementScreenController controller = loader.getController();
 
         //make method
         controller.setDish(dish);

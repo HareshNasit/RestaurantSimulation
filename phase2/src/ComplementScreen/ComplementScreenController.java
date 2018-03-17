@@ -1,31 +1,21 @@
 package ComplementScreen;
 
 import Restaurant.*;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.*;
 
-public class Controller implements EventHandler<ActionEvent>, Initializable {
+public class ComplementScreenController implements EventHandler<ActionEvent>, Initializable {
 
     public Button cancel;
     public Button addition;
@@ -60,32 +50,32 @@ public class Controller implements EventHandler<ActionEvent>, Initializable {
             this.updateSelectedIngredient();
             this.updateButtonAddSubDisabled();
             this.addAndSubtractEvent(event);
+            this.updateButtonAddSubDisabled();
+            this.tableView.refresh();
         } catch (NullPointerException e) {
             System.out.println("Select a complement!");
         }
 
-        if ((event.getSource()) == accept) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
-                    ButtonType.OK, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                this.closeWindow(accept);
-            }
+    }
 
-        } else if ((event.getSource()) == cancel) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
-                    ButtonType.OK, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                this.dish.setToBaseIngredients();
-                this.closeWindow(cancel);
-                System.out.println(this.dish);
-            }
-
+    public void acceptEvent(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
+                ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            this.closeWindow(accept);
         }
+    }
 
-        this.updateButtonAddSubDisabled();
-        this.tableView.refresh();
+    public void cancelEvent(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
+                ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
+            this.dish.setToBaseIngredients();
+            this.closeWindow(cancel);
+            System.out.println(this.dish);
+        }
     }
 
     public void addAndSubtractEvent(ActionEvent event) {
