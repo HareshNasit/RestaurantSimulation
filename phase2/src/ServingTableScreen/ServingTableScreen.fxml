@@ -18,7 +18,7 @@
                       <TableColumn fx:id="cookDish" prefWidth="200.0" text="Dish" />
                     </columns>
                   </TableView>
-                  <Button fx:id="check" layoutX="452.0" layoutY="57.0" mnemonicParsing="false" text="Check" />
+                  <Button fx:id="check" layoutX="452.0" layoutY="57.0" mnemonicParsing="false" onAction="#checkDish" text="Check" />
                   <Button fx:id="accept" layoutX="399.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" text="Accept" />
                   <Button fx:id="reject" layoutX="509.0" layoutY="268.0" mnemonicParsing="false" onAction="#rejectDish" text="Reject" />
                   <ScrollBar layoutX="332.0" layoutY="31.0" orientation="VERTICAL" prefHeight="335.0" prefWidth="17.0" />

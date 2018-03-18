@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Restaurant.Dish;
+import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -37,7 +38,8 @@ public class ServingScreen implements Initializable {
     private ObservableList<Dish> dishesBeingCooked;
     private ObservableList<Dish> dishesToBeServed;
     private Dish dishSelected;
-    private Restaurant restaurant;
+    public Restaurant restaurant;
+    public Cook cook;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
         this.dishesToBeCooked = FXCollections.observableArrayList();
@@ -84,10 +86,19 @@ public class ServingScreen implements Initializable {
 
     public void acceptDish(ActionEvent actionEvent) {
         // Manually removing it.
-        cookTable.getItems().remove(dishSelected);
-        dishesBeingCooked.add(dishSelected);
+//        cookTable.getItems().remove(dishSelected);
+//        dishesBeingCooked.add(dishSelected);
+        cook.acceptCook(dishSelected,restaurant.getServingTable(),restaurant.getInventory());
+        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
     }
 
     public void rejectDish(ActionEvent actionEvent) {
+        cook.rejectDish(dishSelected,restaurant.getServingTable());
+        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+    }
+
+    public void checkDish(ActionEvent actionEvent) {
     }
 }
