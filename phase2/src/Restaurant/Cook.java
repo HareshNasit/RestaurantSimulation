@@ -63,14 +63,15 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Cook accepts to cook the dish and removes ingredients.
    *
-   * @param index index of dish that needs to be cooked
+   * @param dish that need to be cooked
    * @param servingTable serving table that needs to be changed
    * @param inventory inventory of restaurant
    */
-  public void acceptCook(int index, ServingTable servingTable, Inventory inventory) {
-    Dish dish = servingTable.getDishToBeCooked(index);
+  public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
+    // Dish dish = servingTable.getDishToBeCooked(index);
     prepareDish(dish, inventory);
-    servingTable.addToBeCooking(index);
+    // servingTable.addToBeCooking(index);
+    servingTable.addToBeCooking(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -81,12 +82,13 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Cook accepts to prepare a dish. No ingredient removal needed
    *
-   * @param index index of dish that needs to be cooked
+   * @param dish that needs to be cooked
    * @param servingTable serving table of restaurant
    */
-  public void acceptNoCook(int index, ServingTable servingTable) {
-    Dish dish = servingTable.getDishToBeCooked(index);
-    servingTable.addToBeCooking(index);
+  public void acceptNoCook(Dish dish, ServingTable servingTable) {
+    // Dish dish = servingTable.getDishToBeCooked(index);
+    // servingTable.addToBeCooking(index);
+      servingTable.addToBeCooking(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -97,12 +99,13 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Reject a dish that needs to be cooked.
    *
-   * @param index index of dish at the list of dishes that need to be cooked
+   * @param dish that is rejected
    * @param servingTable serving table of the restaurant
    */
-  public void rejectDish(int index, ServingTable servingTable) {
-    Dish dish = servingTable.getDishToBeCooked(index);
-    servingTable.rejectDish(index);
+  public void rejectDish(Dish dish, ServingTable servingTable) {
+    // Dish dish = servingTable.getDishToBeCooked(index);
+    // servingTable.rejectDish(index);
+      servingTable.rejectDish(dish);
     System.out.println(
         String.format(
             "%s has rejected to cook Table%s%d %s",
@@ -113,10 +116,10 @@ public class Cook implements IWorker, ServingTableListener {
   /**
    * Dish has been cooked and is placed in list of dishes that needs to be served.
    *
-   * @param index index of dish that is currently cooking
+   * @param dish which is cooked
    * @param servingTable serving table of restaurant
    */
-  public void serveDish(int index, ServingTable servingTable) {
-    servingTable.addToBeServed(index);
+  public void serveDish(Dish dish, ServingTable servingTable) {
+    servingTable.addToBeServed(dish);
   }
 }

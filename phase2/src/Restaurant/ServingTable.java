@@ -12,7 +12,16 @@ public class ServingTable {
   private ArrayList<ServingTableListener> servers; // List of all the servers.
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
 
-  /** Creates a new serving table. */
+    public ArrayList<Dish> getDishesToBeServed() {
+        return dishesToBeServed;
+    }
+
+    public ArrayList<Dish> getDishesBeingCooked() {
+
+        return dishesBeingCooked;
+    }
+
+    /** Creates a new serving table. */
   public ServingTable() {
     dishesBeingCooked = new ArrayList<>();
     dishesRejected = new ArrayList<>();
@@ -62,20 +71,22 @@ public class ServingTable {
    * Reject a dish at index of dishes that need to be cooked It is added to the list of rejected.
    * dishes to be informed to the servers
    *
-   * @param index - index of dish
+   * @param dish to be rejected
    */
-  public void rejectDish(int index) {
-    Dish dish = dishesToBeCooked.remove(index);
+  public void rejectDish(Dish dish) {
+    // Dish dish = dishesToBeCooked.remove(index);
+    dishesToBeCooked.remove(dish);
     dishesRejected.add(dish);
   }
 
   /**
    * Dish at index has been cooked. Dish is moved to list of dishes that need to be served
    *
-   * @param index - index of dish on dishesBeingCooked list
+   * @param dish which is ready to be served
    */
-  public void addToBeServed(int index) {
-    Dish dish = dishesBeingCooked.remove(index);
+  public void addToBeServed(Dish dish) {
+    // Dish dish = dishesBeingCooked.remove(index);
+      dishesBeingCooked.remove(dish);
     dishesToBeServed.add(dish);
     notifyServers(
         String.format(
@@ -85,8 +96,9 @@ public class ServingTable {
   }
 
   /** Dish at index is moved from needing to be cooked to being cooked. */
-  public void addToBeCooking(int index) {
-    Dish dish = dishesToBeCooked.remove(index);
+  public void addToBeCooking(Dish dish) {
+    // Dish dish = dishesToBeCooked.remove(index);
+      dishesToBeCooked.remove(dish);
     dishesBeingCooked.add(dish);
   }
 
