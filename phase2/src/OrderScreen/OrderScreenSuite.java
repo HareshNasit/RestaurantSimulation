@@ -24,17 +24,6 @@ public class OrderScreenSuite extends Application{
     public void start(Stage primaryStage) throws Exception {
 
         Menu menu = new Menu();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File("menu.txt")))) {
-
-            String line;
-            while ((line = reader.readLine()) != null)
-                System.out.println(line);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         Stage window = new Stage();
 
         FXMLLoader loader = new  FXMLLoader(getClass().getResource("orders.fxml"));
