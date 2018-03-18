@@ -3,6 +3,7 @@ package ServingTableScreen;
 import Restaurant.Restaurant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import Restaurant.Dish;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,10 +32,12 @@ public class ServingScreen implements Initializable {
     public TableView readyTable;
     public TableColumn readyTableId;
     public TableColumn DishReady;
+    public AnchorPane tab1;
     private ObservableList<Dish> dishesToBeCooked;
     private ObservableList<Dish> dishesBeingCooked;
     private ObservableList<Dish> dishesToBeServed;
     private Dish dishSelected;
+    private Restaurant restaurant;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
         this.dishesToBeCooked = FXCollections.observableArrayList();
@@ -76,5 +80,14 @@ public class ServingScreen implements Initializable {
 
     public void rowSelected(MouseEvent mouseEvent) {
         this.dishSelected = (Dish) cookTable.getSelectionModel().getSelectedItem();
+    }
+
+    public void acceptDish(ActionEvent actionEvent) {
+        // Manually removing it.
+        cookTable.getItems().remove(dishSelected);
+        dishesBeingCooked.add(dishSelected);
+    }
+
+    public void rejectDish(ActionEvent actionEvent) {
     }
 }
