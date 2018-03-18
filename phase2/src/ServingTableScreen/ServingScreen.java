@@ -34,6 +34,7 @@ public class ServingScreen implements Initializable {
     public TableColumn readyTableId;
     public TableColumn DishReady;
     public AnchorPane tab1;
+    public Button DishreadyButton;
     private ObservableList<Dish> dishesToBeCooked;
     private ObservableList<Dish> dishesBeingCooked;
     private ObservableList<Dish> dishesToBeServed;
@@ -100,5 +101,8 @@ public class ServingScreen implements Initializable {
     }
 
     public void checkDish(ActionEvent actionEvent) {
+    }
+
+    public void dishReadyToBeServed(ActionEvent actionEvent) {
     }
 }
