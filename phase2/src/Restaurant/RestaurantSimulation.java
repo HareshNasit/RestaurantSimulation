@@ -139,38 +139,38 @@ public class RestaurantSimulation {
 
     Cook cook = restaurant.getCook(input[1]);
 
-    if (input[2].equals("accept")) {
-
-      cook.acceptCook(
-          Integer.valueOf(input[3]), restaurant.getServingTable(), restaurant.getInventory());
-
-    } else if (input[2].equals("transfer")) {
-
-      cook.acceptNoCook(Integer.valueOf(input[3]), restaurant.getServingTable());
-
-    } else if (input[2].equals("reject")) {
-
-      cook.rejectDish(Integer.valueOf(input[3]), restaurant.getServingTable());
-
-    } else if (input[2].equals("serve")) {
-
-      cook.serveDish(Integer.valueOf(input[3]), restaurant.getServingTable());
-
-    } else if (input[2].equals("check")) {
-
-      Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
-      if (!cook.canBePrepared(dish, restaurant.getInventory())) {
-        System.out.println(
-            String.format(
-                "Table%s%d %s cannot be prepared",
-                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-      } else {
-        System.out.println(
-            String.format(
-                "Table%s%d %s can be prepared",
-                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-      }
-    }
+//    if (input[2].equals("accept")) {
+//
+//      cook.acceptCook(
+//          Integer.valueOf(input[3]), restaurant.getServingTable(), restaurant.getInventory());
+//
+//    } else if (input[2].equals("transfer")) {
+//
+//      cook.acceptNoCook(Integer.valueOf(input[3]), restaurant.getServingTable());
+//
+//    } else if (input[2].equals("reject")) {
+//
+//      cook.rejectDish(Integer.valueOf(input[3]), restaurant.getServingTable());
+//
+//    } else if (input[2].equals("serve")) {
+//
+//      cook.serveDish(Integer.valueOf(input[3]), restaurant.getServingTable());
+//
+//    } else if (input[2].equals("check")) {
+//
+//      Dish dish = restaurant.getServingTable().getDishToBeCooked(Integer.valueOf(input[3]));
+//      if (!cook.canBePrepared(dish, restaurant.getInventory())) {
+//        System.out.println(
+//            String.format(
+//                "Table%s%d %s cannot be prepared",
+//                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+//      } else {
+//        System.out.println(
+//            String.format(
+//                "Table%s%d %s can be prepared",
+//                dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+//      }
+//    }
   }
 
   /**
