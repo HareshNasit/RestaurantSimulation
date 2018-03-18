@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -14,22 +14,25 @@
         <Font size="24.0" />
       </font>
     </Label>
-    <ScrollPane fx:id="tableOrderScrollPane" layoutX="27.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-      </content>
-    </ScrollPane>
       <Label fx:id="menuLabel" layoutX="271.0" layoutY="33.0" text="Menu">
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ScrollPane fx:id="menuScrollPanel" layoutX="270.0" layoutY="65.0" prefHeight="200.0" prefWidth="200.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" text="Add dish" />
       <Button fx:id="removeDish" layoutX="110.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
-      <Button fx:id="printBill" layoutX="403.0" layoutY="350.0" mnemonicParsing="false" text="Print bill" />
+      <Button fx:id="printBill" layoutX="400.0" layoutY="350.0" mnemonicParsing="false" text="Print bill" />
+      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="215.0">
+        <columns>
+          <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="nameColumn" prefWidth="61.0" text="name" />
+            <TableColumn fx:id="customerNumber" prefWidth="89.0" text="customer" />
+        </columns>
+      </TableView>
+      <TableView fx:id="menuTableView" layoutX="269.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
   </children>
 </Pane>
