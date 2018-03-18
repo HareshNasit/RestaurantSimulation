@@ -32,6 +32,11 @@ public class OrderScreenSuite extends Application{
 
         ArrayList<Dish> dishes = new ArrayList<>();
         dishes.add(menu.getDish(1.0, "A", 1));
+        dishes.add(menu.getDish(2.0, "B", 2));
+        dishes.add(menu.getDish(2.0, "B", 2));
+        dishes.add(menu.getDish(3.0, "C", 3));
+        dishes.add(menu.getDish(19.0, "A", 2)); // gives error cause dish 19.0 does not exist
+
 
         controller.setDishes(dishes);
 
