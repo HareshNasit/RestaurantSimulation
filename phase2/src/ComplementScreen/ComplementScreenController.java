@@ -5,10 +5,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -27,6 +31,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     public TableColumn amountColumn;
     public Inventory inventory;
     public TableColumn priceColumn;
+    public TextArea dishStatusLabel;
 
     private HashMap<String, DishIngredient> ingredients;
     private String selectedIngredient;
@@ -40,6 +45,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
         getPriceColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("price"));
         this.selectedIngredient = "";
+        this.updateDishLabel();
         this.setRowAction();
     }
 
@@ -53,12 +59,14 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
             this.updateButtonAddSubDisabled();
             this.tableView.refresh();
         } catch (NullPointerException e) {
-            System.out.println("Select a complement!");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Select a complement!",
+                    ButtonType.OK);
+            alert.showAndWait();
         }
 
     }
 
-    public void acceptEvent(ActionEvent event){
+    public void acceptEvent() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
                 ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
@@ -67,7 +75,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         }
     }
 
-    public void cancelEvent(ActionEvent event){
+    public void cancelEvent() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
                 ButtonType.YES, ButtonType.CANCEL);
         alert.showAndWait();
@@ -76,6 +84,10 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
             this.closeWindow(cancel);
             System.out.println(this.dish);
         }
+    }
+
+    public void updateDishLabel(){
+        dishStatusLabel.setText(this.dish.toString());
     }
 
     public void addAndSubtractEvent(ActionEvent event) {
@@ -91,6 +103,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
             }
         }
         System.out.println(this.dish);
+        this.updateDishLabel();
     }
 
     public void updateSelectedIngredient() {
@@ -134,10 +147,10 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         stage.close();
     }
 
-/*
+
     public void displayScreen() throws Exception {
         Stage window = new Stage();
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("complements.fxml"));
         //This means that you can't change any other windows besides this one.
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Table Screen");
@@ -145,7 +158,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         window.setScene(new Scene(root));
         window.show();
 
-    }*/
+    }
 
 
     public ArrayList<InventoryIngredient> getInventoryIngredients() {
