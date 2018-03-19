@@ -45,7 +45,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         getAmountColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("amount"));
         getPriceColumn().setCellValueFactory(new PropertyValueFactory<DishIngredient, Integer>("price"));
         this.selectedIngredient = "";
-        this.updateDishLabel();
+        this.dishStatusLabel.setText("Pick a complement");
         this.setRowAction();
     }
 
@@ -86,8 +86,8 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         }
     }
 
-    public void updateDishLabel(){
-        dishStatusLabel.setText(this.dish.toString());
+    public void updateDishLabel() {
+        this.dishStatusLabel.setText(this.dish.toString());
     }
 
     public void addAndSubtractEvent(ActionEvent event) {
@@ -132,7 +132,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty()) {
                     DishIngredient rowData = row.getItem();
-                    System.out.println("Double click on: " + rowData.getName());
+                    System.out.println("Click on: " + rowData.getName());
                     updateSelectedIngredient();
                     updateButtonAddSubDisabled();
                 }

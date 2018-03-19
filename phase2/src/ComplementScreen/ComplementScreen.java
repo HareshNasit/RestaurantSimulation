@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class ComplementScreen extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         Inventory inventory = new Inventory();
         inventory.readInventory();
@@ -24,7 +24,7 @@ public class ComplementScreen extends Application {
         System.out.println(dish);
 
         Stage window = new Stage();
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource("complements.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("complements.fxml"));
         Parent root = loader.load();
         ComplementScreenController controller = loader.getController();
 
@@ -38,7 +38,6 @@ public class ComplementScreen extends Application {
         window.setScene(new Scene(root));
         window.show();
     }
-
 
 
     public static void main(String[] args) {
