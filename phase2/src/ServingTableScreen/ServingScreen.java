@@ -89,10 +89,16 @@ public class ServingScreen implements Initializable {
         // Manually removing it.
 //        cookTable.getItems().remove(dishSelected);
 //        dishesBeingCooked.add(dishSelected);
-        cook.acceptCook(dishSelectedTab1,restaurant.getServingTable(),restaurant.getInventory());
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        try {
+            cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
+            setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+            setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+            setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        }
+        catch(NullPointerException e){
+            System.out.println("No row selected");
+        }
+        this.dishSelectedTab1 = null;
     }
 
     public void rejectDish(ActionEvent actionEvent) {
@@ -110,9 +116,15 @@ public class ServingScreen implements Initializable {
 
     }
     public void dishReadyToBeServed(ActionEvent actionEvent) {
-        cook.serveDish(dishSelectedTab2,restaurant.getServingTable());
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        try {
+            cook.serveDish(dishSelectedTab2, restaurant.getServingTable());
+            setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+            setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+            setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        }
+        catch (NullPointerException e){
+            System.out.println("No row selected");
+        }
+        dishSelectedTab2 = null;
     }
 }
