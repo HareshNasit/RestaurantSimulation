@@ -121,5 +121,6 @@ public class Cook implements IWorker, ServingTableListener {
    */
   public void serveDish(Dish dish, ServingTable servingTable) {
     servingTable.addToBeServed(dish);
+    servingTable.getDishesBeingCooked().remove(dish);
   }
 }
