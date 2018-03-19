@@ -12,10 +12,10 @@
       <content>
         <AnchorPane fx:id="tab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="cookTable" layoutX="21.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="311.0">
+                  <TableView fx:id="tab1Table" layoutX="21.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="311.0">
                     <columns>
-                      <TableColumn fx:id="cookTableId" prefWidth="110.0" text="Table" />
-                      <TableColumn fx:id="cookDish" prefWidth="200.0" text="Dish" />
+                      <TableColumn fx:id="tab1TableId" prefWidth="119.0" text="Table" />
+                      <TableColumn fx:id="tab1Dish" prefWidth="191.0" text="Dish" />
                     </columns>
                   </TableView>
                   <Button fx:id="check" layoutX="452.0" layoutY="57.0" mnemonicParsing="false" onAction="#checkDish" text="Check" />
@@ -29,13 +29,13 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="beingCookedTable" layoutX="56.0" layoutY="40.0" prefHeight="303.0" prefWidth="297.0">
+                  <TableView fx:id="tab2Table" layoutX="14.0" layoutY="41.0" onMouseClicked="#rowSelectedTab2" prefHeight="320.0" prefWidth="299.0">
                     <columns>
-                      <TableColumn fx:id="CookedTableId" prefWidth="132.0" text="Table" />
-                      <TableColumn fx:id="CookedDish" prefWidth="205.0" text="Dish" />
+                      <TableColumn fx:id="tab2TableId" prefWidth="160.0" text="Table" />
+                      <TableColumn fx:id="tab2Dish" prefWidth="177.0" text="Dish" />
                     </columns>
                   </TableView>
-                  <ScrollBar layoutX="357.0" layoutY="41.0" orientation="VERTICAL" prefHeight="302.0" prefWidth="17.0" />
+                  <ScrollBar layoutX="313.0" layoutY="50.0" orientation="VERTICAL" prefHeight="302.0" prefWidth="17.0" />
                   <Button fx:id="DishreadyButton" layoutX="460.0" layoutY="110.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" text="Dish Ready" />
                </children></AnchorPane>
       </content>
@@ -44,10 +44,10 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="readyTable" layoutX="149.0" layoutY="47.0" prefHeight="297.0" prefWidth="288.0">
+                  <TableView fx:id="tab3Table" layoutX="149.0" layoutY="47.0" prefHeight="297.0" prefWidth="288.0">
                     <columns>
-                      <TableColumn fx:id="readyTableId" prefWidth="116.0" text="Table" />
-                      <TableColumn fx:id="DishReady" prefWidth="171.0" text="Dish" />
+                      <TableColumn fx:id="tab3TableId" prefWidth="116.0" text="Table" />
+                      <TableColumn fx:id="tab3Dish" prefWidth="171.0" text="Dish" />
                     </columns>
                   </TableView>
                   <ScrollBar layoutX="437.0" layoutY="48.0" orientation="VERTICAL" prefHeight="298.0" prefWidth="17.0" />
