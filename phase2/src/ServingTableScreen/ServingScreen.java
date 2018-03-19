@@ -34,27 +34,25 @@ public class ServingScreen implements Initializable {
     public TableColumn tab3TableId;
     public TableColumn tab3Dish;
     public AnchorPane tab1;
-    public Button DishreadyButton;
-    private ObservableList<Dish> dishesToBeCooked;
-    private ObservableList<Dish> dishesBeingCooked;
-    private ObservableList<Dish> dishesToBeServed;
+    public Button DishReadyButton;
+
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
     public Restaurant restaurant;
     public Cook cook;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
-        this.dishesToBeCooked = FXCollections.observableArrayList();
+        ObservableList<Dish> dishesToBeCooked = FXCollections.observableArrayList();
         dishesToBeCooked.addAll(Dishes);
         this.tab1Dish.getTableView().setItems(dishesToBeCooked);
     }
     public void setBeingCookedTable(ArrayList<Dish> Dishes){
-            this.dishesBeingCooked = FXCollections.observableArrayList();
+            ObservableList<Dish> dishesBeingCooked = FXCollections.observableArrayList();
             dishesBeingCooked.addAll(Dishes);
             this.tab2Dish.getTableView().setItems(dishesBeingCooked);
     }
     public void setReadyTable(ArrayList<Dish> Dishes){
-        this.dishesToBeServed = FXCollections.observableArrayList();
+        ObservableList<Dish> dishesToBeServed = FXCollections.observableArrayList();
         dishesToBeServed.addAll(Dishes);
         this.tab3Dish.getTableView().setItems(dishesToBeServed);
     }

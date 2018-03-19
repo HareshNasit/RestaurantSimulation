@@ -36,7 +36,7 @@
                     </columns>
                   </TableView>
                   <ScrollBar layoutX="313.0" layoutY="50.0" orientation="VERTICAL" prefHeight="302.0" prefWidth="17.0" />
-                  <Button fx:id="DishreadyButton" layoutX="460.0" layoutY="110.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" text="Dish Ready" />
+                  <Button fx:id="DishReadyButton" layoutX="460.0" layoutY="110.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" text="Dish Ready" />
                </children></AnchorPane>
       </content>
     </Tab>
