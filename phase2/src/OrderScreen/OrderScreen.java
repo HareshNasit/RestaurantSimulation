@@ -126,9 +126,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         System.out.println(getOrderTableView());
     }
 
+    /**
+     * Gives the data of the selected cell which is the price of the dish in this case
+     * @param actionEvent
+     */
+    public void getSelectedCellPrice(ActionEvent actionEvent){}
 
-    public void printBill(ActionEvent actionEvent){
+    /**
+     * Prints the bill for the table.
+     * @param actionEvent
+     */
+    public void printTableBill(ActionEvent actionEvent){
 
     }
+    
 }
 
