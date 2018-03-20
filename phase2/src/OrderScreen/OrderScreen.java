@@ -25,6 +25,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Button printBill;
     public TableView menuTableView;
     public TableView orderTableView;
+    public TableColumn priceColumn;
 
     public TableColumn getCustomerNumber() {
         return customerNumber;
@@ -123,6 +124,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         getCustomerNumber().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
         System.out.println(getOrderTableView());
+    }
+
+
+    public void printBill(ActionEvent actionEvent){
+        
     }
 }
 
