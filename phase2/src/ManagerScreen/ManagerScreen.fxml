@@ -10,21 +10,28 @@
   <tabs>
     <Tab fx:id="workersTab" text="Workers">
          <content>
-            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="347.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewWorkers" prefHeight="367.0" prefWidth="315.0">
+                    <columns>
+                      <TableColumn fx:id="columnType" prefWidth="90.0" text="Type" />
+                      <TableColumn fx:id="columnName" prefWidth="106.0" text="Name" />
+                        <TableColumn fx:id="columnStatus" prefWidth="118.0" text="Status" />
+                    </columns>
+                  </TableView>
+                  <VBox prefHeight="367.0" prefWidth="292.0">
                      <children>
-                        <TableView prefHeight="368.0" prefWidth="333.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <Pane prefHeight="375.0" prefWidth="289.0">
+                           <children>
+                              <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
+                              <Button fx:id="buttonOffice" layoutX="71.0" layoutY="76.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="148.0" text="Call To Office" />
+                              <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" text="Send to Attend Table" />
+                           </children>
+                        </Pane>
                      </children>
-                  </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
-              </items>
-            </SplitPane>
+                  </VBox>
+               </children>
+            </HBox>
          </content></Tab>
       <Tab fx:id="logTab" text="Log">
         <content>

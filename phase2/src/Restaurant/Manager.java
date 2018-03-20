@@ -20,6 +20,11 @@ public class Manager implements IWorker, InventoryListener {
     return name;
   }
 
+  @Override
+  public String getType() {
+    return "Manager";
+  }
+
   /** Calls a server or a cook to collect the received ingredients. */
   public IWorker callWorker(Restaurant restaurant, String name) {
     return restaurant.MapOfWorkers().get(name);
@@ -61,4 +66,5 @@ public class Manager implements IWorker, InventoryListener {
 
     }
   }
+
 }
