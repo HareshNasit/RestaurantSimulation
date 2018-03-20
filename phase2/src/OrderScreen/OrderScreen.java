@@ -128,7 +128,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
 
     public void printBill(ActionEvent actionEvent){
-        
+
     }
 }
 
