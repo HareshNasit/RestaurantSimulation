@@ -1,45 +1,75 @@
 package Restaurant;
 
+import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class Bill {
 
-  /**
-   * Creates a bill from a given set of orders. This bill will be used for creating a full bill
-   * where one person pays.
-   *
-   * @param orders The dishes from the table.
-   */
-  public static void outputBill(ArrayList<Dish> orders) {
+    public static double tax = .13;
 
-    String billText = "";
-    double subtotal = 0;
-    for (Dish order : orders) {
-      subtotal += order.getPrice();
-      billText += order.toString() + System.lineSeparator();
+    /**
+     * Creates a bill from a given set of orders. This bill will be used for creating a full bill
+     * where one person pays.
+     *
+     * @param orders The dishes from the table.
+     */
+    public static String outputBill(ArrayList<Dish> orders) {
+
+        String billText = "";
+
+        for (Dish order : orders) {
+            billText += order.toString() + System.lineSeparator();
+        }
+
+        double subtotal = getSubtotal(orders);
+        double tax = getTax(subtotal);
+        double total = subtotal + tax;
+        billText += "SubTotal: $" + subtotal;
+        billText += "Tax: $" + tax;
+        billText += "Total: $" + total;
+        return billText;
     }
-    billText += "Total: " + subtotal;
 
-    System.out.println(billText);
-  }
+    /**
+     * Creates a bill for one customer at a table.
+     *
+     * @param table       The table the customer is seated at.
+     * @param customerNum The customer number.s
+     */
+    public static String outputSingleBill(Table table, int customerNum) {
 
-  /**
-   * Creates a bill for one customer at a table.
-   *
-   * @param table The table the customer is seated at.
-   * @param customerNum The customer number.s
-   */
-  public static void outputSingleBill(Table table, int customerNum) {
+        String billText = "";
+        billText += "Table: " + table.getTableID() + ", ";
+        billText += "CustomerNumber: " + customerNum + ", ";
+        for (Dish order : table.getCustomerOrder(customerNum)) {
+            billText += order.getStringForBill() + System.lineSeparator();
+        }
 
-    String billText = "";
-    billText += "Table: " + table.getTableID() + ", ";
-    billText += "CustomerNumber: " + customerNum + ", ";
-    double subtotal = 0;
-    for (Dish order : table.getCustomerOrder(customerNum)) {
-      billText += order.getStringForBill() + System.lineSeparator();
-      subtotal += order.getPrice();
+        double subtotal = getSubtotal(table.getCustomerOrder(customerNum));
+        double tax = getTax(subtotal);
+        double total = subtotal + tax;
+        billText += "SubTotal: $" + subtotal;
+        billText += "Tax: $" + tax;
+        billText += "Total: $" + total;
+        return billText;
     }
-    billText += "Total: $" + subtotal;
-    System.out.println(billText);
-  }
+
+    public static double getSubtotal(ArrayList<Dish> dishes) {
+        double subtotal = 0;
+        for (Dish order : dishes) {
+            subtotal += order.getPrice();
+        }
+        return subtotal;
+    }
+
+    public static double getTax(double subtotal) {
+        BigDecimal bd = new BigDecimal(subtotal);
+        BigDecimal multiplier = new BigDecimal(tax);
+        bd.multiply(multiplier);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
 }
