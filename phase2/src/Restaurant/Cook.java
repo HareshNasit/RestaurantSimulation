@@ -21,6 +21,11 @@ public class Cook implements IWorker, ServingTableListener {
     return name;
   }
 
+  @Override
+  public String getType() {
+    return "Cook";
+  }
+
   /**
    * Checks if the dish can be prepared and subtracts ingredients accordingly and returns a boolean
    * and adds it to the list of dishes being cooked currently.

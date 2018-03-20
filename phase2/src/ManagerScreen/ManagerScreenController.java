@@ -1,7 +1,10 @@
 package ManagerScreen;
 
+import Restaurant.Cook;
 import Restaurant.Inventory;
+import Restaurant.IWorker;
 import Restaurant.InventoryIngredient;
+import Restaurant.Server;
 import Restaurant.Table;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +23,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ManagerScreenController implements Initializable {
 
   private final String  REQUESTFILE = "request.txt";
-
+  @FXML
+  private TableView tableViewWorkers;
+  @FXML
+  private TableColumn columnType;
+  @FXML
+  private TableColumn columnName;
+  @FXML
+  private TableColumn columnStatus;
   @FXML
   private TextArea textFieldRequest;
   @FXML //Allows the variable to be encapsualted
@@ -30,6 +40,12 @@ public class ManagerScreenController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+    getColumnType().setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
+    getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
+    tableViewWorkers.setItems(getWorkerData());
+
+    //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
+
     updateRequestText();
 
   }
@@ -38,6 +54,14 @@ public class ManagerScreenController implements Initializable {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
 
     return ingredients;
+  }
+
+  private ObservableList<IWorker> getWorkerData() {
+    ObservableList<IWorker> workers = FXCollections.observableArrayList();
+    Server server = new Server("John");
+    Cook cook = new Cook("Tim");
+    workers.addAll(server, cook);
+    return workers;
   }
 
   /**
@@ -70,5 +94,37 @@ public class ManagerScreenController implements Initializable {
 
   public void setTextFieldRequest(TextArea textFieldRequest) {
     this.textFieldRequest = textFieldRequest;
+  }
+
+  public TableColumn getColumnType() {
+    return columnType;
+  }
+
+  public void setColumnType(TableColumn columnType) {
+    this.columnType = columnType;
+  }
+
+  public TableColumn getColumnName() {
+    return columnName;
+  }
+
+  public void setColumnName(TableColumn columnName) {
+    this.columnName = columnName;
+  }
+
+  public TableColumn getColumnStatus() {
+    return columnStatus;
+  }
+
+  public void setColumnStatus(TableColumn columnStatus) {
+    this.columnStatus = columnStatus;
+  }
+
+  public TableView getTableViewWorkers() {
+    return tableViewWorkers;
+  }
+
+  public void setTableViewWorkers(TableView tableViewWorkers) {
+    this.tableViewWorkers = tableViewWorkers;
   }
 }
