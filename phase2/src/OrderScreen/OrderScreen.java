@@ -22,7 +22,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Label menuLabel;
     public Button addDish;
     public Button removeDish;
-    public Button printBill;
     public TableView menuTableView;
     public TableView orderTableView;
     public TableColumn priceColumn;
@@ -31,6 +30,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableColumn menuDishColumn;
     public TableColumn menuPriceColumn;
     public TableColumn menuIngredientsColumn;
+    public Button printTableBill;
+    public Button printIndividualBillButton;
 
     public TableColumn getMenuIdColumn() {
         return menuIdColumn;
