@@ -27,6 +27,43 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableView orderTableView;
     public TableColumn priceColumn;
 
+    public TableColumn menuIdColumn;
+    public TableColumn menuDishColumn;
+    public TableColumn menuPriceColumn;
+    public TableColumn menuIngredientsColumn;
+
+    public TableColumn getMenuIdColumn() {
+        return menuIdColumn;
+    }
+
+    public void setMenuIdColumn(TableColumn menuIdColumn) {
+        this.menuIdColumn = menuIdColumn;
+    }
+
+    public TableColumn getMenuDishColumn() {
+        return menuDishColumn;
+    }
+
+    public void setMenuDishColumn(TableColumn menuDishColumn) {
+        this.menuDishColumn = menuDishColumn;
+    }
+
+    public TableColumn getMenuPriceColumn() {
+        return menuPriceColumn;
+    }
+
+    public void setMenuPriceColumn(TableColumn menuPriceColumn) {
+        this.menuPriceColumn = menuPriceColumn;
+    }
+
+    public TableColumn getMenuIngredientsColumn() {
+        return menuIngredientsColumn;
+    }
+
+    public void setMenuIngredientsColumn(TableColumn menuIngredientsColumn) {
+        this.menuIngredientsColumn = menuIngredientsColumn;
+    }
+
     public TableColumn getPriceColumn() {
         return priceColumn;
     }
