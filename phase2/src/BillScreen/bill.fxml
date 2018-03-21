@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Controller">
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="BillScreen.BillScreenController">
   <children>
     <Pane prefHeight="204.0" prefWidth="172.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
-        <ComboBox layoutX="31.0" layoutY="38.0" prefHeight="27.0" prefWidth="111.0">
+        <ComboBox fx:id="scrollMenu" layoutX="31.0" layoutY="38.0" prefHeight="27.0" prefWidth="111.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -19,8 +19,8 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button layoutX="31.0" layoutY="135.0" mnemonicParsing="false" prefWidth="111.0" text="Pay" />
-        <Button layoutX="31.0" layoutY="89.0" mnemonicParsing="false" prefWidth="111.0" text="Receipt" />
+        <Button fx:id="payButton" layoutX="31.0" layoutY="135.0" mnemonicParsing="false" prefWidth="111.0" text="Pay" />
+        <Button fx:id="receiptButton" layoutX="31.0" layoutY="89.0" mnemonicParsing="false" prefWidth="111.0" text="Receipt" />
       </children>
     </Pane>
   </children>

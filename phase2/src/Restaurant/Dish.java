@@ -118,6 +118,13 @@ public class Dish extends MenuItem {
     public String getComment() {
         return comment;
     }
+    /**
+     * Sets the comment attached to the dish.
+     * @param comment comment about the dish.
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     public void setToBaseIngredients() {
         HashMap<String, DishIngredient> ingredients = this.getIngredients();

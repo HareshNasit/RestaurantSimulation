@@ -8,7 +8,31 @@
 
 <TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerScreen.ManagerScreenController">
   <tabs>
-    <Tab fx:id="workersTab" text="Workers" />
+    <Tab fx:id="workersTab" text="Workers">
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tableViewWorkers" prefHeight="367.0" prefWidth="315.0">
+                    <columns>
+                      <TableColumn fx:id="columnType" prefWidth="90.0" text="Type" />
+                      <TableColumn fx:id="columnName" prefWidth="106.0" text="Name" />
+                        <TableColumn fx:id="columnStatus" prefWidth="118.0" text="Status" />
+                    </columns>
+                  </TableView>
+                  <VBox prefHeight="367.0" prefWidth="292.0">
+                     <children>
+                        <Pane prefHeight="375.0" prefWidth="289.0">
+                           <children>
+                              <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
+                              <Button fx:id="buttonOffice" layoutX="71.0" layoutY="76.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="148.0" text="Call To Office" />
+                              <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" text="Send to Attend Table" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </content></Tab>
       <Tab fx:id="logTab" text="Log">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -20,22 +44,25 @@
       </Tab>
       <Tab fx:id="tabInventory" text="Inventory">
          <content>
-            <TableView fx:id="tableInventory" prefHeight="367.0" prefWidth="483.0">
-              <columns>
-                <TableColumn fx:id="columnIngredient" prefWidth="156.0" text="Ingredient" />
-                <TableColumn fx:id="columnAmount" prefWidth="91.0" text="Amount" />
-                  <TableColumn fx:id="columnLowThresh" prefWidth="134.0" text="Lower Threshold" />
-                  <TableColumn fx:id="columnRestock" prefWidth="138.0" text="Restock Amount" />
-                  <TableColumn fx:id="columnIsLow" prefWidth="81.0" text="Low" />
-              </columns>
-            </TableView>
+            <VBox prefHeight="201.0" prefWidth="600.0">
+               <children>
+                  <TableView prefHeight="252.0" prefWidth="545.0">
+                    <columns>
+                      <TableColumn prefWidth="142.0" text="Ingredient" />
+                      <TableColumn prefWidth="117.0" text="Amount" />
+                        <TableColumn prefWidth="107.0" text="Restock Amount" />
+                        <TableColumn prefWidth="147.0" text="Lower Threshold" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </content>
       </Tab>
       <Tab text="Request">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea prefHeight="365.0" prefWidth="600.0" />
+                  <TextArea fx:id="textFieldRequest" layoutX="15.0" layoutY="12.0" prefHeight="341.0" prefWidth="571.0" />
                </children>
             </AnchorPane>
         </content>

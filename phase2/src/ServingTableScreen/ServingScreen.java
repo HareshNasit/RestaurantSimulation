@@ -24,7 +24,6 @@ public class ServingScreen implements Initializable {
     public TableView tab1Table;
     public TableColumn tab1TableId;
     public TableColumn tab1Dish;
-    public Button check;
     public Button accept;
     public Button reject;
     public TableView tab2Table;
@@ -35,6 +34,8 @@ public class ServingScreen implements Initializable {
     public TableColumn tab3Dish;
     public AnchorPane tab1;
     public Button DishReadyButton;
+    public TableColumn tab1Comment;
+    public TableColumn tab2Comment;
 
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
@@ -60,9 +61,11 @@ public class ServingScreen implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab1Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab1Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
         tab2TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab2Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab2Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
         tab3TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
@@ -105,10 +108,6 @@ public class ServingScreen implements Initializable {
         cook.rejectDish(dishSelectedTab1,restaurant.getServingTable());
         setCookTable(restaurant.getServingTable().getDishesToBeCooked());
     }
-
-    public void checkDish(ActionEvent actionEvent) {
-    }
-
     public void rowSelectedTab2(MouseEvent mouseEvent){
         this.dishSelectedTab2 = (Dish) tab2Table.getSelectionModel().getSelectedItem();
         System.out.println(dishSelectedTab2.getTableName());

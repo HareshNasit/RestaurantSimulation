@@ -23,6 +23,11 @@ public class Server implements IWorker, ServingTableListener {
     return name;
   }
 
+  @Override
+  public String getType() {
+    return "Server";
+  }
+
   /**
    * The server takes the order from a table and adds it to the list of orders to be cooked.
    *
@@ -106,7 +111,7 @@ public class Server implements IWorker, ServingTableListener {
    * @param restaurant restaurant.
    */
   public void seatCustomer(String tableID, Restaurant restaurant) {
-    restaurant.getTable(tableID).setOccupied(true);
+    restaurant.getTable(tableID).setOccupied(5);
     System.out.println(String.format("%s seats Table %s", getName(), tableID));
   }
 

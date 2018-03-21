@@ -1,8 +1,13 @@
 package ManagerScreen;
 
+import Restaurant.Cook;
 import Restaurant.Inventory;
+import Restaurant.IWorker;
 import Restaurant.InventoryIngredient;
+import Restaurant.Server;
 import Restaurant.Table;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -12,44 +17,65 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ManagerScreenController implements Initializable {
 
+  private final String  REQUESTFILE = "request.txt";
+  @FXML
+  private TableView tableViewWorkers;
+  @FXML
+  private TableColumn columnType;
+  @FXML
+  private TableColumn columnName;
+  @FXML
+  private TableColumn columnStatus;
+  @FXML
+  private TextArea textFieldRequest;
   @FXML //Allows the variable to be encapsualted
   private Tab tabInventory;
-  @FXML
-  private TableColumn columnIsLow;
-  @FXML
-  private TableColumn columnRestock;
-  @FXML
-  private TableColumn columnLowThresh;
-  @FXML
-  private TableColumn columnAmount;
-  @FXML
-  private TableColumn columnIngredient;
-  @FXML
-  private TableView tableInventory;
+
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    columnIngredient.setCellValueFactory(new PropertyValueFactory<Table, String>("name"));
-    columnAmount.setCellValueFactory(new PropertyValueFactory<Table, Integer>("currentQuantity"));
-    columnLowThresh.setCellValueFactory(new PropertyValueFactory<Table, Integer>("lowerThreshold"));
-    columnRestock.setCellValueFactory(new PropertyValueFactory<Table, Integer>("restockQuantity"));
-    getInventoryTableData();
+
+    getColumnType().setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
+    getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
+    tableViewWorkers.setItems(getWorkerData());
+
+    //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
+
+    updateRequestText();
 
   }
 
   private ObservableList<InventoryIngredient> getInventoryTableData() {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
-    InventoryIngredient ip = new InventoryIngredient("memes", 10, 10, 10);
-    InventoryIngredient jp = new InventoryIngredient("masd", 10, 10, 10);
-    InventoryIngredient yp = new InventoryIngredient("sd", 10, 10, 10);
 
-    ingredients.addAll(ip, jp, yp);
-    tableInventory.setItems(ingredients);
     return ingredients;
+  }
+
+  private ObservableList<IWorker> getWorkerData() {
+    ObservableList<IWorker> workers = FXCollections.observableArrayList();
+    Server server = new Server("John");
+    Cook cook = new Cook("Tim");
+    workers.addAll(server, cook);
+    return workers;
+  }
+
+  /**
+   * Updates the request tab in the manager screen with the contents of request.txt
+   */
+  private void updateRequestText(){
+    try (BufferedReader fileReader = new BufferedReader(new FileReader(REQUESTFILE))) {
+      String line = fileReader.readLine();
+      while (line != null) {
+          textFieldRequest.appendText(line + System.lineSeparator());
+          line = fileReader.readLine();
+      }
+    } catch (java.io.IOException e) {
+    }
   }
 
   //---------------------- Getters and Setters --------------------
@@ -62,51 +88,43 @@ public class ManagerScreenController implements Initializable {
     this.tabInventory = tabInventory;
   }
 
-  public TableColumn getColumnIsLow() {
-    return columnIsLow;
+  public TextArea getTextFieldRequest() {
+    return textFieldRequest;
   }
 
-  public void setColumnIsLow(TableColumn columnIsLow) {
-    this.columnIsLow = columnIsLow;
+  public void setTextFieldRequest(TextArea textFieldRequest) {
+    this.textFieldRequest = textFieldRequest;
   }
 
-  public TableColumn getColumnRestock() {
-    return columnRestock;
+  public TableColumn getColumnType() {
+    return columnType;
   }
 
-  public void setColumnRestock(TableColumn columnRestock) {
-    this.columnRestock = columnRestock;
+  public void setColumnType(TableColumn columnType) {
+    this.columnType = columnType;
   }
 
-  public TableColumn getColumnLowThresh() {
-    return columnLowThresh;
+  public TableColumn getColumnName() {
+    return columnName;
   }
 
-  public void setColumnLowThresh(TableColumn columnLowThresh) {
-    this.columnLowThresh = columnLowThresh;
+  public void setColumnName(TableColumn columnName) {
+    this.columnName = columnName;
   }
 
-  public TableColumn getColumnAmount() {
-    return columnAmount;
+  public TableColumn getColumnStatus() {
+    return columnStatus;
   }
 
-  public void setColumnAmount(TableColumn columnAmount) {
-    this.columnAmount = columnAmount;
+  public void setColumnStatus(TableColumn columnStatus) {
+    this.columnStatus = columnStatus;
   }
 
-  public TableColumn getColumnIngredient() {
-    return columnIngredient;
+  public TableView getTableViewWorkers() {
+    return tableViewWorkers;
   }
 
-  public void setColumnIngredient(TableColumn columnIngredient) {
-    this.columnIngredient = columnIngredient;
-  }
-
-  public TableView getTableInventory() {
-    return tableInventory;
-  }
-
-  public void setTableInventory(TableView tableInventory) {
-    this.tableInventory = tableInventory;
+  public void setTableViewWorkers(TableView tableViewWorkers) {
+    this.tableViewWorkers = tableViewWorkers;
   }
 }

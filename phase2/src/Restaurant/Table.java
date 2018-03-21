@@ -6,13 +6,10 @@ import java.util.ArrayList;
 public class Table {
 
   private String tableID; // the id number of the table
-
-  public boolean getIsOccupied() {
-    return isOccupied;
-  }
-
+  private int tableSize; //Number of people sitting at the table
   private boolean isOccupied; // if the table already has customers
   private ArrayList<Dish> tableOrder; // the dishes the table ordered
+
 
   /**
    * Creates a new table.
@@ -26,19 +23,24 @@ public class Table {
   }
 
   /**
-   * Check if this table is occupied.
-   *
-   * @return if table is occupied
+   * When a server seats customers to a table, the server must specify how many people are eat at
+   * that table. Table then becomes occupied.
+   * @param size
    */
-  public boolean getOccupied() {
-    return isOccupied;
+  public void setOccupied(int size) {
+    this.isOccupied = true;
+    this.tableSize = size;
   }
 
-  /** set if the table is occupied or not. */
-  public void setOccupied(boolean occupied) {
-    isOccupied = occupied;
+  /**
+   * Customers have cleared their bills. TableOrder has been erased and the table is no longer
+   * occupied.
+   */
+  public void clearTable() {
+    this.tableOrder = new ArrayList<>();
+    this.isOccupied = false;
+    this.tableSize = 0;
   }
-
   /**
    * Set the table order to this array of dishes.
    *
@@ -114,9 +116,15 @@ public class Table {
     return this.tableID;
   }
 
-  /** Clear the table order and set isOccupied to false when customer leaves. */
-  public void clearTable() {
-    this.tableOrder = new ArrayList<Dish>();
-    this.isOccupied = false;
+  public int getTableSize() {
+    return tableSize;
+  }
+
+  public void setTableSize(int tableSize) {
+    this.tableSize = tableSize;
+  }
+
+  public boolean getIsOccupied() {
+    return isOccupied;
   }
 }
