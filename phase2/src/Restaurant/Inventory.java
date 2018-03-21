@@ -61,20 +61,28 @@ public class Inventory {
     return true;
   }
 
-  public ArrayList<String> getLowIngredientStrings(Dish dish) {
+  /**
+   * Returns the strings of low ingredients
+   * @param dish
+   * @return
+   */
+  public String getLowIngredientStrings(Dish dish) {
     HashMap<String, Integer> dishIngredients = dish.getIngredientAmounts();
-    ArrayList<String> getLows = new ArrayList<String>();
+    StringBuilder lowIngredients = new StringBuilder();
     for (String ingredient : dishIngredients.keySet()) {
-
-      if (!inventory.containsKey(ingredient.trim())||inventory.get(ingredient.trim()).getCurrentQuantity()
+      if (!inventory.containsKey(ingredient.trim())) {
+        lowIngredients.append(ingredient + "not available" + System.lineSeparator());
+      } else if (inventory.get(ingredient.trim()).getCurrentQuantity()
           < dishIngredients.get(ingredient)) {
-        System.out.println("Not Available: " + ingredient);
-        getLows.add(ingredient);
-        }
+        int difference = Math.abs(inventory.get(ingredient.trim()).getCurrentQuantity()
+            - dishIngredients.get(ingredient));
+        lowIngredients.append(ingredient + "missing: " + String.valueOf(difference)
+            + " units"+ System.lineSeparator());
+      }
     }
-    return getLows;
+    return lowIngredients.toString();
   }
-  
+
   public InventoryIngredient getInventoryIngredient(String ingredient){
       return this.inventory.get(ingredient);
   }
