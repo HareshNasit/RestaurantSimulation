@@ -18,6 +18,7 @@ public class TestSuite extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
 
+
     Stage window = new Stage();
     FXMLLoader loader = new  FXMLLoader(getClass().getResource("TablesScreen.fxml"));
     Parent root = loader.load();
@@ -29,7 +30,9 @@ public class TestSuite extends Application {
     tables.add(new Table("B"));
     tables.add(new Table("C"));
 
+
     controller.setTables(tables);
+
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle("Table Screen");
     window.setScene(new Scene(root));
