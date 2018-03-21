@@ -1,7 +1,6 @@
 package OrderScreen;
 
 import Restaurant.Dish;
-import Restaurant.Restaurant;
 import Restaurant.MenuItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -171,9 +170,12 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
                 if (!row.isEmpty()) {
                     Dish rowData = row.getItem();
                     System.out.println("Click on: " + rowData.getName());
-                    String finalString = "The price of this dish is:" + rowData.getPrice() + ", " + rowData.getIngredients();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION, finalString,
+                    String finalString = "The price of this dish is: " + rowData.getPrice() + System.lineSeparator() +
+                            "The ingredients of this dish are: " + System.lineSeparator() + rowData.getIngredientString()
+                            + "Comment: " + rowData.getComment();
+                    Alert alert = new Alert(Alert.AlertType.NONE, finalString,
                              ButtonType.OK);
+                    alert.setTitle("Dish details");
                     alert.showAndWait();
                     System.out.println(rowData.getPrice());
                 }
