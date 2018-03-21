@@ -66,8 +66,30 @@ public class Dish extends MenuItem {
      */
     public String getStringForBill() {
         String billText = "";
-
         billText += this.getName() + " - ";
+        billText += this.getComplementsString();
+        billText += " - $" + this.getPrice();
+        return billText;
+    }
+
+    /**
+     * Returns a string with each ingredient and the amount.
+     * @return
+     */
+    public String getIngredientString(){
+        String ingredientOutput = "";
+        for(String key: this.getIngredients().keySet()){
+            ingredientOutput += key + ": " + this.getIngredients().get(key).getAmount() + System.lineSeparator();
+        }
+        return ingredientOutput;
+    }
+
+    /**
+     * Returns a string with all the complements.
+     *
+     * @return
+     */
+    public String getComplementsString() {
         String extras = "";
         String subtractions = "";
         HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
@@ -80,12 +102,15 @@ public class Dish extends MenuItem {
                         differenceMap.get(key) + " " + this.getIngredients().get(key).getName() + ", ";
             }
         }
-        billText += extras + subtractions;
-        billText = billText.substring(0, billText.length() - 2);
-        billText += " - $" + this.getPrice();
+        String complements = "";
+        complements += extras;
+        complements += subtractions;
+        if (complements.length() == 0) {
+            return "";
+        } else {
+            return complements.substring(complements.length() - 2, complements.length());
 
-
-        return billText;
+        }
     }
 
     /**
@@ -115,17 +140,23 @@ public class Dish extends MenuItem {
      *
      * @return the comment.
      */
+
     public String getComment() {
         return comment;
     }
+
     /**
      * Sets the comment attached to the dish.
+     *
      * @param comment comment about the dish.
      */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    /**
+     * Sets the dish ingredients to back to baseAmounts.
+     */
     public void setToBaseIngredients() {
         HashMap<String, DishIngredient> ingredients = this.getIngredients();
         for (String key : ingredients.keySet()) {
@@ -133,4 +164,6 @@ public class Dish extends MenuItem {
             ingredients.get(key).setAmount(ingredient.getBaseAmount());
         }
     }
+
+
 }
