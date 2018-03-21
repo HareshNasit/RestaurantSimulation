@@ -14,23 +14,22 @@
         <Font size="24.0" />
       </font>
     </Label>
-      <Label fx:id="menuLabel" layoutX="392.0" layoutY="33.0" text="Menu">
+      <Label fx:id="menuLabel" layoutX="372.0" layoutY="33.0" text="Menu">
          <font>
             <Font size="24.0" />
          </font></Label>
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" text="Add dish" />
       <Button fx:id="removeDish" layoutX="110.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
-      <Button fx:id="printTableBill" layoutX="532.0" layoutY="350.0" mnemonicParsing="false" text="Print Table bill" />
-      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="336.0">
+      <Button fx:id="printTableBill" layoutX="525.0" layoutY="350.0" mnemonicParsing="false" text="Print Table bill" />
+      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="291.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
           <TableColumn fx:id="nameColumn" prefWidth="114.0" text=" Dish name" />
             <TableColumn fx:id="customerNumber" prefWidth="74.0" text="Customer" />
-            <TableColumn fx:id="priceColumn" prefWidth="45.0" text="Price" />
             <TableColumn fx:id="commentColumn" prefWidth="75.0" text="Comment" />
         </columns>
       </TableView>
-      <TableView fx:id="menuTableView" layoutX="392.0" layoutY="60.0" prefHeight="200.0" prefWidth="258.0">
+      <TableView fx:id="menuTableView" layoutX="372.0" layoutY="61.0" prefHeight="200.0" prefWidth="258.0">
         <columns>
           <TableColumn fx:id="menuIdColumn" prefWidth="31.0" text="Id" />
           <TableColumn fx:id="menuDishColumn" prefWidth="94.0" text="Dish name" />
@@ -38,6 +37,6 @@
             <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
         </columns>
       </TableView>
-      <Button fx:id="printIndividualBillButton" layoutX="392.0" layoutY="350.0" mnemonicParsing="false" text="Print Individual bills" />
+      <Button fx:id="printIndividualBillButton" layoutX="384.0" layoutY="350.0" mnemonicParsing="false" text="Print Individual bills" />
   </children>
 </Pane>
