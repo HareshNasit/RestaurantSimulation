@@ -1,6 +1,7 @@
 package Restaurant;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -60,16 +61,20 @@ public class Inventory {
     return true;
   }
 
-  public ArrayList<String> getLowIngredientStrings(HashMap<String, Integer> dishIngredients) {
-    ArrayList<String> lowIngredients = new ArrayList<String>();
+  public ArrayList<String> getLowIngredientStrings(Dish dish) {
+    HashMap<String, Integer> dishIngredients = dish.getIngredientAmounts();
+    ArrayList<String> getLows = new ArrayList<String>();
     for (String ingredient : dishIngredients.keySet()) {
-      if (!inventory.containsKey(ingredient.trim()) || inventory.get(ingredient.trim()).getCurrentQuantity() < dishIngredients.get(ingredient)) {
-        lowIngredients.add(ingredient);
+
+      if (!inventory.containsKey(ingredient.trim())||inventory.get(ingredient.trim()).getCurrentQuantity()
+          < dishIngredients.get(ingredient)) {
+        System.out.println("Not Available: " + ingredient);
+        getLows.add(ingredient);
+        }
     }
-
-  }return lowIngredients;
+    return getLows;
   }
-
+  
   public InventoryIngredient getInventoryIngredient(String ingredient){
       return this.inventory.get(ingredient);
   }
