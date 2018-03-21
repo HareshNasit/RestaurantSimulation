@@ -70,8 +70,9 @@ public class Inventory {
     HashMap<String, Integer> dishIngredients = dish.getIngredientAmounts();
     StringBuilder lowIngredients = new StringBuilder();
     for (String ingredient : dishIngredients.keySet()) {
+      System.out.println("Checking: " + ingredient);
       if (!inventory.containsKey(ingredient.trim())) {
-        lowIngredients.append(ingredient + "not available" + System.lineSeparator());
+        lowIngredients.append(ingredient + " not available" + System.lineSeparator());
       } else if (inventory.get(ingredient.trim()).getCurrentQuantity()
           < dishIngredients.get(ingredient)) {
         int difference = Math.abs(inventory.get(ingredient.trim()).getCurrentQuantity()

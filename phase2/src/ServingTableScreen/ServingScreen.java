@@ -5,10 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import Restaurant.Dish;
 import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -95,7 +92,8 @@ public class ServingScreen implements Initializable {
             checkLabel.setTextFill(Paint.valueOf("Green"));
         }
         else{
-            checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
+            // checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
+            checkLabel.setText(restaurant.getInventory().getLowIngredientStrings(dishSelectedTab1));
             checkLabel.setTextFill(Paint.valueOf("Red"));
         }
         System.out.println(dishSelectedTab1.getTableName());
@@ -106,10 +104,15 @@ public class ServingScreen implements Initializable {
 //        cookTable.getItems().remove(dishSelected);
 //        dishesBeingCooked.add(dishSelected);
         try {
-            cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
-            setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-            setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-            setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
+                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+                setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+                setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+            }
         }
         catch(NullPointerException e){
             System.out.println("No row selected");
