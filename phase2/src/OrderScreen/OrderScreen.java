@@ -2,6 +2,7 @@ package OrderScreen;
 
 import Restaurant.Dish;
 import Restaurant.Restaurant;
+import Restaurant.MenuItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Button printTableBill;
     public Button printIndividualBillButton;
     public TableColumn commentColumn;
+    public TableColumn customerNumber;
+    public TableColumn idColumn;
+    public TableColumn nameColumn;
 
     public TableColumn getMenuIdColumn() {
         return menuIdColumn;
@@ -82,8 +86,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         this.customerNumber = customerNumber;
     }
 
-    public TableColumn customerNumber;
-
     public TableColumn getIdColumn() {
         return idColumn;
     }
@@ -99,9 +101,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public void setNameColumn(TableColumn nameColumn) {
         this.nameColumn = nameColumn;
     }
-
-    public TableColumn idColumn;
-    public TableColumn nameColumn;
 
     private String dishName;
     private int dishNumber;
@@ -170,7 +169,26 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
         getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         getCustomerNumber().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+        this.setRowAction();
         System.out.println(getOrderTableView());
+    }
+
+    public void setRowAction() {
+        getOrderTableView().setRowFactory(tv -> {
+            TableRow<Dish> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty()) {
+                    Dish rowData = row.getItem();
+                    System.out.println("Click on: " + rowData.getName());
+                    String finalString = "The price of this dish is:" + rowData.getPrice() + ", " + rowData.getIngredients();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, finalString,
+                             ButtonType.OK);
+                    alert.showAndWait();
+                    System.out.println(rowData.getPrice());
+                }
+            });
+            return row;
+        });
     }
 
     /**
