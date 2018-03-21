@@ -25,7 +25,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Button removeDish;
     public TableView menuTableView;
     public TableView orderTableView;
-    public TableColumn priceColumn;
 
     public TableColumn menuIdColumn;
     public TableColumn menuDishColumn;
@@ -68,14 +67,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
     public void setMenuIngredientsColumn(TableColumn menuIngredientsColumn) {
         this.menuIngredientsColumn = menuIngredientsColumn;
-    }
-
-    public TableColumn getPriceColumn() {
-        return priceColumn;
-    }
-
-    public void setPriceColumn(TableColumn priceColumn) {
-        this.priceColumn = priceColumn;
     }
 
     public TableColumn getCustomerNumber() {
