@@ -20,7 +20,7 @@
           </items>
         </ComboBox>
         <Button fx:id="payButton" layoutX="31.0" layoutY="135.0" mnemonicParsing="false" prefWidth="111.0" text="Pay" />
-        <Button fx:id="receiptButton" layoutX="31.0" layoutY="89.0" mnemonicParsing="false" prefWidth="111.0" text="Receipt" />
+        <Button fx:id="receiptButton" layoutX="31.0" layoutY="89.0" mnemonicParsing="false" onAction="#createReceiptWindow" prefWidth="111.0" text="Receipt" />
       </children>
     </Pane>
   </children>

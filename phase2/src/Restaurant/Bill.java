@@ -20,15 +20,15 @@ public class Bill {
         String billText = "";
 
         for (Dish order : orders) {
-            billText += order.toString() + System.lineSeparator();
+            billText += order.getStringForBill() + System.lineSeparator();
         }
 
         double subtotal = getSubtotal(orders);
         double tax = getTax(subtotal);
         double total = subtotal + tax;
-        billText += "SubTotal: $" + subtotal;
-        billText += "Tax: $" + tax;
-        billText += "Total: $" + total;
+        billText += "SubTotal: $" + subtotal  + System.lineSeparator();
+        billText += "Tax: $" + tax  + System.lineSeparator();
+        billText += "Total: $" + total  + System.lineSeparator();
         return billText;
     }
 
@@ -50,9 +50,9 @@ public class Bill {
         double subtotal = getSubtotal(table.getCustomerOrder(customerNum));
         double tax = getTax(subtotal);
         double total = subtotal + tax;
-        billText += "SubTotal: $" + subtotal;
-        billText += "Tax: $" + tax;
-        billText += "Total: $" + total;
+        billText += "SubTotal: $" + subtotal + System.lineSeparator();
+        billText += "Tax: $" + tax + System.lineSeparator();
+        billText += "Total: $" + total  + System.lineSeparator();
         return billText;
     }
 
@@ -67,8 +67,9 @@ public class Bill {
     public static double getTax(double subtotal) {
         BigDecimal bd = new BigDecimal(subtotal);
         BigDecimal multiplier = new BigDecimal(tax);
-        bd.multiply(multiplier);
-        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        bd = bd.multiply(multiplier);
+        bd = bd.setScale(2, RoundingMode.CEILING);
+
         return bd.doubleValue();
     }
 
