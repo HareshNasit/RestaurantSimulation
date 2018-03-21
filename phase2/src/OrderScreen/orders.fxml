@@ -7,36 +7,37 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderScreen.OrderScreen">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="666.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderScreen.OrderScreen">
   <children>
     <Label fx:id="tableOrderTitle" layoutX="27.0" layoutY="32.0" text="Table Order">
       <font>
         <Font size="24.0" />
       </font>
     </Label>
-      <Label fx:id="menuLabel" layoutX="313.0" layoutY="33.0" text="Menu">
+      <Label fx:id="menuLabel" layoutX="392.0" layoutY="33.0" text="Menu">
          <font>
             <Font size="24.0" />
          </font></Label>
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" text="Add dish" />
       <Button fx:id="removeDish" layoutX="110.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
-      <Button fx:id="printTableBill" layoutX="462.0" layoutY="350.0" mnemonicParsing="false" text="Print Table bill" />
-      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="228.0">
+      <Button fx:id="printTableBill" layoutX="532.0" layoutY="350.0" mnemonicParsing="false" text="Print Table bill" />
+      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="336.0">
         <columns>
-          <TableColumn fx:id="idColumn" prefWidth="29.0" text="id" />
-          <TableColumn fx:id="nameColumn" prefWidth="84.0" text=" dish name" />
-            <TableColumn fx:id="customerNumber" prefWidth="73.0" text="customer" />
-            <TableColumn fx:id="priceColumn" prefWidth="41.0" text="Price" />
+          <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
+          <TableColumn fx:id="nameColumn" prefWidth="114.0" text=" Dish name" />
+            <TableColumn fx:id="customerNumber" prefWidth="74.0" text="Customer" />
+            <TableColumn fx:id="priceColumn" prefWidth="45.0" text="Price" />
+            <TableColumn fx:id="commentColumn" prefWidth="75.0" text="Comment" />
         </columns>
       </TableView>
-      <TableView fx:id="menuTableView" layoutX="313.0" layoutY="60.0" prefHeight="200.0" prefWidth="252.0">
+      <TableView fx:id="menuTableView" layoutX="392.0" layoutY="60.0" prefHeight="200.0" prefWidth="258.0">
         <columns>
-          <TableColumn fx:id="menuIdColumn" prefWidth="31.0" text="id" />
-          <TableColumn fx:id="menuDishColumn" prefWidth="94.0" text="dish name" />
+          <TableColumn fx:id="menuIdColumn" prefWidth="31.0" text="Id" />
+          <TableColumn fx:id="menuDishColumn" prefWidth="94.0" text="Dish name" />
             <TableColumn fx:id="menuPriceColumn" prefWidth="45.0" text="Price" />
-            <TableColumn fx:id="menuIngredientsColumn" prefWidth="81.0" text="ingrdients" />
+            <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
         </columns>
       </TableView>
-      <Button fx:id="printIndividualBillButton" layoutX="320.0" layoutY="350.0" mnemonicParsing="false" text="Print Individual bills" />
+      <Button fx:id="printIndividualBillButton" layoutX="392.0" layoutY="350.0" mnemonicParsing="false" text="Print Individual bills" />
   </children>
 </Pane>
