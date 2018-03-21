@@ -1,9 +1,6 @@
 package ManagerScreen;
 
-import Restaurant.Table;
-import TablesScreen.TablesScreen;
 import java.io.IOException;
-import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
