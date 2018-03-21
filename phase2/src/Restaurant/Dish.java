@@ -67,9 +67,7 @@ public class Dish extends MenuItem {
     public String getStringForBill() {
         String billText = "";
 
-        billText += "MenuItem Name: " + this.getName() + ", ";
-        billText += "ID: " + this.getId() + ", ";
-        billText += "Price $" + this.getPrice() + ", ";
+        billText += this.getName() + " - ";
         String extras = "";
         String subtractions = "";
         HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
@@ -84,6 +82,8 @@ public class Dish extends MenuItem {
         }
         billText += extras + subtractions;
         billText = billText.substring(0, billText.length() - 2);
+        billText += " - $" + this.getPrice();
+
 
         return billText;
     }
