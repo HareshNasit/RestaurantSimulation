@@ -14,25 +14,27 @@
         <Font size="24.0" />
       </font>
     </Label>
-      <Label fx:id="menuLabel" layoutX="341.0" layoutY="33.0" text="Menu">
+      <Label fx:id="menuLabel" layoutX="313.0" layoutY="33.0" text="Menu">
          <font>
             <Font size="24.0" />
          </font></Label>
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" text="Add dish" />
       <Button fx:id="removeDish" layoutX="110.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
-      <Button fx:id="printBill" layoutX="470.0" layoutY="350.0" mnemonicParsing="false" text="Print bill" />
-      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="215.0">
+      <Button fx:id="printBill" layoutX="496.0" layoutY="350.0" mnemonicParsing="false" text="Print bill" />
+      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="228.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.0" text="id" />
-          <TableColumn fx:id="nameColumn" prefWidth="73.0" text="name" />
-            <TableColumn fx:id="customerNumber" prefWidth="70.0" text="customer" />
+          <TableColumn fx:id="nameColumn" prefWidth="84.0" text=" dish name" />
+            <TableColumn fx:id="customerNumber" prefWidth="73.0" text="customer" />
             <TableColumn fx:id="priceColumn" prefWidth="41.0" text="Price" />
         </columns>
       </TableView>
-      <TableView fx:id="menuTableView" layoutX="341.0" layoutY="60.0" prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="menuTableView" layoutX="313.0" layoutY="60.0" prefHeight="200.0" prefWidth="252.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="menuIdColumn" prefWidth="31.0" text="id" />
+          <TableColumn fx:id="menuDishColumn" prefWidth="94.0" text="dish name" />
+            <TableColumn fx:id="menuPriceColumn" prefWidth="45.0" text="Price" />
+            <TableColumn fx:id="menuIngredientsColumn" prefWidth="81.0" text="ingrdients" />
         </columns>
       </TableView>
   </children>
