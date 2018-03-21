@@ -35,6 +35,7 @@ public class OrderScreenSuite extends Application{
         dishes.add(menu.getDish(2.0, "B", 2));
         dishes.add(menu.getDish(2.0, "B", 2));
         dishes.add(menu.getDish(3.0, "C", 3));
+
         //dishes.add(menu.getDish(19.0, "A", 2)); // gives error cause dish 19.0 does not exist
 
 
@@ -46,6 +47,7 @@ public class OrderScreenSuite extends Application{
         window.setTitle("Order Screen");
         window.setScene(new Scene(root));
         window.show();
+
 
     }
 
