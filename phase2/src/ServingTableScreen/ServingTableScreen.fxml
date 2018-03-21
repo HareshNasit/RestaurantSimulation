@@ -21,6 +21,7 @@
                   </TableView>
                   <Button fx:id="accept" layoutX="399.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" text="Accept" />
                   <Button fx:id="reject" layoutX="509.0" layoutY="268.0" mnemonicParsing="false" onAction="#rejectDish" text="Reject" />
+                  <Label fx:id="checkLabel" layoutX="348.0" layoutY="41.0" prefHeight="96.0" prefWidth="217.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -47,7 +48,7 @@
                     <columns>
                       <TableColumn fx:id="tab3TableId" prefWidth="72.0" text="Table" />
                       <TableColumn fx:id="tab3Dish" prefWidth="150.0" text="Dish" />
-                        <TableColumn prefWidth="109.0" text="Comment" />
+                        <TableColumn fx:id="tab3Comment" prefWidth="109.0" text="Comment" />
                     </columns>
                   </TableView>
                </children></AnchorPane>

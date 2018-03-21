@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Restaurant.Dish;
@@ -13,6 +14,7 @@ import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ public class ServingScreen implements Initializable {
     public Button DishReadyButton;
     public TableColumn tab1Comment;
     public TableColumn tab2Comment;
+    public TableColumn tab3Comment;
+    public Label checkLabel;
 
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
@@ -69,6 +73,7 @@ public class ServingScreen implements Initializable {
 
         tab3TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
     }
 
     public <T, S> TableColumn<S, T> getTableIDColumn() {
@@ -85,6 +90,14 @@ public class ServingScreen implements Initializable {
 
     public void rowSelected(MouseEvent mouseEvent) {
         this.dishSelectedTab1 = (Dish) tab1Table.getSelectionModel().getSelectedItem();
+        if(cook.canBePrepared(dishSelectedTab1,restaurant.getInventory())){
+            checkLabel.setText("Can be Prepared");
+            checkLabel.setTextFill(Paint.valueOf("Green"));
+        }
+        else{
+            checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
+            checkLabel.setTextFill(Paint.valueOf("Red"));
+        }
         System.out.println(dishSelectedTab1.getTableName());
     }
 
