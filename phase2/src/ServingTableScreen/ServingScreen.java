@@ -132,10 +132,15 @@ public class ServingScreen implements Initializable {
     }
     public void dishReadyToBeServed(ActionEvent actionEvent) {
         try {
-            cook.serveDish(dishSelectedTab2, restaurant.getServingTable());
-            setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-            setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-            setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                cook.serveDish(dishSelectedTab2, restaurant.getServingTable());
+                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+                setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+                setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+            }
         }
         catch (NullPointerException e){
             System.out.println("No row selected");
