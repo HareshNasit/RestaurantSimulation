@@ -77,6 +77,7 @@ public class Cook implements IWorker, ServingTableListener {
     prepareDish(dish, inventory);
     // servingTable.addToBeCooking(index);
     servingTable.addToBeCooking(dish);
+    dish.setComment("Cook");
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -94,6 +95,7 @@ public class Cook implements IWorker, ServingTableListener {
     // Dish dish = servingTable.getDishToBeCooked(index);
     // servingTable.addToBeCooking(index);
       servingTable.addToBeCooking(dish);
+      dish.setComment("returned");
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",

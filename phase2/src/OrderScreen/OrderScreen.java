@@ -27,6 +27,14 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableView orderTableView;
     public TableColumn priceColumn;
 
+    public TableColumn getPriceColumn() {
+        return priceColumn;
+    }
+
+    public void setPriceColumn(TableColumn priceColumn) {
+        this.priceColumn = priceColumn;
+    }
+
     public TableColumn getCustomerNumber() {
         return customerNumber;
     }
@@ -130,7 +138,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
      * Gives the data of the selected cell which is the price of the dish in this case
      * @param actionEvent
      */
-    public void getSelectedCellPrice(ActionEvent actionEvent){}
+    public void getSelectedCellPrice(ActionEvent actionEvent){
+        TablePosition pos = (TablePosition) orderTableView.getSelectionModel().getSelectedCells().get(3);
+        int row = pos.getRow();
+
+// Item here is the table view type:
+        Object item = orderTableView.getItems().get(row);
+
+        TableColumn col = pos.getTableColumn();
+
+// this gives the value in the selected cell:
+        String data = (String) col.getCellObservableValue(item).getValue();
+        System.out.println(data);
+    }
 
     /**
      * Prints the bill for the table.
@@ -139,6 +159,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public void printTableBill(ActionEvent actionEvent){
 
     }
-    
+
 }
 

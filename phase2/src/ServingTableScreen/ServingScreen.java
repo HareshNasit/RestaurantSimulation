@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import Restaurant.Dish;
@@ -13,6 +14,7 @@ import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ public class ServingScreen implements Initializable {
     public TableView tab1Table;
     public TableColumn tab1TableId;
     public TableColumn tab1Dish;
-    public Button check;
     public Button accept;
     public Button reject;
     public TableView tab2Table;
@@ -35,6 +36,10 @@ public class ServingScreen implements Initializable {
     public TableColumn tab3Dish;
     public AnchorPane tab1;
     public Button DishReadyButton;
+    public TableColumn tab1Comment;
+    public TableColumn tab2Comment;
+    public TableColumn tab3Comment;
+    public Label checkLabel;
 
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
@@ -60,12 +65,15 @@ public class ServingScreen implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab1Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab1Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
         tab2TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab2Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab2Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
         tab3TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+        tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
     }
 
     public <T, S> TableColumn<S, T> getTableIDColumn() {
@@ -82,6 +90,14 @@ public class ServingScreen implements Initializable {
 
     public void rowSelected(MouseEvent mouseEvent) {
         this.dishSelectedTab1 = (Dish) tab1Table.getSelectionModel().getSelectedItem();
+        if(cook.canBePrepared(dishSelectedTab1,restaurant.getInventory())){
+            checkLabel.setText("Can be Prepared");
+            checkLabel.setTextFill(Paint.valueOf("Green"));
+        }
+        else{
+            checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
+            checkLabel.setTextFill(Paint.valueOf("Red"));
+        }
         System.out.println(dishSelectedTab1.getTableName());
     }
 
@@ -105,10 +121,6 @@ public class ServingScreen implements Initializable {
         cook.rejectDish(dishSelectedTab1,restaurant.getServingTable());
         setCookTable(restaurant.getServingTable().getDishesToBeCooked());
     }
-
-    public void checkDish(ActionEvent actionEvent) {
-    }
-
     public void rowSelectedTab2(MouseEvent mouseEvent){
         this.dishSelectedTab2 = (Dish) tab2Table.getSelectionModel().getSelectedItem();
         System.out.println(dishSelectedTab2.getTableName());
