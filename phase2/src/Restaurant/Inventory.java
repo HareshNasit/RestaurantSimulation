@@ -88,6 +88,13 @@ public class Inventory {
       return this.inventory.get(ingredient);
   }
 
+  public Collection<InventoryIngredient> getInventoryAsCollection(){
+    return inventory.values();
+  }
+
+  public void addNewIngredient(InventoryIngredient ingredient){
+    inventory.put(ingredient.getName(), ingredient);
+  }
 
   /**
    * Reduces the current stock of String ingredient by int amount if available

@@ -125,7 +125,6 @@ public class ManagerScreenController implements Initializable {
     }
   }
 
-
   public void buttonAddAction(){
 
       String name = textFieldIngredient.getText().trim();
@@ -134,11 +133,9 @@ public class ManagerScreenController implements Initializable {
       int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
       InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
       inventory.addNewIngredient(ingredient);
-
       //There should be a better way to set this
       tableInventory.setItems(getIngredients());
       clearTextFields();
-
 
   }
 
