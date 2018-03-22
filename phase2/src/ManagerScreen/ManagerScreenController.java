@@ -36,6 +36,8 @@ import javafx.stage.Stage;
 
 public class ManagerScreenController implements Initializable {
 
+  private Inventory inventory;
+
   private final String  REQUESTFILE = "request.txt";
   @FXML
   private TableColumn columnIngredient;
@@ -82,7 +84,11 @@ public class ManagerScreenController implements Initializable {
     getColumnRestock().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
     getColumnThreshold().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
+    inventory = new Inventory();
+    inventory.readInventory();
+
     tableInventory.setItems(getIngredients());
+    this.setIngredientTableRowAction();
 
     //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
 
@@ -101,10 +107,7 @@ public class ManagerScreenController implements Initializable {
 
   private ObservableList<InventoryIngredient> getIngredients() {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
-    InventoryIngredient adda = new InventoryIngredient("apples", 13);
-    InventoryIngredient tyy = new InventoryIngredient("popp", 44);
-
-    ingredients.addAll(adda, tyy);
+    ingredients.setAll(inventory.getInventoryAsCollection());
     return ingredients;
   }
 
@@ -122,33 +125,28 @@ public class ManagerScreenController implements Initializable {
     }
   }
 
-  public void test() throws IOException{
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-        "../TablesScreen/TablesScreen.fxml"));
-    Parent root1 = fxmlLoader.load();
-    Stage stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    //stage.initStyle(StageStyle.UNDECORATED);
-    stage.setTitle("ABC");
-    stage.setScene(new Scene(root1));
-    stage.show();
-  }
 
-  public void buttonAddEdit(){
+  public void buttonAddAction(){
 
-    if( getTableInventory().getSelectionModel().getSelectedItem() != null){
       String name = textFieldIngredient.getText().trim();
       int amount = Integer.valueOf(textFieldAmount.getText().trim());
       int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
       int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
       InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
+      inventory.addNewIngredient(ingredient);
+
+      //There should be a better way to set this
+      tableInventory.setItems(getIngredients());
+      clearTextFields();
 
 
-    } else {
+  }
 
-
-    }
-
+  private void clearTextFields(){
+    textFieldThreshold.clear();
+    textFieldIngredient.clear();
+    textFieldAmount.clear();
+    textFieldRestock.clear();
 
   }
 
@@ -162,9 +160,6 @@ public class ManagerScreenController implements Initializable {
           textFieldAmount.setText(String.valueOf(ingredient.getCurrentQuantity()));
           textFieldRestock.setText(String.valueOf(ingredient.getRestockQuantity()));
           textFieldThreshold.setText(String.valueOf(ingredient.getLowerThreshold()));
-
-
-
 
         }
       });
