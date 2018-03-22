@@ -1,7 +1,10 @@
 package ManagerScreen;
 
 import Restaurant.Cook;
+import Restaurant.Dish;
+import Restaurant.DishIngredient;
 import Restaurant.IWorker;
+import Restaurant.Inventory;
 import Restaurant.InventoryIngredient;
 import Restaurant.Manager;
 import Restaurant.Server;
@@ -15,8 +18,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -31,8 +37,16 @@ import javafx.stage.Stage;
 public class ManagerScreenController implements Initializable {
 
   private final String  REQUESTFILE = "request.txt";
-
-
+  @FXML
+  private TableColumn columnIngredient;
+  @FXML
+  private TableColumn columnAmount;
+  @FXML
+  private TableColumn columnRestock;
+  @FXML
+  private TableColumn columnThreshold;
+  @FXML
+  private Button buttonAddEdit;
   @FXML
   private TextField textFieldThreshold;
   @FXML
@@ -63,16 +77,17 @@ public class ManagerScreenController implements Initializable {
     getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
     tableViewWorkers.setItems(getWorkerData());
 
+    getColumnIngredient().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
+    getColumnAmount().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
+    getColumnRestock().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
+    getColumnThreshold().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+
+    tableInventory.setItems(getIngredients());
+
     //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
 
     updateRequestText();
 
-  }
-
-  private ObservableList<InventoryIngredient> getInventoryTableData() {
-    ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
-
-    return ingredients;
   }
 
   private ObservableList<IWorker> getWorkerData() {
@@ -82,6 +97,15 @@ public class ManagerScreenController implements Initializable {
     Manager man = new Manager("Ling");
     workers.addAll(server, cook, man);
     return workers;
+  }
+
+  private ObservableList<InventoryIngredient> getIngredients() {
+    ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
+    InventoryIngredient adda = new InventoryIngredient("apples", 13);
+    InventoryIngredient tyy = new InventoryIngredient("popp", 44);
+
+    ingredients.addAll(adda, tyy);
+    return ingredients;
   }
 
   /**
@@ -113,7 +137,11 @@ public class ManagerScreenController implements Initializable {
   public void buttonAddEdit(){
 
     if( getTableInventory().getSelectionModel().getSelectedItem() != null){
-
+      String name = textFieldIngredient.getText().trim();
+      int amount = Integer.valueOf(textFieldAmount.getText().trim());
+      int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
+      int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
+      InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
 
 
     } else {
@@ -124,7 +152,27 @@ public class ManagerScreenController implements Initializable {
 
   }
 
-  
+  public void setIngredientTableRowAction() {
+    getTableInventory().setRowFactory(tv -> {
+      TableRow<InventoryIngredient> row = new TableRow<>();
+      row.setOnMouseClicked(event -> {
+        if (!row.isEmpty()) {
+          InventoryIngredient ingredient = row.getItem();
+          textFieldIngredient.setText(ingredient.getName());
+          textFieldAmount.setText(String.valueOf(ingredient.getCurrentQuantity()));
+          textFieldRestock.setText(String.valueOf(ingredient.getRestockQuantity()));
+          textFieldThreshold.setText(String.valueOf(ingredient.getLowerThreshold()));
+
+
+
+
+        }
+      });
+      return row;
+    });
+  }
+
+
 
   //---------------------- Getters and Setters --------------------
 
@@ -214,5 +262,45 @@ public class ManagerScreenController implements Initializable {
 
   public void setTableInventory(TableView tableInventory) {
     this.tableInventory = tableInventory;
+  }
+
+  public TableColumn getColumnIngredient() {
+    return columnIngredient;
+  }
+
+  public void setColumnIngredient(TableColumn columnIngredient) {
+    this.columnIngredient = columnIngredient;
+  }
+
+  public TableColumn getColumnAmount() {
+    return columnAmount;
+  }
+
+  public void setColumnAmount(TableColumn columnAmount) {
+    this.columnAmount = columnAmount;
+  }
+
+  public TableColumn getColumnRestock() {
+    return columnRestock;
+  }
+
+  public void setColumnRestock(TableColumn columnRestock) {
+    this.columnRestock = columnRestock;
+  }
+
+  public TableColumn getColumnThreshold() {
+    return columnThreshold;
+  }
+
+  public void setColumnThreshold(TableColumn columnThreshold) {
+    this.columnThreshold = columnThreshold;
+  }
+
+  public Button getButtonAddEdit() {
+    return buttonAddEdit;
+  }
+
+  public void setButtonAddEdit(Button buttonAddEdit) {
+    this.buttonAddEdit = buttonAddEdit;
   }
 }
