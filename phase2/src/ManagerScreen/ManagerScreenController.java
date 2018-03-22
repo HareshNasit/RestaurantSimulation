@@ -74,7 +74,7 @@ public class ManagerScreenController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    //Sets the columns of each table to their respective types
     getColumnType().setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
     tableViewWorkers.setItems(getWorkerData());
@@ -86,7 +86,6 @@ public class ManagerScreenController implements Initializable {
 
     inventory = new Inventory();
     inventory.readInventory();
-
     tableInventory.setItems(getIngredients());
     this.setIngredientTableRowAction();
 
@@ -96,6 +95,10 @@ public class ManagerScreenController implements Initializable {
 
   }
 
+  /**
+   * Generates an ObservableList of IWorkers
+   * @return ObservableList of IWorkers
+   */
   private ObservableList<IWorker> getWorkerData() {
     ObservableList<IWorker> workers = FXCollections.observableArrayList();
     Server server = new Server("John");
@@ -105,6 +108,10 @@ public class ManagerScreenController implements Initializable {
     return workers;
   }
 
+  /**
+   * Generates an ObservableList of InventoryIngredients
+   * @return ObservableList of Inventory Ingredients
+   */
   private ObservableList<InventoryIngredient> getIngredients() {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
     ingredients.setAll(inventory.getInventoryAsCollection());
@@ -125,6 +132,10 @@ public class ManagerScreenController implements Initializable {
     }
   }
 
+  /**
+   * When the add button is clicked, a new ingredient is created as specified by the respective
+   * text fields
+   */
   public void buttonAddAction(){
 
       String name = textFieldIngredient.getText().trim();
@@ -139,6 +150,28 @@ public class ManagerScreenController implements Initializable {
 
   }
 
+  /**
+   * Edits a selected ingredients based on the text fields and updates accordingly.
+   */
+  public void buttonEditAction(){
+    InventoryIngredient ingredient = (InventoryIngredient)
+        tableInventory.getSelectionModel().getSelectedItem();
+
+    if (ingredient != null){
+      ingredient.setCurrentQuantity(Integer.valueOf(textFieldAmount.getText().trim()));
+      ingredient.setRestockQuantity(Integer.valueOf(textFieldRestock.getText().trim()));
+      ingredient.setLowerThreshold(Integer.valueOf(textFieldThreshold.getText().trim()));
+    }
+
+    //Only works when editing objects directlty
+    tableInventory.refresh();
+    clearTextFields();
+
+  }
+
+  /**
+   * Clears all the text field of input
+   */
   private void clearTextFields(){
     textFieldThreshold.clear();
     textFieldIngredient.clear();
@@ -147,16 +180,28 @@ public class ManagerScreenController implements Initializable {
 
   }
 
-  public void setIngredientTableRowAction() {
+  /**
+   * Populate the text fields with the respective data of ingredient
+   * @param ingredient Ingredient that is going to populate the fields
+   */
+  private void populateTextFields(InventoryIngredient ingredient){
+    textFieldIngredient.setText(ingredient.getName());
+    textFieldAmount.setText(String.valueOf(ingredient.getCurrentQuantity()));
+    textFieldRestock.setText(String.valueOf(ingredient.getRestockQuantity()));
+    textFieldThreshold.setText(String.valueOf(ingredient.getLowerThreshold()));
+  }
+
+  /**
+   * Handles the events when a row is selected for the IngredientsTable
+   */
+  private void setIngredientTableRowAction() {
     getTableInventory().setRowFactory(tv -> {
       TableRow<InventoryIngredient> row = new TableRow<>();
       row.setOnMouseClicked(event -> {
         if (!row.isEmpty()) {
+
           InventoryIngredient ingredient = row.getItem();
-          textFieldIngredient.setText(ingredient.getName());
-          textFieldAmount.setText(String.valueOf(ingredient.getCurrentQuantity()));
-          textFieldRestock.setText(String.valueOf(ingredient.getRestockQuantity()));
-          textFieldThreshold.setText(String.valueOf(ingredient.getLowerThreshold()));
+          populateTextFields(ingredient);
 
         }
       });
