@@ -170,6 +170,17 @@ public class ManagerScreenController implements Initializable {
   }
 
   /**
+   * Edits a selected ingredients based on the text fields and updates accordingly.
+   */
+  public void buttonDeleteAction(){
+    InventoryIngredient ingredient = (InventoryIngredient)
+        tableInventory.getSelectionModel().getSelectedItem();
+    inventory.removeIngredient(ingredient.getName());
+    tableInventory.setItems(getIngredients());
+    clearTextFields();
+  }
+
+  /**
    * Clears all the text field of input
    */
   private void clearTextFields(){
