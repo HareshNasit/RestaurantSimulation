@@ -28,7 +28,7 @@
                   </TableView>
                   <Button fx:id="reject" layoutX="477.0" layoutY="266.0" mnemonicParsing="false" onAction="#rejectDish" prefHeight="85.0" prefWidth="105.0" text="Reject" />
                   <Label fx:id="checkLabel" layoutX="347.0" layoutY="110.0" prefHeight="96.0" prefWidth="217.0" />
-                  <Button layoutX="463.0" layoutY="3.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="133.0" text="Refresh" />
+                  <Button fx:id="tab1Refresh" layoutX="463.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshScreen" prefHeight="81.0" prefWidth="133.0" text="Refresh" />
                   <ImageView fitHeight="35.0" fitWidth="53.0" layoutX="512.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@refresh.png" />

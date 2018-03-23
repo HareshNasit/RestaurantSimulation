@@ -37,6 +37,7 @@ public class ServingScreen implements Initializable {
     public TableColumn tab2Comment;
     public TableColumn tab3Comment;
     public Label checkLabel;
+    public Button tab1Refresh;
 
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
@@ -146,5 +147,11 @@ public class ServingScreen implements Initializable {
             System.out.println("No row selected");
         }
         dishSelectedTab2 = null;
+    }
+
+    public void refreshScreen(ActionEvent actionEvent) {
+        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
     }
 }
