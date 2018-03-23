@@ -96,6 +96,10 @@ public class Inventory {
     inventory.put(ingredient.getName(), ingredient);
   }
 
+  public void removeIngredient(String ingredientName){
+    inventory.remove(ingredientName);
+  }
+
   /**
    * Reduces the current stock of String ingredient by int amount if available
    *

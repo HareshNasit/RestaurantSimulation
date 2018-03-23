@@ -1,5 +1,6 @@
 package TablesScreen;
 
+import ManagerScreen.ManagerListener;
 import Restaurant.Table;
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
@@ -27,8 +29,9 @@ import javafx.stage.Stage;
 /**
  * The controller for the TablesScreen. Manages all user interactions regarding this GUI
  */
-public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
+public class TablesScreen implements EventHandler<ActionEvent>, Initializable, ManagerListener {
 
+  public Label labelTest;
   @FXML
   private TableView<Table> tableView; //Table of tables
   @FXML
@@ -66,7 +69,9 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
       Parent root = loader.load();
       hBox.getChildren().setAll(root);
     } catch (IOException e){
-
+      System.out.println("File Doesn't Exist Bro");
+    } catch (NullPointerException e){
+      System.out.println("Table Doesn't Exist Bro");
     }
 
 
@@ -103,6 +108,7 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
     getTableIDColumn().setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
     getOccupiedTableColumn().setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
     System.out.println(getTableView());
+    labelTest.setVisible(false);
   }
 
   /**
@@ -193,5 +199,11 @@ public class TablesScreen implements EventHandler<ActionEvent>, Initializable {
 
   public void setTableIDColumn(TableColumn tableIDColumn) {
     this.tableIDColumn = tableIDColumn;
+  }
+
+  @Override
+  public void update() {
+    System.out.println("memes");
+    labelTest.setVisible(true);
   }
 }

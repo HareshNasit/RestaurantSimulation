@@ -72,6 +72,8 @@ public class ManagerScreenController implements Initializable {
   @FXML
   private TableView tableInventory;
 
+  private ManagerListener test;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     //Sets the columns of each table to their respective types
@@ -221,6 +223,10 @@ public class ManagerScreenController implements Initializable {
   }
 
 
+  public void callWorker(){
+    test.update();
+    System.out.println("WILL MEMES APPEAR??");
+  }
 
   //---------------------- Getters and Setters --------------------
 
@@ -351,4 +357,13 @@ public class ManagerScreenController implements Initializable {
   public void setButtonAddEdit(Button buttonAddEdit) {
     this.buttonAddEdit = buttonAddEdit;
   }
+
+  public ManagerListener getTest() {
+    return test;
+  }
+
+  public void setTest(ManagerListener test) {
+    this.test = test;
+  }
+
 }
