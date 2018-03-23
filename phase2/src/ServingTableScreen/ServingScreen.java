@@ -131,7 +131,7 @@ public class ServingScreen implements Initializable {
 
 
     }
-    public void dishReadyToBeServed(ActionEvent actionEvent) {
+    public void dishReadyToBeServed() {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you?",
                     ButtonType.YES, ButtonType.CANCEL);
