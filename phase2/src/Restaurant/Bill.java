@@ -56,7 +56,7 @@ public class Bill {
      * @param tip
      * @return
      */
-    public static String finalPaymentSingleTip(Table table, int customerNum, double tip) {
+    public static String finalPaymentSinglePerson(Table table, int customerNum, double tip) {
         String billText = "";
         billText += "Table: " + table.getTableID() + ", ";
         billText += "CustomerNumber: " + customerNum + ", ";
@@ -79,14 +79,14 @@ public class Bill {
      * @param tip
      * @return
      */
-    public static String finalPaymentBillPercent(ArrayList<Dish> orders, double tip) {
+    public static String finalPaymentBillTable(ArrayList<Dish> orders, double tip) {
         String billText = "";
         for (Dish order : orders) {
             billText += order.getStringForBill() + System.lineSeparator();
         }
         double subtotal = getSubtotal(orders);
         double tax = getTax(subtotal);
-        double tipAmount = get2Decimals(subtotal * (1 + tip / 100));
+        double tipAmount = get2Decimals(tip);
         double total = getTotal(subtotal + tipAmount, tax);
         billText += "SubTotal: $" + subtotal + System.lineSeparator();
         billText += "Tax: $" + tax + System.lineSeparator();
@@ -135,5 +135,8 @@ public class Bill {
         return billText;
     }
 
+    public static double getPercentWithTip(double subtotal, double tip) {
+        return Bill.get2Decimals(subtotal * tip / 100);
+    }
 
 }
