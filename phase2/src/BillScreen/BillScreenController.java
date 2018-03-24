@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -86,51 +87,52 @@ public class BillScreenController implements Initializable {
         scrollMenu.setItems(labels);
     }
 
-    public double getTip() {
+    public void payButton() {
         ButtonType percent = new ButtonType("%");
         ButtonType dollarAmount = new ButtonType("$");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Pick tip type",
                 percent, dollarAmount, ButtonType.CANCEL);
 
+        alert.showAndWait();
+        if(alert.getResult() == percent){
+            if(!getTextInput().equals("")){
+
+            }
+        }else if(alert.getResult() == dollarAmount){
+            if(!getTextInput().equals("")){
+
+            }
+        }
+
+
+    }
+
+    private String getTextInput(){
 
         Dialog dialog = new TextInputDialog();
         dialog.setTitle("Tip Dialog");
         dialog.setHeaderText("Enter your tip");
         Optional<String> result = dialog.showAndWait();
-        String entered = "none.";
+        String entered = "";
 
-        if (result.isPresent()) {
 
+        while (result.isPresent() && ((result.get()).equals("") || !validTipEntry(result.get()))) {
+            result = dialog.showAndWait();
+        }
+        if(result.isPresent()){
             entered = result.get();
+            System.out.println(entered);
         }
-
-        return 0;
+        return entered;
     }
 
-    /**
-     *
-     *
-     */
-    public void generateCustomerReceiptTxt() {
-        Date date = new Date();
-
-        String fileName = "receipt2.txt.txt";
-        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
-
-        } catch (Exception e) {
-        }
-    }
-
-    /**
-     *
-     */
-    public void generateRestaurantReceiptTxt() {
-        Date date = new Date();
-
-        String fileName = "";
-        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
-
-        } catch (Exception e) {
+    private boolean validTipEntry(String tip) {
+        try{
+            double tipAmount = Double.parseDouble(tip);
+            boolean fail = (BigDecimal.valueOf(tipAmount).scale() > 2);
+            return !fail;
+        }catch(NumberFormatException e){
+            return false;
         }
     }
 
