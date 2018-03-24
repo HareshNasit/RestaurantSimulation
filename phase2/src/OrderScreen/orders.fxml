@@ -20,7 +20,7 @@
          </font></Label>
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" text="Add dish" />
       <Button fx:id="removeDish" layoutX="107.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
-      <Button fx:id="printTableBill" layoutX="525.0" layoutY="350.0" mnemonicParsing="false" onAction="#openBillScreen" text="Print Table bill" />
+      <Button fx:id="openBillScreen" layoutX="515.0" layoutY="350.0" mnemonicParsing="false" onAction="#openBillScreen" text="Open bill screen" />
       <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="291.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
@@ -37,7 +37,6 @@
             <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
         </columns>
       </TableView>
-      <Button fx:id="printIndividualBillButton" layoutX="384.0" layoutY="350.0" mnemonicParsing="false" text="Print Individual bills" />
       <Button fx:id="addCommentButton" layoutX="210.0" layoutY="350.0" mnemonicParsing="false" text="Add comment" />
   </children>
 </Pane>

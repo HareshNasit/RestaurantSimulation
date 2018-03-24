@@ -32,8 +32,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableColumn menuDishColumn;
     public TableColumn menuPriceColumn;
     public TableColumn menuIngredientsColumn;
-    public Button printTableBill;
-    public Button printIndividualBillButton;
+    public Button openBillScreen;
     public TableColumn commentColumn;
     public TableColumn customerNumber;
     public TableColumn idColumn;
