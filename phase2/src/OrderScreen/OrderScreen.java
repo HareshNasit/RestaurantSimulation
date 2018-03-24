@@ -186,6 +186,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     }
 
     /**
+     * Opens the bill screen GUI when the print bill button is clicked
+     */
+    public void openBillScreen(){
+
+    }
+
+    /**
      * Gives the data of the selected cell which is the price of the dish in this case
      * @param actionEvent
      */
