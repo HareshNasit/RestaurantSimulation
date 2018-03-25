@@ -1,12 +1,9 @@
 package OrderScreen;
 
 import Restaurant.Dish;
-import Restaurant.Inventory;
-import Restaurant.Menu;
-import Restaurant.MenuItem;
 import Restaurant.Restaurant;
 import Restaurant.Server;
-import Restaurant.ServingTable;
+import Restaurant.Table;
 import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +23,10 @@ import java.util.ResourceBundle;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
+
+    private Server server;
+    private Table table;
+    private Restaurant restaurant;
 
     public Label tableOrderTitle;
     public Label menuLabel;
@@ -238,13 +239,38 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "../TablesScreen/TablesScreen.fxml"));
             Parent root1 = fxmlLoader.load();
-            paneBox.getChildren().setAll(root1);}
-
+            TablesScreen controller = fxmlLoader.getController();
+            controller.setServer(getServer());
+            controller.setRestaurant(getRestaurant());
+          paneBox.getChildren().setAll(root1);}
 
 
         catch (IOException e){}
 
     }
 
+  public Server getServer() {
+    return server;
+  }
+
+  public void setServer(Server server) {
+    this.server = server;
+  }
+
+  public Table getTable() {
+    return table;
+  }
+
+  public void setTable(Table table) {
+    this.table = table;
+  }
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
+  }
 }
 
