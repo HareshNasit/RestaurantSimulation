@@ -146,39 +146,13 @@ public class BillScreenController implements Initializable {
       if (customer.equals("All")) {
         double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
         if (!(tip == -1)) {
-          Alert alert =
-              new Alert(
-                  Alert.AlertType.CONFIRMATION,
-                  Bill.finalPaymentBillTable(table, tip),
-                  ButtonType.YES,
-                  ButtonType.CANCEL);
-          alert.setTitle("Is this all correct?");
-          alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-          alert.showAndWait();
-          if (alert.getResult() == ButtonType.YES) {
-            restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
-            restaurant.writeToRECEIPTFILE(Bill.finalPaymentBillTable(table, tip));
-          }
+          allBillConfirmationHelper(tip);
         }
 
       } else {
         double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
         if (tip != -1) {
-          int customerNum =
-              Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
-          Alert alert =
-              new Alert(
-                  Alert.AlertType.CONFIRMATION,
-                  Bill.finalPaymentSinglePerson(table, customerNum, tip),
-                  ButtonType.YES,
-                  ButtonType.CANCEL);
-          alert.setTitle("Is this all correct?");
-          alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-          alert.showAndWait();
-          if (alert.getResult() == ButtonType.YES) {
-            restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
-            restaurant.writeToRECEIPTFILE(Bill.finalPaymentSinglePerson(table, customerNum, tip));
-          }
+          customerBillConfirmationHelper(customer, tip);
         }
       }
 
@@ -190,5 +164,30 @@ public class BillScreenController implements Initializable {
 
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
+  }
+
+  private void customerBillConfirmationHelper(String customer, double tip) {
+    int customerNum =
+        Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
+    if (alertBillHelper(Bill.finalPaymentSinglePerson(table, customerNum, tip), tip)
+        == ButtonType.YES) {
+      restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
+      restaurant.writeToRECEIPTFILE(Bill.finalPaymentSinglePerson(table, customerNum, tip));
+    }
+  }
+
+  private void allBillConfirmationHelper(double tip) {
+    if (alertBillHelper(Bill.finalPaymentBillTable(table, tip), tip) == ButtonType.YES) {
+      restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
+      restaurant.writeToRECEIPTFILE(Bill.finalPaymentBillTable(table, tip));
+    }
+  }
+
+  private ButtonType alertBillHelper(String bill, double tip) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bill, ButtonType.YES, ButtonType.CANCEL);
+    alert.setTitle("Is this all correct?");
+    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    alert.showAndWait();
+    return alert.getResult();
   }
 }

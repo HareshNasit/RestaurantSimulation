@@ -1,12 +1,10 @@
 package OrderScreen;
 
 import Restaurant.Dish;
-import Restaurant.Inventory;
-import Restaurant.Menu;
-import Restaurant.MenuItem;
 import Restaurant.Restaurant;
 import Restaurant.Server;
-import Restaurant.ServingTable;
+import Restaurant.Table;
+import Restaurant.MenuItem;
 import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +24,10 @@ import java.util.ResourceBundle;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
+
+    private Server server;
+    private Table table;
+    private Restaurant restaurant;
 
     public Label tableOrderTitle;
     public Label menuLabel;
@@ -238,7 +240,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "../TablesScreen/TablesScreen.fxml"));
             Parent root1 = fxmlLoader.load();
-            paneBox.getChildren().setAll(root1);}
+            TablesScreen controller = fxmlLoader.getController();
+            controller.setServer(getServer());
+            controller.setRestaurant(getRestaurant());
+            controller.update();
+          paneBox.getChildren().setAll(root1);}
 
 
 
@@ -246,5 +252,38 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
     }
 
+    public void update(){
+        menuTableView.setItems(getMenuItem());
+    }
+
+    public ObservableList<Restaurant.MenuItem> getMenuItem(){
+        ObservableList<Restaurant.MenuItem> menu = FXCollections.observableArrayList();
+        menu.addAll(restaurant.getMenu().getMenuItems());
+        return menu;
+    }
+
+  public Server getServer() {
+    return server;
+  }
+
+  public void setServer(Server server) {
+    this.server = server;
+  }
+
+  public Table getTable() {
+    return table;
+  }
+
+  public void setTable(Table table) {
+    this.table = table;
+  }
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
+  }
 }
 
