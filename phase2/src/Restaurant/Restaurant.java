@@ -15,6 +15,15 @@ public class Restaurant {
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
   private HashMap<String, Server> servers; // HashMap of servers name and the server.
   private HashMap<String, Cook> cooks; // HashMap of cooks name and the cook.
+
+  public HashMap<String, Table> getTables() {
+    return tables;
+  }
+
+  public void setTables(HashMap<String, Table> tables) {
+    this.tables = tables;
+  }
+
   private HashMap<String, Table> tables; // HashMap of table name and the table.
   private Manager manager; // The manager of the restaurant.
   private ServingTable servingTable; // The serving table of this restaurant.
