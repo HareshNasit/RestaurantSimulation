@@ -156,6 +156,7 @@ public class BillScreenController implements Initializable {
           alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
           alert.showAndWait();
           if (alert.getResult() == ButtonType.YES) {
+            restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
             restaurant.writeToRECEIPTFILE(Bill.finalPaymentBillTable(table, tip));
           }
         }
@@ -175,6 +176,7 @@ public class BillScreenController implements Initializable {
           alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
           alert.showAndWait();
           if (alert.getResult() == ButtonType.YES) {
+            restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
             restaurant.writeToRECEIPTFILE(Bill.finalPaymentSinglePerson(table, customerNum, tip));
           }
         }
