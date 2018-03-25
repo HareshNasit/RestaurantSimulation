@@ -171,6 +171,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
         getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         getCustomerNumber().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+
+        menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
+        menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
+        menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
+      //menuIdColumn.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+
+
         this.setRowAction();
         System.out.println(getOrderTableView());
     }
@@ -256,8 +263,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         menuTableView.setItems(getMenuItem());
     }
 
-    public ObservableList<Restaurant.MenuItem> getMenuItem(){
-        ObservableList<Restaurant.MenuItem> menu = FXCollections.observableArrayList();
+    public ObservableList<MenuItem> getMenuItem(){
+        ObservableList<MenuItem> menu = FXCollections.observableArrayList();
         menu.addAll(restaurant.getMenu().getMenuItems());
         return menu;
     }

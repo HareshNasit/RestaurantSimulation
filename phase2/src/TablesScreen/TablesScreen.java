@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import ServingTableScreen.ServingScreen;
+
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
+import server.ServerScreen;
 
 
 /**
@@ -64,6 +67,7 @@ public class TablesScreen implements Initializable {
       controller.setTable(table);
       controller.setServer(server);
       controller.setRestaurant(restaurant);
+      controller.update();
       hBox.getChildren().setAll(root);
 
     } catch (IOException e){
@@ -80,10 +84,12 @@ public class TablesScreen implements Initializable {
    */
   public void openServingTable() throws IOException{
     System.out.println("Loading Serving Table.....");
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(
         "../ServingTableScreen/ServingTableScreen.fxml"));
-    Parent root1 = fxmlLoader.load();
-
+    Parent root1 = loader.load();
+    ServingScreen controller = loader.getController();
+    controller.restaurant = restaurant;
+    controller.updateScreen();
     hBox.getChildren().setAll(root1);
   }
 
