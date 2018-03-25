@@ -1,7 +1,13 @@
 package OrderScreen;
 
 import Restaurant.Dish;
+import Restaurant.Inventory;
+import Restaurant.Menu;
 import Restaurant.MenuItem;
+import Restaurant.Restaurant;
+import Restaurant.Server;
+import Restaurant.ServingTable;
+import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -222,6 +228,21 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
      * @param actionEvent
      */
     public void printTableBill(ActionEvent actionEvent){
+
+    }
+
+    public void backButtonAction(){
+        try{
+
+            System.out.println("Loading Serving Table.....");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+                "../TablesScreen/TablesScreen.fxml"));
+            Parent root1 = fxmlLoader.load();
+            paneBox.getChildren().setAll(root1);}
+
+
+
+        catch (IOException e){}
 
     }
 
