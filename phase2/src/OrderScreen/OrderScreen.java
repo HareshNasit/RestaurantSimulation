@@ -87,12 +87,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     private String menuSelectedDishName;
     private int menuSelectedDishCustomerNum;
 
-    public void setOrderTable(ArrayList<Dish> orderedDishes){
-        ObservableList<Dish> dishes = FXCollections.observableArrayList();
-        dishes.addAll(orderedDishes);
-        this.menuIdColumn.getTableView().setItems(dishes);
-    }
-
     public TableColumn getMenuIdColumn() {
         return menuIdColumn;
     }
@@ -283,6 +277,12 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
      */
     public void printTableBill(ActionEvent actionEvent){
 
+    }
+
+    public void setOrderTable(ArrayList<Dish> orderedDishes){
+        ObservableList<Dish> dishes = FXCollections.observableArrayList();
+        dishes.addAll(orderedDishes);
+        this.idColumn.getTableView().setItems(dishes);
     }
 
     public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
