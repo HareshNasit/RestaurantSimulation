@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ServingScreen implements Initializable {
+public class ServingScreen implements Initializable, Restaurant.ModelControllerInterface {
 
 
     public TableView tab1Table;
@@ -150,6 +150,17 @@ public class ServingScreen implements Initializable {
     }
 
     public void refreshScreen(ActionEvent actionEvent) {
+        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+    }
+
+    public void refreshScreen1(ActionEvent actionEvent) {
+        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+    }
+    public void updateScreen(){
         setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
         setReadyTable(restaurant.getServingTable().getDishesToBeServed());

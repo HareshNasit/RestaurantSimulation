@@ -53,7 +53,18 @@
                         <TableColumn fx:id="tab2Comment" prefWidth="96.0" text="Comment" />
                     </columns>
                   </TableView>
-                  <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" text="Dish Ready" />
+                  <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready" />
+                  <Button fx:id="tab2Refresh" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshScreen1" prefHeight="78.0" prefWidth="110.0" text="Refresh" />
+                  <ImageView fitHeight="31.0" fitWidth="45.0" layoutX="510.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@refresh.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@tick.png" />
+                     </image>
+                  </ImageView>
                </children></AnchorPane>
       </content>
     </Tab>
