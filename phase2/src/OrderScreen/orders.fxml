@@ -25,7 +25,7 @@
       <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" onAction="#addDishToOrder" text="Add dish" />
       <Button fx:id="removeDish" layoutX="107.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
       <Button fx:id="openBillScreen" layoutX="515.0" layoutY="350.0" mnemonicParsing="false" onAction="#openBillScreen" text="Open bill screen" />
-      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" onMouseClicked="#getSelectedMenuDish" prefHeight="200.0" prefWidth="291.0">
+      <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="291.0">
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
           <TableColumn fx:id="nameColumn" prefWidth="114.0" text=" Dish name" />

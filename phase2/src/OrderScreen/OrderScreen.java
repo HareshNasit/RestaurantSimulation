@@ -48,7 +48,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableColumn nameColumn;
     public Button addCommentButton;
     public Pane paneBox;
-    private Dish menuSelectedRow;
 
     public Dish getMenuSelectedDish() {
         return menuSelectedDish;
@@ -299,14 +298,12 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                // server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
-                server.addOrder(table,menuSelectedRow);
+                server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
             }
         }
         catch(NullPointerException e){
             System.out.println("No row selected");
         }
-        this.menuSelectedRow = null;
     }
 
 
@@ -363,8 +360,5 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     this.restaurant = restaurant;
   }
 
-    public void getSelectedMenuDish(javafx.scene.input.MouseEvent mouseEvent) {
-        this.menuSelectedRow = (Dish) getMenuTableView().getSelectionModel().getSelectedItem();
-    }
 }
 
