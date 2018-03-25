@@ -6,11 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,13 +32,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public TableColumn menuDishColumn;
     public TableColumn menuPriceColumn;
     public TableColumn menuIngredientsColumn;
-    public Button printTableBill;
-    public Button printIndividualBillButton;
+    public Button openBillScreen;
     public TableColumn commentColumn;
     public TableColumn customerNumber;
     public TableColumn idColumn;
     public TableColumn nameColumn;
     public Button addCommentButton;
+    public Pane paneBox;
 
     public TableColumn getMenuIdColumn() {
         return menuIdColumn;
@@ -183,6 +186,17 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             });
             return row;
         });
+    }
+
+    /**
+     * Opens the bill screen GUI when the print bill button is clicked
+     */
+    public void openBillScreen() throws IOException {
+        System.out.println("Loading Bill Screen.....");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+                "../BillScreen/bill.fxml"));
+        Parent root1 = fxmlLoader.load();
+        paneBox.getChildren().setAll(root1);
     }
 
     /**
