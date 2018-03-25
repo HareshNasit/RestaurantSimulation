@@ -28,9 +28,9 @@
             <Button fx:id="tableButton" layoutX="11.0" layoutY="123.0" mnemonicParsing="false" onAction="#openTableMenu" prefHeight="40.0" prefWidth="273.0" text="Open Table" />
             <Button fx:id="servingTableButton" layoutX="11.0" layoutY="178.0" mnemonicParsing="false" onAction="#openServingTable" prefHeight="40.0" prefWidth="273.0" text="Open Serving Table" />
             <Button fx:id="managerButton" layoutX="11.0" layoutY="238.0" mnemonicParsing="false" onAction="#callManager" prefHeight="40.0" prefWidth="273.0" text="Call Manager" />
-            <Label fx:id="labelTest" layoutX="32.0" layoutY="313.0" text="WREEEEE">
+            <Label fx:id="labelServerName" layoutX="196.0" layoutY="14.0" prefHeight="18.0" prefWidth="87.0" text="Server Name">
                <font>
-                  <Font size="36.0" />
+                  <Font size="14.0" />
                </font>
             </Label>
          </children>
