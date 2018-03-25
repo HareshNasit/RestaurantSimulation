@@ -13,11 +13,8 @@ public class BillScreen extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("bill.fxml"));
-    Parent root = loader.load();
     Restaurant restaurant = new Restaurant(new Menu(), new Inventory(), new ServingTable());
     restaurant.createNewReceiptFile();
-
     Table table = new Table("A");
     Menu menu = new Menu();
     table.addSingleOrder(menu.getDish(1.0, "A", 1));
@@ -28,8 +25,12 @@ public class BillScreen extends Application {
     table.addSingleOrder(menu.getDish(2.0, "A", 6));
     table.addSingleOrder(menu.getDish(2.0, "A", 7));
     table.addSingleOrder(menu.getDish(3.0, "A", 8));
+      table.setTableSize(8);
+
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("bill.fxml"));
+    Parent root = loader.load();
     BillScreenController controller = loader.getController();
-    table.setTableSize(8);
+
     controller.setTable(table);
     controller.setRestaurant(restaurant);
 
