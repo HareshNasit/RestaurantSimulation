@@ -1,7 +1,10 @@
 package TablesScreen;
 
-import Restaurant.Table;
-import java.util.ArrayList;
+import Restaurant.Restaurant;
+import Restaurant.Server;
+import Restaurant.Menu;
+import Restaurant.Inventory;
+import Restaurant.ServingTable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,14 +27,16 @@ public class TestSuite extends Application {
     Parent root = loader.load();
 
     TablesScreen controller = loader.getController();
+    Server server = new Server("John");
+    ServingTable servingTable = new ServingTable();
+    Menu menu = new Menu();
+    Inventory inventory = new Inventory();
+    Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
 
-    ArrayList<Table> tables = new ArrayList<>();
-    tables.add(new Table("A"));
-    tables.add(new Table("B"));
-    tables.add(new Table("C"));
+    controller.setRestaurant(restaurant);
+    controller.setServer(server);
 
-
-    controller.setTables(tables);
+    controller.update();
 
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle("Table Screen");
