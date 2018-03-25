@@ -2,6 +2,7 @@ package BillScreen;
 
 import Restaurant.Bill;
 import Restaurant.Dish;
+import Restaurant.Restaurant;
 import Restaurant.Table;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ public class BillScreenController implements Initializable {
   public Button payButton;
   public Button receiptButton;
   public Table table;
+  public Restaurant restaurant;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
@@ -63,10 +65,7 @@ public class BillScreenController implements Initializable {
   public void createRestaurantReceiptWindow(Table table) {
     Alert alert =
         new Alert(
-            Alert.AlertType.CONFIRMATION,
-            Bill.outputBill(table),
-            ButtonType.OK,
-            ButtonType.CANCEL);
+            Alert.AlertType.CONFIRMATION, Bill.outputBill(table), ButtonType.OK, ButtonType.CANCEL);
     alert.setTitle("Is this all correct?");
     alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
     alert.showAndWait();
@@ -143,44 +142,51 @@ public class BillScreenController implements Initializable {
   public void createPaymentWindow() {
     String customer = (String) scrollMenu.getValue();
     if (!(customer == null)) {
+
       if (customer.equals("All")) {
-        double input = getTip(Bill.getSubtotal(table.getTableOrder()));
-        if (!(input == -1)) {
+        double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
+        if (!(tip == -1)) {
           Alert alert =
               new Alert(
                   Alert.AlertType.CONFIRMATION,
-                  Bill.finalPaymentBillTable(table, input),
-                  ButtonType.OK,
+                  Bill.finalPaymentBillTable(table, tip),
+                  ButtonType.YES,
                   ButtonType.CANCEL);
           alert.setTitle("Is this all correct?");
           alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
           alert.showAndWait();
-
+          if (alert.getResult() == ButtonType.YES) {
+            restaurant.writeToRECEIPTFILE(Bill.finalPaymentBillTable(table, tip));
+          }
         }
-
 
       } else {
-            double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
-            if(tip != -1){
-                int customerNum =
-                        Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
-                Alert alert =
-                        new Alert(
-                                Alert.AlertType.CONFIRMATION,
-                                Bill.finalPaymentSinglePerson(table, customerNum, tip),
-                                ButtonType.OK,
-                                ButtonType.CANCEL);
-                alert.setTitle("Is this all correct?");
-                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                alert.showAndWait();
-            }
-
+        double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
+        if (tip != -1) {
+          int customerNum =
+              Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
+          Alert alert =
+              new Alert(
+                  Alert.AlertType.CONFIRMATION,
+                  Bill.finalPaymentSinglePerson(table, customerNum, tip),
+                  ButtonType.YES,
+                  ButtonType.CANCEL);
+          alert.setTitle("Is this all correct?");
+          alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+          alert.showAndWait();
+          if (alert.getResult() == ButtonType.YES) {
+            restaurant.writeToRECEIPTFILE(Bill.finalPaymentSinglePerson(table, customerNum, tip));
+          }
         }
-
+      }
 
     } else {
       Alert alert2 = new Alert(Alert.AlertType.WARNING, "Select a Customer", ButtonType.OK);
       alert2.showAndWait();
     }
+  }
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
   }
 }

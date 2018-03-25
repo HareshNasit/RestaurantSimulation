@@ -199,8 +199,16 @@ public class Restaurant {
   public void createNewReceiptFile() {
     String pattern = "dd-MM-yyyy";
     String dateInString = new SimpleDateFormat(pattern).format(new Date());
-    String name = "receipt" + dateInString + ".txt";
-    File file = new File("/receipts/" + name);
+    String name = "receipts/receipt" + dateInString + ".txt";
+    System.out.println(name);
+    File file = new File(name);
+    try{
+        PrintWriter writer = new PrintWriter(name, "UTF-8");
+
+    }catch(IOException e){
+        System.out.println("No file");
+    }
+
     setRECEIPTFILE(name);
   }
 
@@ -213,4 +221,6 @@ public class Restaurant {
 
     }
   }
+
+
 }

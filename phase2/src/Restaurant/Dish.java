@@ -66,8 +66,10 @@ public class Dish extends MenuItem {
      */
     public String getStringForBill() {
         String billText = "";
-        billText += this.getName() + " - ";
-        billText += this.getComplementsString();
+        billText += this.getName();
+        if(!this.getComplementsString().equals("")){
+            billText += " - " + this.getComplementsString();
+        }
         billText += " - $" + this.getPrice();
         return billText;
     }

@@ -1,7 +1,6 @@
 package BillScreen;
 
-import Restaurant.Menu;
-import Restaurant.Table;
+import Restaurant.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +15,8 @@ public class BillScreen extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("bill.fxml"));
         Parent root = loader.load();
+        Restaurant restaurant = new Restaurant(new Menu(), new Inventory(), new ServingTable());
+        restaurant.createNewReceiptFile();
 
         Table table = new Table("A");
         Menu menu = new Menu();
@@ -27,6 +28,8 @@ public class BillScreen extends Application {
         BillScreenController controller = loader.getController();
         table.setTableSize(3);
         controller.setTable(table);
+        controller.setRestaurant(restaurant);
+
 
         primaryStage.setTitle("Bill Menu");
         primaryStage.setScene(new Scene(root));
