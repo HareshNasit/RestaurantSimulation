@@ -38,8 +38,8 @@ public class Bill {
   public static String outputSingleBill(Table table, int customerNum) {
 
     String billText = "";
-    billText += "Table: " + table.getTableID() + ", ";
-    billText += "CustomerNumber: " + customerNum + ", ";
+    billText += "Table: " + table.getTableID() + System.lineSeparator();
+    billText += "CustomerNumber: " + customerNum + System.lineSeparator();
     for (Dish order : table.getCustomerOrder(customerNum)) {
       billText += order.getStringForBill() + System.lineSeparator();
     }
