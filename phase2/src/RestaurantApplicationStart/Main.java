@@ -28,7 +28,7 @@ public class Main extends Application {
 
         ManagerScreenController manager = loader.getController();
         TablesScreen server = loader2.getController();
-        manager.setTest(server);
+
 
         window2.initModality(Modality.WINDOW_MODAL);
         window2.setTitle("Server");
