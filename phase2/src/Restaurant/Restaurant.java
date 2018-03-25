@@ -204,32 +204,44 @@ public class Restaurant {
     this.RECEIPTFILE = fileName;
   }
 
-  /** Creates the receipt txt that keeps track of all the payments/bills. */
-  public void createNewReceiptFile() {
-    String pattern = "dd-MM-yyyy";
-    String dateInString = new SimpleDateFormat(pattern).format(new Date());
-    String name = "receipts/receipt" + dateInString + ".txt";
-    System.out.println(name);
-    File file = new File(name);
-    try{
-        PrintWriter writer = new PrintWriter(name, "UTF-8");
+    /** Creates the receipt txt that keeps track of all the payments/bills. */
+    public void createNewReceiptFile() {
+        String pattern = "dd-MM-yyyy";
+        String dateInString = new SimpleDateFormat(pattern).format(new Date());
+        String name = "receipts/receipt" + dateInString + ".txt";
 
-    }catch(IOException e){
-        System.out.println("No file");
+        File file = new File(name);
+
+        try {
+            PrintWriter writer = new PrintWriter(name, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setRECEIPTFILE(name);
     }
 
-    setRECEIPTFILE(name);
-  }
-
-  public void writeToRECEIPTFILE(String content) {
-    try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(RECEIPTFILE, true));
-      writer.write(content);
-      writer.close();
-    } catch (IOException e) {
-
+    public void writeToRECEIPTFILE(String content) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(RECEIPTFILE, true));
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-  }
+
+    public String returnAllReceipts() {
+        String receipts = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(RECEIPTFILE)))) {
+            String line;
+            while ((line = reader.readLine()) != null)
+                receipts += line + System.lineSeparator();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return receipts;
+    }
 
 
 }
