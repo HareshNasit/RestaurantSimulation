@@ -296,6 +296,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty()) {
                     MenuItem rowData = row.getItem();
+                    menuSelectedDishId = rowData.getId();
+                    menuSelectedDishName = rowData.getName();
+                    menuSelectedDishCustomerNum = 1;
                     System.out.println(rowData.getPrice());
                 }
             });
@@ -319,9 +322,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         }
     }
 
-
-
-    
 
     public void backButtonAction(){
         try{
