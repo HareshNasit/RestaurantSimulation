@@ -38,8 +38,8 @@ public class Bill {
   public static String outputSingleBill(Table table, int customerNum) {
 
     String billText = "";
-    billText += "Table: " + table.getTableID() + ", ";
-    billText += "CustomerNumber: " + customerNum + ", ";
+    billText += "Table: " + table.getTableID() + System.lineSeparator();
+    billText += "CustomerNumber: " + customerNum + System.lineSeparator();
     for (Dish order : table.getCustomerOrder(customerNum)) {
       billText += order.getStringForBill() + System.lineSeparator();
     }
@@ -58,8 +58,8 @@ public class Bill {
    */
   public static String finalPaymentSinglePerson(Table table, int customerNum, double tip) {
     String billText = "";
-    billText += "Table: " + table.getTableID() + ", " + System.lineSeparator();
-    billText += "CustomerNumber: " + customerNum + ", " + System.lineSeparator();
+    billText += "Table: " + table.getTableID() + System.lineSeparator();
+    billText += "CustomerNumber: " + customerNum + System.lineSeparator();
     for (Dish order : table.getCustomerOrder(customerNum)) {
       billText += order.getStringForBill() + System.lineSeparator();
     }
@@ -75,7 +75,7 @@ public class Bill {
    */
   public static String finalPaymentBillTable(Table table, double tip) {
     String billText = "";
-    billText += "Table: " + table.getTableID() + ", " + System.lineSeparator();
+    billText += "Table: " + table.getTableID() + System.lineSeparator();
     ArrayList<Dish> orders = table.getTableOrder();
     for (Dish order : orders) {
       billText += order.getStringForBill() + System.lineSeparator();
