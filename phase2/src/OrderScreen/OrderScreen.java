@@ -172,7 +172,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         return orderTableView;
     }
 
-    public TableView<Dish> getMenuTableView(){
+    public TableView<MenuItem> getMenuTableView(){
         return menuTableView;
     }
 
@@ -218,6 +218,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
 
         this.setRowAction();
+        this.rowSelected();
         System.out.println(getOrderTableView());
     }
 
@@ -285,11 +286,21 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         this.idColumn.getTableView().setItems(dishes);
     }
 
-    public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
-        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
-        menuSelectedDishId = menuSelectedDish.getId();
-        menuSelectedDishName = menuSelectedDish.getName();
-        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
+    public void rowSelected() {
+//        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
+//        menuSelectedDishId = menuSelectedDish.getId();
+//        menuSelectedDishName = menuSelectedDish.getName();
+//        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
+        getMenuTableView().setRowFactory(tv -> {
+            TableRow<MenuItem> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (!row.isEmpty()) {
+                    MenuItem rowData = row.getItem();
+                    System.out.println(rowData.getPrice());
+                }
+            });
+            return row;
+        });
     }
 
     public void addDishToOrder(ActionEvent actionEvent){
@@ -299,6 +310,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
+                server.passOrder(getTable(), restaurant.getServingTable());
+                setOrderTable(restaurant.getTable(this.getTable().getTableID()).getTableOrder());
             }
         }
         catch(NullPointerException e){
