@@ -49,6 +49,43 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Button addCommentButton;
     public Pane paneBox;
 
+    public Dish getMenuSelectedDish() {
+        return menuSelectedDish;
+    }
+
+    public void setMenuSelectedDish(Dish menuSelectedDish) {
+        this.menuSelectedDish = menuSelectedDish;
+    }
+
+    private Dish menuSelectedDish;
+
+    public double getMenuSelectedDishId() {
+        return menuSelectedDishId;
+    }
+
+    public void setMenuSelectedDishId(double menuSelectedDishId) {
+        this.menuSelectedDishId = menuSelectedDishId;
+    }
+
+    public String getMenuSelectedDishName() {
+        return menuSelectedDishName;
+    }
+
+    public void setMenuSelectedDishName(String menuSelectedDishName) {
+        this.menuSelectedDishName = menuSelectedDishName;
+    }
+
+    public int getMenuSelectedDishCustomerNum() {
+        return menuSelectedDishCustomerNum;
+    }
+
+    public void setMenuSelectedDishCustomerNum(int menuSelectedDishCustomerNum) {
+        this.menuSelectedDishCustomerNum = menuSelectedDishCustomerNum;
+    }
+
+    private double menuSelectedDishId;
+    private String menuSelectedDishName;
+    private int menuSelectedDishCustomerNum;
 
     public void setOrderTable(ArrayList<Dish> orderedDishes){
         ObservableList<Dish> dishes = FXCollections.observableArrayList();
@@ -248,13 +285,20 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
     }
 
+    public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
+        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
+        menuSelectedDishId = menuSelectedDish.getId();
+        menuSelectedDishName = menuSelectedDish.getName();
+        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
+    }
+
     public void addDishToOrder(ActionEvent actionEvent){
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to add this dish?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                //server.addOrder(getTable(), restaurant.getMenu().getDish());
+                server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
             }
         }
         catch(NullPointerException e){
