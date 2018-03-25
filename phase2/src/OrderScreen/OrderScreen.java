@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -186,7 +187,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getOrderTableView().setRowFactory(tv -> {
             TableRow<Dish> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (!row.isEmpty()) {
+                if (!row.isEmpty() && event.getClickCount()==2) {
                     Dish rowData = row.getItem();
                     System.out.println("Click on: " + rowData.getName());
                     String finalString = "The price of this dish is: " + rowData.getPrice() + System.lineSeparator() +
