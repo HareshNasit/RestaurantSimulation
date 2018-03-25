@@ -121,7 +121,7 @@ public class Server implements IWorker, ServingTableListener {
    * @param table The table that asked for the bill
    */
   public void generateTableBill(Table table) {
-    Bill.outputBill(table.getTableOrder());
+    Bill.outputBill(table);
   }
 
   /**

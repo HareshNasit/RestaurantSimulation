@@ -34,7 +34,7 @@ public class BillScreenController implements Initializable {
         Alert alert =
             new Alert(
                 Alert.AlertType.CONFIRMATION,
-                Bill.outputBill(table.getTableOrder()),
+                Bill.outputBill(table),
                 ButtonType.OK,
                 ButtonType.CANCEL);
         alert.setTitle("Is this all correct?");
@@ -46,7 +46,7 @@ public class BillScreenController implements Initializable {
         Alert alert =
             new Alert(
                 Alert.AlertType.CONFIRMATION,
-                Bill.outputBill(table.getCustomerOrder(customerNum)),
+                Bill.outputSingleBill(table, customerNum),
                 ButtonType.OK,
                 ButtonType.CANCEL);
         alert.setTitle("Is this all correct?");
@@ -60,11 +60,11 @@ public class BillScreenController implements Initializable {
     }
   }
 
-  public void createRestaurantReceiptWindow(ArrayList<Dish> dishes) {
+  public void createRestaurantReceiptWindow(Table table) {
     Alert alert =
         new Alert(
             Alert.AlertType.CONFIRMATION,
-            Bill.outputBill(dishes),
+            Bill.outputBill(table),
             ButtonType.OK,
             ButtonType.CANCEL);
     alert.setTitle("Is this all correct?");
@@ -149,7 +149,7 @@ public class BillScreenController implements Initializable {
           Alert alert =
               new Alert(
                   Alert.AlertType.CONFIRMATION,
-                  Bill.finalPaymentBillTable(table.getTableOrder(), input),
+                  Bill.finalPaymentBillTable(table, input),
                   ButtonType.OK,
                   ButtonType.CANCEL);
           alert.setTitle("Is this all correct?");
@@ -157,24 +157,26 @@ public class BillScreenController implements Initializable {
           alert.showAndWait();
 
         }
-        
+
 
       } else {
-        String input = getTextTipInput();
-        if (!input.equals("")) {
-          int customerNum =
-              Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
-          Alert alert =
-              new Alert(
-                  Alert.AlertType.CONFIRMATION,
-                  Bill.outputBill(table.getCustomerOrder(customerNum)),
-                  ButtonType.OK,
-                  ButtonType.CANCEL);
-          alert.setTitle("Is this all correct?");
-          alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-          alert.showAndWait();
+            double tip = getTip(Bill.getSubtotal(table.getTableOrder()));
+            if(tip != -1){
+                int customerNum =
+                        Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
+                Alert alert =
+                        new Alert(
+                                Alert.AlertType.CONFIRMATION,
+                                Bill.finalPaymentSinglePerson(table, customerNum, tip),
+                                ButtonType.OK,
+                                ButtonType.CANCEL);
+                alert.setTitle("Is this all correct?");
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                alert.showAndWait();
+            }
+
         }
-      }
+
 
     } else {
       Alert alert2 = new Alert(Alert.AlertType.WARNING, "Select a Customer", ButtonType.OK);
