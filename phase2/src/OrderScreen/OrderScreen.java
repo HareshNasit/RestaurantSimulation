@@ -49,6 +49,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public Button addCommentButton;
     public Pane paneBox;
 
+
+    public void setOrderTable(ArrayList<Dish> orderedDishes){
+        ObservableList<Dish> dishes = FXCollections.observableArrayList();
+        dishes.addAll(orderedDishes);
+        this.menuIdColumn.getTableView().setItems(dishes);
+    }
+
     public TableColumn getMenuIdColumn() {
         return menuIdColumn;
     }
@@ -240,6 +247,21 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public void printTableBill(ActionEvent actionEvent){
 
     }
+
+    public void addDishToOrder(ActionEvent actionEvent){
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to add this dish?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                //server.addOrder(getTable(), restaurant.getMenu().getDish());
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println("No row selected");
+        }
+    }
+
 
     public void backButtonAction(){
         try{
