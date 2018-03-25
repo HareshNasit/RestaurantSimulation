@@ -12,12 +12,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import Restaurant.ModelControllerInterface;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ServingScreen implements Initializable, Restaurant.ModelControllerInterface {
+public class ServingScreen implements Initializable, ModelControllerInterface {
 
 
     public TableView tab1Table;
