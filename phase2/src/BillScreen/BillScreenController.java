@@ -115,7 +115,12 @@ public class BillScreenController implements Initializable {
 
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Tip Dialog");
-    dialog.setHeaderText("Enter your tip");
+    dialog.setHeaderText(
+        "Enter your tip."
+            + System.lineSeparator()
+            + "Format: no more than 2 decimal places"
+            + System.lineSeparator()
+            + "Ex. 2.02 ");
     Optional<String> result = dialog.showAndWait();
     String entered = "";
 
