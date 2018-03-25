@@ -242,7 +242,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             TablesScreen controller = fxmlLoader.getController();
             controller.setServer(getServer());
             controller.setRestaurant(getRestaurant());
+            controller.update();
           paneBox.getChildren().setAll(root1);}
+
 
 
         catch (IOException e){}
