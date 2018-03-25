@@ -3,6 +3,7 @@ package OrderScreen;
 import Restaurant.Dish;
 import Restaurant.Menu;
 import Restaurant.MenuItem;
+import Restaurant.Restaurant;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +42,7 @@ public class OrderScreenSuite extends Application{
         controller.setDishes(dishes);
 
         OrderScreen orderScreen = new OrderScreen();
+
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Order Screen");
