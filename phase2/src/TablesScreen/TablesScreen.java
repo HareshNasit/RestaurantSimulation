@@ -1,5 +1,6 @@
 package TablesScreen;
 
+import OrderScreen.OrderScreen;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
@@ -55,13 +56,20 @@ public class TablesScreen implements Initializable {
    */
   public void openTableMenu(){
     Table table = getTableView().getSelectionModel().getSelectedItem();
-    try{FXMLLoader loader = new  FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
+    try{
+
+      FXMLLoader loader = new  FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
       Parent root = loader.load();
+      OrderScreen controller = loader.getController();
+      controller.setTable(table);
+      controller.setServer(server);
+      controller.setRestaurant(restaurant);
       hBox.getChildren().setAll(root);
+
     } catch (IOException e){
-      System.out.println("Choose a table bro");
+      System.out.println("File Doesn't Exist");
     } catch (NullPointerException e){
-      System.out.println("Table Doesn't Exist Bro");
+      System.out.println("Choose a file bro");
     }
 
 
@@ -75,6 +83,7 @@ public class TablesScreen implements Initializable {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
         "../ServingTableScreen/ServingTableScreen.fxml"));
     Parent root1 = fxmlLoader.load();
+
     hBox.getChildren().setAll(root1);
   }
 

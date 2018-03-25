@@ -4,6 +4,7 @@ import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
+import Restaurant.MenuItem;
 import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -242,11 +243,23 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
             TablesScreen controller = fxmlLoader.getController();
             controller.setServer(getServer());
             controller.setRestaurant(getRestaurant());
+            controller.update();
           paneBox.getChildren().setAll(root1);}
+
 
 
         catch (IOException e){}
 
+    }
+
+    public void update(){
+        menuTableView.setItems(getMenuItem());
+    }
+
+    public ObservableList<Restaurant.MenuItem> getMenuItem(){
+        ObservableList<Restaurant.MenuItem> menu = FXCollections.observableArrayList();
+        menu.addAll(restaurant.getMenu().getMenuItems());
+        return menu;
     }
 
   public Server getServer() {

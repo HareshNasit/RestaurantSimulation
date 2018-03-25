@@ -18,17 +18,11 @@ public class LoginTestSuite extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Stage window = new Stage();
 
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource("Login.fxml"));
-        Parent root = loader.load();
-        OrderScreen controller = loader.getController();
-        LoginScreen loginScreen = new LoginScreen();
-
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Login Screen");
-        window.setScene(new Scene(root));
-        window.show();
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        primaryStage.setTitle("Login Screen");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
 
 
     }
