@@ -306,7 +306,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         });
     }
 
-    
+
     public void addDishToOrder(ActionEvent actionEvent){
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to add this dish?",
