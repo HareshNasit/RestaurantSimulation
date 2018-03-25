@@ -2,11 +2,12 @@ package Restaurant;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Bill {
 
-  public static double salestax = .13;
+  public static double salesTax = .13;
   public static double autoGratuity = .15;
 
   /**
@@ -18,7 +19,7 @@ public class Bill {
   public static String outputBill(Table table) {
 
     String billText = "";
-
+    billText += "Table: " + table.getTableID() + ", " + System.lineSeparator();
     for (Dish order : table.getTableOrder()) {
       billText += order.getStringForBill() + System.lineSeparator();
     }
@@ -74,6 +75,7 @@ public class Bill {
    */
   public static String finalPaymentBillTable(Table table, double tip) {
     String billText = "";
+    billText += "Table: " + table.getTableID() + ", " + System.lineSeparator();
     ArrayList<Dish> orders = table.getTableOrder();
     for (Dish order : orders) {
       billText += order.getStringForBill() + System.lineSeparator();
@@ -84,20 +86,20 @@ public class Bill {
 
   private static double get2Decimals(double number) {
     BigDecimal bd = new BigDecimal(number);
-    bd = bd.setScale(2, RoundingMode.CEILING);
+    bd = bd.setScale(2, RoundingMode.FLOOR);
     return bd.doubleValue();
   }
 
-  public static double getTotal(double subtotal, double tax) {
+  public static double getTotal(double subtotal, double tip, double tax) {
     BigDecimal bd = new BigDecimal(subtotal);
-    BigDecimal bigTax = new BigDecimal(tax);
-    bd = bd.add(bigTax);
+    bd = bd.add(new BigDecimal(tip));
+    bd = bd.add(new BigDecimal(tax));
     return get2Decimals(bd.doubleValue());
   }
 
   public static double getTax(double subtotal) {
     BigDecimal bd = new BigDecimal(subtotal);
-    BigDecimal multiplier = new BigDecimal(salestax);
+    BigDecimal multiplier = new BigDecimal(salesTax);
     bd = bd.multiply(multiplier);
     return get2Decimals(bd.doubleValue());
   }
@@ -117,14 +119,19 @@ public class Bill {
   private static String billTextHelper(double subtotal, Table table) {
     String billText = "";
     double tax = getTax(subtotal);
-    double total = getTotal(subtotal, tax);
 
-    billText += "SubTotal: $" + subtotal + System.lineSeparator();
+    billText += "SubTotal: $" + doubleToCurrency(subtotal) + System.lineSeparator();
+    double tip = 0;
     if (table.getTableSize() >= 8) {
-      billText += "Tip: $" + get2Decimals(subtotal * autoGratuity) + System.lineSeparator();
+      billText +=
+          "Tip: $"
+              + doubleToCurrency(get2Decimals(subtotal * autoGratuity))
+              + System.lineSeparator();
+      tip = get2Decimals(subtotal * autoGratuity);
     }
-    billText += "Tax: $" + tax + System.lineSeparator();
-    billText += "Total: $" + total + System.lineSeparator();
+    double total = getTotal(subtotal, tip, tax);
+    billText += "Tax: $" + doubleToCurrency(tax) + System.lineSeparator();
+    billText += "Total: $" + doubleToCurrency(total) + System.lineSeparator();
     return billText;
   }
 
@@ -136,11 +143,23 @@ public class Bill {
     }
     double tipAmount = get2Decimals(tip + tipAm);
     double tax = getTax(subtotal);
-    double total = getTotal(subtotal + tipAmount, tax);
-    billText += "SubTotal: $" + subtotal + System.lineSeparator();
-    billText += "Tip: $" + tipAmount + System.lineSeparator();
-    billText += "Tax: $" + tax + System.lineSeparator();
-    billText += "Total: $" + total + System.lineSeparator();
+    double total = getTotal(subtotal, tipAmount, tax);
+    System.out.println(tipAmount + subtotal + tax);
+    billText += "SubTotal: $" + doubleToCurrency(subtotal) + System.lineSeparator();
+    billText += "Tip: $" + doubleToCurrency(tipAmount) + System.lineSeparator();
+    billText += "Tax: $" + doubleToCurrency(tax) + System.lineSeparator();
+    billText += "Total: $" + doubleToCurrency(total) + System.lineSeparator();
     return billText;
+  }
+
+  /**
+   * Adds necessary 0's to the number. Ex. "3.0" turns into "3.00"
+   *
+   * @param number
+   * @return
+   */
+  private static String doubleToCurrency(double number) {
+    DecimalFormat decim = new DecimalFormat("0.00");
+    return decim.format(number);
   }
 }
