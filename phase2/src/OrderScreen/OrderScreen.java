@@ -34,7 +34,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public ComboBox customerNumberDropDown;
 
 
-  public TableColumn customerNumber;
+  public TableColumn customerNumberColumn;
   private Server server;
   private Table table;
   private Restaurant restaurant;
@@ -69,7 +69,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void initialize(URL location, ResourceBundle resources) {
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
-    customerNumber.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -155,7 +155,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
 //    int customerNumber = (Integer) customerNumberDropDown.getValue();
-    server.addOrder(getTable(), 123, dish);
+    server.addOrder(getTable(), 13, dish);
     updateScreen();
   }
 
@@ -405,6 +405,14 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public void setMenuSelectedDishCustomerNum(int menuSelectedDishCustomerNum) {
     this.menuSelectedDishCustomerNum = menuSelectedDishCustomerNum;
+  }
+
+  public TableColumn getCustomerNumberColumn() {
+    return customerNumberColumn;
+  }
+
+  public void setCustomerNumberColumn(TableColumn customerNumberColumn) {
+    this.customerNumberColumn = customerNumberColumn;
   }
 
 }

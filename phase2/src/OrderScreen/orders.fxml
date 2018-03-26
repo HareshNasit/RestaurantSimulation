@@ -26,7 +26,7 @@
         <columns>
           <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
           <TableColumn fx:id="nameColumn" prefWidth="114.0" text=" Dish name" />
-            <TableColumn fx:id="customerNumber" prefWidth="74.0" text="Customer" />
+            <TableColumn fx:id="customerNumberColumn" prefWidth="74.0" text="Customer" />
             <TableColumn fx:id="commentColumn" prefWidth="75.0" text="Comment" />
         </columns>
       </TableView>
