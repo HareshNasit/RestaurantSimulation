@@ -172,7 +172,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private boolean validCustomerEntry(String customerInput) {
     try {
       int numCustomers = Integer.parseInt(customerInput);
-      return 1 < numCustomers || numCustomers < 50;
+      return numCustomers > 1 && numCustomers < 50;
     } catch (NumberFormatException e) {
       return false;
     }
