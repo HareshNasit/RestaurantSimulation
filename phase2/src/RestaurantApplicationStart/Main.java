@@ -48,7 +48,7 @@ public class Main extends Application {
             Server server = new Server(name);
             controller.setRestaurant(restaurant);
             controller.setServer(server);
-            controller.update();
+            controller.updateScreen();
             window.initModality(Modality.WINDOW_MODAL);
             window.setTitle("Server");
             window.setScene(new Scene(root));

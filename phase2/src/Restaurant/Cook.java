@@ -64,6 +64,7 @@ public class Cook implements IWorker, ServingTableListener {
   /** Notify the cook that dish has been served. */
   public void update(String message) {
     screen.updateScreen();
+    screen.openNotification(message);
   }
 
   /**

@@ -20,6 +20,7 @@ import Restaurant.IWorker;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import notificationBox.NotificationBox;
 
 public class ServingScreen implements Initializable, ModelControllerInterface {
 
@@ -195,6 +196,11 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
         setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+    }
+
+    @Override
+    public void openNotification(String message) {
+        NotificationBox.display(message);
     }
 
     public ServingTable getServingTable() {

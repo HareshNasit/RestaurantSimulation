@@ -34,7 +34,7 @@ public class NotificationBox {
 
       window.setX(100);
       window.setY(100);
-
+      layout.setOnMouseClicked(event -> window.close());
       Scene scene = new Scene(layout);
       FadeTransition ft = new FadeTransition(Duration.millis(3000), layout);
 
