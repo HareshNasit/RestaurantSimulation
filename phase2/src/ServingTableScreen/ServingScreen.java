@@ -111,10 +111,15 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
-                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-                setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-                setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+                if(dishSelectedTab1.getComment().equals("Cook")) {
+                    cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
+                    setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+                    setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
+                    setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+                }
+                else{
+                    cook.acceptNoCook(dishSelectedTab1,restaurant.getServingTable());
+                }
             }
         }
         catch(NullPointerException e){
