@@ -1,7 +1,16 @@
 package RestaurantApplicationStart;
 
 import ManagerScreen.ManagerScreenController;
+import Restaurant.Restaurant;
+import Restaurant.Menu;
+import Restaurant.ServingTable;
+import Restaurant.Server;
+import Restaurant.Inventory;
+import Restaurant.Restaurant;
+
 import TablesScreen.TablesScreen;
+import java.io.IOException;
+import java.util.HashMap;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,27 +22,30 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Stage window = new Stage();
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource("../ManagerScreen/ManagerScreen.fxml"));
-        Parent root = loader.load();
-
-        window.initModality(Modality.WINDOW_MODAL);
-        window.setTitle("Manager");
-        window.setScene(new Scene(root));
-        window.show();
-
-        Stage window2 = new Stage();
-        FXMLLoader loader2 = new  FXMLLoader(getClass().getResource("../TablesScreen/TablesScreen.fxml"));
-        Parent root2 = loader2.load();
-
-        ManagerScreenController manager = loader.getController();
-        TablesScreen server = loader2.getController();
+        ServingTable servingTable = new ServingTable();
+        Menu menu = new Menu();
+        Inventory inventory = new Inventory();
+        Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
+        serverStart("John", restaurant);
+    }
 
 
-        window2.initModality(Modality.WINDOW_MODAL);
-        window2.setTitle("Server");
-        window2.setScene(new Scene(root2));
-        window2.show();
+    private void serverStart(String name, Restaurant restaurant){
+        try{Stage window = new Stage();
+            FXMLLoader loader = new  FXMLLoader(getClass().getResource("../TablesScreen/TablesScreen.fxml"));
+            Parent root = loader.load();
+
+            TablesScreen controller = loader.getController();
+            Server server = new Server(name);
+            controller.setRestaurant(restaurant);
+            controller.setServer(server);
+            controller.update();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Server");
+            window.setScene(new Scene(root));
+            window.show();
+        } catch (IOException e){}
+
     }
 
 
