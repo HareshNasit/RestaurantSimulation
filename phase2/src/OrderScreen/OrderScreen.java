@@ -287,8 +287,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
     }
 
-    public void addDishToOrder(ActionEvent actionEvent){
+    public void addDishToOrder(){
       // TODO: Create a way to give customer number
+      // TODO: Add Compliments Somehow
       MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
       int customerNumber = 69;
       server.addOrder(getTable(), customerNumber, dish);
@@ -296,7 +297,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     }
 
     public void setTableOccupied(){
-
+      // TODO: Make a pop up or something
       try {
         int tableSize = Integer.valueOf(labelTableSize.getText().trim());
         table.setOccupied(tableSize);
@@ -330,6 +331,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
     public void update(){
         tableOrderTitle.setText("Table" + table.getTableID() + " Order");
+
+        //TODO: Disable or not show certain MenuItems that have not enough ingridients
         menuTableView.setItems(getMenuItem());
         orderTableView.setItems(getOrderDish());
     }
