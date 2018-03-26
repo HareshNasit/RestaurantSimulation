@@ -195,6 +195,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     }
     if (result.isPresent()) {
        entered = result.get();
+       table.setOccupied(Integer.parseInt(entered));
        System.out.println(entered);
     }
   }
