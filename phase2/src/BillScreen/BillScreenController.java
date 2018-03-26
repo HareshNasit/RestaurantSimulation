@@ -144,16 +144,7 @@ public class BillScreenController implements Initializable {
       return false;
     }
   }
-
-  private boolean validCustomerEntry(String customerInput) {
-    try {
-      double numCustomers = Double.parseDouble(customerInput);
-      boolean fail = (BigDecimal.valueOf(numCustomers).scale() > 2);
-      return !fail && numCustomers >= 1;
-    } catch (NumberFormatException e) {
-      return false;
-    }
-  }
+  
 
   public void createPaymentWindow() {
     String customer = (String) scrollMenu.getValue();

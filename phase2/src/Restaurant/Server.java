@@ -4,6 +4,7 @@ package Restaurant;
 public class Server implements IWorker, ServingTableListener {
 
   private String name; // name of a server
+  private ModelControllerInterface screen;
 
   /**
    * Creates a new server for this restaurant
@@ -97,7 +98,9 @@ public class Server implements IWorker, ServingTableListener {
    * @param dish dish to be added to the tables order.
    */
   public void addOrder(Table table, int customerNumber, MenuItem dish) {
-    table.addSingleOrder(new Dish(dish, table.getTableID(), customerNumber));
+    Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
+    dish1.setComment("Cook");
+    table.addSingleOrder(dish1);
   }
 
   /**
@@ -157,5 +160,13 @@ public class Server implements IWorker, ServingTableListener {
         String.format(
             "Cancelled %s from Table%s%d",
             dish.getName(), dish.getTableName(), dish.getCustomerNum()));
+  }
+
+  public ModelControllerInterface getScreen() {
+    return screen;
+  }
+
+  public void setScreen(ModelControllerInterface screen) {
+    this.screen = screen;
   }
 }
