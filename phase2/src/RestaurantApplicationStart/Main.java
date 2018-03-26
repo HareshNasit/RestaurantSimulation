@@ -10,7 +10,6 @@ import Restaurant.Cook;
 import ServingTableScreen.ServingScreen;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
