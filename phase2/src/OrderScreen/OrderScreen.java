@@ -26,7 +26,10 @@ import java.util.ResourceBundle;
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
-    private Server server;
+  public Button buttonOccupied;
+  public TextField labelTableSize;
+
+  private Server server;
     private Table table;
     private Restaurant restaurant;
 
@@ -158,21 +161,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getOrderTableView().setItems(getOrderDish());
     }
 
-    /**
-     *
-     * @return
-     */
-    public ObservableList<Dish> getOrderDish(){
-        ObservableList<Dish> orderedDishes = FXCollections.observableArrayList();
-        orderedDishes.addAll(getDishes());
-        return orderedDishes;
-    }
+
 
     public TableView<Dish> getOrderTableView(){
         return orderTableView;
     }
 
-    public TableView<MenuItem> getMenuTableView(){
+    public TableView<Dish> getMenuTableView(){
         return menuTableView;
     }
 
@@ -218,7 +213,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
 
         this.setRowAction();
-        this.rowSelected();
         System.out.println(getOrderTableView());
     }
 
@@ -286,41 +280,33 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         this.idColumn.getTableView().setItems(dishes);
     }
 
-    public void rowSelected() {
-//        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
-//        menuSelectedDishId = menuSelectedDish.getId();
-//        menuSelectedDishName = menuSelectedDish.getName();
-//        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
-        getMenuTableView().setRowFactory(tv -> {
-            TableRow<MenuItem> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty()) {
-                    MenuItem rowData = row.getItem();
-                    menuSelectedDishId = rowData.getId();
-                    menuSelectedDishName = rowData.getName();
-                    menuSelectedDishCustomerNum = 1;
-                    System.out.println(rowData.getPrice());
-                }
-            });
-            return row;
-        });
+    public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
+        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
+        menuSelectedDishId = menuSelectedDish.getId();
+        menuSelectedDishName = menuSelectedDish.getName();
+        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
     }
 
+    public void addDishToOrder(){
+      // TODO: Create a way to give customer number
+      // TODO: Add Compliments Somehow
+      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+      int customerNumber = 69;
+      server.addOrder(getTable(), customerNumber, dish);
+      update();
+    }
 
-    public void addDishToOrder(ActionEvent actionEvent){
-        try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to add this dish?",
-                    ButtonType.YES, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
-                server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
-                server.passOrder(getTable(), restaurant.getServingTable());
-                setOrderTable(restaurant.getTable(this.getTable().getTableID()).getTableOrder());
-            }
-        }
-        catch(NullPointerException e){
-            System.out.println("No row selected");
-        }
+    public void setTableOccupied(){
+      // TODO: Make a pop up or something
+      try {
+        int tableSize = Integer.valueOf(labelTableSize.getText().trim());
+        table.setOccupied(tableSize);
+        buttonOccupied.setDisable(true);
+      } catch (NumberFormatException e){
+        System.out.println("Enter a proper number bro");
+      }
+
+
     }
 
 
@@ -344,7 +330,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     }
 
     public void update(){
+        tableOrderTitle.setText("Table" + table.getTableID() + " Order");
+
+        //TODO: Disable or not show certain MenuItems that have not enough ingridients
         menuTableView.setItems(getMenuItem());
+        orderTableView.setItems(getOrderDish());
     }
 
     public ObservableList<MenuItem> getMenuItem(){
@@ -353,6 +343,15 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         return menu;
     }
 
+  /**
+   *
+   * @return
+   */
+  public ObservableList<Dish> getOrderDish(){
+    ObservableList<Dish> orderedDishes = FXCollections.observableArrayList();
+    orderedDishes.addAll(table.getTableOrder());
+    return orderedDishes;
+  }
   public Server getServer() {
     return server;
   }
@@ -376,6 +375,5 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
-
 }
 

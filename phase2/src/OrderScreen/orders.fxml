@@ -22,8 +22,8 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <Button fx:id="addDish" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" onAction="#addDishToOrder" text="Add dish" />
-      <Button fx:id="removeDish" layoutX="107.0" layoutY="350.0" mnemonicParsing="false" text="Remove dish" />
+      <Button fx:id="addDish" layoutX="29.0" layoutY="280.0" mnemonicParsing="false" onAction="#addDishToOrder" text="Add dish" />
+      <Button fx:id="removeDish" layoutX="29.0" layoutY="315.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="72.0" text="Remove dish" />
       <Button fx:id="openBillScreen" layoutX="515.0" layoutY="350.0" mnemonicParsing="false" onAction="#openBillScreen" text="Open bill screen" />
       <TableView fx:id="orderTableView" layoutX="29.0" layoutY="60.0" prefHeight="200.0" prefWidth="291.0">
         <columns>
@@ -41,7 +41,9 @@
             <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
         </columns>
       </TableView>
-      <Button fx:id="addCommentButton" layoutX="210.0" layoutY="350.0" mnemonicParsing="false" text="Add comment" />
+      <Button fx:id="addCommentButton" layoutX="29.0" layoutY="350.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="72.0" text="Add comment" />
       <Button fx:id="buttonBack" layoutX="593.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonAction" text="Back" />
+      <Button fx:id="buttonOccupied" layoutX="116.0" layoutY="280.0" mnemonicParsing="false" onAction="#setTableOccupied" text="Occupied" />
+      <TextField fx:id="labelTableSize" layoutX="116.0" layoutY="315.0" prefHeight="27.0" prefWidth="77.0" text="Table Size" />
   </children>
 </Pane>

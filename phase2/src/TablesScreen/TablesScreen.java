@@ -61,14 +61,16 @@ public class TablesScreen implements Initializable {
     Table table = getTableView().getSelectionModel().getSelectedItem();
     try{
 
-      FXMLLoader loader = new  FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
-      Parent root = loader.load();
-      OrderScreen controller = loader.getController();
-      controller.setTable(table);
-      controller.setServer(server);
-      controller.setRestaurant(restaurant);
-      controller.update();
-      hBox.getChildren().setAll(root);
+      if (table != null) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
+        Parent root = loader.load();
+        OrderScreen controller = loader.getController();
+        controller.setTable(table);
+        controller.setServer(server);
+        controller.setRestaurant(restaurant);
+        controller.update();
+        hBox.getChildren().setAll(root);
+      }
 
     } catch (IOException e){
       System.out.println("File Doesn't Exist");
