@@ -1,5 +1,6 @@
 package OrderScreen;
 
+import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -33,7 +34,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
-
 
   public TableColumn customerNumberColumn;
     public Button addComplimentsButton;
@@ -227,12 +227,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public void openComplimentMenu(){
       try{
-
-          if (table != null) {
+          Dish dish = getOrderTableView().getSelectionModel().getSelectedItem();
+          if (dish != null) {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
-              OrderScreen controller = loader.getController();
-              controller.updateScreen();
               paneBox.getChildren().setAll(root);
           }
 
