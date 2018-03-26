@@ -121,7 +121,7 @@ public class Inventory {
                 + System.lineSeparator()
                 + "manager has been notified, request.txt updated"
                 + System.lineSeparator();
-        manager.notifyLowStock(message);
+//        manager.notifyLowStock(message);
         this.getLowIngredients();
       }
     }

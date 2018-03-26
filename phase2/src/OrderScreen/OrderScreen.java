@@ -1,5 +1,6 @@
 package OrderScreen;
 
+import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -30,11 +31,9 @@ import notificationBox.NotificationBox;
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
 
-  public Button buttonOccupied;
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
-
 
   public TableColumn customerNumberColumn;
     public Button addComplimentsButton;
@@ -228,12 +227,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public void openComplimentMenu(){
       try{
-
-          if (table != null) {
+          Dish dish = getOrderTableView().getSelectionModel().getSelectedItem();
+          if (dish != null) {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
-              OrderScreen controller = loader.getController();
-              controller.updateScreen();
               paneBox.getChildren().setAll(root);
           }
 
@@ -247,7 +244,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
 
-    //TODO: Disable or not show certain MenuItems that have not enough ingridients
+    //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
   }
