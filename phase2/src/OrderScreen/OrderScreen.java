@@ -23,6 +23,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -70,7 +71,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
     menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
-    //menuIdColumn.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
 
     this.setRowAction();
     System.out.println(getOrderTableView());
@@ -132,7 +132,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
    * Prints the bill for the table.
    */
   public void printTableBill(ActionEvent actionEvent) {
-
   }
 
   public void setOrderTable(ArrayList<Dish> orderedDishes) {
@@ -157,18 +156,49 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     updateScreen();
   }
 
-  public void setTableOccupied() {
-    // TODO: Make a pop up or something
+//  public void setTableOccupied() {
+//    // TODO: Make a pop up or something
+//    try {
+//      int tableSize = Integer.valueOf(labelTableSize.getText().trim());
+//      table.setOccupied(tableSize);
+//      buttonOccupied.setDisable(true);
+//    } catch (NumberFormatException e) {
+//      System.out.println("Enter a proper number bro");
+//    }
+//
+//
+//  }
+
+  private boolean validCustomerEntry(String customerInput) {
     try {
-      int tableSize = Integer.valueOf(labelTableSize.getText().trim());
-      table.setOccupied(tableSize);
-      buttonOccupied.setDisable(true);
+      int numCustomers = Integer.parseInt(customerInput);
+      return 1 < numCustomers || numCustomers < 50;
     } catch (NumberFormatException e) {
-      System.out.println("Enter a proper number bro");
+      return false;
     }
-
-
   }
+
+  public void setTableOccupied(){
+    Dialog dialog = new TextInputDialog();
+    dialog.setTitle("Table Dialog");
+    dialog.setHeaderText(
+            "Enter the number of people"
+                    + System.lineSeparator()
+                    + "Format: a whole number between 1 and 50"
+                    + System.lineSeparator()
+                    + "Example: 8");
+    Optional<String> result = dialog.showAndWait();
+    String entered;
+
+    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+      result = dialog.showAndWait();
+    }
+    if (result.isPresent()) {
+       entered = result.get();
+       System.out.println(entered);
+    }
+  }
+
 
 
   public void backButtonAction() {
