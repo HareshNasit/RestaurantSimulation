@@ -9,6 +9,7 @@ import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -56,6 +57,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private int dishNumber;
   private int dishPrice;
   private ArrayList<Dish> dishes;
+
+
+
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -203,6 +207,12 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     orderedDishes.addAll(table.getTableOrder());
     return orderedDishes;
   }
+
+  public void sendOrder(){
+    server.passOrder(table, restaurant.getServingTable());
+  }
+
+  //-----------------------GETTERS AND SETTERS BELOW
 
   public Server getServer() {
     return server;

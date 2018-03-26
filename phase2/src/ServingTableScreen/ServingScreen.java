@@ -1,6 +1,8 @@
 package ServingTableScreen;
 
 import Restaurant.Restaurant;
+import Restaurant.ServingTable;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,6 +45,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
     public Restaurant restaurant;
+    private ServingTable servingTable;
     public Cook cook;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
@@ -60,6 +63,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         dishesToBeServed.addAll(Dishes);
         this.tab3Dish.getTableView().setItems(dishesToBeServed);
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
@@ -165,5 +169,13 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
         setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+    }
+
+    public ServingTable getServingTable() {
+        return servingTable;
+    }
+
+    public void setServingTable(ServingTable servingTable) {
+        this.servingTable = servingTable;
     }
 }
