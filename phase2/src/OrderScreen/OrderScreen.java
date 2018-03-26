@@ -9,7 +9,6 @@ import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -19,12 +18,12 @@ import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import notificationBox.NotificationBox;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
@@ -212,7 +211,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       TablesScreen controller = fxmlLoader.getController();
       controller.setServer(getServer());
       controller.setRestaurant(getRestaurant());
-      controller.update();
+      controller.updateScreen();
       paneBox.getChildren().setAll(root1);
     } catch (IOException e) {
     }
@@ -225,6 +224,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     //TODO: Disable or not show certain MenuItems that have not enough ingridients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
+  }
+
+  @Override
+  public void openNotification(String message) {
+    NotificationBox.display(message);
   }
 
   public ObservableList<MenuItem> getMenuItem() {
