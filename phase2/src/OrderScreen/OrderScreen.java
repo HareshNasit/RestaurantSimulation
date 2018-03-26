@@ -161,21 +161,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         getOrderTableView().setItems(getOrderDish());
     }
 
-    /**
-     *
-     * @return
-     */
-    public ObservableList<Dish> getOrderDish(){
-        ObservableList<Dish> orderedDishes = FXCollections.observableArrayList();
-        orderedDishes.addAll(getDishes());
-        return orderedDishes;
-    }
+
 
     public TableView<Dish> getOrderTableView(){
         return orderTableView;
     }
 
-    public TableView<MenuItem> getMenuTableView(){
+    public TableView<Dish> getMenuTableView(){
         return menuTableView;
     }
 
@@ -221,7 +213,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
 
         this.setRowAction();
-        this.rowSelected();
         System.out.println(getOrderTableView());
     }
 
@@ -289,41 +280,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         this.idColumn.getTableView().setItems(dishes);
     }
 
-    public void rowSelected() {
-//        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
-//        menuSelectedDishId = menuSelectedDish.getId();
-//        menuSelectedDishName = menuSelectedDish.getName();
-//        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
-        getMenuTableView().setRowFactory(tv -> {
-            TableRow<MenuItem> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty()) {
-                    MenuItem rowData = row.getItem();
-                    menuSelectedDishId = rowData.getId();
-                    menuSelectedDishName = rowData.getName();
-                    menuSelectedDishCustomerNum = 1;
-                    System.out.println(rowData.getPrice());
-                }
-            });
-            return row;
-        });
+    public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
+        this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
+        menuSelectedDishId = menuSelectedDish.getId();
+        menuSelectedDishName = menuSelectedDish.getName();
+        menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
     }
 
-
     public void addDishToOrder(ActionEvent actionEvent){
-        try {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to add this dish?",
-                    ButtonType.YES, ButtonType.CANCEL);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.YES) {
-                server.addOrder(getTable(), restaurant.getMenu().getDish(menuSelectedDishId, menuSelectedDishName, menuSelectedDishCustomerNum));
-                server.passOrder(getTable(), restaurant.getServingTable());
-                setOrderTable(restaurant.getTable(this.getTable().getTableID()).getTableOrder());
-            }
-        }
-        catch(NullPointerException e){
-            System.out.println("No row selected");
-        }
+      // TODO: Create a way to give customer number
+      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+      int customerNumber = 69;
+      server.addOrder(getTable(), customerNumber, dish);
+      update();
     }
 
     public void setTableOccupied(){
@@ -362,6 +331,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     public void update(){
         tableOrderTitle.setText("Table" + table.getTableID() + " Order");
         menuTableView.setItems(getMenuItem());
+        orderTableView.setItems(getOrderDish());
     }
 
     public ObservableList<MenuItem> getMenuItem(){
@@ -370,6 +340,15 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         return menu;
     }
 
+  /**
+   *
+   * @return
+   */
+  public ObservableList<Dish> getOrderDish(){
+    ObservableList<Dish> orderedDishes = FXCollections.observableArrayList();
+    orderedDishes.addAll(table.getTableOrder());
+    return orderedDishes;
+  }
   public Server getServer() {
     return server;
   }
@@ -393,6 +372,5 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
-
 }
 
