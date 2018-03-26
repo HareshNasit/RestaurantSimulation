@@ -59,9 +59,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private double menuSelectedDishId;
   private String menuSelectedDishName;
   private int menuSelectedDishCustomerNum;
-  private String dishName;
-  private int dishNumber;
-  private int dishPrice;
   private ArrayList<Dish> dishes;
 
 
@@ -156,17 +153,17 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-//    int customerNumber = (Integer) customerNumberDropDown.getValue();
+    // int customerNumber = (Integer) customerNumberDropDown.getValue();
     server.addOrder(getTable(), 13, dish);
     updateScreen();
   }
 
-  public void addOptionsToComboBox(){
+  public void addOptionsToComboBox(Table table){
+      this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
-      for(int k =0; k < setTableOccupied(); k++){
+      for(int k = 1; k <= table.getTableSize(); k++){
           customerLabels.add("Customer " + k);
       }
-      customerLabels.add("All");
       ObservableList<String> labels = FXCollections.observableArrayList();
       labels.addAll(customerLabels);
       customerNumberDropDown.setItems(labels);
@@ -299,30 +296,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public TableView<Dish> getMenuTableView() {
     return menuTableView;
-  }
-
-  public String getDishName() {
-    return dishName;
-  }
-
-  public void setDishName(String dishName) {
-    this.dishName = dishName;
-  }
-
-  public int getDishNumber() {
-    return dishNumber;
-  }
-
-  public void setDishNumber(int dishNumber) {
-    this.dishNumber = dishNumber;
-  }
-
-  public int getDishPrice() {
-    return dishPrice;
-  }
-
-  public void setDishPrice(int dishPrice) {
-    this.dishPrice = dishPrice;
   }
 
   @Override
