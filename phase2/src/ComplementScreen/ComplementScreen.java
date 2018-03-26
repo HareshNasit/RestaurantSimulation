@@ -30,7 +30,6 @@ public class ComplementScreen extends Application {
 
         //make method
         controller.setDish(dish);
-        controller.setInventory(inventory);
         controller.setIngredients();
 
         window.initModality(Modality.APPLICATION_MODAL);

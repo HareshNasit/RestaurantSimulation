@@ -96,6 +96,7 @@ public class Dish extends MenuItem {
     String extras = "";
     String subtractions = "";
     HashMap<String, Integer> differenceMap = this.getDifferenceAmounts();
+
     for (String key : differenceMap.keySet()) {
       if (differenceMap.get(key) > 0) {
         extras +=
@@ -111,7 +112,7 @@ public class Dish extends MenuItem {
     if (complements.length() == 0) {
       return "";
     } else {
-      return complements.substring(complements.length() - 2, complements.length());
+      return complements.substring(0, complements.length() - 2);
     }
   }
 

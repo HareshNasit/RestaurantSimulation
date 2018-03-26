@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /** This is the Restaurant class. This is where all the moving parts move around. */
 public class Restaurant {
@@ -242,6 +243,7 @@ public class Restaurant {
         }
         return receipts;
     }
+
 
 
 }

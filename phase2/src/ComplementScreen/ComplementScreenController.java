@@ -29,7 +29,6 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     public TableView tableView;
     public TableColumn ingredientColumn;
     public TableColumn amountColumn;
-    public Inventory inventory;
     public TableColumn priceColumn;
     public TextArea dishStatusLabel;
 
@@ -86,7 +85,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         }
     }
 
-    public void updateDishLabel() {
+    private void updateDishLabel() {
         this.dishStatusLabel.setText(this.dish.toString());
     }
 
@@ -126,7 +125,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
         }
     }
 
-    public void setRowAction() {
+    private void setRowAction() {
         getTableView().setRowFactory(tv -> {
             TableRow<DishIngredient> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
@@ -160,26 +159,16 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
 
     }
 
-
-    public ArrayList<InventoryIngredient> getInventoryIngredients() {
-        ArrayList<InventoryIngredient> ingredients = new ArrayList<>();
-        for (String key : this.ingredients.keySet()) {
-            ingredients.add(this.inventory.getInventoryIngredient(key));
-        }
-        return ingredients;
-    }
-
-
-    public TableColumn getAmountColumn() {
+    private TableColumn getAmountColumn() {
         return amountColumn;
     }
 
 
-    public TableColumn getIngredientColumn() {
+    private TableColumn getIngredientColumn() {
         return ingredientColumn;
     }
 
-    public TableView getTableView() {
+    private TableView getTableView() {
         return tableView;
     }
 
@@ -219,17 +208,7 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
 
     }
 
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
-
-    public ObservableList<InventoryIngredient> getInventoryIngredient() {
-        ObservableList<InventoryIngredient> inventoryIngredients = FXCollections.observableArrayList();
-        inventoryIngredients.addAll(getInventoryIngredients());
-        return inventoryIngredients;
-    }
-
-    public TableColumn getPriceColumn() {
+    private TableColumn getPriceColumn() {
         return priceColumn;
     }
 }
