@@ -1,9 +1,7 @@
 package logging;
 
 
-import Restaurant.Dish;
-import Restaurant.DishIngredient;
-import Restaurant.Table;
+import Restaurant.*;
 
 import java.util.ArrayList;
 
@@ -28,6 +26,11 @@ public class RestaurantLogger extends SimpleLogger {
         this.writeToLogger(content);
     }
 
+    /**
+     * Sends a message about a dish being delivered.
+     *
+     * @param dish
+     */
     public void logDishPrepared(Dish dish) {
         String content = "[NEW LOG - DISH PREPARED] ";
         content += "[ " + dish.toString() + "] has been prepared ";
@@ -35,6 +38,11 @@ public class RestaurantLogger extends SimpleLogger {
         this.writeToLogger(content);
     }
 
+    /**
+     * Sends a message about a dish being delivered.
+     *
+     * @param dish Dish being delivered.
+     */
     public void logDishDelivered(Dish dish) {
         String content = "[NEW LOG - DISH DELIVERED] ";
         content += "[ " + dish.toString() + "] has been delivered ";
@@ -42,6 +50,12 @@ public class RestaurantLogger extends SimpleLogger {
         this.writeToLogger(content);
     }
 
+    /**
+     * Sends a message about a dish being returned.
+     *
+     * @param dish   Dish being returned.
+     * @param reason Reason for the return.
+     */
     public void logDishReturned(Dish dish, String reason) {
         String content = "[NEW LOG - DISH DELIVERED] ";
         content += "[ " + dish.toString() + "] has been returned" + System.lineSeparator();
@@ -50,11 +64,32 @@ public class RestaurantLogger extends SimpleLogger {
         this.writeToLogger(content);
     }
 
-    public void logInventoryChanged(DishIngredient dishIngredient, int amount) {
+    /**
+     * Sends a message to the log about an Ingredient amount being changed in the Inventory. Ex. -2 means that the amount
+     * decreased by 2, and "2" means that the amount increased by 2.
+     *
+     * @param inventoryIngredient Ingredient whose amount is being changed
+     * @param amount              amount being changed.
+     */
+    public void logInventoryChanged(InventoryIngredient inventoryIngredient, int amount) {
         String content = "[NEW LOG - DISH DELIVERED] ";
-        content += "[ " + dishIngredient.toString() + "] has changed by: ";
+        content += "[ " + inventoryIngredient.toString() + "] has changed by: " + amount;
         content += "[END LOG]" + System.lineSeparator();
         this.writeToLogger(content);
     }
+
+    /**
+     * Sends a message to the log about a worker request.
+     *
+     * @param worker  worker that has been sent request
+     * @param request request info
+     */
+    public void logRequest(IWorker worker, String request) {
+        String content = "[NEW LOG - DISH DELIVERED] ";
+        content += "[ " + worker.getName() + "] has been sent request from Manager: " + request;
+        content += "[END LOG]" + System.lineSeparator();
+        this.writeToLogger(content);
+    }
+    
 
 }
