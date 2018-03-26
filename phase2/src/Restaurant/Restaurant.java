@@ -33,7 +33,7 @@ public class Restaurant {
   private final String TABLEFILE = "tables.txt";
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
-  public SimpleLogger receiptsLogger = new SimpleLogger("");
+  public SimpleLogger receiptsLogger;
   public RestaurantLogger restaurantLogger = new RestaurantLogger("");
 
   /**
@@ -49,6 +49,8 @@ public class Restaurant {
     generateTables(TABLEFILE);
     this.servingTable = servingTable;
     this.generateWorkers(WORKERFILE, this.servingTable);
+    createNewReceiptFile();
+    createNewLogFile();
   }
 
   /**
