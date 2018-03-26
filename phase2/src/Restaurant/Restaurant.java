@@ -1,5 +1,8 @@
 package Restaurant;
 
+import logging.RestaurantLogger;
+import logging.SimpleLogger;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +19,6 @@ public class Restaurant {
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
   private HashMap<String, Server> servers; // HashMap of servers name and the server.
   private HashMap<String, Cook> cooks; // HashMap of cooks name and the cook.
-
   public HashMap<String, Table> getTables() {
     return tables;
   }
@@ -31,6 +33,8 @@ public class Restaurant {
   private final String TABLEFILE = "tables.txt";
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
+  public SimpleLogger receiptsLogger = new SimpleLogger("");
+  public RestaurantLogger restaurantLogger = new RestaurantLogger("");
 
   /**
    * Generates a new restaurant with menu, inventory, and serving table
@@ -196,54 +200,23 @@ public class Restaurant {
     return servingTable;
   }
 
-  /**
-   * Sets the receipt storage file name
-   *
-   * @param fileName
-   */
-  public void setRECEIPTFILE(String fileName) {
-    this.RECEIPTFILE = fileName;
+  public void createNewReceiptFile(){
+    this.receiptsLogger.createAndSetNewLoggerFile("receipts", "receipt");
+    System.out.println(this.receiptsLogger.getLoggerDestination() + "2");
+  }
+  public void createNewLogFile(){
+    this.restaurantLogger.createAndSetNewLoggerFile("logger", "log");
   }
 
-    /** Creates the receipt txt that keeps track of all the payments/bills. */
-    public void createNewReceiptFile() {
-        String pattern = "dd-MM-yyyy";
-        String dateInString = new SimpleDateFormat(pattern).format(new Date());
-        String name = "receipts/receipt" + dateInString + ".txt";
+  public RestaurantLogger getRestaurantLogger() {
+    return restaurantLogger;
+  }
 
-        File file = new File(name);
+  public void writeToRECEIPTFILE(String content){
+    this.receiptsLogger.writeToLogger(content);
+  }
 
-        try {
-            PrintWriter writer = new PrintWriter(name, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        setRECEIPTFILE(name);
-    }
-
-    public void writeToRECEIPTFILE(String content) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(RECEIPTFILE, true));
-            writer.write(content);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String returnAllReceipts() {
-        String receipts = "";
-        try (BufferedReader reader = new BufferedReader(new FileReader(new File(RECEIPTFILE)))) {
-            String line;
-            while ((line = reader.readLine()) != null)
-                receipts += line + System.lineSeparator();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return receipts;
-    }
-
-
-
+  public SimpleLogger getReceiptsLogger() {
+    return receiptsLogger;
+  }
 }

@@ -16,30 +16,37 @@ public class SimpleLogger {
         this.loggerDestination = filePath;
     }
 
+    public String getLoggerDestination(){
+        return this.loggerDestination;
+    }
     /**
      * Creates the logger file w/ date
      */
     public void createAndSetNewLoggerFile(String filePath, String namePrefix) {
         String pattern = "dd-MM-yyyy";
         String dateInString = new SimpleDateFormat(pattern).format(new Date());
-        String name = filePath + namePrefix + dateInString + ".txt";
+        String name = filePath + "/" + namePrefix + dateInString + ".txt";
 
         File file = new File(name);
+        setLoggerDestination(name);
+
 
         try {
             PrintWriter writer = new PrintWriter(name, "UTF-8");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setLoggerDestination(name);
+
     }
 
     public void writeToLogger(String content) {
+
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(loggerDestination, true));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(this.loggerDestination, true));
             writer.write(content);
             writer.close();
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }
