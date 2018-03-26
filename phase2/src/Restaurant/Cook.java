@@ -76,10 +76,12 @@ public class Cook implements IWorker, ServingTableListener {
    */
   public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
     // Dish dish = servingTable.getDishToBeCooked(index);
+      dish.setComment("Cook");
     prepareDish(dish, inventory);
+
     // servingTable.addToBeCooking(index);
     servingTable.addToBeCooking(dish);
-    dish.setComment("Cook");
+
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",

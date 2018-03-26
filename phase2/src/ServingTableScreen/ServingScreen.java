@@ -117,43 +117,46 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     }
 
     public void acceptDish(ActionEvent actionEvent) {
+        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
+        System.out.println(dish.getIngredientString());
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                if(dishSelectedTab1.getComment().equals("Cook")) {
-                    ((Cook) getCook()).acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
+                if(dish.getComment().equals("Cook")) {
+                    ((Cook) getCook()).acceptCook(dish, restaurant.getServingTable(), restaurant.getInventory());
                     setCookTable(restaurant.getServingTable().getDishesToBeCooked());
                     setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
                     setReadyTable(restaurant.getServingTable().getDishesToBeServed());
                 }
                 else{
-                    ((Cook) getCook()).acceptNoCook(dishSelectedTab1,restaurant.getServingTable());
+                    ((Cook) getCook()).acceptNoCook(dish,restaurant.getServingTable());
                 }
             }
         }
         catch(NullPointerException e){
             System.out.println("No row selected");
         }
-        this.dishSelectedTab1 = null;
+        // this.dishSelectedTab1 = null;
         checkLabel.setText("");
     }
 
     public void rejectDish(ActionEvent actionEvent) {
+        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
         try {
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reject?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert1.showAndWait();
             if (alert1.getResult() == ButtonType.YES) {
-                ((Cook) getCook()).rejectDish(dishSelectedTab1, restaurant.getServingTable());
+                ((Cook) getCook()).rejectDish(dish, restaurant.getServingTable());
                 setCookTable(restaurant.getServingTable().getDishesToBeCooked());
             }
         }
         catch(NullPointerException e){
             System.out.println("No row selected");
             }
-            this.dishSelectedTab1 = null;
+           // this.dishSelectedTab1 = null;
         checkLabel.setText("");
 
     }
