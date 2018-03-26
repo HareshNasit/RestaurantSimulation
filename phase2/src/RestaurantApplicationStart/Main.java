@@ -32,6 +32,7 @@ public class Main extends Application {
         ServingTable servingTable = new ServingTable();
         Menu menu = new Menu();
         Inventory inventory = new Inventory();
+        inventory.readInventory();
         Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
 
         serverStart("John", restaurant);
@@ -78,11 +79,15 @@ public class Main extends Application {
       Stage window = new Stage();
       FXMLLoader loader = new  FXMLLoader(getClass().getResource("../ServingTableScreen/ServingTableScreen.fxml"));
       Parent root = loader.load();
+      Cook cook = new Cook(name);
       ServingScreen controller = loader.getController();
       controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
       controller.restaurant = restaurant;
-      controller.cook = new Cook(name);
+      controller.cook = cook;
+      cook.setScreen(controller);
       controller.updateScreen();
+      restaurant.getServingTable().addCook(cook);
+
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Serving Screen");
       window.setScene(new Scene(root));

@@ -7,6 +7,7 @@ package Restaurant;
 public class Cook implements IWorker, ServingTableListener {
 
   private String name; // Name of the cook.
+  private ModelControllerInterface screen;
 
   public Cook(String name) {
     this.name = name;
@@ -62,7 +63,7 @@ public class Cook implements IWorker, ServingTableListener {
 
   /** Notify the cook that dish has been served. */
   public void update(String message) {
-    // message notification on GUI
+    screen.updateScreen();
   }
 
   /**
@@ -129,5 +130,13 @@ public class Cook implements IWorker, ServingTableListener {
   public void serveDish(Dish dish, ServingTable servingTable) {
     servingTable.addToBeServed(dish);
     servingTable.getDishesBeingCooked().remove(dish);
+  }
+
+  public ModelControllerInterface getScreen() {
+    return screen;
+  }
+
+  public void setScreen(ModelControllerInterface screen) {
+    this.screen = screen;
   }
 }
