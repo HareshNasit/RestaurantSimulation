@@ -26,7 +26,10 @@ import java.util.ResourceBundle;
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
 
-    private Server server;
+  public Button buttonOccupied;
+  public TextField labelTableSize;
+
+  private Server server;
     private Table table;
     private Restaurant restaurant;
 
@@ -304,6 +307,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
         catch(NullPointerException e){
             System.out.println("No row selected");
         }
+    }
+
+    public void setTableOccupied(){
+
+      try {
+        int tableSize = Integer.valueOf(labelTableSize.getText().trim());
+        table.setOccupied(tableSize);
+        buttonOccupied.setDisable(true);
+      } catch (NumberFormatException e){
+        System.out.println("Enter a proper number bro");
+      }
+
+
     }
 
 
