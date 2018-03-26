@@ -101,15 +101,6 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
    */
   public void callManager() throws IOException {
 
-
-    NotificationBox.display("Aler");
-
-//    System.out.println("Calling Manager......");
-//
-//    FXMLLoader loader = new  FXMLLoader(getClass().getResource("ManagerScreen.ManagerScreen.fxml"));
-//    TabPane root = loader.load();
-//    hBox.getChildren().setAll(root);
-
   }
 
   /**
@@ -228,6 +219,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
 
   public void setServer(Server server) {
     this.server = server;
+    server.setScreen(this);
   }
 
   public Restaurant getRestaurant() {

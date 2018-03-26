@@ -8,7 +8,6 @@ import Restaurant.Dish;
 import Restaurant.ServingTable;
 import Restaurant.DishIngredient;
 import Restaurant.MenuItem;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -41,16 +40,17 @@ public class TestSuite extends Application {
     ingredients.put("tomato",new DishIngredient("tomato",12,12,12,12,12.0));
     Dish dish =  new Dish(new MenuItem("Pizza",5.0,5.0,ingredients),"A",24);
     servingTable.getDishesToBeCooked().add(dish);
-
+    Scene scene = new Scene(root);
     controller.setRestaurant(restaurant);
     controller.setServer(server);
 
-    controller.update();
+    controller.updateScreen();
 
     window.initModality(Modality.APPLICATION_MODAL);
     window.setTitle("Table Screen");
-    window.setScene(new Scene(root));
+    window.setScene(scene);
     window.show();
+    System.out.println(window.getX());
 
 
 

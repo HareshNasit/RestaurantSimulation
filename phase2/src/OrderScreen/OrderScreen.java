@@ -257,6 +257,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public void setServer(Server server) {
     this.server = server;
+    server.setScreen(this);
   }
 
   public Table getTable() {

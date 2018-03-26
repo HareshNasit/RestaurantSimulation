@@ -1,24 +1,20 @@
 package ManagerScreen;
 
 import Restaurant.Cook;
-import Restaurant.Dish;
-import Restaurant.DishIngredient;
 import Restaurant.IWorker;
 import Restaurant.Inventory;
 import Restaurant.InventoryIngredient;
 import Restaurant.Manager;
+import Restaurant.Restaurant;
 import Restaurant.Server;
-import Restaurant.Table;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -28,14 +24,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
 public class ManagerScreenController implements Initializable {
 
+  private Manager manager;
+  private Restaurant restaurant;
   private Inventory inventory;
 
   private final String  REQUESTFILE = "request.txt";
@@ -86,8 +78,8 @@ public class ManagerScreenController implements Initializable {
     getColumnRestock().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
     getColumnThreshold().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
-    inventory = new Inventory();
-    inventory.readInventory();
+    setInventory(new Inventory());
+    getInventory().readInventory();
     tableInventory.setItems(getIngredients());
     this.setIngredientTableRowAction();
 
@@ -116,7 +108,7 @@ public class ManagerScreenController implements Initializable {
    */
   private ObservableList<InventoryIngredient> getIngredients() {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
-    ingredients.setAll(inventory.getInventoryAsCollection());
+    ingredients.setAll(getInventory().getInventoryAsCollection());
     return ingredients;
   }
 
@@ -145,7 +137,7 @@ public class ManagerScreenController implements Initializable {
       int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
       int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
       InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
-      inventory.addNewIngredient(ingredient);
+      getInventory().addNewIngredient(ingredient);
       //There should be a better way to set this
       tableInventory.setItems(getIngredients());
       clearTextFields();
@@ -177,7 +169,7 @@ public class ManagerScreenController implements Initializable {
   public void buttonDeleteAction(){
     InventoryIngredient ingredient = (InventoryIngredient)
         tableInventory.getSelectionModel().getSelectedItem();
-    inventory.removeIngredient(ingredient.getName());
+    getInventory().removeIngredient(ingredient.getName());
     tableInventory.setItems(getIngredients());
     clearTextFields();
   }
@@ -366,4 +358,27 @@ public class ManagerScreenController implements Initializable {
     this.test = test;
   }
 
+  public Manager getManager() {
+    return manager;
+  }
+
+  public void setManager(Manager manager) {
+    this.manager = manager;
+  }
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
+  }
+
+  public Inventory getInventory() {
+    return inventory;
+  }
+
+  public void setInventory(Inventory inventory) {
+    this.inventory = inventory;
+  }
 }
