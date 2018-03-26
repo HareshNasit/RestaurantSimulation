@@ -1,7 +1,6 @@
 package ServingTableScreen;
 
 import Restaurant.*;
-import TablesScreen.TablesScreen;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +34,7 @@ public class ServingTestSuite extends Application{
         controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         // controller.setReadyTable(dishes);
         controller.restaurant = restaurant;
-        controller.cook = new Cook("harsh");
+        controller.setCook(new Server("harsh"));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Serving Screen");
         window.setScene(new Scene(root));

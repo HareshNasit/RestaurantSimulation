@@ -14,7 +14,7 @@
         <AnchorPane fx:id="tab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Button fx:id="accept" layoutX="360.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" prefHeight="83.0" prefWidth="95.0" text="Accept" />
-                  <ImageView fitHeight="40.0" fitWidth="65.0" layoutX="383.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="tick" fitHeight="40.0" fitWidth="65.0" layoutX="383.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tick.png" />
                      </image>
@@ -34,7 +34,7 @@
                         <Image url="@refresh.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="34.0" fitWidth="45.0" layoutX="513.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="cross" fitHeight="34.0" fitWidth="45.0" layoutX="513.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@x.png" />
                      </image>
@@ -44,7 +44,7 @@
     </Tab>
     <Tab text="Dishes being Cooked">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane fx:id="tab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="tab2Table" layoutX="14.0" layoutY="32.0" onMouseClicked="#rowSelectedTab2" prefHeight="329.0" prefWidth="319.0">
                     <columns>
@@ -60,7 +60,7 @@
                         <Image url="@refresh.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@tick.png" />
                      </image>

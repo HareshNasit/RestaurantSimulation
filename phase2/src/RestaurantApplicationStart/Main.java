@@ -1,6 +1,5 @@
 package RestaurantApplicationStart;
 
-import ManagerScreen.ManagerScreenController;
 import Restaurant.Restaurant;
 import Restaurant.Menu;
 import Restaurant.ServingTable;
@@ -11,8 +10,7 @@ import Restaurant.Cook;
 import ServingTableScreen.ServingScreen;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -83,7 +81,7 @@ public class Main extends Application {
       ServingScreen controller = loader.getController();
       controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
       controller.restaurant = restaurant;
-      controller.cook = cook;
+      controller.setCook(cook);
       cook.setScreen(controller);
       controller.updateScreen();
       restaurant.getServingTable().addCook(cook);
