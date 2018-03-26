@@ -23,13 +23,16 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
 
   public Button buttonOccupied;
-  public TextField labelTableSize;
+  public Button buttonSend;
+  public Button buttonBack;
+  public ComboBox customerNumberDropDown;
   private Server server;
   private Table table;
   private Restaurant restaurant;
@@ -70,7 +73,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
     menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
-    //menuIdColumn.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
 
     this.setRowAction();
     System.out.println(getOrderTableView());
@@ -132,7 +134,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
    * Prints the bill for the table.
    */
   public void printTableBill(ActionEvent actionEvent) {
-
   }
 
   public void setOrderTable(ArrayList<Dish> orderedDishes) {
@@ -152,23 +153,43 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+    
     int customerNumber = 69;
     server.addOrder(getTable(), customerNumber, dish);
     updateScreen();
   }
 
-  public void setTableOccupied() {
-    // TODO: Make a pop up or something
+  private boolean validCustomerEntry(String customerInput) {
     try {
-      int tableSize = Integer.valueOf(labelTableSize.getText().trim());
-      table.setOccupied(tableSize);
-      buttonOccupied.setDisable(true);
+      int numCustomers = Integer.parseInt(customerInput);
+      return numCustomers > 1 && numCustomers < 50;
     } catch (NumberFormatException e) {
-      System.out.println("Enter a proper number bro");
+      return false;
     }
-
-
   }
+
+  public void setTableOccupied(){
+    Dialog dialog = new TextInputDialog();
+    dialog.setTitle("Table Dialog");
+    dialog.setHeaderText(
+            "Enter the number of people"
+                    + System.lineSeparator()
+                    + "Format: a whole number between 1 and 50"
+                    + System.lineSeparator()
+                    + "Example: 8");
+    Optional<String> result = dialog.showAndWait();
+    String entered;
+
+    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+      result = dialog.showAndWait();
+    }
+    if (result.isPresent()) {
+       entered = result.get();
+       table.setOccupied(Integer.parseInt(entered));
+       System.out.println(entered);
+    }
+  }
+
 
 
   public void backButtonAction() {

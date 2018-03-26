@@ -4,6 +4,7 @@ package Restaurant;
 public class Server implements IWorker, ServingTableListener {
 
   private String name; // name of a server
+  private ModelControllerInterface screen;
 
   /**
    * Creates a new server for this restaurant
@@ -159,5 +160,13 @@ public class Server implements IWorker, ServingTableListener {
         String.format(
             "Cancelled %s from Table%s%d",
             dish.getName(), dish.getTableName(), dish.getCustomerNum()));
+  }
+
+  public ModelControllerInterface getScreen() {
+    return screen;
+  }
+
+  public void setScreen(ModelControllerInterface screen) {
+    this.screen = screen;
   }
 }
