@@ -11,11 +11,12 @@ import javafx.scene.control.*;
 import Restaurant.Dish;
 import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import Restaurant.ModelControllerInterface;
-
+import Restaurant.IWorker;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,12 +43,16 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     public TableColumn tab3Comment;
     public Label checkLabel;
     public Button tab1Refresh;
+    public ImageView tick;
+    public ImageView cross;
+    public AnchorPane tab2;
+    public ImageView tick1;
 
     private Dish dishSelectedTab1;
     private Dish dishSelectedTab2;
     public Restaurant restaurant;
     private ServingTable servingTable;
-    public Cook cook;
+    private IWorker cook;
 
     public void setCookTable(ArrayList<Dish> Dishes) {
         ObservableList<Dish> dishesToBeCooked = FXCollections.observableArrayList();
@@ -67,6 +72,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab1Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         tab1Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
@@ -78,7 +84,11 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         tab3TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
+
+
+
     }
+
 
     public <T, S> TableColumn<S, T> getTableIDColumn() {
         return tab1TableId;
@@ -94,7 +104,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
 
     public void rowSelected(MouseEvent mouseEvent) {
         this.dishSelectedTab1 = (Dish) tab1Table.getSelectionModel().getSelectedItem();
-        if(cook.canBePrepared(dishSelectedTab1,restaurant.getInventory())){
+        if(((Cook) getCook()).canBePrepared(dishSelectedTab1,restaurant.getInventory())){
             checkLabel.setText("Can be Prepared");
             checkLabel.setTextFill(Paint.valueOf("Green"));
         }
@@ -113,13 +123,13 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 if(dishSelectedTab1.getComment().equals("Cook")) {
-                    cook.acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
+                    ((Cook) getCook()).acceptCook(dishSelectedTab1, restaurant.getServingTable(), restaurant.getInventory());
                     setCookTable(restaurant.getServingTable().getDishesToBeCooked());
                     setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
                     setReadyTable(restaurant.getServingTable().getDishesToBeServed());
                 }
                 else{
-                    cook.acceptNoCook(dishSelectedTab1,restaurant.getServingTable());
+                    ((Cook) getCook()).acceptNoCook(dishSelectedTab1,restaurant.getServingTable());
                 }
             }
         }
@@ -136,7 +146,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
                     ButtonType.YES, ButtonType.CANCEL);
             alert1.showAndWait();
             if (alert1.getResult() == ButtonType.YES) {
-                cook.rejectDish(dishSelectedTab1, restaurant.getServingTable());
+                ((Cook) getCook()).rejectDish(dishSelectedTab1, restaurant.getServingTable());
                 setCookTable(restaurant.getServingTable().getDishesToBeCooked());
             }
         }
@@ -159,7 +169,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                cook.serveDish(dishSelectedTab2, restaurant.getServingTable());
+                ((Cook) getCook()).serveDish(dishSelectedTab2, restaurant.getServingTable());
                 setCookTable(restaurant.getServingTable().getDishesToBeCooked());
                 setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
                 setReadyTable(restaurant.getServingTable().getDishesToBeServed());
@@ -199,5 +209,27 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
 
     public void setServingTable(ServingTable servingTable) {
         this.servingTable = servingTable;
+    }
+
+    public IWorker getCook() {
+        return cook;
+    }
+
+    public void setCook(IWorker cook) {
+        this.cook = cook;
+
+        if(cook.getType().equals("Cook")){
+            System.out.println("Yayy");
+        }
+        else if(cook.getType().equals("Server")){
+            tab1.getChildren().remove(accept);
+            tab1.getChildren().remove(checkLabel);
+            tab1.getChildren().remove(reject);
+            tab1.getChildren().remove(tick);
+            tab1.getChildren().remove(cross);
+            tab2.getChildren().remove(tick1);
+            tab2.getChildren().remove(DishReadyButton);
+            System.out.println("halamadrid");
+        }
     }
 }

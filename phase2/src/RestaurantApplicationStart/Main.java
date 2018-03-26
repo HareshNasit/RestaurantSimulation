@@ -80,7 +80,7 @@ public class Main extends Application {
       ServingScreen controller = loader.getController();
       controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
       controller.restaurant = restaurant;
-      controller.cook = cook;
+      controller.setCook(cook);
       cook.setScreen(controller);
       controller.updateScreen();
       restaurant.getServingTable().addCook(cook);
