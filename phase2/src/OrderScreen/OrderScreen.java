@@ -30,7 +30,6 @@ import notificationBox.NotificationBox;
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
 
-  public Button buttonOccupied;
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
@@ -247,7 +246,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
 
-    //TODO: Disable or not show certain MenuItems that have not enough ingridients
+    //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
   }
