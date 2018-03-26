@@ -33,6 +33,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
+  public TableColumn customerNumberColumn;
   private Server server;
   private Table table;
   private Restaurant restaurant;
@@ -48,7 +49,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn menuIngredientsColumn;
   public Button openBillScreen;
   public TableColumn commentColumn;
-  public TableColumn customerNumber;
   public TableColumn idColumn;
   public TableColumn nameColumn;
   public Button addCommentButton;
@@ -68,7 +68,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void initialize(URL location, ResourceBundle resources) {
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
-    getCustomerNumber().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -153,10 +153,20 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    
-    int customerNumber = 69;
+    int customerNumber = (Integer) customerNumberDropDown.getValue();
     server.addOrder(getTable(), customerNumber, dish);
     updateScreen();
+  }
+
+  public void addOptionsToComboBox(){
+      ArrayList<String> customerLabels = new ArrayList<>();
+      for(int k =0; k < setTableOccupied(); k++){
+          customerLabels.add("Customer " + k);
+      }
+      customerLabels.add("All");
+      ObservableList<String> labels = FXCollections.observableArrayList();
+      labels.addAll(customerLabels);
+      customerNumberDropDown.setItems(labels);
   }
 
   private boolean validCustomerEntry(String customerInput) {
@@ -168,7 +178,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     }
   }
 
-  public void setTableOccupied(){
+  public int setTableOccupied(){
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Table Dialog");
     dialog.setHeaderText(
@@ -178,7 +188,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
                     + System.lineSeparator()
                     + "Example: 8");
     Optional<String> result = dialog.showAndWait();
-    String entered;
+    String entered = "";
 
     while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
       result = dialog.showAndWait();
@@ -188,6 +198,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
        table.setOccupied(Integer.parseInt(entered));
        System.out.println(entered);
     }
+    int numberOfPeople = Integer.parseInt(entered);
+    return numberOfPeople;
   }
 
 
@@ -338,14 +350,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.menuIngredientsColumn = menuIngredientsColumn;
   }
 
-  public TableColumn getCustomerNumber() {
-    return customerNumber;
-  }
-
-  public void setCustomerNumber(TableColumn customerNumber) {
-    this.customerNumber = customerNumber;
-  }
-
   public TableColumn getIdColumn() {
     return idColumn;
   }
@@ -395,5 +399,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void setMenuSelectedDishCustomerNum(int menuSelectedDishCustomerNum) {
     this.menuSelectedDishCustomerNum = menuSelectedDishCustomerNum;
   }
+
+    public TableColumn getCustomerNumberColumn() {
+        return customerNumberColumn;
+    }
+
+    public void setCustomerNumberColumn(TableColumn customerNumberColumn) {
+        this.customerNumberColumn = customerNumberColumn;
+    }
 }
 
