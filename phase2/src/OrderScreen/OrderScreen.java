@@ -30,7 +30,9 @@ import java.util.ResourceBundle;
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
 
   public Button buttonOccupied;
-  public TextField labelTableSize;
+  public Button buttonSend;
+  public Button buttonBack;
+  public ComboBox customerNumberDropDown;
   private Server server;
   private Table table;
   private Restaurant restaurant;
@@ -151,23 +153,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+    
     int customerNumber = 69;
     server.addOrder(getTable(), customerNumber, dish);
     updateScreen();
   }
-
-//  public void setTableOccupied() {
-//    // TODO: Make a pop up or something
-//    try {
-//      int tableSize = Integer.valueOf(labelTableSize.getText().trim());
-//      table.setOccupied(tableSize);
-//      buttonOccupied.setDisable(true);
-//    } catch (NumberFormatException e) {
-//      System.out.println("Enter a proper number bro");
-//    }
-//
-//
-//  }
 
   private boolean validCustomerEntry(String customerInput) {
     try {
