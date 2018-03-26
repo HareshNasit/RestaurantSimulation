@@ -8,17 +8,16 @@ public class SimpleLogger {
 
     String loggerDestination;
 
+    /**
+     * SimpleLogger constructor.
+     *
+     * @param filePath filePath for the logger.
+     */
     public SimpleLogger(String filePath) {
         this.loggerDestination = filePath;
     }
 
-    public void setLoggerDestination(String filePath) {
-        this.loggerDestination = filePath;
-    }
 
-    public String getLoggerDestination(){
-        return this.loggerDestination;
-    }
     /**
      * Creates the logger file w/ date
      */
@@ -39,6 +38,11 @@ public class SimpleLogger {
 
     }
 
+    /**
+     * Writes a message to the log.
+     *
+     * @param content information being written to the logger.
+     */
     public void writeToLogger(String content) {
 
         try {
@@ -51,6 +55,11 @@ public class SimpleLogger {
         }
     }
 
+    /**
+     * Returns a string with all the info from the logger.
+     *
+     * @return String with all info from the logger (separated by line).
+     */
     public String returnAllContent() {
         String info = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(loggerDestination)))) {
@@ -63,4 +72,23 @@ public class SimpleLogger {
         }
         return info;
     }
+
+    /**
+     * Setter for the filePath
+     *
+     * @param filePath filePath of the logger.
+     */
+    public void setLoggerDestination(String filePath) {
+        this.loggerDestination = filePath;
+    }
+
+    /**
+     * Getter for the filePath
+     *
+     * @return filePath of the logger.
+     */
+    public String getLoggerDestination() {
+        return this.loggerDestination;
+    }
+
 }
