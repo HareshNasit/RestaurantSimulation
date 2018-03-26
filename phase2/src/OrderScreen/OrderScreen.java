@@ -35,7 +35,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
 
   public TableColumn customerNumberColumn;
-  private Server server;
+    public Button addComplimentsButton;
+    private Server server;
   private Table table;
   private Restaurant restaurant;
   public Label tableOrderTitle;
@@ -159,6 +160,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void addOptionsToComboBox(Table table){
       this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
+      int tableSize = setTableOccupied();
+      table.setOccupied(tableSize);
       for(int k = 1; k <= table.getTableSize(); k++){
           customerLabels.add("Customer " + k);
       }
@@ -217,6 +220,24 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     } catch (IOException e) {
     }
 
+  }
+
+  public void openComplimentMenu(){
+      try{
+
+          if (table != null) {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
+              Parent root = loader.load();
+              OrderScreen controller = loader.getController();
+              controller.updateScreen();
+              paneBox.getChildren().setAll(root);
+          }
+
+      } catch (IOException e){
+          e.printStackTrace();
+      } catch (NullPointerException e){
+          System.out.println("Choose a file bro");
+      }
   }
 
   public void updateScreen() {
