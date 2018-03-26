@@ -154,17 +154,17 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-//    int customerNumber = (Integer) customerNumberDropDown.getValue();
+    // int customerNumber = (Integer) customerNumberDropDown.getValue();
     server.addOrder(getTable(), 13, dish);
     updateScreen();
   }
 
-  public void addOptionsToComboBox(){
+  public void addOptionsToComboBox(Table table){
+      this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
-      for(int k =0; k < setTableOccupied(); k++){
+      for(int k = 1; k <= table.getTableSize(); k++){
           customerLabels.add("Customer " + k);
       }
-      customerLabels.add("All");
       ObservableList<String> labels = FXCollections.observableArrayList();
       labels.addAll(customerLabels);
       customerNumberDropDown.setItems(labels);
