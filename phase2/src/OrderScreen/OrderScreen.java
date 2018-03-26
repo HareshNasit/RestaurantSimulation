@@ -180,6 +180,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     } catch (NumberFormatException e) {
       return false;
     }
+
+    
   }
 
   public int setTableOccupied(){
@@ -240,6 +242,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
           System.out.println("Choose a file bro");
       }
   }
+
+
+
+
 
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
