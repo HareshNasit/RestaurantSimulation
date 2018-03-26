@@ -106,9 +106,6 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     }
 
     public void acceptDish(ActionEvent actionEvent) {
-        // Manually removing it.
-//        cookTable.getItems().remove(dishSelected);
-//        dishesBeingCooked.add(dishSelected);
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
                     ButtonType.YES, ButtonType.CANCEL);
@@ -127,8 +124,20 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     }
 
     public void rejectDish(ActionEvent actionEvent) {
-        cook.rejectDish(dishSelectedTab1,restaurant.getServingTable());
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        try {
+            Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reject?",
+                    ButtonType.YES, ButtonType.CANCEL);
+            alert1.showAndWait();
+            if (alert1.getResult() == ButtonType.YES) {
+                cook.rejectDish(dishSelectedTab1, restaurant.getServingTable());
+                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+            }
+        }
+        catch(NullPointerException e){
+            System.out.println("No row selected");
+            }
+            this.dishSelectedTab1 = null;
+
     }
     public void rowSelectedTab2(MouseEvent mouseEvent){
         this.dishSelectedTab2 = (Dish) tab2Table.getSelectionModel().getSelectedItem();
