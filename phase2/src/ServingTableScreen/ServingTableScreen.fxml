@@ -19,7 +19,7 @@
                         <Image url="@tick.png" />
                      </image>
                   </ImageView>
-                  <TableView fx:id="tab1Table" layoutX="7.0" layoutY="30.0" prefHeight="336.0" prefWidth="325.0">
+                  <TableView fx:id="tab1Table" layoutX="7.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="325.0">
                     <columns>
                       <TableColumn fx:id="tab1TableId" prefWidth="69.0" text="Table" />
                       <TableColumn fx:id="tab1Dish" prefWidth="152.0" text="Dish" />
@@ -46,7 +46,7 @@
       <content>
         <AnchorPane fx:id="tab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="tab2Table" layoutX="14.0" layoutY="32.0" onMouseClicked="#rowSelectedTab2" prefHeight="329.0" prefWidth="319.0">
+                  <TableView fx:id="tab2Table" layoutX="14.0" layoutY="32.0" prefHeight="329.0" prefWidth="319.0">
                     <columns>
                       <TableColumn fx:id="tab2TableId" prefWidth="76.0" text="Table" />
                       <TableColumn fx:id="tab2Dish" prefWidth="145.0" text="Dish" />
