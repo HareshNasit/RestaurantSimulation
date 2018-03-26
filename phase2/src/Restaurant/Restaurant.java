@@ -49,8 +49,8 @@ public class Restaurant {
     generateTables(TABLEFILE);
     this.servingTable = servingTable;
     this.generateWorkers(WORKERFILE, this.servingTable);
-//    createNewReceiptFile();
-//    createNewLogFile();
+    createNewReceiptFile();
+    createNewLogFile();
   }
 
   /**
