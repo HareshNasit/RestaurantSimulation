@@ -97,7 +97,9 @@ public class Server implements IWorker, ServingTableListener {
    * @param dish dish to be added to the tables order.
    */
   public void addOrder(Table table, int customerNumber, MenuItem dish) {
-    table.addSingleOrder(new Dish(dish, table.getTableID(), customerNumber));
+    Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
+    dish1.setComment("Cook");
+    table.addSingleOrder(dish1);
   }
 
   /**

@@ -121,6 +121,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
             System.out.println("No row selected");
         }
         this.dishSelectedTab1 = null;
+        checkLabel.setText("");
     }
 
     public void rejectDish(ActionEvent actionEvent) {
@@ -137,6 +138,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
             System.out.println("No row selected");
             }
             this.dishSelectedTab1 = null;
+        checkLabel.setText("");
 
     }
     public void rowSelectedTab2(MouseEvent mouseEvent){

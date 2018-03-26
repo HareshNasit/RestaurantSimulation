@@ -13,8 +13,6 @@ public class Bill {
   /**
    * Creates a bill from a given set of orders. This bill will be used for creating a full bill
    * where one person pays.
-   *
-   * @param table
    */
   public static String outputBill(Table table) {
 
@@ -50,11 +48,6 @@ public class Bill {
 
   /**
    * String method for the final payment including a $ amount tip.
-   *
-   * @param table
-   * @param customerNum
-   * @param tip
-   * @return
    */
   public static String finalPaymentSinglePerson(Table table, int customerNum, double tip) {
     String billText = "";
@@ -154,9 +147,6 @@ public class Bill {
 
   /**
    * Adds necessary 0's to the number. Ex. "3.0" turns into "3.00"
-   *
-   * @param number
-   * @return
    */
   private static String doubleToCurrency(double number) {
     DecimalFormat decim = new DecimalFormat("0.00");
