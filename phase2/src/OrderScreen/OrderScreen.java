@@ -56,7 +56,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private int dishNumber;
   private int dishPrice;
   private ArrayList<Dish> dishes;
-  
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));

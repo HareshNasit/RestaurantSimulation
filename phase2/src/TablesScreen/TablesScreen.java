@@ -68,7 +68,7 @@ public class TablesScreen implements Initializable {
         controller.setTable(table);
         controller.setServer(server);
         controller.setRestaurant(restaurant);
-        controller.update();
+        controller.updateScreen();
         hBox.getChildren().setAll(root);
       }
 
