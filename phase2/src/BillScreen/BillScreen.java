@@ -34,6 +34,7 @@ public class BillScreen extends Application {
     controller.setTable(table);
     controller.setRestaurant(restaurant);
 
+
     primaryStage.setTitle("Bill Menu");
     primaryStage.setScene(new Scene(root));
 

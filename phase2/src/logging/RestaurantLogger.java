@@ -56,5 +56,5 @@ public class RestaurantLogger extends SimpleLogger {
         content += "[END LOG]" + System.lineSeparator();
         this.writeToLogger(content);
     }
-    
+
 }
