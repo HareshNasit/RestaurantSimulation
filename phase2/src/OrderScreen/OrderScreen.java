@@ -54,6 +54,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn nameColumn;
   public Button addCommentButton;
   public Pane paneBox;
+  public Label labelNotification;
+
   private double menuSelectedDishId;
   private String menuSelectedDishName;
   private int menuSelectedDishCustomerNum;
@@ -232,7 +234,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   @Override
   public void openNotification(String message) {
+    labelNotification.setText(message);
     NotificationBox.display(message);
+    System.out.println("NEW NOTIFICATION");
   }
 
   public ObservableList<MenuItem> getMenuItem() {
@@ -260,6 +264,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void setServer(Server server) {
     this.server = server;
     server.setScreen(this);
+    System.out.println("New Screen has been changed");
   }
 
   public Table getTable() {
