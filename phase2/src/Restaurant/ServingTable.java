@@ -38,7 +38,7 @@ public class ServingTable {
    */
   public void addToBeCooked(ArrayList<Dish> order) {
     dishesToBeCooked.addAll(order);
-    notifyCooks("Orders has been sent to chef");
+    notifyCooks("New Orders have been placed on the serving table");
   }
 
   /**

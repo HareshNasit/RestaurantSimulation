@@ -4,19 +4,20 @@ import OrderScreen.OrderScreen;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
+import Restaurant.ModelControllerInterface;
+import java.awt.Window;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collection;
 import ServingTableScreen.ServingScreen;
-
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -24,13 +25,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
-import server.ServerScreen;
+import notificationBox.NotificationBox;
 
 
 /**
  * The controller for the TablesScreen. Manages all user interactions regarding this GUI
  */
-public class TablesScreen implements Initializable {
+public class TablesScreen implements Initializable, ModelControllerInterface  {
 
   private Server server;
   private Restaurant restaurant;
@@ -99,11 +100,15 @@ public class TablesScreen implements Initializable {
    * Calls the manager for special events
    */
   public void callManager() throws IOException {
-    System.out.println("Calling Manager......");
 
-    FXMLLoader loader = new  FXMLLoader(getClass().getResource("ManagerScreen.ManagerScreen.fxml"));
-    TabPane root = loader.load();
-    hBox.getChildren().setAll(root);
+
+    NotificationBox.display("Aler");
+
+//    System.out.println("Calling Manager......");
+//
+//    FXMLLoader loader = new  FXMLLoader(getClass().getResource("ManagerScreen.ManagerScreen.fxml"));
+//    TabPane root = loader.load();
+//    hBox.getChildren().setAll(root);
 
   }
 
@@ -114,6 +119,7 @@ public class TablesScreen implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     getTableIDColumn().setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
     getOccupiedTableColumn().setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
+
   }
 
   /**
@@ -126,9 +132,17 @@ public class TablesScreen implements Initializable {
     return observableList;
   }
 
-  public void update() {
+  @Override
+  public void updateScreen() {
     tableView.setItems(getObservableTablesList(restaurant.getTables().values()));
     labelServerName.setText(server.getName());
+  }
+
+
+  @Override
+  public void openNotification(String message) {
+    NotificationBox.display(message);
+
   }
 
 
@@ -223,4 +237,5 @@ public class TablesScreen implements Initializable {
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
+
 }
