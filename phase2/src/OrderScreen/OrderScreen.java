@@ -1,5 +1,6 @@
 package OrderScreen;
 
+import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -7,6 +8,7 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -23,19 +25,19 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.util.Duration;
 import notificationBox.NotificationBox;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
 
-  public Button buttonOccupied;
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
 
-
   public TableColumn customerNumberColumn;
-  private Server server;
+    public Button addComplimentsButton;
+    private Server server;
   private Table table;
   private Restaurant restaurant;
   public Label tableOrderTitle;
@@ -54,12 +56,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn nameColumn;
   public Button addCommentButton;
   public Pane paneBox;
+  public Label labelNotification;
+
   private double menuSelectedDishId;
   private String menuSelectedDishName;
   private int menuSelectedDishCustomerNum;
-  private String dishName;
-  private int dishNumber;
-  private int dishPrice;
   private ArrayList<Dish> dishes;
 
 
@@ -162,6 +163,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void addOptionsToComboBox(Table table){
       this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
+      int tableSize = setTableOccupied();
+      table.setOccupied(tableSize);
       for(int k = 1; k <= table.getTableSize(); k++){
           customerLabels.add("Customer " + k);
       }
@@ -177,6 +180,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     } catch (NumberFormatException e) {
       return false;
     }
+
+    
   }
 
   public int setTableOccupied(){
@@ -222,17 +227,44 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  public void openComplimentMenu(){
+      try{
+          Dish dish = getOrderTableView().getSelectionModel().getSelectedItem();
+          if (dish != null) {
+              FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
+              Parent root = loader.load();
+              paneBox.getChildren().setAll(root);
+          }
+
+      } catch (IOException e){
+          e.printStackTrace();
+      } catch (NullPointerException e){
+          System.out.println("Choose a file bro");
+      }
+  }
+
+
+
+
+
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
 
-    //TODO: Disable or not show certain MenuItems that have not enough ingridients
+    //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
   }
 
   @Override
   public void openNotification(String message) {
-    NotificationBox.display(message);
+
+    labelNotification.setText(message);
+    FadeTransition ft = new FadeTransition(Duration.millis(3000), labelNotification);
+
+    ft.setFromValue(1.0);
+    ft.setToValue(0.0);
+    ft.play();
+    System.out.println("NEW NOTIFICATION");
   }
 
   public ObservableList<MenuItem> getMenuItem() {
@@ -260,6 +292,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void setServer(Server server) {
     this.server = server;
     server.setScreen(this);
+    System.out.println("New Screen has been changed");
   }
 
   public Table getTable() {
@@ -294,30 +327,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   public TableView<Dish> getMenuTableView() {
     return menuTableView;
-  }
-
-  public String getDishName() {
-    return dishName;
-  }
-
-  public void setDishName(String dishName) {
-    this.dishName = dishName;
-  }
-
-  public int getDishNumber() {
-    return dishNumber;
-  }
-
-  public void setDishNumber(int dishNumber) {
-    this.dishNumber = dishNumber;
-  }
-
-  public int getDishPrice() {
-    return dishPrice;
-  }
-
-  public void setDishPrice(int dishPrice) {
-    this.dishPrice = dishPrice;
   }
 
   @Override

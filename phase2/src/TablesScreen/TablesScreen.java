@@ -70,6 +70,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
         controller.setServer(server);
         controller.setRestaurant(restaurant);
         controller.updateScreen();
+        controller.addOptionsToComboBox(table);
         hBox.getChildren().setAll(root);
       }
 

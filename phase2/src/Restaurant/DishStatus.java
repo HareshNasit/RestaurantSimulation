@@ -31,6 +31,12 @@ public enum DishStatus {
         public String toString() {
             return "Serving";
         }
+    },
+    NOTSENT{
+        @Override
+        public String toString() {
+            return "Not Sent";
+        }
     };
 
 
