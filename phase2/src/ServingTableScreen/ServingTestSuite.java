@@ -27,11 +27,13 @@ public class ServingTestSuite extends Application{
         ArrayList<Dish> dishes = new ArrayList<>();
         dishes.add(new Dish(new MenuItem("Pizza",5.0,5.0,ingredients),"A",24));
         dishes.add(new Dish(new MenuItem("Burritos",5.0,5.0,ingredients),"B",24));
-        controller.setCookTable(dishes);
+
         dishes.add(new Dish(new MenuItem("Hamus",5.0,5.0,ingredients),"C",24));
-        controller.setBeingCookedTable(dishes);
+        // controller.setBeingCookedTable(dishes);
         dishes.add(new Dish(new MenuItem("Falafal",5.0,5.0,ingredients),"D",24));
-        controller.setReadyTable(dishes);
+        restaurant.getServingTable().getDishesToBeCooked().addAll(dishes);
+        controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+        // controller.setReadyTable(dishes);
         controller.restaurant = restaurant;
         controller.cook = new Cook("harsh");
         window.initModality(Modality.APPLICATION_MODAL);

@@ -2,7 +2,15 @@
 
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
@@ -11,13 +19,17 @@
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
         <Button fx:id="accept" layoutX="353.0" layoutY="60.0" mnemonicParsing="false" onAction="#acceptEvent" prefWidth="118.0" text="Accept" />
-        <Button id="add" fx:id="addition" disable="false" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Add">
+        <Button id="add" fx:id="addition" disable="false" layoutX="353.0" layoutY="99.0" mnemonicParsing="false" onAction="#handle" prefHeight="87.50390625" prefWidth="118.0" text="+">
           <font>
-            <Font size="20.0" fx:id="x1" />
+            <Font size="32.0" />
           </font>
         </Button>
-        <Button fx:id="cancel" layoutX="353.0" layoutY="231.0" mnemonicParsing="false" onAction="#cancelEvent" prefWidth="118.0" text="Cancel" />
-        <Button fx:id="subtract" font="$x1" layoutX="353.0" layoutY="165.0" mnemonicParsing="false" onAction="#handle" prefHeight="56.951171875" prefWidth="118.0" text="Sub" />
+        <Button fx:id="cancel" layoutX="353.0" layoutY="304.0" mnemonicParsing="false" onAction="#cancelEvent" prefWidth="118.0" text="Cancel" />
+        <Button fx:id="subtract" layoutX="353.0" layoutY="201.0" mnemonicParsing="false" onAction="#handle" prefHeight="87.5" prefWidth="118.0" text="-">
+          <font>
+            <Font name="System Bold" size="40.0" />
+          </font>
+        </Button>
         <TextArea id="label" fx:id="dishStatusLabel" editable="false" layoutX="37.0" layoutY="7.0" prefHeight="33.951171875" prefWidth="434.000022070315" wrapText="true" />
         <TableView fx:id="tableView" layoutX="37.0" layoutY="60.0" prefHeight="421.0" prefWidth="290.0">
           <columns>

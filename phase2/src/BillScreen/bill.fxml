@@ -1,4 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="331.0" prefWidth="293.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="BillScreen.BillScreenController">
+  <children>
+    <Pane prefHeight="358.0" prefWidth="292.9999000000025" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <children>
+        <ComboBox fx:id="scrollMenu" layoutX="32.0" layoutY="31.0" prefHeight="41.0" prefWidth="229.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button fx:id="payButton" layoutX="32.0" layoutY="201.0" mnemonicParsing="false" onAction="#createPaymentWindow" prefHeight="93.0" prefWidth="229.00009999999747" text="Pay">
+          <font>
+            <Font size="20.0" fx:id="x1" />
+          </font>
+        </Button>
+        <Button fx:id="receiptButton" font="$x1" layoutX="32.0" layoutY="93.0" mnemonicParsing="false" onAction="#createReceiptWindow" prefHeight="93.0" prefWidth="229.0" text="Generate Receipt" />
+      </children>
+    </Pane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+  </rowConstraints>
 </GridPane>

@@ -1,6 +1,10 @@
 package Restaurant;
 
+
 import java.io.*;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /*
  * A Manager manages the overall restaurant and gets the ingredients if there
@@ -18,6 +22,11 @@ public class Manager implements IWorker, InventoryListener {
   @Override
   public String getName() {
     return name;
+  }
+
+  @Override
+  public String getType() {
+    return "Manager";
   }
 
   /** Calls a server or a cook to collect the received ingredients. */

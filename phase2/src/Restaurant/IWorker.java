@@ -12,5 +12,7 @@ public interface IWorker {
    */
   void scanStock(Inventory inventory, String ingredient, int amount);
 
-  String getName();
+  public String getName();
+
+  public String getType();
 }

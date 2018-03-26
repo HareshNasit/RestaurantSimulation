@@ -2,6 +2,7 @@ package Restaurant;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,6 +10,10 @@ public class Menu {
 
   private final String FILENAME = "menu.txt";
   private HashMap<Double, MenuItem> menuItems;
+
+  public Collection<MenuItem> getMenuItems(){
+    return menuItems.values();
+  }
 
   /** Creates a Menu from the FILENAME txt file and adds all the dishes to an array. */
   public Menu() {

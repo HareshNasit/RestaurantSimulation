@@ -1,5 +1,7 @@
 package Restaurant;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -59,10 +61,44 @@ public class Inventory {
     return true;
   }
 
+  /**
+   * Returns the strings of low ingredients
+   * @param dish
+   * @return
+   */
+  public String getLowIngredientStrings(Dish dish) {
+    HashMap<String, Integer> dishIngredients = dish.getIngredientAmounts();
+    StringBuilder lowIngredients = new StringBuilder();
+    for (String ingredient : dishIngredients.keySet()) {
+      System.out.println("Checking: " + ingredient);
+      if (!inventory.containsKey(ingredient.trim())) {
+        lowIngredients.append(ingredient + " not available" + System.lineSeparator());
+      } else if (inventory.get(ingredient.trim()).getCurrentQuantity()
+          < dishIngredients.get(ingredient)) {
+        int difference = Math.abs(inventory.get(ingredient.trim()).getCurrentQuantity()
+            - dishIngredients.get(ingredient));
+        lowIngredients.append(ingredient + "missing: " + String.valueOf(difference)
+            + " units"+ System.lineSeparator());
+      }
+    }
+    return lowIngredients.toString();
+  }
+
   public InventoryIngredient getInventoryIngredient(String ingredient){
       return this.inventory.get(ingredient);
   }
 
+  public Collection<InventoryIngredient> getInventoryAsCollection(){
+    return inventory.values();
+  }
+
+  public void addNewIngredient(InventoryIngredient ingredient){
+    inventory.put(ingredient.getName(), ingredient);
+  }
+
+  public void removeIngredient(String ingredientName){
+    inventory.remove(ingredientName);
+  }
 
   /**
    * Reduces the current stock of String ingredient by int amount if available
