@@ -2,7 +2,9 @@ package Restaurant;
 
 import java.util.ArrayList;
 
-/** A Serving Table is used between all chefs and servers. It depicts the state of the dish */
+/**
+ * A Serving Table is used between all chefs and servers. It depicts the state of the dish
+ */
 public class ServingTable {
 
   private ArrayList<Dish> dishesRejected; // List of dishes being rejected
@@ -12,16 +14,10 @@ public class ServingTable {
   private ArrayList<ServingTableListener> servers; // List of all the servers.
   private ArrayList<ServingTableListener> cooks; // List of all the cooks.
 
-    public ArrayList<Dish> getDishesToBeServed() {
-        return dishesToBeServed;
-    }
 
-    public ArrayList<Dish> getDishesBeingCooked() {
-
-        return dishesBeingCooked;
-    }
-
-    /** Creates a new serving table. */
+  /**
+   * Creates a new serving table.
+   */
   public ServingTable() {
     dishesBeingCooked = new ArrayList<>();
     dishesRejected = new ArrayList<>();
@@ -78,6 +74,9 @@ public class ServingTable {
     // Dish dish = dishesToBeCooked.remove(index);
     dishesToBeCooked.remove(dish);
     dishesRejected.add(dish);
+    String message = String
+        .format("Table %s%d has been rejected", dish.getTableName(), dish.getCustomerNum());
+    notifyServers(message);
   }
 
   /**
@@ -87,19 +86,21 @@ public class ServingTable {
    */
   public void addToBeServed(Dish dish) {
     // Dish dish = dishesBeingCooked.remove(index);
-      dishesBeingCooked.remove(dish);
+    dishesBeingCooked.remove(dish);
     dishesToBeServed.add(dish);
-    notifyServers(
-        String.format(
-            "Table %s%d %s is ready to be served",
-            dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    String message = String
+        .format("Table %s%d %s is ready to be served", dish.getTableName(), dish.getCustomerNum(),
+            dish.getName());
+    notifyServers(message);
     System.out.println(this);
   }
 
-  /** Dish at index is moved from needing to be cooked to being cooked. */
+  /**
+   * Dish at index is moved from needing to be cooked to being cooked.
+   */
   public void addToBeCooking(Dish dish) {
     // Dish dish = dishesToBeCooked.remove(index);
-      dishesToBeCooked.remove(dish);
+    dishesToBeCooked.remove(dish);
     dishesBeingCooked.add(dish);
   }
 
@@ -112,10 +113,10 @@ public class ServingTable {
    */
   public Dish serveDish(int index) {
     Dish dish = dishesToBeServed.remove(index);
-    notifyCooks(
-        String.format(
-            "Table %s%d %s has been served",
-            dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    String message = String.format(String.format(
+        "Table %s%d %s has been served",
+        dish.getTableName(), dish.getCustomerNum(), dish.getName()));
+    notifyCooks(message);
     return dish;
   }
 
@@ -155,13 +156,15 @@ public class ServingTable {
    * @param message Message that needs to be passed
    */
   private void notifyCooks(String message) {
-    System.out.println("Cooks notified that " + message);
+    System.out.println(message);
     for (ServingTableListener cook : cooks) {
       cook.update(message);
     }
   }
 
-  /** prints the ServingTable information. */
+  /**
+   * prints the ServingTable information.
+   */
   @Override
   public String toString() {
     String finalString =
@@ -186,12 +189,22 @@ public class ServingTable {
     }
     return finalString + System.lineSeparator();
   }
-    /**
-     * Getter for Dishes to be cooked.
-     *
-     * @return ArrayList<Dish>
-     */
-    public ArrayList<Dish> getDishesToBeCooked() {
-        return dishesToBeCooked;
-    }
+
+  /**
+   * Getter for Dishes to be cooked.
+   *
+   * @return ArrayList<Dish>
+   */
+  public ArrayList<Dish> getDishesToBeCooked() {
+    return dishesToBeCooked;
+  }
+
+  public ArrayList<Dish> getDishesToBeServed() {
+    return dishesToBeServed;
+  }
+
+  public ArrayList<Dish> getDishesBeingCooked() {
+
+    return dishesBeingCooked;
+  }
 }

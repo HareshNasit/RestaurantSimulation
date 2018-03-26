@@ -74,7 +74,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
       }
 
     } catch (IOException e){
-      System.out.println("File Doesn't Exist");
+      e.printStackTrace();
     } catch (NullPointerException e){
       System.out.println("Choose a file bro");
     }

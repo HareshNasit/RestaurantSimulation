@@ -32,7 +32,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public Button buttonSend;
   public Button buttonBack;
   public ComboBox customerNumberDropDown;
-  public TableColumn customerNumberColumn;
+
+
+  public TableColumn customerNumber;
   private Server server;
   private Table table;
   private Restaurant restaurant;
@@ -67,7 +69,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void initialize(URL location, ResourceBundle resources) {
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
-    getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    customerNumber.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -152,8 +154,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    int customerNumber = (Integer) customerNumberDropDown.getValue();
-    server.addOrder(getTable(), customerNumber, dish);
+//    int customerNumber = (Integer) customerNumberDropDown.getValue();
+    server.addOrder(getTable(), 123, dish);
     updateScreen();
   }
 
@@ -405,12 +407,5 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.menuSelectedDishCustomerNum = menuSelectedDishCustomerNum;
   }
 
-    public TableColumn getCustomerNumberColumn() {
-        return customerNumberColumn;
-    }
-
-    public void setCustomerNumberColumn(TableColumn customerNumberColumn) {
-        this.customerNumberColumn = customerNumberColumn;
-    }
 }
 
