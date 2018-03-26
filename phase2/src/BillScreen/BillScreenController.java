@@ -25,7 +25,8 @@ public class BillScreenController implements Initializable {
   public Restaurant restaurant;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+  }
 
   /** */
   public void createReceiptWindow() {
@@ -143,6 +144,7 @@ public class BillScreenController implements Initializable {
       return false;
     }
   }
+  
 
   public void createPaymentWindow() {
     String customer = (String) scrollMenu.getValue();

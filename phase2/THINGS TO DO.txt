@@ -1,0 +1,6 @@
+1. Change tableOccuppied true or false 
+2. Improve the setTableOccupied functionality
+3. Improve call Manager 
+4. Remove all print statements
+5. Add javadocs
+6. 
