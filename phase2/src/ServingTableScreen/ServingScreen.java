@@ -200,6 +200,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
 
     @Override
     public void openNotification(String message) {
+
         NotificationBox.display(message);
     }
 

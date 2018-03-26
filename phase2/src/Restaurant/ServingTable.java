@@ -144,7 +144,7 @@ public class ServingTable {
    * @param message Message that needs to be passed to servers
    */
   private void notifyServers(String message) {
-    System.out.println("Servers notified that " + message);
+    System.out.println(message);
     for (ServingTableListener server : servers) {
       server.update(message);
     }

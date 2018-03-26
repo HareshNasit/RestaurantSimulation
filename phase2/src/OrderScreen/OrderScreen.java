@@ -7,6 +7,7 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.util.Duration;
 import notificationBox.NotificationBox;
 
 
@@ -55,6 +57,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn nameColumn;
   public Button addCommentButton;
   public Pane paneBox;
+  public Label labelNotification;
+
   private double menuSelectedDishId;
   private String menuSelectedDishName;
   private int menuSelectedDishCustomerNum;
@@ -250,7 +254,14 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   @Override
   public void openNotification(String message) {
-    NotificationBox.display(message);
+
+    labelNotification.setText(message);
+    FadeTransition ft = new FadeTransition(Duration.millis(3000), labelNotification);
+
+    ft.setFromValue(1.0);
+    ft.setToValue(0.0);
+    ft.play();
+    System.out.println("NEW NOTIFICATION");
   }
 
   public ObservableList<MenuItem> getMenuItem() {
@@ -278,6 +289,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void setServer(Server server) {
     this.server = server;
     server.setScreen(this);
+    System.out.println("New Screen has been changed");
   }
 
   public Table getTable() {

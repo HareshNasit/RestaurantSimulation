@@ -27,7 +27,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import notificationBox.NotificationBox;
 
-
 /**
  * The controller for the TablesScreen. Manages all user interactions regarding this GUI
  */
@@ -70,6 +69,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
         controller.setServer(server);
         controller.setRestaurant(restaurant);
         controller.updateScreen();
+
         hBox.getChildren().setAll(root);
       }
 
