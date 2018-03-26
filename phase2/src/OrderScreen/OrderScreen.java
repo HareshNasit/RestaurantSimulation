@@ -343,6 +343,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable{
     }
 
     public void update(){
+        tableOrderTitle.setText("Table" + table.getTableID() + " Order");
         menuTableView.setItems(getMenuItem());
     }
 
