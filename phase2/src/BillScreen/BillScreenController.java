@@ -25,7 +25,8 @@ public class BillScreenController implements Initializable {
   public Restaurant restaurant;
 
   @Override
-  public void initialize(URL location, ResourceBundle resources) {}
+  public void initialize(URL location, ResourceBundle resources) {
+  }
 
   /** */
   public void createReceiptWindow() {
@@ -139,6 +140,16 @@ public class BillScreenController implements Initializable {
       double tipAmount = Double.parseDouble(tip);
       boolean fail = (BigDecimal.valueOf(tipAmount).scale() > 2);
       return !fail && tipAmount >= 0;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  private boolean validCustomerEntry(String customerInput) {
+    try {
+      double numCustomers = Double.parseDouble(customerInput);
+      boolean fail = (BigDecimal.valueOf(numCustomers).scale() > 2);
+      return !fail && numCustomers >= 1;
     } catch (NumberFormatException e) {
       return false;
     }
