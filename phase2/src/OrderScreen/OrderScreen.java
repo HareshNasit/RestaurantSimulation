@@ -119,6 +119,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
         "../BillScreen/bill.fxml"));
     Parent root1 = fxmlLoader.load();
     paneBox.getChildren().setAll(root1);
+
   }
 
   /**
@@ -158,6 +159,18 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
   }
 
+  /**
+   * Removes dishes from a specific customer's order
+   */
+  public void removeDishFromOrder(Table table){
+    this.table = table;
+    MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
+    server.removeDish((int) dish.getId(), table);
+  }
+
+  /**
+   * Adds dishes to a specific customer's order
+   */
   public void addDishToOrder() {
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
