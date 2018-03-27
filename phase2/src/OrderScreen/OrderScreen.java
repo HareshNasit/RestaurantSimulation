@@ -429,16 +429,13 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   }
 
   public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
-      MenuItem dish = getOrderTableView().getSelectionModel().getSelectedItem();
-      System.out.println("1st");
+      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
     try {
-        if(!restaurant.getInventory().hasEnoughIngredients(((Dish)dish).getIngredientAmounts())){
+        if(!restaurant.getInventory().hasEnoughIngredients(dish.getIngredientAmounts())){
             addDish.setDisable(true);
-            System.out.println("2nd");
         }
         else{
             addDish.setDisable(false);
-            System.out.println("3rd");
         }
     }
     catch(NullPointerException e){
