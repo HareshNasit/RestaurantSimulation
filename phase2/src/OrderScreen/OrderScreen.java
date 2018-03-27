@@ -18,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -427,5 +428,22 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.customerNumberColumn = customerNumberColumn;
   }
 
+  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
+      MenuItem dish = getOrderTableView().getSelectionModel().getSelectedItem();
+      System.out.println("1st");
+    try {
+        if(!restaurant.getInventory().hasEnoughIngredients(((Dish)dish).getIngredientAmounts())){
+            addDish.setDisable(true);
+            System.out.println("2nd");
+        }
+        else{
+            addDish.setDisable(false);
+            System.out.println("3rd");
+        }
+    }
+    catch(NullPointerException e){
+        System.out.println("No row selected");
+    }
+  }
 }
 
