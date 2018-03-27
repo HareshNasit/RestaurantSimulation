@@ -29,7 +29,7 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
 
   private Manager manager;
   private Restaurant restaurant;
-  private Inventory inventory;
+
 
   private final String  REQUESTFILE = "request.txt";
   @FXML private TableColumn columnIngredient;
@@ -62,9 +62,6 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
     getColumnRestock().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
     getColumnThreshold().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
-    setInventory(new Inventory());
-    getInventory().readInventory();
-    tableInventory.setItems(getIngredients());
     this.setIngredientTableRowAction();
 
     //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
@@ -87,9 +84,9 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
    * Generates an ObservableList of InventoryIngredients
    * @return ObservableList of Inventory Ingredients
    */
-  private ObservableList<InventoryIngredient> getIngredients() {
+  private ObservableList<InventoryIngredient> getIngredients(Inventory inventory) {
     ObservableList<InventoryIngredient> ingredients = FXCollections.observableArrayList();
-    ingredients.setAll(getInventory().getInventoryAsCollection());
+    ingredients.setAll(inventory.getInventoryAsCollection());
     return ingredients;
   }
 
@@ -109,7 +106,7 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
 
   public void updateScreen(){
     tableViewWorkers.setItems(getWorkerData());
-
+    tableInventory.setItems(getIngredients(restaurant.getInventory()));
 
   }
 
@@ -129,9 +126,9 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
       int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
       int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
       InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
-      getInventory().addNewIngredient(ingredient);
+      restaurant.getInventory().addNewIngredient(ingredient);
       //There should be a better way to set this
-      tableInventory.setItems(getIngredients());
+      tableInventory.setItems(getIngredients(restaurant.getInventory()));
       clearTextFields();
 
   }
@@ -161,8 +158,8 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
   public void buttonDeleteAction(){
     InventoryIngredient ingredient = (InventoryIngredient)
         tableInventory.getSelectionModel().getSelectedItem();
-    getInventory().removeIngredient(ingredient.getName());
-    tableInventory.setItems(getIngredients());
+    restaurant.getInventory().removeIngredient(ingredient.getName());
+    tableInventory.setItems(getIngredients(restaurant.getInventory()));
     clearTextFields();
   }
 
@@ -368,11 +365,4 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
     this.restaurant = restaurant;
   }
 
-  public Inventory getInventory() {
-    return inventory;
-  }
-
-  public void setInventory(Inventory inventory) {
-    this.inventory = inventory;
-  }
 }
