@@ -52,6 +52,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn menuPriceColumn;
   public TableColumn menuIngredientsColumn;
   public Button openBillScreen;
+
   public TableColumn commentColumn;
   public TableColumn idColumn;
   public TableColumn nameColumn;
@@ -75,6 +76,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -323,9 +325,20 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       }
   }
 
-
-
-
+  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
+    MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+    try {
+      if(!restaurant.getInventory().hasEnoughIngredients(dish.getIngredientAmounts())){
+        addDish.setDisable(true);
+      }
+      else{
+        addDish.setDisable(false);
+      }
+    }
+    catch(NullPointerException e){
+      System.out.println("No row selected");
+    }
+  }
 
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
@@ -498,19 +511,14 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.customerNumberColumn = customerNumberColumn;
   }
 
-  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
-      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    try {
-        if(!restaurant.getInventory().hasEnoughIngredients(dish.getIngredientAmounts())){
-            addDish.setDisable(true);
-        }
-        else{
-            addDish.setDisable(false);
-        }
-    }
-    catch(NullPointerException e){
-        System.out.println("No row selected");
-    }
+  public TableColumn getCommentColumn() {
+    return commentColumn;
   }
+
+  public void setCommentColumn(TableColumn commentColumn) {
+    this.commentColumn = commentColumn;
+  }
+
+
 }
 
