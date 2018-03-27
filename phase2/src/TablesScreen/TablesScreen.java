@@ -25,7 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import notificationBox.NotificationBox;
 
 
 /**
@@ -36,31 +35,24 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   private Server server;
   private Restaurant restaurant;
 
-  @FXML
-  private TableView<Table> tableView; //Table of tables
-  @FXML
-  private Button tableButton; //Button that will open the Table's menu
-  @FXML
-  private Button servingTableButton; // Button that will open the ServingTableMenu
-  @FXML
-  private Button managerButton; //Button that will call the manager
-  @FXML
-  private TableColumn tableStatusColumn;
-  @FXML
-  private TableColumn occupiedTableColumn;
-  @FXML
-  private TableColumn tableIDColumn;
+  @FXML private TableView<Table> tableView; //Table of tables
+  @FXML private Button tableButton; //Button that will open the Table's menu
+  @FXML private Button servingTableButton; // Button that will open the ServingTableMenu
+  @FXML private Button managerButton; //Button that will call the manager
+  @FXML private TableColumn tableStatusColumn;
+  @FXML private TableColumn occupiedTableColumn;
+  @FXML private TableColumn tableIDColumn;
   @FXML private HBox hBox; //The container that contains all of this
   @FXML private Label labelServerName;
-  @FXML private Pane layout;
+  @FXML private Pane notificationArea;
   @FXML private VBox vBox;
+  private Notification notification;
 
-  Notification cc;
   /**
    * Opens the selected restaurant table's menu from the TablesScreen tables
    */
   public void openTableMenu(){
-    Table table = getTableView().getSelectionModel().getSelectedItem();
+    Table table = tableView.getSelectionModel().getSelectedItem();
     try{
 
       if (table != null) {
@@ -111,11 +103,11 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    getTableIDColumn().setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
-    getOccupiedTableColumn().setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
+    tableIDColumn.setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
+    tableStatusColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
 
-    cc = new Notification();
-    layout.getChildren().setAll(cc);
+    notification = new Notification();
+    notificationArea.getChildren().setAll(notification);
 
   }
 
@@ -130,108 +122,52 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   }
 
   @Override
+  /**
+   * Updates the screen to show new changes
+   */
   public void updateScreen() {
     tableView.setItems(getObservableTablesList(restaurant.getTables().values()));
     labelServerName.setText(server.getName());
   }
 
-
   @Override
+  /**
+   * Pushes a new notification to the screen
+   */
   public void openNotification(String message) {
-   cc.pushNotification(message);
+   notification.pushNotification(message);
 
   }
 
-
-  //------------------------- GETTERS AND SETTERS BELOW --------------------
-  //Probs remove setters
-  //Getters are needed to generate
-
-  public TableView<Table> getTableView() {
-    return tableView;
-  }
-
-  public void setTableView(TableView<Table> tableView) {
-    this.tableView = tableView;
-  }
-
-  public HBox gethBox() {
-    return hBox;
-  }
-
-  public void sethBox(HBox hBox) {
-    this.hBox = hBox;
-  }
-
-  public Button getTableButton() {
-    return tableButton;
-  }
-
-  public void setTableButton(Button tableButton) {
-    this.tableButton = tableButton;
-  }
-
-  public Button getServingTableButton() {
-    return servingTableButton;
-  }
-
-  public void setServingTableButton(Button servingTableButton) {
-    this.servingTableButton = servingTableButton;
-  }
-
-  public Button getManagerButton() {
-    return managerButton;
-  }
-
-  public void setManagerButton(Button managerButton) {
-    this.managerButton = managerButton;
-  }
-
-  public TableColumn getTableStatusColumn() {
-    return tableStatusColumn;
-  }
-
-  public void setTableStatusColumn(TableColumn tableStatusColumn) {
-    this.tableStatusColumn = tableStatusColumn;
-  }
-
-  public TableColumn getOccupiedTableColumn() {
-    return occupiedTableColumn;
-  }
-
-  public void setOccupiedTableColumn(TableColumn occupiedTableColumn) {
-    this.occupiedTableColumn = occupiedTableColumn;
-  }
-
-  public TableColumn getTableIDColumn() {
-    return tableIDColumn;
-  }
-
-  public void setTableIDColumn(TableColumn tableIDColumn) {
-    this.tableIDColumn = tableIDColumn;
-  }
-
-  public Label getLabelServerName() {
-    return labelServerName;
-  }
-
-  public void setLabelServerName(Label labelServerName) {
-    this.labelServerName = labelServerName;
-  }
-
+  /**
+   * Gets the server of this screen
+   * @return server of this screen
+   */
   public Server getServer() {
     return server;
   }
 
+  /**
+   * Sets the server of this screen. Sets this screen as the screen of the server
+   * @param server server of this screen
+   */
   public void setServer(Server server) {
     this.server = server;
     server.setScreen(this);
   }
 
+  /**
+   * Gets the Restaurant object of this class
+   * @return
+   */
   public Restaurant getRestaurant() {
     return restaurant;
   }
 
+  /**
+   * Sets the restaurant object of this class
+   * @param restaurant
+   */
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }

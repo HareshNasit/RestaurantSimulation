@@ -39,6 +39,6 @@
             </Pane>
          </children>
       </HBox>
-      <javafx.scene.layout.Pane fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="597.0" />
+      <javafx.scene.layout.Pane fx:id="notificationArea" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="597.0" />
    </children>
 </VBox>
