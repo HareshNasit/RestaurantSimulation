@@ -32,16 +32,8 @@ public class SimpleLogger {
     String pattern = "dd-MM-yyyy";
     String dateInString = new SimpleDateFormat(pattern).format(new Date());
     String name = filePath + "/" + namePrefix + dateInString + ".txt";
-
     File file = new File(name);
     setLoggerDestination(name);
-
-    try {
-      PrintWriter writer = new PrintWriter(name, "UTF-8");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
   }
 
   /**

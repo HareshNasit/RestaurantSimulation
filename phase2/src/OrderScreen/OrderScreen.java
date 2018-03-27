@@ -1,6 +1,5 @@
 package OrderScreen;
 
-import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -8,9 +7,9 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
-import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -26,8 +25,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.util.Duration;
-import notificationBox.NotificationBox;
+import javafx.scene.layout.VBox;
+import notification.Notification;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
@@ -64,6 +63,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private int menuSelectedDishCustomerNum;
   private ArrayList<Dish> dishes;
 
+  private Notification notification;
+  @FXML private Pane notificationArea;
+  @FXML private VBox vBox;
+
 
 
 
@@ -79,6 +82,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
     this.setRowAction();
     System.out.println(getOrderTableView());
+    notification = new Notification();
+    notificationArea.getChildren().setAll(notification);
+    
   }
 
   public void setRowAction() {
@@ -155,13 +161,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void addDishToOrder() {
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
-    MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    String customer =  (String) customerNumberDropDown.getValue();
-    int customerNumber = (int) customer.charAt(9);
+    try{
+      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+      String customer =  (String) customerNumberDropDown.getValue();
+      int customerNumber = (int) customer.charAt(9);
       System.out.println(customer);
       System.out.println(customerNumber);
-    server.addOrder(getTable(), customerNumber-48, dish);
-    updateScreen();
+      server.addOrder(getTable(), customerNumber-48, dish);
+      updateScreen();
+    }
+    catch(NullPointerException e){
+      System.out.println("Choose a customer from the drop down menu");
+    }
+
   }
 
   public void addOptionsToComboBox(Table table){
@@ -225,7 +237,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       controller.setServer(getServer());
       controller.setRestaurant(getRestaurant());
       controller.updateScreen();
-      paneBox.getChildren().setAll(root1);
+      vBox.getChildren().setAll(root1);
     } catch (IOException e) {
     }
 
@@ -237,7 +249,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
           if (dish != null) {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
-              paneBox.getChildren().setAll(root);
+              vBox.getChildren().setAll(root);
           }
 
       } catch (IOException e){
@@ -261,14 +273,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   @Override
   public void openNotification(String message) {
+    notification.pushNotification(message);
 
-    labelNotification.setText(message);
-    FadeTransition ft = new FadeTransition(Duration.millis(3000), labelNotification);
-
-    ft.setFromValue(1.0);
-    ft.setToValue(0.0);
-    ft.play();
-    System.out.println("NEW NOTIFICATION");
   }
 
   public ObservableList<MenuItem> getMenuItem() {
