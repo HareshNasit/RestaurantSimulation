@@ -155,8 +155,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    // int customerNumber = (Integer) customerNumberDropDown.getValue();
-    server.addOrder(getTable(), 13, dish);
+    String customer =  (String) customerNumberDropDown.getValue();
+    int customerNumber = (int) customer.charAt(9);
+      System.out.println(customer);
+      System.out.println(customerNumber);
+    server.addOrder(getTable(), customerNumber-48, dish);
     updateScreen();
   }
 
@@ -181,7 +184,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       return false;
     }
 
-    
+
   }
 
   public int setTableOccupied(){
