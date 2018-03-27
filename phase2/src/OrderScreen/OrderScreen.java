@@ -1,6 +1,5 @@
 package OrderScreen;
 
-import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -8,9 +7,9 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
-import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -18,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -25,8 +25,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.util.Duration;
-import notificationBox.NotificationBox;
+import javafx.scene.layout.VBox;
+import notification.Notification;
 
 
 public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
@@ -63,6 +63,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   private int menuSelectedDishCustomerNum;
   private ArrayList<Dish> dishes;
 
+  private Notification notification;
+  @FXML private Pane notificationArea;
+  @FXML private VBox vBox;
+
 
 
 
@@ -78,6 +82,9 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
     this.setRowAction();
     System.out.println(getOrderTableView());
+    notification = new Notification();
+    notificationArea.getChildren().setAll(notification);
+    
   }
 
   public void setRowAction() {
@@ -224,7 +231,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       controller.setServer(getServer());
       controller.setRestaurant(getRestaurant());
       controller.updateScreen();
-      paneBox.getChildren().setAll(root1);
+      vBox.getChildren().setAll(root1);
     } catch (IOException e) {
     }
 
@@ -236,7 +243,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
           if (dish != null) {
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
-              paneBox.getChildren().setAll(root);
+              vBox.getChildren().setAll(root);
           }
 
       } catch (IOException e){
@@ -260,14 +267,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   @Override
   public void openNotification(String message) {
+    notification.pushNotification(message);
 
-    labelNotification.setText(message);
-    FadeTransition ft = new FadeTransition(Duration.millis(3000), labelNotification);
-
-    ft.setFromValue(1.0);
-    ft.setToValue(0.0);
-    ft.play();
-    System.out.println("NEW NOTIFICATION");
   }
 
   public ObservableList<MenuItem> getMenuItem() {
@@ -427,5 +428,22 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.customerNumberColumn = customerNumberColumn;
   }
 
+  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
+      MenuItem dish = getOrderTableView().getSelectionModel().getSelectedItem();
+      System.out.println("1st");
+    try {
+        if(!restaurant.getInventory().hasEnoughIngredients(((Dish)dish).getIngredientAmounts())){
+            addDish.setDisable(true);
+            System.out.println("2nd");
+        }
+        else{
+            addDish.setDisable(false);
+            System.out.println("3rd");
+        }
+    }
+    catch(NullPointerException e){
+        System.out.println("No row selected");
+    }
+  }
 }
 
