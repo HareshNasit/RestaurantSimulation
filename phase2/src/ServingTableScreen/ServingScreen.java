@@ -6,6 +6,7 @@ import Restaurant.ServingTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import Restaurant.Dish;
@@ -14,12 +15,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import Restaurant.ModelControllerInterface;
 import Restaurant.IWorker;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import notification.Notification;
 import notificationBox.NotificationBox;
 
 public class ServingScreen implements Initializable, ModelControllerInterface {
@@ -47,6 +50,9 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     public ImageView cross;
     public AnchorPane tab2;
     public ImageView tick1;
+
+    private Notification notification;
+    @FXML private Pane notificationArea;
 
 
     public Restaurant restaurant;
@@ -84,6 +90,8 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
         tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
+        notification = new Notification();
+        notificationArea.getChildren().setAll(notification);
 
 
     }
@@ -199,8 +207,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
 
     @Override
     public void openNotification(String message) {
-
-        NotificationBox.display(message);
+        notification.pushNotification(message);
     }
 
     public ServingTable getServingTable() {
