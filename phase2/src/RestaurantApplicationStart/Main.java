@@ -70,6 +70,7 @@ public class Main extends Application {
         Parent root = loader.load();
         ManagerScreenController controller = loader.getController();
         controller.setManager(manager);
+        controller.setRestaurant(restaurant);
         window.initModality(Modality.WINDOW_MODAL);
         window.setTitle("Manager");
         window.setScene(new Scene(root));
