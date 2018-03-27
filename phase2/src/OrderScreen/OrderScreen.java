@@ -162,10 +162,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   /**
    * Removes dishes from a specific customer's order
    */
-  public void removeDishFromOrder(Table table){
-    this.table = table;
+  public void removeDishFromOrder(){
     MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
-    server.removeDish((int) dish.getId(), table);
+    table.removeDish((Dish) dish);    
+    updateScreen();
   }
 
   /**
