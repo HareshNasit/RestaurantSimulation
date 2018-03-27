@@ -98,7 +98,6 @@ public class Server implements IWorker, ServingTableListener {
    */
   public void addOrder(Table table, int customerNumber, MenuItem dish) {
     Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
-    dish1.setComment("Cook");
     table.addSingleOrder(dish1);
   }
 

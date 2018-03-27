@@ -76,6 +76,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    getCommentColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
@@ -168,6 +169,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void addCommentToDish(String comment){
       Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
       dish.setComment(comment);
+      updateScreen();
   }
 
   public void openCommentDialog(){
