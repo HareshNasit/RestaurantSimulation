@@ -168,6 +168,25 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       dish.setComment(comment);
   }
 
+  public void openCommentDialog(){
+    Dialog dialog = new TextInputDialog();
+    dialog.setTitle("Comment Dialog");
+    dialog.setHeaderText(
+            "Enter your comment for the dish"
+                    + System.lineSeparator()
+                    + "Example: Make the falafel crispy on the outside");
+    Optional<String> result = dialog.showAndWait();
+    String entered = "";
+
+    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+      result = dialog.showAndWait();
+    }
+    if (result.isPresent()) {
+      entered = result.get();
+      System.out.println(entered);
+    }
+  }
+
   /**
    * Removes dishes from a specific customer's order
    */
