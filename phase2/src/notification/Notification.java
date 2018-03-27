@@ -68,6 +68,7 @@ public class Notification extends Pane {
 
     try {
       fxmlLoader.load();
+      labelNotification.setText("");
     } catch (IOException exception) {
       throw new RuntimeException(exception);
     }
