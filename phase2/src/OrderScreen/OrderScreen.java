@@ -160,11 +160,20 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   }
 
   /**
+   * This method assigns a specific comment given by a customer to the selected dish
+   * @param comment the comment of the customer
+   */
+  public void addCommentToDish(String comment){
+      Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+      dish.setComment(comment);
+  }
+
+  /**
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder(){
     MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
-    table.removeDish((Dish) dish);    
+    table.removeDish((Dish) dish);
     updateScreen();
   }
 
