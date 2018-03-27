@@ -5,6 +5,7 @@ import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.ModelControllerInterface;
+import javafx.scene.layout.VBox;
 import notification.Notification;
 import java.io.IOException;
 import java.net.URL;
@@ -49,12 +50,10 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   private TableColumn occupiedTableColumn;
   @FXML
   private TableColumn tableIDColumn;
-  @FXML
-  private HBox hBox; //The container that contains all of this
-  @FXML
-  private Label labelServerName;
-  @FXML
-  private Pane layout;
+  @FXML private HBox hBox; //The container that contains all of this
+  @FXML private Label labelServerName;
+  @FXML private Pane layout;
+  @FXML private VBox vBox;
 
   Notification cc;
   /**
@@ -73,7 +72,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
         controller.setRestaurant(restaurant);
         controller.updateScreen();
         controller.addOptionsToComboBox(table);
-        hBox.getChildren().setAll(root);
+        vBox.getChildren().setAll(root);
       }
 
     } catch (IOException e){
