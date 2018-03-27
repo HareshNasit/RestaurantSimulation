@@ -1,5 +1,6 @@
 package OrderScreen;
 
+import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -56,7 +57,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn nameColumn;
   public Button addCommentButton;
   public Pane paneBox;
-  public Label labelNotification;
 
   private double menuSelectedDishId;
   private String menuSelectedDishName;
@@ -176,6 +176,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  /**
+   * Adds the number of customers at the table to the drop down menu so each customer can have his/her own order.
+   * @param table the table at which the customers are seated
+   */
   public void addOptionsToComboBox(Table table){
       this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
@@ -189,6 +193,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       customerNumberDropDown.setItems(labels);
   }
 
+  /**
+   * Checks if the number of customers at a table entered is a valid input value
+   * @param customerInput the number of customers that have entered
+   * @return returns true if it is a valid input else false
+   */
   private boolean validCustomerEntry(String customerInput) {
     try {
       int numCustomers = Integer.parseInt(customerInput);
@@ -196,8 +205,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     } catch (NumberFormatException e) {
       return false;
     }
-
-
   }
 
   public int setTableOccupied(){
@@ -243,19 +250,25 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  /**
+   *
+   * Opens the compliment menu with only the ingredients that are allowed to be added or removed to the selected dish
+   */
   public void openComplimentMenu(){
       try{
           Dish dish = getOrderTableView().getSelectionModel().getSelectedItem();
           if (dish != null) {
+
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
               vBox.getChildren().setAll(root);
+
           }
 
       } catch (IOException e){
           e.printStackTrace();
       } catch (NullPointerException e){
-          System.out.println("Choose a file bro");
+          System.out.println("Choose a dish to add compliments");
       }
   }
 
