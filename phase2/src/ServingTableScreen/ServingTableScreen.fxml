@@ -7,80 +7,89 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServingTableScreen.ServingScreen">
-  <tabs>
-    <Tab text="Dishes to be Cooked">
-      <content>
-        <AnchorPane fx:id="tab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="accept" layoutX="360.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" prefHeight="83.0" prefWidth="95.0" text="Accept" />
-                  <ImageView fx:id="tick" fitHeight="40.0" fitWidth="65.0" layoutX="383.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@tick.png" />
-                     </image>
-                  </ImageView>
-                  <TableView fx:id="tab1Table" layoutX="7.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="325.0">
-                    <columns>
-                      <TableColumn fx:id="tab1TableId" prefWidth="69.0" text="Table" />
-                      <TableColumn fx:id="tab1Dish" prefWidth="152.0" text="Dish" />
-                        <TableColumn fx:id="tab1Comment" prefWidth="103.0" text="Comment" />
-                    </columns>
-                  </TableView>
-                  <Button fx:id="reject" layoutX="477.0" layoutY="266.0" mnemonicParsing="false" onAction="#rejectDish" prefHeight="85.0" prefWidth="105.0" text="Reject" />
-                  <Label fx:id="checkLabel" layoutX="347.0" layoutY="110.0" prefHeight="96.0" prefWidth="217.0" />
-                  <Button fx:id="tab1Refresh" layoutX="463.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshScreen" prefHeight="81.0" prefWidth="133.0" text="Refresh" />
-                  <ImageView fitHeight="35.0" fitWidth="53.0" layoutX="512.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@refresh.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="cross" fitHeight="34.0" fitWidth="45.0" layoutX="513.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@x.png" />
-                     </image>
-                  </ImageView>
-               </children></AnchorPane>
-      </content>
-    </Tab>
-    <Tab text="Dishes being Cooked">
-      <content>
-        <AnchorPane fx:id="tab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="tab2Table" layoutX="14.0" layoutY="32.0" prefHeight="329.0" prefWidth="319.0">
-                    <columns>
-                      <TableColumn fx:id="tab2TableId" prefWidth="76.0" text="Table" />
-                      <TableColumn fx:id="tab2Dish" prefWidth="145.0" text="Dish" />
-                        <TableColumn fx:id="tab2Comment" prefWidth="96.0" text="Comment" />
-                    </columns>
-                  </TableView>
-                  <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready" />
-                  <Button fx:id="tab2Refresh" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshScreen1" prefHeight="78.0" prefWidth="110.0" text="Refresh" />
-                  <ImageView fitHeight="31.0" fitWidth="45.0" layoutX="510.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@refresh.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@tick.png" />
-                     </image>
-                  </ImageView>
-               </children></AnchorPane>
-      </content>
-    </Tab>
-      <Tab text="Dishes to be Served">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="tab3Table" layoutX="10.0" layoutY="31.0" prefHeight="329.0" prefWidth="324.0">
-                    <columns>
-                      <TableColumn fx:id="tab3TableId" prefWidth="72.0" text="Table" />
-                      <TableColumn fx:id="tab3Dish" prefWidth="150.0" text="Dish" />
-                        <TableColumn fx:id="tab3Comment" prefWidth="109.0" text="Comment" />
-                    </columns>
-                  </TableView>
-               </children></AnchorPane>
-        </content>
-      </Tab>
-  </tabs>
-</TabPane>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServingTableScreen.ServingScreen">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Dishes to be Cooked">
+               <content>
+                  <AnchorPane fx:id="tab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="accept" layoutX="360.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" prefHeight="83.0" prefWidth="95.0" text="Accept" />
+                        <ImageView fx:id="tick" fitHeight="40.0" fitWidth="65.0" layoutX="383.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@tick.png" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tab1Table" layoutX="7.0" layoutY="30.0" onMouseClicked="#rowSelected" prefHeight="336.0" prefWidth="325.0">
+                           <columns>
+                              <TableColumn fx:id="tab1TableId" prefWidth="69.0" text="Table" />
+                              <TableColumn fx:id="tab1Dish" prefWidth="152.0" text="Dish" />
+                              <TableColumn fx:id="tab1Comment" prefWidth="103.0" text="Comment" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="reject" layoutX="477.0" layoutY="266.0" mnemonicParsing="false" onAction="#rejectDish" prefHeight="85.0" prefWidth="105.0" text="Reject" />
+                        <Label fx:id="checkLabel" layoutX="347.0" layoutY="110.0" prefHeight="96.0" prefWidth="217.0" />
+                        <Button fx:id="tab1Refresh" layoutX="463.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshScreen" prefHeight="81.0" prefWidth="133.0" text="Refresh" />
+                        <ImageView fitHeight="35.0" fitWidth="53.0" layoutX="512.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@refresh.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="cross" fitHeight="34.0" fitWidth="45.0" layoutX="513.0" layoutY="268.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@x.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Dishes being Cooked">
+               <content>
+                  <AnchorPane fx:id="tab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tab2Table" layoutX="14.0" layoutY="32.0" prefHeight="329.0" prefWidth="319.0">
+                           <columns>
+                              <TableColumn fx:id="tab2TableId" prefWidth="76.0" text="Table" />
+                              <TableColumn fx:id="tab2Dish" prefWidth="145.0" text="Dish" />
+                              <TableColumn fx:id="tab2Comment" prefWidth="96.0" text="Comment" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready" />
+                        <Button fx:id="tab2Refresh" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshScreen1" prefHeight="78.0" prefWidth="110.0" text="Refresh" />
+                        <ImageView fitHeight="31.0" fitWidth="45.0" layoutX="510.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@refresh.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@tick.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Dishes to be Served">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tab3Table" layoutX="10.0" layoutY="31.0" prefHeight="329.0" prefWidth="324.0">
+                           <columns>
+                              <TableColumn fx:id="tab3TableId" prefWidth="72.0" text="Table" />
+                              <TableColumn fx:id="tab3Dish" prefWidth="150.0" text="Dish" />
+                              <TableColumn fx:id="tab3Comment" prefWidth="109.0" text="Comment" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Pane fx:id="notificationArea" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</VBox>
