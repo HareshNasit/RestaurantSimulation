@@ -178,12 +178,21 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     Optional<String> result = dialog.showAndWait();
     String entered = "";
 
-    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+    while (result.isPresent() && ((result.get()).equals("") || !validCommentEntry(result.get()))) {
       result = dialog.showAndWait();
     }
     if (result.isPresent()) {
       entered = result.get();
       System.out.println(entered);
+    }
+  }
+
+  private boolean validCommentEntry(String comment){
+    try{
+      return comment instanceof String;
+    }
+    catch (Exception e){
+      return false;
     }
   }
 
