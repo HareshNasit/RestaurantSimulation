@@ -183,6 +183,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     }
     if (result.isPresent()) {
       entered = result.get();
+      addCommentToDish(entered);
       System.out.println(entered);
     }
   }
