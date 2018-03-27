@@ -39,9 +39,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<fx:root type="javafx.scene.layout.Pane" fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="506.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="labelNotification" layoutX="8.0" layoutY="6.0" prefHeight="33.0" prefWidth="488.0" text="Label" />
+      <Label fx:id="labelNotification" layoutX="8.0" layoutY="6.0" onMouseClicked="#popNotification" prefHeight="33.0" prefWidth="488.0" text="Label" />
    </children>
 </fx:root>

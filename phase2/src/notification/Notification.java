@@ -36,20 +36,30 @@ import java.io.IOException;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 /**
  * Sample custom control hosting a text field and a button.
  */
 public class Notification extends Pane {
 
-  @FXML
-  private Label labelNotification;
-  Stack<String> notifications;
 
+  @FXML private Label labelNotification;
+  private Stack<String> notifications;
+  private final int FADETIME = 3000;
+  private final double OPACITYINITIAL = 1.0;
+  private final double OPACITYFINAL = 0.0;
+
+
+
+  /**
+   * Creates a new notification JavaFX control
+   */
   public Notification() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("notification.fxml"));
     fxmlLoader.setRoot(this);
@@ -63,18 +73,42 @@ public class Notification extends Pane {
     }
   }
 
-  public String popNotification() {
+
+  /**
+   * Removes the most recent notification and replaces it with the next one
+   * @return The String of the most recent notification
+   */
+  @FXML public String popNotification() {
     try {
       String message = notifications.pop();
-      labelNotification.setText(notifications.peek());
+
+      FadeTransition ft = new FadeTransition(Duration.millis(FADETIME), labelNotification);
+
+      ft.setFromValue(OPACITYINITIAL);
+      ft.setToValue(OPACITYFINAL);
+
+      ft.setOnFinished(event -> {
+            try { labelNotification.setText(notifications.peek()); }
+            catch (EmptyStackException e){ labelNotification.setText("No New Notifications"); }
+            labelNotification.setOpacity(1);
+            }
+      );
+      ft.play();
+
       return message;
+
     } catch (EmptyStackException e) {
-      labelNotification.setText("No New Notifications");
+
       return "No New Notifications";
     }
   }
 
-  public void pushNotification(String message) {
+  /**
+   * Pushes the notification message to the top of the list. GUI will now show the most recent
+   * notification
+   * @param message
+   */
+  @FXML public void pushNotification(String message) {
     notifications.push(message);
     labelNotification.setText(message);
 

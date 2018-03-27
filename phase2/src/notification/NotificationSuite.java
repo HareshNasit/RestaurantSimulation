@@ -41,7 +41,9 @@ public class NotificationSuite extends Application {
     public void start(Stage stage) throws Exception {
         Notification notification = new Notification();
 //        customControl.setText("Hello!");
-        
+        notification.pushNotification("Meme1");
+        notification.pushNotification("Meme2");
+
         stage.setScene(new Scene(notification));
         stage.setTitle("Custom Control");
 
