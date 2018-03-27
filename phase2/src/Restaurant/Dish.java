@@ -25,7 +25,7 @@ public class Dish extends MenuItem {
     this.tableName = tableName;
     this.customerNum = customerNum;
     this.comment = "";
-    this.dishStatus = DishStatus.NOTSENT;
+    this.dishStatus = DishStatus.ORDERED;
   }
 
   /**
