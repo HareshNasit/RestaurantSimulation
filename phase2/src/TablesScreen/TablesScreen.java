@@ -5,7 +5,7 @@ import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.ModelControllerInterface;
-import java.awt.Window;
+import notification.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -14,9 +14,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
@@ -25,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import notificationBox.NotificationBox;
 
 
@@ -54,7 +53,10 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   private HBox hBox; //The container that contains all of this
   @FXML
   private Label labelServerName;
+  @FXML
+  private Pane layout;
 
+  Notification cc;
   /**
    * Opens the selected restaurant table's menu from the TablesScreen tables
    */
@@ -101,6 +103,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
    * Calls the manager for special events
    */
   public void callManager() throws IOException {
+    cc.popNotification();
 
   }
 
@@ -111,6 +114,13 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   public void initialize(URL location, ResourceBundle resources) {
     getTableIDColumn().setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
     getOccupiedTableColumn().setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
+
+    cc = new Notification();
+    layout.getChildren().setAll(cc);
+    cc.pushNotification("I LIKE DIOCKs");
+    cc.pushNotification("I LIKE POCS");
+    cc.pushNotification("I LIKE TIOCK");
+
 
   }
 
