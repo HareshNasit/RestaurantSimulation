@@ -84,7 +84,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     System.out.println(getOrderTableView());
     notification = new Notification();
     notificationArea.getChildren().setAll(notification);
-    
+
   }
 
   public void setRowAction() {
@@ -164,8 +164,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
     String customer =  (String) customerNumberDropDown.getValue();
     int customerNumber = (int) customer.charAt(9);
-      System.out.println(customer);
-      System.out.println(customerNumber);
+    System.out.println(customer);
+    System.out.println(customerNumber);
     server.addOrder(getTable(), customerNumber-48, dish);
     updateScreen();
   }
