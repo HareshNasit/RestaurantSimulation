@@ -161,13 +161,19 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public void addDishToOrder() {
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
-    MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    String customer =  (String) customerNumberDropDown.getValue();
-    int customerNumber = (int) customer.charAt(9);
+    try{
+      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+      String customer =  (String) customerNumberDropDown.getValue();
+      int customerNumber = (int) customer.charAt(9);
       System.out.println(customer);
       System.out.println(customerNumber);
-    server.addOrder(getTable(), customerNumber-48, dish);
-    updateScreen();
+      server.addOrder(getTable(), customerNumber-48, dish);
+      updateScreen();
+    }
+    catch(NullPointerException e){
+      System.out.println("Choose a customer from the drop down menu");
+    }
+
   }
 
   public void addOptionsToComboBox(Table table){
