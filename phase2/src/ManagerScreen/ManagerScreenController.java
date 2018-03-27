@@ -1,12 +1,13 @@
 package ManagerScreen;
 
-import Restaurant.Cook;
 import Restaurant.IWorker;
 import Restaurant.Inventory;
 import Restaurant.InventoryIngredient;
 import Restaurant.Manager;
 import Restaurant.Restaurant;
-import Restaurant.Server;
+import Restaurant.ModelControllerInterface;
+
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.net.URL;
@@ -24,45 +25,29 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ManagerScreenController implements Initializable {
+public class ManagerScreenController implements Initializable, ModelControllerInterface {
 
   private Manager manager;
   private Restaurant restaurant;
   private Inventory inventory;
 
   private final String  REQUESTFILE = "request.txt";
-  @FXML
-  private TableColumn columnIngredient;
-  @FXML
-  private TableColumn columnAmount;
-  @FXML
-  private TableColumn columnRestock;
-  @FXML
-  private TableColumn columnThreshold;
-  @FXML
-  private Button buttonAddEdit;
-  @FXML
-  private TextField textFieldThreshold;
-  @FXML
-  private TextField textFieldAmount;
-  @FXML
-  private TextField textFieldIngredient;
-  @FXML
-  private TextField textFieldRestock;
-  @FXML
-  private TableView tableViewWorkers;
-  @FXML
-  private TableColumn columnType;
-  @FXML
-  private TableColumn columnName;
-  @FXML
-  private TableColumn columnStatus;
-  @FXML
-  private TextArea textFieldRequest;
-  @FXML //Allows the variable to be encapsualted
-  private Tab tabInventory;
-  @FXML
-  private TableView tableInventory;
+  @FXML private TableColumn columnIngredient;
+  @FXML private TableColumn columnAmount;
+  @FXML private TableColumn columnRestock;
+  @FXML private TableColumn columnThreshold;
+  @FXML private Button buttonAddEdit;
+  @FXML private TextField textFieldThreshold;
+  @FXML private TextField textFieldAmount;
+  @FXML private TextField textFieldIngredient;
+  @FXML private TextField textFieldRestock;
+  @FXML private TableView tableViewWorkers;
+  @FXML private TableColumn columnType;
+  @FXML private TableColumn columnName;
+  @FXML private TableColumn columnStatus;
+  @FXML private TextArea textFieldRequest;
+  @FXML private Tab tabInventory;
+  @FXML private TableView tableInventory;
 
   private ManagerListener test;
 
@@ -71,7 +56,6 @@ public class ManagerScreenController implements Initializable {
     //Sets the columns of each table to their respective types
     getColumnType().setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
-    tableViewWorkers.setItems(getWorkerData());
 
     getColumnIngredient().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
     getColumnAmount().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
@@ -95,10 +79,7 @@ public class ManagerScreenController implements Initializable {
    */
   private ObservableList<IWorker> getWorkerData() {
     ObservableList<IWorker> workers = FXCollections.observableArrayList();
-    Server server = new Server("John");
-    Cook cook = new Cook("Tim");
-    Manager man = new Manager("Ling");
-    workers.addAll(server, cook, man);
+    workers.addAll(getManager().getWorkers());
     return workers;
   }
 
@@ -124,6 +105,17 @@ public class ManagerScreenController implements Initializable {
       }
     } catch (java.io.IOException e) {
     }
+  }
+
+  public void updateScreen(){
+    tableViewWorkers.setItems(getWorkerData());
+
+
+  }
+
+  @Override
+  public void openNotification(String message) {
+
   }
 
   /**
@@ -364,6 +356,8 @@ public class ManagerScreenController implements Initializable {
 
   public void setManager(Manager manager) {
     this.manager = manager;
+    tableViewWorkers.setItems(getWorkerData());
+    manager.setScreen(this);
   }
 
   public Restaurant getRestaurant() {

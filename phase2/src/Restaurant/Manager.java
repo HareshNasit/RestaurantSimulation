@@ -4,6 +4,7 @@ package Restaurant;
 import java.io.*;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /*
@@ -14,9 +15,12 @@ public class Manager implements IWorker, InventoryListener {
 
   private String name;
   private final String RECEIVEDFILE = "receivedShipments.txt";
+  private ArrayList<IWorker> workers;
+  private ModelControllerInterface screen;
 
   public Manager(String name) {
     this.name = name;
+    workers = new ArrayList<IWorker>();
   }
 
   @Override
@@ -29,9 +33,19 @@ public class Manager implements IWorker, InventoryListener {
     return "Manager";
   }
 
+  public void addWorker(IWorker worker){
+    workers.add(worker);
+    screen.updateScreen();
+  }
+
+  public ArrayList<IWorker> getWorkers(){
+    return workers;
+  }
+
   /** Calls a server or a cook to collect the received ingredients. */
-  public IWorker callWorker(Restaurant restaurant, String name) {
-    return restaurant.MapOfWorkers().get(name);
+  public IWorker callWorker(IWorker worker) {
+    //TODO: WORKER FUNCTION
+    return worker;
   }
 
   @Override
@@ -69,5 +83,13 @@ public class Manager implements IWorker, InventoryListener {
     } catch (Exception e) {
 
     }
+  }
+
+  public ModelControllerInterface getScreen() {
+    return screen;
+  }
+
+  public void setScreen(ModelControllerInterface screen) {
+    this.screen = screen;
   }
 }

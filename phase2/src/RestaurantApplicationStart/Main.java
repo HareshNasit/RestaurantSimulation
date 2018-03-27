@@ -1,11 +1,13 @@
 package RestaurantApplicationStart;
 
+import ManagerScreen.ManagerScreenController;
 import Restaurant.Restaurant;
 import Restaurant.Menu;
 import Restaurant.ServingTable;
 import Restaurant.Server;
 import Restaurant.Inventory;
 import Restaurant.Cook;
+import Restaurant.Manager;
 
 import ServingTableScreen.ServingScreen;
 import TablesScreen.TablesScreen;
@@ -31,14 +33,15 @@ public class Main extends Application {
         Inventory inventory = new Inventory();
         inventory.readInventory();
         Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
+        Manager manager = managerStart("Alfred", restaurant);
 
-        serverStart("John", restaurant);
-        managerStart("OOP", restaurant);
-        cookStart("harsh", restaurant);
+        serverStart("John", restaurant, manager);
+
+        cookStart("harsh", restaurant, manager);
     }
 
 
-    private void serverStart(String name, Restaurant restaurant){
+    private void serverStart(String name, Restaurant restaurant, Manager manager ){
         try{Stage window = new Stage();
             FXMLLoader loader = new  FXMLLoader(getClass().getResource(SERVER));
             Parent root = loader.load();
@@ -48,6 +51,7 @@ public class Main extends Application {
             controller.setRestaurant(restaurant);
             controller.setServer(server);
             controller.updateScreen();
+            manager.addWorker(server);
             restaurant.getServingTable().addServer(server);
             window.initModality(Modality.WINDOW_MODAL);
             window.setTitle("Server");
@@ -57,27 +61,35 @@ public class Main extends Application {
 
     }
 
-    private void managerStart(String name, Restaurant restaurant){
+    private Manager managerStart(String name, Restaurant restaurant){
+      Manager manager = new Manager(name);
       try {
+
         Stage window = new Stage();
         FXMLLoader loader = new  FXMLLoader(getClass().getResource(MANAGER));
         Parent root = loader.load();
+        ManagerScreenController controller = loader.getController();
+        controller.setManager(manager);
         window.initModality(Modality.WINDOW_MODAL);
         window.setTitle("Manager");
         window.setScene(new Scene(root));
         window.show();
       } catch (IOException e){
+        e.printStackTrace();
 
       }
+      return manager;
 
     }
 
-  private void cookStart(String name, Restaurant restaurant){
+  private void cookStart(String name, Restaurant restaurant, Manager manager){
     try {
       Stage window = new Stage();
       FXMLLoader loader = new  FXMLLoader(getClass().getResource("../ServingTableScreen/ServingTableScreen.fxml"));
       Parent root = loader.load();
       Cook cook = new Cook(name);
+      manager.addWorker(cook);
+
       ServingScreen controller = loader.getController();
       controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
       controller.restaurant = restaurant;

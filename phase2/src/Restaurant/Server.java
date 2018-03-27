@@ -35,8 +35,7 @@ public class Server implements IWorker, ServingTableListener {
    * @param table the table that places the order
    */
   public void passOrder(Table table, ServingTable servingTable) {
-    System.out.println(
-        String.format("%s sending Table %s's orders to cooks", getName(), table.getTableID()));
+    System.out.println(String.format("%s sending Table %s's orders to cooks", getName(), table.getTableID()));
     servingTable.addToBeCooked(table.getTableOrder());
     System.out.println(servingTable);
   }
