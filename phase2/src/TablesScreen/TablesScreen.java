@@ -103,7 +103,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
    * Calls the manager for special events
    */
   public void callManager() throws IOException {
-    cc.popNotification();
+
 
   }
 
@@ -117,10 +117,6 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
 
     cc = new Notification();
     layout.getChildren().setAll(cc);
-    cc.pushNotification("I LIKE DIOCKs");
-    cc.pushNotification("I LIKE POCS");
-    cc.pushNotification("I LIKE TIOCK");
-
 
   }
 
@@ -143,7 +139,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
 
   @Override
   public void openNotification(String message) {
-    NotificationBox.display(message);
+   cc.pushNotification(message);
 
   }
 
