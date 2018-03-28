@@ -15,9 +15,9 @@
                <content>
                   <AnchorPane fx:id="tab1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="accept" layoutX="360.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" prefHeight="83.0" prefWidth="95.0" text="Accept">
+                        <Button fx:id="accept" layoutX="341.0" layoutY="268.0" mnemonicParsing="false" onAction="#acceptDish" prefHeight="83.0" prefWidth="119.0" text="Accept">
                            <graphic>
-                              <ImageView fx:id="tick" fitHeight="40.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="tick" fitHeight="31.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@tick.png" />
                                  </image>
