@@ -85,8 +85,20 @@ public class RestaurantLogger extends SimpleLogger {
    * @param request request info
    */
   public void logRequest(IWorker worker, String request) {
-    String content = "[NEW LOG - DISH DELIVERED] ";
+    String content = "[NEW LOG - WORKER REQUEST] ";
     content += "[ " + worker.getName() + "] has been sent request from Manager: " + request;
+    content += "[END LOG]" + System.lineSeparator();
+    this.writeToLogger(content);
+  }
+
+  /**
+   * Logs when a worker logs into the restaurant.
+   *
+   * @param worker worker that has logged in.
+   */
+  public void logWorkerLogin(IWorker worker) {
+    String content = "[NEW LOG - ] ";
+    content += "[ " + worker.getName() + "] has logged into the system: ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }

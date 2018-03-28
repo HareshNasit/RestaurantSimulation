@@ -50,7 +50,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     @FXML private TableColumn tab2Comment;
     @FXML private TableColumn tab3Comment;
     @FXML private Label checkLabel;
-    @FXML private Button tab1Refresh;
     @FXML private ImageView tick;
     @FXML private ImageView cross;
     @FXML private AnchorPane tab2;
@@ -149,9 +148,9 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     }
 
     public void acceptDish(ActionEvent actionEvent) {
-        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
-        System.out.println(dish.getIngredientString());
+
         try {
+            Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
@@ -172,11 +171,12 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             System.out.println("No row selected");
         }
         checkLabel.setText("");
+        this.updateScreen();
     }
 
     public void rejectDish(ActionEvent actionEvent) {
-        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
         try {
+            Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reject?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert1.showAndWait();
@@ -188,14 +188,13 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         catch(NullPointerException e){
             System.out.println("No row selected");
             }
-           // this.dishSelectedTab1 = null;
         checkLabel.setText("");
 
     }
 
     public void dishReadyToBeServed() {
-        Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
         try {
+            Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
@@ -211,17 +210,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         }
     }
 
-    public void refreshScreen(ActionEvent actionEvent) {
-        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
-        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
-    }
-
-    public void refreshScreen1(ActionEvent actionEvent) {
-        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
-        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
-    }
     public void updateScreen(){
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
         setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
@@ -255,7 +243,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         this.cook = cook;
 
         if(cook.getType().equals("Cook")){
-            System.out.println("Yayy");
             servingTable.addCook((ServingTableListener) cook);
             ((Cook) cook).setScreen(this);
         }
@@ -267,9 +254,13 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             tab1.getChildren().remove(cross);
             tab2.getChildren().remove(tick1);
             tab2.getChildren().remove(DishReadyButton);
+            Button back = new Button();
+            back.setLayoutX(400);
+            back.setLayoutY(3);
+            tab1.getChildren().add(back);
+            back.setText("Back");
             servingTable.addServer((ServingTableListener) cook);
             ((Server) cook).setScreen(this);
-            System.out.println("halamadrid");
         }
 
 

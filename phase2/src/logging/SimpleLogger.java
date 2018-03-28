@@ -6,14 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SimpleLogger {
 
-  String loggerDestination;
+  protected String filePath;
 
   /**
    * SimpleLogger constructor.
@@ -21,7 +20,7 @@ public class SimpleLogger {
    * @param filePath filePath for the logger.
    */
   public SimpleLogger(String filePath) {
-    this.loggerDestination = filePath;
+    this.filePath = filePath;
   }
 
 
@@ -33,7 +32,7 @@ public class SimpleLogger {
     String dateInString = new SimpleDateFormat(pattern).format(new Date());
     String name = filePath + "/" + namePrefix + dateInString + ".txt";
     File file = new File(name);
-    setLoggerDestination(name);
+    setFilePath(name);
   }
 
   /**
@@ -44,7 +43,7 @@ public class SimpleLogger {
   public void writeToLogger(String content) {
 
     try {
-      BufferedWriter writer = new BufferedWriter(new FileWriter(this.loggerDestination, true));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath, true));
       writer.write(content);
       writer.close();
     } catch (IOException e) {
@@ -60,7 +59,7 @@ public class SimpleLogger {
    */
   public String returnAllContent() {
     String info = "";
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File(loggerDestination)))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
       String line;
       while ((line = reader.readLine()) != null) {
         info += line + System.lineSeparator();
@@ -77,8 +76,8 @@ public class SimpleLogger {
    *
    * @param filePath filePath of the logger.
    */
-  public void setLoggerDestination(String filePath) {
-    this.loggerDestination = filePath;
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 
   /**
@@ -86,8 +85,8 @@ public class SimpleLogger {
    *
    * @return filePath of the logger.
    */
-  public String getLoggerDestination() {
-    return this.loggerDestination;
+  public String getFilePath() {
+    return this.filePath;
   }
 
 }

@@ -4,12 +4,9 @@ import logging.RestaurantLogger;
 import logging.SimpleLogger;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.logging.Logger;
 
 /** This is the Restaurant class. This is where all the moving parts move around. */
 public class Restaurant {
@@ -204,7 +201,7 @@ public class Restaurant {
 
   public void createNewReceiptFile(){
     this.receiptsLogger.createAndSetNewLoggerFile("receipts", "receipt");
-    System.out.println(this.receiptsLogger.getLoggerDestination() + "2");
+    System.out.println(this.receiptsLogger.getFilePath() + "2");
   }
   public void createNewLogFile(){
     this.restaurantLogger.createAndSetNewLoggerFile("logger", "log");

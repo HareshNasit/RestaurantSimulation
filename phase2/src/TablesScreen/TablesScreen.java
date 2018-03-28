@@ -95,15 +95,10 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
    * Opens the serving table for the server to see
    */
   public void openServingTable() throws IOException{
-    System.out.println("Loading Serving Table.....");
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(
-        "../ServingTableScreen/ServingTableScreen.fxml"));
-    Parent root1 = loader.load();
-    ServingScreen controller = loader.getController();
-    controller.setRestaurant(restaurant);
+    ServingScreen controller = new ServingScreen(restaurant, restaurant.getServingTable(), this.server);
 
     controller.updateScreen();
-    hBox.getChildren().setAll(root1);
+    hBox.getChildren().setAll(controller);
   }
 
   /**
