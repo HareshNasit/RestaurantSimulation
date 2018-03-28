@@ -57,6 +57,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     @FXML private ImageView tick1;
     @FXML private Pane notificationArea;
     @FXML private VBox vBox;
+    @FXML private AnchorPane tab3;
     private Notification notification;
 
 
@@ -208,7 +209,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             }
         }
         catch (NullPointerException e){
-            System.out.println("No row selected");
+                System.out.println("No row selected");
         }
     }
 
@@ -264,6 +265,20 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             back.setLayoutX(400);
             back.setLayoutY(3);
             tab1.getChildren().add(back);
+            Button serveDishBtn = new Button();
+            serveDishBtn.setOnAction(event -> {
+                try {
+                    Dish dish = (Dish) tab3Table.getSelectionModel().getSelectedItem();
+                    ((Server) cook).serveDish(dish, restaurant);
+                }
+                catch (NullPointerException e){
+                    System.out.println("No row selected");
+                }
+                    });
+            serveDishBtn.setLayoutX(492);
+            serveDishBtn.setLayoutY(282);
+            serveDishBtn.setText("Serve Dish");
+            tab3.getChildren().add(serveDishBtn);
             back.setText("Back");
             servingTable.addServer((ServingTableListener) cook);
             ((Server) cook).setScreen(this);

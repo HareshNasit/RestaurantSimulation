@@ -43,11 +43,10 @@ public class Server implements IWorker, ServingTableListener {
   /**
    * Serves a dish to the customer.
    *
-   * @param index index of the dish.
+   * @param dish the dish.
    * @param restaurant the restaurant.
    */
-  public void serveDish(int index, Restaurant restaurant) {
-    Dish dish = restaurant.getServingTable().serveDish(index);
+  public void serveDish(Dish dish, Restaurant restaurant) {
     System.out.println(
         String.format(
             "%s serving Table%s%d order: %s",

@@ -66,7 +66,7 @@
             </Tab>
             <Tab text="Dishes to be Served">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <AnchorPane fx:id="tab3" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="tab3Table" layoutX="10.0" layoutY="31.0" prefHeight="329.0" prefWidth="324.0">
                            <columns>
