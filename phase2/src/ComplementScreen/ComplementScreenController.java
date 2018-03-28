@@ -1,6 +1,9 @@
 package ComplementScreen;
 
+import OrderScreen.OrderScreen;
 import Restaurant.*;
+import TablesScreen.TablesScreen;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -20,7 +24,8 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.*;
 
-public class ComplementScreenController implements EventHandler<ActionEvent>, Initializable {
+public class ComplementScreenController extends VBox implements EventHandler<ActionEvent>,
+    Initializable {
 
 
   @FXML
@@ -283,4 +288,6 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     Stage stage = (Stage) button.getScene().getWindow();
     stage.close();
   }
+
+
 }
