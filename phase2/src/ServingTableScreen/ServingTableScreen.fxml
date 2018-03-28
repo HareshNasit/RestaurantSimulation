@@ -39,12 +39,6 @@
                               </ImageView>
                            </graphic></Button>
                         <Label fx:id="checkLabel" layoutX="347.0" layoutY="110.0" prefHeight="96.0" prefWidth="217.0" />
-                        <Button fx:id="tab1Refresh" layoutX="463.0" layoutY="3.0" mnemonicParsing="false" onAction="#refreshScreen" prefHeight="81.0" prefWidth="133.0" text="Refresh" />
-                        <ImageView fitHeight="35.0" fitWidth="53.0" layoutX="512.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@refresh.png" />
-                           </image>
-                        </ImageView>
                      </children>
                   </AnchorPane>
                </content>
@@ -61,12 +55,6 @@
                            </columns>
                         </TableView>
                         <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready" />
-                        <Button fx:id="tab2Refresh" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshScreen1" prefHeight="78.0" prefWidth="110.0" text="Refresh" />
-                        <ImageView fitHeight="31.0" fitWidth="45.0" layoutX="510.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@refresh.png" />
-                           </image>
-                        </ImageView>
                         <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@tick.png" />

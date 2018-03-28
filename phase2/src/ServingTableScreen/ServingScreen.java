@@ -50,7 +50,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     @FXML private TableColumn tab2Comment;
     @FXML private TableColumn tab3Comment;
     @FXML private Label checkLabel;
-    @FXML private Button tab1Refresh;
     @FXML private ImageView tick;
     @FXML private ImageView cross;
     @FXML private AnchorPane tab2;
@@ -211,17 +210,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         }
     }
 
-    public void refreshScreen(ActionEvent actionEvent) {
-        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
-        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
-    }
-
-    public void refreshScreen1(ActionEvent actionEvent) {
-        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
-        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
-    }
     public void updateScreen(){
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
         setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
@@ -270,6 +258,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             back.setLayoutX(400);
             back.setLayoutY(3);
             tab1.getChildren().add(back);
+            back.setText("Back");
             servingTable.addServer((ServingTableListener) cook);
             ((Server) cook).setScreen(this);
         }
