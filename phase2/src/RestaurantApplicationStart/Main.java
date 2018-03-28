@@ -42,24 +42,17 @@ public class Main extends Application {
 
 
   private void serverStart(String name, Restaurant restaurant, Manager manager) {
-    try {
-      Stage window = new Stage();
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(SERVER));
-      Parent root = loader.load();
 
-      TablesScreen controller = loader.getController();
+      Stage window = new Stage();
       Server server = new Server(name);
-      controller.setRestaurant(restaurant);
-      controller.setServer(server);
-      controller.updateScreen();
+      TablesScreen screen = new TablesScreen(server, restaurant);
       manager.addWorker(server);
-      restaurant.getServingTable().addServer(server);
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Server");
-      window.setScene(new Scene(root));
+      window.setScene(new Scene(screen));
       window.show();
-    } catch (IOException e) {
-    }
+
+
 
   }
 
@@ -81,7 +74,6 @@ public class Main extends Application {
       Cook cook = new Cook(name);
       manager.addWorker(cook);
       ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
-
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Serving Screen");
       window.setScene(new Scene(screen));

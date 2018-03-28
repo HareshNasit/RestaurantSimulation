@@ -5,6 +5,7 @@ import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.ModelControllerInterface;
+import java.util.Stack;
 import javafx.scene.layout.VBox;
 import notification.Notification;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import javafx.scene.layout.Pane;
 /**
  * The controller for the TablesScreen. Manages all user interactions regarding this GUI
  */
-public class TablesScreen implements Initializable, ModelControllerInterface  {
+public class TablesScreen extends VBox implements ModelControllerInterface  {
 
   private Server server;
   private Restaurant restaurant;
@@ -47,6 +48,27 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   @FXML private Pane notificationArea;
   @FXML private VBox vBox;
   private Notification notification;
+
+  public TablesScreen(Server server, Restaurant restaurant){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TablesScreen.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+
+
+    try {
+      fxmlLoader.load();
+      initialize();
+      setServer(server);
+      this.restaurant = restaurant;
+      restaurant.getServingTable().addServer(server);
+      updateScreen();
+
+    } catch (IOException exception) {
+      exception.printStackTrace();
+    }
+
+
+  }
 
   /**
    * Opens the selected restaurant table's menu from the TablesScreen tables
@@ -102,8 +124,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   /**
    * After the constructor is called, this is called.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize() {
     tableIDColumn.setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
     tableStatusColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
 
