@@ -43,7 +43,9 @@ public class ServingTable {
    * @param order A dish being ordered.
    */
   public void addToBeCooked(Dish order) {
+
     dishesToBeCooked.add(order);
+    notifyCooks("New Orders have been placed on the serving table");
   }
 
   /**
@@ -102,6 +104,7 @@ public class ServingTable {
     // Dish dish = dishesToBeCooked.remove(index);
     dishesToBeCooked.remove(dish);
     dishesBeingCooked.add(dish);
+    notifyServers("Dish is now cooking");
   }
 
   /**

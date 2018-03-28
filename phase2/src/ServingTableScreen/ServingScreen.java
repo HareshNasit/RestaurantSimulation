@@ -172,6 +172,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             System.out.println("No row selected");
         }
         checkLabel.setText("");
+        this.updateScreen();
     }
 
     public void rejectDish(ActionEvent actionEvent) {
