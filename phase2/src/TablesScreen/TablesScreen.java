@@ -139,6 +139,11 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
 
   }
 
+  @Override
+  public void openReceiverFunction() {
+    notification.openScanner();
+  }
+
   /**
    * Gets the server of this screen
    * @return server of this screen
