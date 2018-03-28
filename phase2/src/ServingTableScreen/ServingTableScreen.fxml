@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ServingTableScreen.ServingScreen">
+<fx:root  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.layout.VBox">
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -92,4 +92,4 @@
       </TabPane>
       <Pane fx:id="notificationArea" prefHeight="200.0" prefWidth="200.0" />
    </children>
-</VBox>
+</fx:root>

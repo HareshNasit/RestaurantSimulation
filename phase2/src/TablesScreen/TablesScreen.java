@@ -85,7 +85,8 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
         "../ServingTableScreen/ServingTableScreen.fxml"));
     Parent root1 = loader.load();
     ServingScreen controller = loader.getController();
-    controller.restaurant = restaurant;
+    controller.setRestaurant(restaurant);
+
     controller.updateScreen();
     hBox.getChildren().setAll(root1);
   }

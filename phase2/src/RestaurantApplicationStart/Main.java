@@ -76,29 +76,17 @@ public class Main extends Application {
   }
 
   private void cookStart(String name, Restaurant restaurant, Manager manager) {
-    try {
+
       Stage window = new Stage();
-      FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("../ServingTableScreen/ServingTableScreen.fxml"));
-      Parent root = loader.load();
       Cook cook = new Cook(name);
       manager.addWorker(cook);
-
-      ServingScreen controller = loader.getController();
-      controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-      controller.restaurant = restaurant;
-      controller.setCook(cook);
-      cook.setScreen(controller);
-      controller.updateScreen();
-      restaurant.getServingTable().addCook(cook);
+      ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
 
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Serving Screen");
-      window.setScene(new Scene(root));
+      window.setScene(new Scene(screen));
       window.show();
-    } catch (IOException e) {
 
-    }
 
   }
 
