@@ -58,6 +58,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     @FXML private Pane notificationArea;
     @FXML private VBox vBox;
     @FXML private AnchorPane tab3;
+    @FXML private TabPane tabsPane;
     private Notification notification;
 
 
@@ -275,6 +276,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
                     System.out.println("No row selected");
                 }
                     });
+            tabsPane.getSelectionModel().select(2);
             serveDishBtn.setLayoutX(492);
             serveDishBtn.setLayoutY(282);
             serveDishBtn.setText("Serve Dish");
