@@ -78,19 +78,12 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
     try{
 
       if (table != null) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
-        Parent root = loader.load();
-        OrderScreen controller = loader.getController();
-        controller.setTable(table);
-        controller.setServer(server);
-        controller.setRestaurant(restaurant);
-        controller.updateScreen();
+        OrderScreen controller = new OrderScreen(server,table,restaurant);
         controller.addOptionsToComboBox(table);
-        vBox.getChildren().setAll(root);
+        vBox.getChildren().setAll(controller);
       }
 
-    } catch (IOException e){
-      e.printStackTrace();
+
     } catch (NullPointerException e){
       System.out.println("Choose a file bro");
     }

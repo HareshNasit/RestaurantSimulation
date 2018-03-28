@@ -41,7 +41,7 @@ public class OrderScreenSuite extends Application{
 
         controller.setDishes(dishes);
 
-        OrderScreen orderScreen = new OrderScreen();
+        //OrderScreen orderScreen = new OrderScreen();
 
 
         window.initModality(Modality.APPLICATION_MODAL);

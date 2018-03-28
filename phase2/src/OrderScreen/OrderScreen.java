@@ -30,34 +30,33 @@ import javafx.scene.layout.VBox;
 import notification.Notification;
 
 
-public class OrderScreen implements EventHandler<ActionEvent>, Initializable, ModelControllerInterface {
+public class OrderScreen extends VBox implements ModelControllerInterface {
 
-  public Button buttonSend;
-  public Button buttonBack;
-  public ComboBox customerNumberDropDown;
-
-  public TableColumn customerNumberColumn;
-    public Button addComplimentsButton;
-    private Server server;
+  @FXML private Button buttonSend;
+  @FXML private Button buttonBack;
+  @FXML private ComboBox customerNumberDropDown;
+  @FXML private TableColumn customerNumberColumn;
+  @FXML private Button addComplimentsButton;
+  private Server server;
   private Table table;
   private Restaurant restaurant;
-  public Label tableOrderTitle;
-  public Label menuLabel;
-  public Button addDish;
-  public Button removeDish;
-  public TableView menuTableView;
-  public TableView orderTableView;
-  public TableColumn menuIdColumn;
-  public TableColumn menuDishColumn;
-  public TableColumn menuPriceColumn;
-  public TableColumn menuIngredientsColumn;
-  public Button openBillScreen;
+  @FXML private Label tableOrderTitle;
+  @FXML private Label menuLabel;
+  @FXML private Button addDish;
+  @FXML private Button removeDish;
+  @FXML private TableView menuTableView;
+  @FXML private TableView orderTableView;
+  @FXML private TableColumn menuIdColumn;
+  @FXML private TableColumn menuDishColumn;
+  @FXML private TableColumn menuPriceColumn;
+  @FXML private TableColumn menuIngredientsColumn;
+  @FXML private Button openBillScreen;
 
-  public TableColumn commentColumn;
-  public TableColumn idColumn;
-  public TableColumn nameColumn;
-  public Button addCommentButton;
-  public Pane paneBox;
+  @FXML private TableColumn commentColumn;
+  @FXML private TableColumn idColumn;
+  @FXML private TableColumn nameColumn;
+  @FXML private Button addCommentButton;
+  @FXML private Pane paneBox;
 
   private double menuSelectedDishId;
   private String menuSelectedDishName;
@@ -69,14 +68,28 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   @FXML private VBox vBox;
 
 
+  public OrderScreen(Server server, Table table, Restaurant restaurant){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orders.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
 
+    try {
+      fxmlLoader.load();
+      setServer(server);
+      this.restaurant = restaurant;
+      this.table = table;
+      initialize();
+      updateScreen();
+    } catch (IOException e){
+      e.printStackTrace();
+    }
+  }
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
-    getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
-    getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
-    getCommentColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
+  public void initialize() {
+    idColumn.setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
+    nameColumn.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+    customerNumberColumn.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    commentColumn.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
@@ -156,10 +169,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   }
 
   public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
-    this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
-    menuSelectedDishId = menuSelectedDish.getId();
-    menuSelectedDishName = menuSelectedDish.getName();
-    menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
+//    this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
+//    menuSelectedDishId = menuSelectedDish.getId();
+//    menuSelectedDishName = menuSelectedDish.getName();
+//    menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
   }
 
   /**
@@ -422,110 +435,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableView<Dish> getMenuTableView() {
     return menuTableView;
   }
-
-  @Override
-  public void handle(ActionEvent event) {
-
-  }
-
-  public TableColumn getMenuIdColumn() {
-    return menuIdColumn;
-  }
-
-  public void setMenuIdColumn(TableColumn menuIdColumn) {
-    this.menuIdColumn = menuIdColumn;
-  }
-
-  public TableColumn getMenuDishColumn() {
-    return menuDishColumn;
-  }
-
-  public void setMenuDishColumn(TableColumn menuDishColumn) {
-    this.menuDishColumn = menuDishColumn;
-  }
-
-  public TableColumn getMenuPriceColumn() {
-    return menuPriceColumn;
-  }
-
-  public void setMenuPriceColumn(TableColumn menuPriceColumn) {
-    this.menuPriceColumn = menuPriceColumn;
-  }
-
-  public TableColumn getMenuIngredientsColumn() {
-    return menuIngredientsColumn;
-  }
-
-  public void setMenuIngredientsColumn(TableColumn menuIngredientsColumn) {
-    this.menuIngredientsColumn = menuIngredientsColumn;
-  }
-
-  public TableColumn getIdColumn() {
-    return idColumn;
-  }
-
-  public void setIdColumn(TableColumn idColumn) {
-    this.idColumn = idColumn;
-  }
-
-  public TableColumn getNameColumn() {
-    return nameColumn;
-  }
-
-  public void setNameColumn(TableColumn nameColumn) {
-    this.nameColumn = nameColumn;
-  }
-
-  public Dish getMenuSelectedDish() {
-    return menuSelectedDish;
-  }
-
-  public void setMenuSelectedDish(Dish menuSelectedDish) {
-    this.menuSelectedDish = menuSelectedDish;
-  }
-
-  private Dish menuSelectedDish;
-
-  public double getMenuSelectedDishId() {
-    return menuSelectedDishId;
-  }
-
-  public void setMenuSelectedDishId(double menuSelectedDishId) {
-    this.menuSelectedDishId = menuSelectedDishId;
-  }
-
-  public String getMenuSelectedDishName() {
-    return menuSelectedDishName;
-  }
-
-  public void setMenuSelectedDishName(String menuSelectedDishName) {
-    this.menuSelectedDishName = menuSelectedDishName;
-  }
-
-  public int getMenuSelectedDishCustomerNum() {
-    return menuSelectedDishCustomerNum;
-  }
-
-  public void setMenuSelectedDishCustomerNum(int menuSelectedDishCustomerNum) {
-    this.menuSelectedDishCustomerNum = menuSelectedDishCustomerNum;
-  }
-
-  public TableColumn getCustomerNumberColumn() {
-    return customerNumberColumn;
-  }
-
-  public void setCustomerNumberColumn(TableColumn customerNumberColumn) {
-    this.customerNumberColumn = customerNumberColumn;
-  }
-
-  public TableColumn getCommentColumn() {
-    return commentColumn;
-  }
-
-  public void setCommentColumn(TableColumn commentColumn) {
-    this.commentColumn = commentColumn;
-  }
-
 
 }
 
