@@ -8,6 +8,7 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -250,7 +251,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    */
   public void addOptionsToComboBox(Table table){
       this.table = table;
-      try{
         ArrayList<String> customerLabels = new ArrayList<>();
         int tableSize = setTableOccupied();
         table.setOccupied(tableSize);
@@ -260,10 +260,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
         ObservableList<String> labels = FXCollections.observableArrayList();
         labels.addAll(customerLabels);
         customerNumberDropDown.setItems(labels);
-      }
-      catch(Exception e){
-        System.out.println("Enter the number of customers");
-      }
   }
 
   /**
@@ -274,15 +270,13 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private boolean validCustomerEntry(String customerInput) {
     try {
       int numCustomers = Integer.parseInt(customerInput);
-      return numCustomers > 1 && numCustomers < 50;
+      return numCustomers >= 1 && numCustomers < 50;
     } catch (NumberFormatException e) {
       return false;
     }
   }
 
   public int setTableOccupied(){
-    String entered = "";
-    try{
       Dialog dialog = new TextInputDialog();
       dialog.setTitle("Table Dialog");
       dialog.setHeaderText(
@@ -292,20 +286,28 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
                       + System.lineSeparator()
                       + "Example: 8");
       Optional<String> result = dialog.showAndWait();
-      while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+      String entered = "";
+    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
         result = dialog.showAndWait();
       }
-      if (result.isPresent()) {
-        entered = result.get();
-        table.setOccupied(Integer.parseInt(entered));
-        System.out.println(entered);
+      try{
+        if (result.isPresent()) {
+          entered = result.get();
+          table.setOccupied(Integer.parseInt(entered));
+          System.out.println(entered);
+        }
       }
+      catch(Exception e){
+        System.out.println("Enter the number of people occupying the table");
+        entered = "0";
+      }
+    try{
+      int numberOfPeople = Integer.parseInt(entered);
+      return numberOfPeople;
     }
-    catch(Exception e){
-      System.out.println("Enter the number of people");
+    catch (NumberFormatException e){
+      return 0;
     }
-    int numberOfPeople = Integer.parseInt(entered);
-    return numberOfPeople;
   }
 
 

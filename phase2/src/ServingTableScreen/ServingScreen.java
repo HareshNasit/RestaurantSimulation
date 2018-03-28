@@ -3,7 +3,7 @@ package ServingTableScreen;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
-
+import Restaurant.DishStatus;
 import Restaurant.ServingTableListener;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
@@ -157,7 +157,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                if(dish.getComment().equals("Cook")) {
+                if(dish.getDishStatus().equals(DishStatus.ORDERED)) {
                     ((Cook) getCook()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
                         .getInventory());
                     setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
