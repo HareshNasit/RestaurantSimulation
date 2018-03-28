@@ -111,11 +111,10 @@ public class ServingTable {
    * Removes and returns dish at index on dishesToBeServed. Cooks are notified that the dish has
    * been served.
    *
-   * @param index index of dish on dishesToBeServed
    * @return dish at index of dishesToBeServed
    */
-  public Dish serveDish(int index) {
-    Dish dish = dishesToBeServed.remove(index);
+  public Dish serveDish(Dish dish) {
+    getDishesToBeServed().remove(dish);
     String message = String.format(String.format(
         "Table %s%d %s has been served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));

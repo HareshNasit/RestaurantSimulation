@@ -54,6 +54,7 @@ public class Server implements IWorker, ServingTableListener {
             getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
     dish.setDishStatus(DishStatus.SERVED);
+    screen.updateScreen();
   }
 
   /**
