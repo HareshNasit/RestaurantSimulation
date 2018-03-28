@@ -50,8 +50,7 @@ public class Manager implements IWorker, InventoryListener {
 
   @Override
   public void notifyLowStock(String message) {
-    // to be replaced with gui notification
-    System.out.println(message);
+    screen.openNotification(message);
   }
 
   /** The server receives and adds ingredients to the inventory. */

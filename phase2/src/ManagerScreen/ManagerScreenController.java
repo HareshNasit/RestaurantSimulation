@@ -28,30 +28,52 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import notification.Notification;
 import sun.tools.jconsole.Worker;
 
-public class ManagerScreenController extends TabPane implements ModelControllerInterface{
+public class ManagerScreenController extends VBox implements ModelControllerInterface {
 
   private Manager manager;
   private Restaurant restaurant;
-  private final String  REQUESTFILE = "request.txt";
+  private final String REQUESTFILE = "request.txt";
 
-  @FXML private TableColumn columnIngredient;
-  @FXML private TableColumn columnAmount;
-  @FXML private TableColumn columnRestock;
-  @FXML private TableColumn columnThreshold;
-  @FXML private Button buttonAddEdit;
-  @FXML private TextField textFieldThreshold;
-  @FXML private TextField textFieldAmount;
-  @FXML private TextField textFieldIngredient;
-  @FXML private TextField textFieldRestock;
-  @FXML private TableView tableViewWorkers;
-  @FXML private TableColumn columnType;
-  @FXML private TableColumn columnName;
-  @FXML private TableColumn columnStatus;
-  @FXML private TextArea textFieldRequest;
-  @FXML private Tab tabInventory;
-  @FXML private TableView tableInventory;
+  @FXML
+  private TableColumn columnIngredient;
+  @FXML
+  private TableColumn columnAmount;
+  @FXML
+  private TableColumn columnRestock;
+  @FXML
+  private TableColumn columnThreshold;
+  @FXML
+  private Button buttonAddEdit;
+  @FXML
+  private TextField textFieldThreshold;
+  @FXML
+  private TextField textFieldAmount;
+  @FXML
+  private TextField textFieldIngredient;
+  @FXML
+  private TextField textFieldRestock;
+  @FXML
+  private TableView tableViewWorkers;
+  @FXML
+  private TableColumn columnType;
+  @FXML
+  private TableColumn columnName;
+  @FXML
+  private TableColumn columnStatus;
+  @FXML
+  private TextArea textFieldRequest;
+  @FXML
+  private Tab tabInventory;
+  @FXML
+  private TableView tableInventory;
+  @FXML
+  private Pane paneNotification;
+  Notification notification;
 
   public ManagerScreenController(Manager manager, Restaurant restaurant) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerScreen.fxml"));
@@ -78,13 +100,18 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
     columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
 
-    columnIngredient.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
-    columnAmount.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
-    columnRestock.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
-    columnThreshold.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+    columnIngredient
+        .setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
+    columnAmount.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
+    columnRestock.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
+    columnThreshold.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
     this.setIngredientTableRowAction();
-
+    notification = new Notification();
+    paneNotification.getChildren().setAll(notification);
     //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
 
     updateRequestText();
@@ -94,6 +121,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
 
   /**
    * Generates an ObservableList of IWorkers
+   *
    * @return ObservableList of IWorkers
    */
   private ObservableList<IWorker> getWorkerData() {
@@ -104,6 +132,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
 
   /**
    * Generates an ObservableList of InventoryIngredients
+   *
    * @return ObservableList of Inventory Ingredients
    */
   private ObservableList<InventoryIngredient> getIngredients(Inventory inventory) {
@@ -115,26 +144,27 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
   /**
    * Updates the request tab in the manager screen with the contents of request.txt
    */
-  private void updateRequestText(){
+  private void updateRequestText() {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(REQUESTFILE))) {
       String line = fileReader.readLine();
       while (line != null) {
-          textFieldRequest.appendText(line + System.lineSeparator());
-          line = fileReader.readLine();
+        textFieldRequest.appendText(line + System.lineSeparator());
+        line = fileReader.readLine();
       }
     } catch (java.io.IOException e) {
     }
   }
 
-  public void updateScreen(){
+  public void updateScreen() {
     tableViewWorkers.setItems(getWorkerData());
     tableInventory.setItems(getIngredients(restaurant.getInventory()));
+    updateRequestText();
 
   }
 
   @Override
   public void openNotification(String message) {
-
+    notification.pushNotification(message);
   }
 
   @Override
@@ -142,7 +172,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
 
   }
 
-  public void buttonStockAction(){
+  public void buttonStockAction() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
     worker.scanStock(restaurant.getInventory(), "meems", 123);
 
@@ -150,31 +180,32 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
 
 
   /**
-   * When the add button is clicked, a new ingredient is created as specified by the respective
-   * text fields
+   * When the add button is clicked, a new ingredient is created as specified by the respective text
+   * fields
    */
-  public void buttonAddAction(){
+  public void buttonAddAction() {
 
-      String name = textFieldIngredient.getText().trim();
-      int amount = Integer.valueOf(textFieldAmount.getText().trim());
-      int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
-      int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
-      InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity, lowerThreshold);
-      restaurant.getInventory().addNewIngredient(ingredient);
-      //There should be a better way to set this
-      tableInventory.setItems(getIngredients(restaurant.getInventory()));
-      clearTextFields();
+    String name = textFieldIngredient.getText().trim();
+    int amount = Integer.valueOf(textFieldAmount.getText().trim());
+    int restockQuantity = Integer.valueOf(textFieldRestock.getText().trim());
+    int lowerThreshold = Integer.valueOf(textFieldThreshold.getText().trim());
+    InventoryIngredient ingredient = new InventoryIngredient(name, amount, restockQuantity,
+        lowerThreshold);
+    restaurant.getInventory().addNewIngredient(ingredient);
+    //There should be a better way to set this
+    tableInventory.setItems(getIngredients(restaurant.getInventory()));
+    clearTextFields();
 
   }
 
   /**
    * Edits a selected ingredients based on the text fields and updates accordingly.
    */
-  public void buttonEditAction(){
+  public void buttonEditAction() {
     InventoryIngredient ingredient = (InventoryIngredient)
         tableInventory.getSelectionModel().getSelectedItem();
 
-    if (ingredient != null){
+    if (ingredient != null) {
       ingredient.setCurrentQuantity(Integer.valueOf(textFieldAmount.getText().trim()));
       ingredient.setRestockQuantity(Integer.valueOf(textFieldRestock.getText().trim()));
       ingredient.setLowerThreshold(Integer.valueOf(textFieldThreshold.getText().trim()));
@@ -189,7 +220,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
   /**
    * Edits a selected ingredients based on the text fields and updates accordingly.
    */
-  public void buttonDeleteAction(){
+  public void buttonDeleteAction() {
     InventoryIngredient ingredient = (InventoryIngredient)
         tableInventory.getSelectionModel().getSelectedItem();
     restaurant.getInventory().removeIngredient(ingredient.getName());
@@ -200,7 +231,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
   /**
    * Clears all the text field of input
    */
-  private void clearTextFields(){
+  private void clearTextFields() {
     textFieldThreshold.clear();
     textFieldIngredient.clear();
     textFieldAmount.clear();
@@ -210,9 +241,10 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
 
   /**
    * Populate the text fields with the respective data of ingredient
+   *
    * @param ingredient Ingredient that is going to populate the fields
    */
-  private void populateTextFields(InventoryIngredient ingredient){
+  private void populateTextFields(InventoryIngredient ingredient) {
     textFieldIngredient.setText(ingredient.getName());
     textFieldAmount.setText(String.valueOf(ingredient.getCurrentQuantity()));
     textFieldRestock.setText(String.valueOf(ingredient.getRestockQuantity()));
@@ -238,7 +270,7 @@ public class ManagerScreenController extends TabPane implements ModelControllerI
   }
 
 
-  public void callWorker(){
+  public void callWorker() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
     worker.sendNotification("Come to my office");
   }
