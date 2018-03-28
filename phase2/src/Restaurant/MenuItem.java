@@ -6,7 +6,7 @@ public class MenuItem {
 
   private String name; // name of the dish
   private double id; // id of the dish
-  private double price; // price of the dish
+  protected double price; // price of the dish
   private HashMap<String, DishIngredient> ingredients; // the ingredients of this dish.
 
   /**
@@ -28,7 +28,7 @@ public class MenuItem {
   /**
    * Returns the id of this menu item.
    *
-   * @return the id of the menu itema
+   * @return the id of the menu item
    */
   public double getId() {
     return this.id;

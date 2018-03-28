@@ -86,7 +86,7 @@ public class Table {
     return tableOrder.remove(index);
   }
 
-  /** Returns the dishes ordered by a specifc customerNumber on this table. */
+  /** Returns the dishes ordered by a specific customerNumber on this table. */
   public ArrayList<Dish> getCustomerOrder(int customerNumber) {
     ArrayList<Dish> customerDishes = new ArrayList<>();
     for (Dish dish : tableOrder) {

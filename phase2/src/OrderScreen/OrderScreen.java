@@ -1,5 +1,6 @@
 package OrderScreen;
 
+import ComplementScreen.ComplementScreen;
 import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -51,12 +52,12 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
   public TableColumn menuPriceColumn;
   public TableColumn menuIngredientsColumn;
   public Button openBillScreen;
+
   public TableColumn commentColumn;
   public TableColumn idColumn;
   public TableColumn nameColumn;
   public Button addCommentButton;
   public Pane paneBox;
-  public Label labelNotification;
 
   private double menuSelectedDishId;
   private String menuSelectedDishName;
@@ -75,6 +76,8 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     getIdColumn().setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     getNameColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     getCustomerNumberColumn().setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    getCommentColumn().setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
+
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -119,6 +122,7 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
         "../BillScreen/bill.fxml"));
     Parent root1 = fxmlLoader.load();
     paneBox.getChildren().setAll(root1);
+
   }
 
   /**
@@ -158,6 +162,57 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
   }
 
+  /**
+   * This method assigns a specific comment given by a customer to the selected dish
+   * @param comment the comment of the customer
+   */
+  public void addCommentToDish(String comment){
+      Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+      dish.setComment(comment);
+      updateScreen();
+  }
+
+  public void openCommentDialog(){
+    Dialog dialog = new TextInputDialog();
+    dialog.setTitle("Comment Dialog");
+    dialog.setHeaderText(
+            "Enter your comment for the dish"
+                    + System.lineSeparator()
+                    + "Example: Make the falafel crispy on the outside");
+    Optional<String> result = dialog.showAndWait();
+    String entered = "";
+
+    while (result.isPresent() && ((result.get()).equals("") || !validCommentEntry(result.get()))) {
+      result = dialog.showAndWait();
+    }
+    if (result.isPresent()) {
+      entered = result.get();
+      addCommentToDish(entered);
+      System.out.println(entered);
+    }
+  }
+
+  private boolean validCommentEntry(String comment){
+    try{
+      return comment instanceof String;
+    }
+    catch (Exception e){
+      return false;
+    }
+  }
+
+  /**
+   * Removes dishes from a specific customer's order
+   */
+  public void removeDishFromOrder(){
+    MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
+    table.removeDish((Dish) dish);
+    updateScreen();
+  }
+
+  /**
+   * Adds dishes to a specific customer's order
+   */
   public void addDishToOrder() {
     // TODO: Create a way to give customer number
     // TODO: Add Compliments Somehow
@@ -176,6 +231,10 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  /**
+   * Adds the number of customers at the table to the drop down menu so each customer can have his/her own order.
+   * @param table the table at which the customers are seated
+   */
   public void addOptionsToComboBox(Table table){
       this.table = table;
       ArrayList<String> customerLabels = new ArrayList<>();
@@ -189,6 +248,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
       customerNumberDropDown.setItems(labels);
   }
 
+  /**
+   * Checks if the number of customers at a table entered is a valid input value
+   * @param customerInput the number of customers that have entered
+   * @return returns true if it is a valid input else false
+   */
   private boolean validCustomerEntry(String customerInput) {
     try {
       int numCustomers = Integer.parseInt(customerInput);
@@ -196,8 +260,6 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     } catch (NumberFormatException e) {
       return false;
     }
-
-
   }
 
   public int setTableOccupied(){
@@ -243,25 +305,42 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  /**
+   *
+   * Opens the compliment menu with only the ingredients that are allowed to be added or removed to the selected dish
+   */
   public void openComplimentMenu(){
       try{
           Dish dish = getOrderTableView().getSelectionModel().getSelectedItem();
           if (dish != null) {
+
               FXMLLoader loader = new FXMLLoader(getClass().getResource("../ComplementScreen/complements.fxml"));
               Parent root = loader.load();
               vBox.getChildren().setAll(root);
+
           }
 
       } catch (IOException e){
           e.printStackTrace();
       } catch (NullPointerException e){
-          System.out.println("Choose a file bro");
+          System.out.println("Choose a dish to add compliments");
       }
   }
 
-
-
-
+  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
+    MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
+    try {
+      if(!restaurant.getInventory().hasEnoughIngredients(dish.getIngredientAmounts())){
+        addDish.setDisable(true);
+      }
+      else{
+        addDish.setDisable(false);
+      }
+    }
+    catch(NullPointerException e){
+      System.out.println("No row selected");
+    }
+  }
 
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
@@ -439,19 +518,14 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
     this.customerNumberColumn = customerNumberColumn;
   }
 
-  public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
-      MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
-    try {
-        if(!restaurant.getInventory().hasEnoughIngredients(dish.getIngredientAmounts())){
-            addDish.setDisable(true);
-        }
-        else{
-            addDish.setDisable(false);
-        }
-    }
-    catch(NullPointerException e){
-        System.out.println("No row selected");
-    }
+  public TableColumn getCommentColumn() {
+    return commentColumn;
   }
+
+  public void setCommentColumn(TableColumn commentColumn) {
+    this.commentColumn = commentColumn;
+  }
+
+
 }
 
