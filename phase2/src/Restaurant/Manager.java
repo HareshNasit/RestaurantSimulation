@@ -59,6 +59,11 @@ public class Manager implements IWorker, InventoryListener {
     inventory.addStock(ingredient, amount);
   }
 
+  @Override
+  public void sendNotification(String message) {
+
+  }
+
   /** The Manager shuts the system and updates the inventory.txt file. */
   public void shutDown(Inventory inventory) {
     System.out.println("System Shutdown: Writing inventory to file");

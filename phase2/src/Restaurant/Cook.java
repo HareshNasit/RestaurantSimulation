@@ -51,6 +51,11 @@ public class Cook implements IWorker, ServingTableListener {
     screen.openReceiverFunction();
   }
 
+  @Override
+  public void sendNotification(String message) {
+    screen.openNotification(message);
+  }
+
   /**
    * Returns a boolean whether a dish can be prepared or no.
    *

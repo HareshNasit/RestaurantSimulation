@@ -1,5 +1,8 @@
 Adam
 -TableScreen Package
+-ManagerScreen Package
+-Connecting Screens Together
+-Notification System
 
 
 Akarsh

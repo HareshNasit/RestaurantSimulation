@@ -24,14 +24,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sun.tools.jconsole.Worker;
 
 public class ManagerScreenController implements Initializable, ModelControllerInterface{
 
   private Manager manager;
   private Restaurant restaurant;
-
-
   private final String  REQUESTFILE = "request.txt";
+
   @FXML private TableColumn columnIngredient;
   @FXML private TableColumn columnAmount;
   @FXML private TableColumn columnRestock;
@@ -49,18 +49,17 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
   @FXML private Tab tabInventory;
   @FXML private TableView tableInventory;
 
-  private ManagerListener test;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     //Sets the columns of each table to their respective types
-    getColumnType().setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
-    getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
+    columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
+    columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
 
-    getColumnIngredient().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
-    getColumnAmount().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
-    getColumnRestock().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
-    getColumnThreshold().setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+    columnIngredient.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
+    columnAmount.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
+    columnRestock.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
+    columnThreshold.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
     this.setIngredientTableRowAction();
 
@@ -201,7 +200,7 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
    * Handles the events when a row is selected for the IngredientsTable
    */
   private void setIngredientTableRowAction() {
-    getTableInventory().setRowFactory(tv -> {
+    tableInventory.setRowFactory(tv -> {
       TableRow<InventoryIngredient> row = new TableRow<>();
       row.setOnMouseClicked(event -> {
         if (!row.isEmpty()) {
@@ -217,147 +216,12 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
 
 
   public void callWorker(){
-    test.update();
-    System.out.println("WILL MEMES APPEAR??");
+    IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
+    worker.sendNotification("Come to my office");
+
   }
 
-  //---------------------- Getters and Setters --------------------
 
-  public Tab getTabInventory() {
-    return tabInventory;
-  }
-
-  public void setTabInventory(Tab tabInventory) {
-    this.tabInventory = tabInventory;
-  }
-
-  public TextArea getTextFieldRequest() {
-    return textFieldRequest;
-  }
-
-  public void setTextFieldRequest(TextArea textFieldRequest) {
-    this.textFieldRequest = textFieldRequest;
-  }
-
-  public TableColumn getColumnType() {
-    return columnType;
-  }
-
-  public void setColumnType(TableColumn columnType) {
-    this.columnType = columnType;
-  }
-
-  public TableColumn getColumnName() {
-    return columnName;
-  }
-
-  public void setColumnName(TableColumn columnName) {
-    this.columnName = columnName;
-  }
-
-  public TableColumn getColumnStatus() {
-    return columnStatus;
-  }
-
-  public void setColumnStatus(TableColumn columnStatus) {
-    this.columnStatus = columnStatus;
-  }
-
-  public TableView getTableViewWorkers() {
-    return tableViewWorkers;
-  }
-
-  public void setTableViewWorkers(TableView tableViewWorkers) {
-    this.tableViewWorkers = tableViewWorkers;
-  }
-
-  public TextField getTextFieldThreshold() {
-    return textFieldThreshold;
-  }
-
-  public void setTextFieldThreshold(TextField textFieldThreshold) {
-    this.textFieldThreshold = textFieldThreshold;
-  }
-
-  public TextField getTextFieldAmount() {
-    return textFieldAmount;
-  }
-
-  public void setTextFieldAmount(TextField textFieldAmount) {
-    this.textFieldAmount = textFieldAmount;
-  }
-
-  public TextField getTextFieldIngredient() {
-    return textFieldIngredient;
-  }
-
-  public void setTextFieldIngredient(TextField textFieldIngredient) {
-    this.textFieldIngredient = textFieldIngredient;
-  }
-
-  public TextField getTextFieldRestock() {
-    return textFieldRestock;
-  }
-
-  public void setTextFieldRestock(TextField textFieldRestock) {
-    this.textFieldRestock = textFieldRestock;
-  }
-
-  public TableView getTableInventory() {
-    return tableInventory;
-  }
-
-  public void setTableInventory(TableView tableInventory) {
-    this.tableInventory = tableInventory;
-  }
-
-  public TableColumn getColumnIngredient() {
-    return columnIngredient;
-  }
-
-  public void setColumnIngredient(TableColumn columnIngredient) {
-    this.columnIngredient = columnIngredient;
-  }
-
-  public TableColumn getColumnAmount() {
-    return columnAmount;
-  }
-
-  public void setColumnAmount(TableColumn columnAmount) {
-    this.columnAmount = columnAmount;
-  }
-
-  public TableColumn getColumnRestock() {
-    return columnRestock;
-  }
-
-  public void setColumnRestock(TableColumn columnRestock) {
-    this.columnRestock = columnRestock;
-  }
-
-  public TableColumn getColumnThreshold() {
-    return columnThreshold;
-  }
-
-  public void setColumnThreshold(TableColumn columnThreshold) {
-    this.columnThreshold = columnThreshold;
-  }
-
-  public Button getButtonAddEdit() {
-    return buttonAddEdit;
-  }
-
-  public void setButtonAddEdit(Button buttonAddEdit) {
-    this.buttonAddEdit = buttonAddEdit;
-  }
-
-  public ManagerListener getTest() {
-    return test;
-  }
-
-  public void setTest(ManagerListener test) {
-    this.test = test;
-  }
 
   public Manager getManager() {
     return manager;

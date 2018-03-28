@@ -142,6 +142,11 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   @Override
+  public void sendNotification(String message) {
+    screen.openNotification(message);
+  }
+
+  @Override
   public void update(String message) {
       screen.updateScreen();
       screen.openNotification(message);
