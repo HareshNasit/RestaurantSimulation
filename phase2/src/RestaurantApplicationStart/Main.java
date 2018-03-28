@@ -59,6 +59,7 @@ public class Main extends Application {
     Manager manager = new Manager(name);
     Stage window = new Stage();
     ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
+    restaurant.getInventory().setManager(manager);
     window.initModality(Modality.WINDOW_MODAL);
     window.setTitle("Manager");
     window.setScene(new Scene(controller));
