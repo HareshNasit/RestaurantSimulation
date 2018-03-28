@@ -152,7 +152,7 @@ public class Server implements IWorker, ServingTableListener {
       screen.openNotification(message);
   }
 
-  
+
   public void removeDish(Table table, Dish dish) {
     table.removeDish(dish);
     System.out.println(

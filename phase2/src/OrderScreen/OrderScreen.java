@@ -218,8 +218,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder(){
-    MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
-    table.removeDish((Dish) dish);
+    Dish dish = (Dish)  orderTableView.getSelectionModel().getSelectedItem();
+    server.removeDish(table, dish);
     updateScreen();
   }
 
