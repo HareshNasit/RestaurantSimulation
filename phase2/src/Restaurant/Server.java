@@ -156,14 +156,9 @@ public class Server implements IWorker, ServingTableListener {
       screen.openNotification(message);
   }
 
-  /**
-   * Removes a dish from the given table.
-   *
-   * @param index of the dish in the list.
-   * @param table the given table from which dish is removed.
-   */
-  public void removeDish(int index, Table table) {
-    Dish dish = table.removeDish(index);
+
+  public void removeDish(Table table, Dish dish) {
+    table.removeDish(dish);
     System.out.println(
         String.format(
             "Cancelled %s from Table%s%d",
