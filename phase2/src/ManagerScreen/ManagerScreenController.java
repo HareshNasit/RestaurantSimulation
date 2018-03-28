@@ -66,7 +66,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   @FXML
   private TableColumn columnStatus;
   @FXML
-  private TextArea textFieldRequest;
+  private TextArea textAreaRequest;
   @FXML
   private Tab tabInventory;
   @FXML
@@ -119,6 +119,13 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   }
 
+  public void testInventory(){
+    System.out.println("CHECKING Inventory");
+    restaurant.getInventory().removeStock("chocolate", 2);
+    this.updateRequestText();
+
+  }
+
   /**
    * Generates an ObservableList of IWorkers
    *
@@ -145,10 +152,11 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
    * Updates the request tab in the manager screen with the contents of request.txt
    */
   private void updateRequestText() {
+    textAreaRequest.clear();
     try (BufferedReader fileReader = new BufferedReader(new FileReader(REQUESTFILE))) {
       String line = fileReader.readLine();
       while (line != null) {
-        textFieldRequest.appendText(line + System.lineSeparator());
+        textAreaRequest.appendText(line + System.lineSeparator());
         line = fileReader.readLine();
       }
     } catch (java.io.IOException e) {
