@@ -20,10 +20,12 @@ public class Inventory {
   private final String REQUESTSFILE = "request.txt";
   private InventoryListener manager;
   private HashMap<String, InventoryIngredient> inventory;
+  private ArrayList<InventoryIngredient> lowIngredients;
 
   /** Constructs a new Inventory object */
   public Inventory() {
     inventory = new HashMap<String, InventoryIngredient>();
+    lowIngredients = new ArrayList<InventoryIngredient>();
   }
 
   /**
@@ -123,10 +125,12 @@ public class Inventory {
    */
   private void writeToRequest(String ingredient, int amount){
     InventoryIngredient ingredient1 = inventory.get(ingredient.trim());
-    if (ingredient1.getCurrentQuantity() - amount < ingredient1.getLowerThreshold()){
+    if (ingredient1.getCurrentQuantity() - amount < ingredient1.getLowerThreshold() &&
+        !lowIngredients.contains(ingredient1)){
       try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(REQUESTSFILE, true));
-        writer.write(ingredient1.getName() + ": " + ingredient1.getRestockQuantity());
+        writer.write(ingredient1.getName() + ": " + ingredient1.getRestockQuantity() + System.lineSeparator());
+        lowIngredients.add(ingredient1);
         writer.close();
         manager.notifyLowStock("request.txt updated");
       } catch (IOException e){}
