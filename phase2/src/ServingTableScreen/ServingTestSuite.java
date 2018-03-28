@@ -33,7 +33,7 @@ public class ServingTestSuite extends Application{
         restaurant.getServingTable().getDishesToBeCooked().addAll(dishes);
         controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         // controller.setReadyTable(dishes);
-        controller.restaurant = restaurant;
+        controller.setRestaurant(restaurant);
         controller.setCook(new Server("harsh"));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Serving Screen");

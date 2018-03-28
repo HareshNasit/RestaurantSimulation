@@ -1,12 +1,17 @@
 package ServingTableScreen;
 
 import Restaurant.Restaurant;
+import Restaurant.Server;
 import Restaurant.ServingTable;
 
+import Restaurant.ServingTableListener;
+import java.io.IOException;
+import java.util.Stack;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import Restaurant.Dish;
@@ -16,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import Restaurant.ModelControllerInterface;
 import Restaurant.IWorker;
@@ -23,41 +29,58 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import notification.Notification;
-import notificationBox.NotificationBox;
 
-public class ServingScreen implements Initializable, ModelControllerInterface {
+public class ServingScreen extends VBox implements ModelControllerInterface {
 
 
-    public TableView tab1Table;
-    public TableColumn tab1TableId;
-    public TableColumn tab1Dish;
-    public Button accept;
-    public Button reject;
-    public TableView tab2Table;
-    public TableColumn tab2TableId;
-    public TableColumn tab2Dish;
-    public TableView tab3Table;
-    public TableColumn tab3TableId;
-    public TableColumn tab3Dish;
-    public AnchorPane tab1;
-    public Button DishReadyButton;
-    public TableColumn tab1Comment;
-    public TableColumn tab2Comment;
-    public TableColumn tab3Comment;
-    public Label checkLabel;
-    public Button tab1Refresh;
-    public ImageView tick;
-    public ImageView cross;
-    public AnchorPane tab2;
-    public ImageView tick1;
-
-    private Notification notification;
+    @FXML private TableView tab1Table;
+    @FXML private TableColumn tab1TableId;
+    @FXML private TableColumn tab1Dish;
+    @FXML private Button accept;
+    @FXML private Button reject;
+    @FXML private TableView tab2Table;
+    @FXML private TableColumn tab2TableId;
+    @FXML private TableColumn tab2Dish;
+    @FXML private TableView tab3Table;
+    @FXML private TableColumn tab3TableId;
+    @FXML private TableColumn tab3Dish;
+    @FXML private AnchorPane tab1;
+    @FXML private Button DishReadyButton;
+    @FXML private TableColumn tab1Comment;
+    @FXML private TableColumn tab2Comment;
+    @FXML private TableColumn tab3Comment;
+    @FXML private Label checkLabel;
+    @FXML private Button tab1Refresh;
+    @FXML private ImageView tick;
+    @FXML private ImageView cross;
+    @FXML private AnchorPane tab2;
+    @FXML private ImageView tick1;
     @FXML private Pane notificationArea;
+    private Notification notification;
 
 
-    public Restaurant restaurant;
+    private Restaurant restaurant;
     private ServingTable servingTable;
     private IWorker cook;
+
+    public ServingScreen(Restaurant restaurant, ServingTable servingTable, IWorker worker){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ServingTableScreen.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+            this.restaurant = restaurant;
+            this.servingTable = servingTable;
+            setCook(worker);
+            initialize();
+            updateScreen();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+
+
+    }
 
     public void setCookTable(ArrayList<Dish> Dishes) {
         ObservableList<Dish> dishesToBeCooked = FXCollections.observableArrayList();
@@ -75,8 +98,7 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         this.tab3Dish.getTableView().setItems(dishesToBeServed);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize() {
 
         tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
         tab1Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
@@ -112,12 +134,12 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     public void rowSelected(MouseEvent mouseEvent) {
         Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
         try {
-            if (((Cook) getCook()).canBePrepared(dish, restaurant.getInventory())) {
+            if (((Cook) getCook()).canBePrepared(dish, getRestaurant().getInventory())) {
                 checkLabel.setText("Can be Prepared");
                 checkLabel.setTextFill(Paint.valueOf("Green"));
             } else {
                 // checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
-                checkLabel.setText(restaurant.getInventory().getLowIngredientStrings(dish));
+                checkLabel.setText(getRestaurant().getInventory().getLowIngredientStrings(dish));
                 checkLabel.setTextFill(Paint.valueOf("Red"));
             }
         }
@@ -127,21 +149,22 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     }
 
     public void acceptDish(ActionEvent actionEvent) {
-        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
-        System.out.println(dish.getIngredientString());
+
         try {
+            Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 if(dish.getComment().equals("Cook")) {
-                    ((Cook) getCook()).acceptCook(dish, restaurant.getServingTable(), restaurant.getInventory());
-                    setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-                    setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-                    setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+                    ((Cook) getCook()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
+                        .getInventory());
+                    setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+                    setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
+                    setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
                 }
                 else{
-                    ((Cook) getCook()).acceptNoCook(dish,restaurant.getServingTable());
+                    ((Cook) getCook()).acceptNoCook(dish, getRestaurant().getServingTable());
                 }
             }
         }
@@ -149,38 +172,38 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
             System.out.println("No row selected");
         }
         checkLabel.setText("");
+        this.updateScreen();
     }
 
     public void rejectDish(ActionEvent actionEvent) {
-        Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
         try {
+            Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
             Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to reject?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert1.showAndWait();
             if (alert1.getResult() == ButtonType.YES) {
-                ((Cook) getCook()).rejectDish(dish, restaurant.getServingTable());
-                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
+                ((Cook) getCook()).rejectDish(dish, getRestaurant().getServingTable());
+                setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
             }
         }
         catch(NullPointerException e){
             System.out.println("No row selected");
             }
-           // this.dishSelectedTab1 = null;
         checkLabel.setText("");
 
     }
 
     public void dishReadyToBeServed() {
-        Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
         try {
+            Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you?",
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                ((Cook) getCook()).serveDish(dish, restaurant.getServingTable());
-                setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-                setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-                setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+                ((Cook) getCook()).serveDish(dish, getRestaurant().getServingTable());
+                setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+                setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
+                setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
             }
         }
         catch (NullPointerException e){
@@ -189,25 +212,31 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
     }
 
     public void refreshScreen(ActionEvent actionEvent) {
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
+        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
     }
 
     public void refreshScreen1(ActionEvent actionEvent) {
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
+        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
     }
     public void updateScreen(){
-        setCookTable(restaurant.getServingTable().getDishesToBeCooked());
-        setBeingCookedTable(restaurant.getServingTable().getDishesBeingCooked());
-        setReadyTable(restaurant.getServingTable().getDishesToBeServed());
+        setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+        setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
+        setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
     }
 
     @Override
     public void openNotification(String message) {
         notification.pushNotification(message);
+    }
+
+    @Override
+    public void openReceiverFunction() {
+        notification.openScanner();
+
     }
 
     public ServingTable getServingTable() {
@@ -226,7 +255,8 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         this.cook = cook;
 
         if(cook.getType().equals("Cook")){
-            System.out.println("Yayy");
+            servingTable.addCook((ServingTableListener) cook);
+            ((Cook) cook).setScreen(this);
         }
         else if(cook.getType().equals("Server")){
             tab1.getChildren().remove(accept);
@@ -236,7 +266,22 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
             tab1.getChildren().remove(cross);
             tab2.getChildren().remove(tick1);
             tab2.getChildren().remove(DishReadyButton);
-            System.out.println("halamadrid");
+            Button back = new Button();
+            back.setLayoutX(400);
+            back.setLayoutY(3);
+            tab1.getChildren().add(back);
+            servingTable.addServer((ServingTableListener) cook);
+            ((Server) cook).setScreen(this);
         }
+
+
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

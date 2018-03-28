@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OrderScreen.OrderScreen">
+<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"  type="javafx.scene.layout.VBox">
    <children>
       <Pane fx:id="paneBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="391.0" prefWidth="649.0">
          <children>
@@ -42,7 +42,7 @@
                   <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
                </columns>
             </TableView>
-            <Button fx:id="addCommentButton" layoutX="29.0" layoutY="350.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="Add comment" />
+            <Button fx:id="addCommentButton" layoutX="29.0" layoutY="350.0" mnemonicParsing="false" onAction="#openCommentDialog" prefHeight="27.0" prefWidth="107.0" text="Add comment" />
             <Button fx:id="buttonBack" layoutX="593.0" layoutY="14.0" mnemonicParsing="false" onAction="#backButtonAction" text="Back" />
             <Button fx:id="buttonSend" layoutX="143.0" layoutY="350.0" mnemonicParsing="false" onAction="#sendOrder" prefHeight="27.0" prefWidth="72.0" text="Send" />
             <ComboBox fx:id="customerNumberDropDown" layoutX="215.0" layoutY="280.0" prefHeight="27.0" prefWidth="128.0" promptText="customer no." />
@@ -51,4 +51,4 @@
       </Pane>
       <Pane fx:id="notificationArea" prefHeight="200.0" prefWidth="200.0" />
    </children>
-</VBox>
+</fx:root>

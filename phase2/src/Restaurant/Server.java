@@ -98,7 +98,6 @@ public class Server implements IWorker, ServingTableListener {
    */
   public void addOrder(Table table, int customerNumber, MenuItem dish) {
     Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
-    dish1.setComment("Cook");
     table.addSingleOrder(dish1);
   }
 
@@ -139,7 +138,12 @@ public class Server implements IWorker, ServingTableListener {
   /** When new stock has been received, updateScreen the stock. */
   @Override
   public void scanStock(Inventory inventory, String ingredient, int amount) {
-    inventory.addStock(ingredient, amount);
+    screen.openReceiverFunction();
+  }
+
+  @Override
+  public void sendNotification(String message) {
+    screen.openNotification(message);
   }
 
   @Override

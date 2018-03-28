@@ -6,7 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerScreen.ManagerScreenController">
+
+<fx:root xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.control.TabPane">
   <tabs>
     <Tab fx:id="workersTab" text="Workers">
          <content>
@@ -23,7 +24,7 @@
                      <children>
                         <Pane prefHeight="375.0" prefWidth="289.0">
                            <children>
-                              <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
+                              <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" onAction="#buttonStockAction" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
                               <Button fx:id="buttonOffice" layoutX="71.0" layoutY="76.0" mnemonicParsing="false" onAction="#callWorker" prefHeight="27.0" prefWidth="148.0" text="Call To Office" />
                               <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" text="Send to Attend Table" />
                            </children>
@@ -87,4 +88,4 @@
         </content>
       </Tab>
   </tabs>
-</TabPane>
+</fx:root>

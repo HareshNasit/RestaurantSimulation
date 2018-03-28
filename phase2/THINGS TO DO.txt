@@ -3,4 +3,5 @@
 3. Improve call Manager 
 4. Remove all print statements
 5. Add javadocs
-6. 
+6. Fix all the minor NullPointer Errors.
+7. Combining login screen with all screens.

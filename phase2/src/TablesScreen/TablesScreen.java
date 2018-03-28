@@ -5,6 +5,7 @@ import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.ModelControllerInterface;
+import java.util.Stack;
 import javafx.scene.layout.VBox;
 import notification.Notification;
 import java.io.IOException;
@@ -30,7 +31,7 @@ import javafx.scene.layout.Pane;
 /**
  * The controller for the TablesScreen. Manages all user interactions regarding this GUI
  */
-public class TablesScreen implements Initializable, ModelControllerInterface  {
+public class TablesScreen extends VBox implements ModelControllerInterface  {
 
   private Server server;
   private Restaurant restaurant;
@@ -48,6 +49,27 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   @FXML private VBox vBox;
   private Notification notification;
 
+  public TablesScreen(Server server, Restaurant restaurant){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TablesScreen.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+
+
+    try {
+      fxmlLoader.load();
+      initialize();
+      setServer(server);
+      this.restaurant = restaurant;
+      restaurant.getServingTable().addServer(server);
+      updateScreen();
+
+    } catch (IOException exception) {
+      exception.printStackTrace();
+    }
+
+
+  }
+
   /**
    * Opens the selected restaurant table's menu from the TablesScreen tables
    */
@@ -56,19 +78,12 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
     try{
 
       if (table != null) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../OrderScreen/orders.fxml"));
-        Parent root = loader.load();
-        OrderScreen controller = loader.getController();
-        controller.setTable(table);
-        controller.setServer(server);
-        controller.setRestaurant(restaurant);
-        controller.updateScreen();
+        OrderScreen controller = new OrderScreen(server,table,restaurant);
         controller.addOptionsToComboBox(table);
-        vBox.getChildren().setAll(root);
+        vBox.getChildren().setAll(controller);
       }
 
-    } catch (IOException e){
-      e.printStackTrace();
+
     } catch (NullPointerException e){
       System.out.println("Choose a file bro");
     }
@@ -80,14 +95,10 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
    * Opens the serving table for the server to see
    */
   public void openServingTable() throws IOException{
-    System.out.println("Loading Serving Table.....");
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(
-        "../ServingTableScreen/ServingTableScreen.fxml"));
-    Parent root1 = loader.load();
-    ServingScreen controller = loader.getController();
-    controller.restaurant = restaurant;
+    ServingScreen controller = new ServingScreen(restaurant, restaurant.getServingTable(), this.server);
+
     controller.updateScreen();
-    hBox.getChildren().setAll(root1);
+    hBox.getChildren().setAll(controller);
   }
 
   /**
@@ -101,8 +112,7 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   /**
    * After the constructor is called, this is called.
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize() {
     tableIDColumn.setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
     tableStatusColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
 
@@ -137,6 +147,11 @@ public class TablesScreen implements Initializable, ModelControllerInterface  {
   public void openNotification(String message) {
    notification.pushNotification(message);
 
+  }
+
+  @Override
+  public void openReceiverFunction() {
+    notification.openScanner();
   }
 
   /**
