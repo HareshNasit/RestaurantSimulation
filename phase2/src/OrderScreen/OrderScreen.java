@@ -9,6 +9,7 @@ import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
 import TablesScreen.TablesScreen;
+// import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import notification.Notification;
 
