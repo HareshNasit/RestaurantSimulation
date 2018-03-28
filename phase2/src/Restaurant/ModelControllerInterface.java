@@ -6,4 +6,6 @@ public interface ModelControllerInterface {
 
   public void openNotification(String message);
 
+  public void openReceiverFunction();
+
 }

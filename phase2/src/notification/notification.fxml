@@ -39,8 +39,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" prefWidth="506.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="layout" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="506.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="labelNotification" layoutX="8.0" layoutY="6.0" onMouseClicked="#popNotification" prefHeight="33.0" prefWidth="488.0" text="Label" />
+      <Label fx:id="labelPickUp" layoutX="14.0" layoutY="49.0" prefHeight="17.0" prefWidth="307.0" text="New Stock Awaiting For Pick Up" />
+      <Button fx:id="buttonPickUp" layoutX="367.0" layoutY="44.0" mnemonicParsing="false" onAction="#closeScanner" prefHeight="7.0" prefWidth="125.0" text="Confirm Pick Up" />
    </children>
 </fx:root>

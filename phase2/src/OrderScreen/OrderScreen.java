@@ -277,6 +277,11 @@ public class OrderScreen implements EventHandler<ActionEvent>, Initializable, Mo
 
   }
 
+  @Override
+  public void openReceiverFunction() {
+    notification.openScanner();
+  }
+
   public ObservableList<MenuItem> getMenuItem() {
     ObservableList<MenuItem> menu = FXCollections.observableArrayList();
     menu.addAll(restaurant.getMenu().getMenuItems());

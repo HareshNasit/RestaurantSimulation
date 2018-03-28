@@ -210,6 +210,12 @@ public class ServingScreen implements Initializable, ModelControllerInterface {
         notification.pushNotification(message);
     }
 
+    @Override
+    public void openReceiverFunction() {
+        notification.openScanner();
+
+    }
+
     public ServingTable getServingTable() {
         return servingTable;
     }

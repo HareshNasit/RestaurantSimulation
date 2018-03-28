@@ -39,6 +39,7 @@ import java.util.Stack;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -50,6 +51,11 @@ public class Notification extends Pane {
 
 
   @FXML private Label labelNotification;
+  @FXML private Label labelPickUp;
+
+
+
+  @FXML private Button buttonPickUp;
   private Stack<String> notifications;
   private final int FADETIME = 3000;
   private final double OPACITYINITIAL = 1.0;
@@ -69,6 +75,9 @@ public class Notification extends Pane {
     try {
       fxmlLoader.load();
       labelNotification.setText("");
+      closeScanner();
+
+
     } catch (IOException exception) {
       throw new RuntimeException(exception);
     }
@@ -113,6 +122,20 @@ public class Notification extends Pane {
     notifications.push(message);
     labelNotification.setText(message);
 
+  }
+
+  public void openScanner(){
+    labelPickUp.setVisible(true);
+    buttonPickUp.setVisible(true);
+  }
+
+  public void closeScanner(){
+    labelPickUp.setVisible(false);
+    buttonPickUp.setVisible(false);
+  }
+
+  public Button getButtonPickUp() {
+    return buttonPickUp;
   }
 
 }

@@ -25,7 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ManagerScreenController implements Initializable, ModelControllerInterface {
+public class ManagerScreenController implements Initializable, ModelControllerInterface{
 
   private Manager manager;
   private Restaurant restaurant;
@@ -114,6 +114,18 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
   public void openNotification(String message) {
 
   }
+
+  @Override
+  public void openReceiverFunction() {
+
+  }
+
+  public void buttonStockAction(){
+    IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
+    worker.scanStock(restaurant.getInventory(), "meems", 123);
+
+  }
+
 
   /**
    * When the add button is clicked, a new ingredient is created as specified by the respective
