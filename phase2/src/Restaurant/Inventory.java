@@ -1,5 +1,6 @@
 package Restaurant;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -108,22 +109,28 @@ public class Inventory {
    */
   public void removeStock(String ingredient, int amount) {
     if (amount <= inventory.get(ingredient.trim()).getCurrentQuantity()) {
+      writeToRequest(ingredient, amount);
       inventory.get(ingredient.trim()).decreaseQuantity(amount);
 
-      if (inventory.get(ingredient.trim()).getCurrentQuantity()
-          < inventory.get(ingredient.trim()).getLowerThreshold()) {
 
-        String message =
-            System.lineSeparator()
-                + String.format(
-                    "%s is less than lower threshold: %d units",
-                    ingredient, inventory.get(ingredient.trim()).getLowerThreshold())
-                + System.lineSeparator()
-                + "manager has been notified, request.txt updated"
-                + System.lineSeparator();
-//        manager.notifyLowStock(message);
-        this.getLowIngredients();
       }
+    }
+
+  /**
+   * Checks if ingredients needs to be written to request.txt (i.e ingredient is less than lower threshold)
+   * @param ingredient ingredient to be checked
+   * @param amount amount subtracted from ingredient
+   */
+  private void writeToRequest(String ingredient, int amount){
+    InventoryIngredient ingredient1 = inventory.get(ingredient.trim());
+    if (ingredient1.getCurrentQuantity() - amount < ingredient1.getLowerThreshold()){
+      try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(REQUESTSFILE, true));
+        writer.write(ingredient1.getName() + ": " + ingredient1.getRestockQuantity());
+        writer.close();
+        manager.notifyLowStock("request.txt updated");
+      } catch (IOException e){}
+
     }
   }
 
