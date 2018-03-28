@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="10.0" prefHeight="331.0" prefWidth="293.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="BillScreen.BillScreenController">
+<GridPane alignment="CENTER" hgap="10.0" prefHeight="358.0" prefWidth="293.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="BillScreen.BillScreenController">
   <children>
-    <Pane prefHeight="358.0" prefWidth="292.9999000000025" GridPane.columnIndex="0" GridPane.rowIndex="0">
+    <Pane prefHeight="380.0" prefWidth="293.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
         <ComboBox fx:id="scrollMenu" layoutX="32.0" layoutY="31.0" prefHeight="41.0" prefWidth="229.0">
           <items>
@@ -26,6 +26,7 @@
           </font>
         </Button>
         <Button fx:id="receiptButton" font="$x1" layoutX="32.0" layoutY="93.0" mnemonicParsing="false" onAction="#createReceiptWindow" prefHeight="93.0" prefWidth="229.0" text="Generate Receipt" />
+        <Button layoutX="204.0" layoutY="310.0" mnemonicParsing="false" text="Back" />
       </children>
     </Pane>
   </children>
