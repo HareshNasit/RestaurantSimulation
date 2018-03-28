@@ -302,19 +302,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
 
   public void backButtonAction() {
-    try {
 
-      System.out.println("Loading Serving Table.....");
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-          "../TablesScreen/TablesScreen.fxml"));
-      Parent root1 = fxmlLoader.load();
-      TablesScreen controller = fxmlLoader.getController();
-      controller.setServer(getServer());
-      controller.setRestaurant(getRestaurant());
-      controller.updateScreen();
-      vBox.getChildren().setAll(root1);
-    } catch (IOException e) {
-    }
+      TablesScreen tablesScreen = new TablesScreen(server, restaurant);
+      vBox.getChildren().setAll(tablesScreen);
 
   }
 
