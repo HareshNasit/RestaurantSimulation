@@ -31,7 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import notification.Notification;
-import sun.tools.jconsole.Worker;
+// import sun.tools.jconsole.Worker;
 
 public class ManagerScreenController extends VBox implements ModelControllerInterface {
 
