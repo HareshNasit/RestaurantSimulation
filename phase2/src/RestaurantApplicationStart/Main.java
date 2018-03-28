@@ -21,72 +21,65 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public static final String MANAGER = "../ManagerScreen/ManagerScreen.fxml";
-    public static final String SERVER = "../TablesScreen/TablesScreen.fxml";
-    public static final String COOK = "../ServingTableScreen/ServingTableScreen.fxml";
+  public static final String MANAGER = "../ManagerScreen/ManagerScreen.fxml";
+  public static final String SERVER = "../TablesScreen/TablesScreen.fxml";
+  public static final String COOK = "../ServingTableScreen/ServingTableScreen.fxml";
 
 
   @Override
-    public void start(Stage primaryStage) throws Exception{
-        ServingTable servingTable = new ServingTable();
-        Menu menu = new Menu();
-        Inventory inventory = new Inventory();
-        inventory.readInventory();
-        Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
-        Manager manager = managerStart("Alfred", restaurant);
+  public void start(Stage primaryStage) throws Exception {
+    ServingTable servingTable = new ServingTable();
+    Menu menu = new Menu();
+    Inventory inventory = new Inventory();
+    inventory.readInventory();
+    Restaurant restaurant = new Restaurant(menu, inventory, servingTable);
+    Manager manager = managerStart("Alfred", restaurant);
 
-        serverStart("John", restaurant, manager);
+    serverStart("John", restaurant, manager);
 
-        cookStart("harsh", restaurant, manager);
-    }
+    cookStart("harsh", restaurant, manager);
+  }
 
 
-    private void serverStart(String name, Restaurant restaurant, Manager manager ){
-        try{Stage window = new Stage();
-            FXMLLoader loader = new  FXMLLoader(getClass().getResource(SERVER));
-            Parent root = loader.load();
-
-            TablesScreen controller = loader.getController();
-            Server server = new Server(name);
-            controller.setRestaurant(restaurant);
-            controller.setServer(server);
-            controller.updateScreen();
-            manager.addWorker(server);
-            restaurant.getServingTable().addServer(server);
-            window.initModality(Modality.WINDOW_MODAL);
-            window.setTitle("Server");
-            window.setScene(new Scene(root));
-            window.show();
-        } catch (IOException e){}
-
-    }
-
-    private Manager managerStart(String name, Restaurant restaurant){
-      Manager manager = new Manager(name);
-      try {
-
-        Stage window = new Stage();
-        FXMLLoader loader = new  FXMLLoader(getClass().getResource(MANAGER));
-        Parent root = loader.load();
-        ManagerScreenController controller = loader.getController();
-        controller.setManager(manager);
-        controller.setRestaurant(restaurant);
-        window.initModality(Modality.WINDOW_MODAL);
-        window.setTitle("Manager");
-        window.setScene(new Scene(root));
-        window.show();
-      } catch (IOException e){
-        e.printStackTrace();
-
-      }
-      return manager;
-
-    }
-
-  private void cookStart(String name, Restaurant restaurant, Manager manager){
+  private void serverStart(String name, Restaurant restaurant, Manager manager) {
     try {
       Stage window = new Stage();
-      FXMLLoader loader = new  FXMLLoader(getClass().getResource("../ServingTableScreen/ServingTableScreen.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(SERVER));
+      Parent root = loader.load();
+
+      TablesScreen controller = loader.getController();
+      Server server = new Server(name);
+      controller.setRestaurant(restaurant);
+      controller.setServer(server);
+      controller.updateScreen();
+      manager.addWorker(server);
+      restaurant.getServingTable().addServer(server);
+      window.initModality(Modality.WINDOW_MODAL);
+      window.setTitle("Server");
+      window.setScene(new Scene(root));
+      window.show();
+    } catch (IOException e) {
+    }
+
+  }
+
+  private Manager managerStart(String name, Restaurant restaurant) {
+    Manager manager = new Manager(name);
+    Stage window = new Stage();
+    ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
+    window.initModality(Modality.WINDOW_MODAL);
+    window.setTitle("Manager");
+    window.setScene(new Scene(controller));
+    window.show();
+    return manager;
+
+  }
+
+  private void cookStart(String name, Restaurant restaurant, Manager manager) {
+    try {
+      Stage window = new Stage();
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("../ServingTableScreen/ServingTableScreen.fxml"));
       Parent root = loader.load();
       Cook cook = new Cook(name);
       manager.addWorker(cook);
@@ -103,14 +96,14 @@ public class Main extends Application {
       window.setTitle("Serving Screen");
       window.setScene(new Scene(root));
       window.show();
-    } catch (IOException e){
+    } catch (IOException e) {
 
     }
 
   }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+  public static void main(String[] args) {
+    launch(args);
+  }
 }

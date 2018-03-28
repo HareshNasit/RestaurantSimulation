@@ -10,14 +10,18 @@ import Restaurant.ModelControllerInterface;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -26,7 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sun.tools.jconsole.Worker;
 
-public class ManagerScreenController implements Initializable, ModelControllerInterface{
+public class ManagerScreenController extends TabPane implements ModelControllerInterface{
 
   private Manager manager;
   private Restaurant restaurant;
@@ -49,9 +53,27 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
   @FXML private Tab tabInventory;
   @FXML private TableView tableInventory;
 
+  public ManagerScreenController(Manager manager, Restaurant restaurant) {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerScreen.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+    try {
+      fxmlLoader.load();
+      initialize();
+      this.manager = manager;
+      manager.setScreen(this);
+      this.restaurant = restaurant;
+      updateScreen();
+
+
+    } catch (IOException exception) {
+      throw new RuntimeException(exception);
+    }
+  }
+
+
+  public void initialize() {
     //Sets the columns of each table to their respective types
     columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
@@ -66,6 +88,7 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
     //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
 
     updateRequestText();
+
 
   }
 
@@ -218,10 +241,7 @@ public class ManagerScreenController implements Initializable, ModelControllerIn
   public void callWorker(){
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
     worker.sendNotification("Come to my office");
-
   }
-
-
 
   public Manager getManager() {
     return manager;
