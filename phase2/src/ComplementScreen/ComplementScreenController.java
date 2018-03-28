@@ -124,7 +124,6 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
       if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
         this.dish.addIngredient(selectedIngredient, 1);
       }
-      System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
     } else if ((event.getSource()) == subtract) {
       if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
         this.dish.subtractIngredient(selectedIngredient, 1);
@@ -172,7 +171,6 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
       row.setOnMouseClicked(event -> {
         if (!row.isEmpty()) {
           DishIngredient rowData = row.getItem();
-          System.out.println("Click on: " + rowData.getName());
           updateSelectedIngredient();
           updateButtonAddSubDisabled();
         }
