@@ -250,15 +250,20 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    */
   public void addOptionsToComboBox(Table table){
       this.table = table;
-      ArrayList<String> customerLabels = new ArrayList<>();
-      int tableSize = setTableOccupied();
-      table.setOccupied(tableSize);
-      for(int k = 1; k <= table.getTableSize(); k++){
+      try{
+        ArrayList<String> customerLabels = new ArrayList<>();
+        int tableSize = setTableOccupied();
+        table.setOccupied(tableSize);
+        for(int k = 1; k <= table.getTableSize(); k++){
           customerLabels.add("Customer " + k);
+        }
+        ObservableList<String> labels = FXCollections.observableArrayList();
+        labels.addAll(customerLabels);
+        customerNumberDropDown.setItems(labels);
       }
-      ObservableList<String> labels = FXCollections.observableArrayList();
-      labels.addAll(customerLabels);
-      customerNumberDropDown.setItems(labels);
+      catch(Exception e){
+        System.out.println("Enter the number of customers");
+      }
   }
 
   /**
@@ -276,24 +281,28 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   }
 
   public int setTableOccupied(){
-    Dialog dialog = new TextInputDialog();
-    dialog.setTitle("Table Dialog");
-    dialog.setHeaderText(
-            "Enter the number of people"
-                    + System.lineSeparator()
-                    + "Format: a whole number between 1 and 50"
-                    + System.lineSeparator()
-                    + "Example: 8");
-    Optional<String> result = dialog.showAndWait();
     String entered = "";
-
-    while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
-      result = dialog.showAndWait();
+    try{
+      Dialog dialog = new TextInputDialog();
+      dialog.setTitle("Table Dialog");
+      dialog.setHeaderText(
+              "Enter the number of people"
+                      + System.lineSeparator()
+                      + "Format: a whole number between 1 and 50"
+                      + System.lineSeparator()
+                      + "Example: 8");
+      Optional<String> result = dialog.showAndWait();
+      while (result.isPresent() && ((result.get()).equals("") || !validCustomerEntry(result.get()))) {
+        result = dialog.showAndWait();
+      }
+      if (result.isPresent()) {
+        entered = result.get();
+        table.setOccupied(Integer.parseInt(entered));
+        System.out.println(entered);
+      }
     }
-    if (result.isPresent()) {
-       entered = result.get();
-       table.setOccupied(Integer.parseInt(entered));
-       System.out.println(entered);
+    catch(Exception e){
+      System.out.println("Enter the number of people");
     }
     int numberOfPeople = Integer.parseInt(entered);
     return numberOfPeople;
