@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<fx:root fx:id="vBox" type="javafx.scene.layout.VBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="600.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="405.0" prefWidth="600.0">
          <tabs>
@@ -28,7 +27,7 @@
                                  <children>
                                     <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" onAction="#buttonStockAction" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
                                     <Button fx:id="buttonOffice" layoutX="71.0" layoutY="76.0" mnemonicParsing="false" onAction="#callWorker" prefHeight="27.0" prefWidth="148.0" text="Call To Office" />
-                                    <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" text="Send to Attend Table" />
+                                    <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" onAction="#testInventory" text="Send to Attend Table" />
                                  </children>
                               </Pane>
                            </children>
@@ -85,7 +84,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextArea fx:id="textFieldRequest" layoutX="15.0" layoutY="12.0" prefHeight="341.0" prefWidth="571.0" />
+                        <TextArea fx:id="textAreaRequest" layoutX="15.0" layoutY="12.0" prefHeight="341.0" prefWidth="571.0" />
                      </children>
                   </AnchorPane>
                </content>
