@@ -265,6 +265,10 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             tab1.getChildren().remove(cross);
             tab2.getChildren().remove(tick1);
             tab2.getChildren().remove(DishReadyButton);
+            Button back = new Button();
+            back.setLayoutX(400);
+            back.setLayoutY(3);
+            tab1.getChildren().add(back);
             servingTable.addServer((ServingTableListener) cook);
             ((Server) cook).setScreen(this);
         }
