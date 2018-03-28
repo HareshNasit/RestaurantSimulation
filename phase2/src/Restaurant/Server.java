@@ -53,6 +53,7 @@ public class Server implements IWorker, ServingTableListener {
             "%s serving Table%s%d order: %s",
             getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
+    dish.setDishStatus(DishStatus.SERVED);
   }
 
   /**
@@ -69,6 +70,7 @@ public class Server implements IWorker, ServingTableListener {
             "%s informs Table%s%d that %s has been rejected by kitchen",
             getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
+    dish.setDishStatus(DishStatus.REJECTED);
   }
 
   /**
@@ -88,6 +90,7 @@ public class Server implements IWorker, ServingTableListener {
             dish.getTableName(), dish.getCustomerNum(), dish.getName(), dish.getComment()));
     restaurant.getServingTable().addToBeCooked(dish);
     System.out.println(restaurant.getServingTable());
+    dish.setDishStatus(DishStatus.RETURNED);
   }
 
   /**
@@ -99,6 +102,7 @@ public class Server implements IWorker, ServingTableListener {
   public void addOrder(Table table, int customerNumber, MenuItem dish) {
     Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
     table.addSingleOrder(dish1);
+    dish1.setDishStatus(DishStatus.ORDERED);
   }
 
   /**
@@ -152,14 +156,9 @@ public class Server implements IWorker, ServingTableListener {
       screen.openNotification(message);
   }
 
-  /**
-   * Removes a dish from the given table.
-   *
-   * @param index of the dish in the list.
-   * @param table the given table from which dish is removed.
-   */
-  public void removeDish(int index, Table table) {
-    Dish dish = table.removeDish(index);
+
+  public void removeDish(Table table, Dish dish) {
+    table.removeDish(dish);
     System.out.println(
         String.format(
             "Cancelled %s from Table%s%d",

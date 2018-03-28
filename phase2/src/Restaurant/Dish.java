@@ -25,7 +25,7 @@ public class Dish extends MenuItem {
     this.tableName = tableName;
     this.customerNum = customerNum;
     this.comment = "";
-    this.dishStatus = DishStatus.ORDERED;
+    this.setDishStatus(DishStatus.ORDERED);
   }
 
   /**
@@ -176,5 +176,13 @@ public class Dish extends MenuItem {
   private static String doubleToCurrency(double number) {
     DecimalFormat decim = new DecimalFormat("0.00");
     return decim.format(number);
+  }
+
+  public DishStatus getDishStatus() {
+    return dishStatus;
+  }
+
+  public void setDishStatus(DishStatus dishStatus) {
+    this.dishStatus = dishStatus;
   }
 }

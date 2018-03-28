@@ -3,8 +3,9 @@ package ServingTableScreen;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
-
+import Restaurant.DishStatus;
 import Restaurant.ServingTableListener;
+import TablesScreen.TablesScreen;
 import java.io.IOException;
 import java.util.Stack;
 import javafx.collections.FXCollections;
@@ -55,6 +56,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     @FXML private AnchorPane tab2;
     @FXML private ImageView tick1;
     @FXML private Pane notificationArea;
+    @FXML private VBox vBox;
     private Notification notification;
 
 
@@ -155,7 +157,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
                     ButtonType.YES, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                if(dish.getComment().equals("Cook")) {
+                if(dish.getDishStatus().equals(DishStatus.ORDERED)) {
                     ((Cook) getCook()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
                         .getInventory());
                     setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
@@ -255,6 +257,10 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             tab2.getChildren().remove(tick1);
             tab2.getChildren().remove(DishReadyButton);
             Button back = new Button();
+            back.setOnAction(event -> {
+                TablesScreen tablesScreen = new TablesScreen((Server) cook, restaurant);
+                vBox.getChildren().setAll(tablesScreen);
+            });
             back.setLayoutX(400);
             back.setLayoutY(3);
             tab1.getChildren().add(back);

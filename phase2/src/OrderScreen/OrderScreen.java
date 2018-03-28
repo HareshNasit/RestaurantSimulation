@@ -219,8 +219,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder(){
-    MenuItem dish = (MenuItem) orderTableView.getSelectionModel().getSelectedItem();
-    table.removeDish((Dish) dish);
+    Dish dish = (Dish)  orderTableView.getSelectionModel().getSelectedItem();
+    server.removeDish(table, dish);
     updateScreen();
   }
 
@@ -313,19 +313,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
 
   public void backButtonAction() {
-    try {
 
-      System.out.println("Loading Serving Table.....");
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-          "../TablesScreen/TablesScreen.fxml"));
-      Parent root1 = fxmlLoader.load();
-      TablesScreen controller = fxmlLoader.getController();
-      controller.setServer(getServer());
-      controller.setRestaurant(getRestaurant());
-      controller.updateScreen();
-      vBox.getChildren().setAll(root1);
-    } catch (IOException e) {
-    }
+      TablesScreen tablesScreen = new TablesScreen(server, restaurant);
+      vBox.getChildren().setAll(tablesScreen);
 
   }
 

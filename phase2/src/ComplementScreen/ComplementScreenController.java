@@ -80,6 +80,9 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
 
   }
 
+  /**
+   * When the cancel button gets pressed, the server gets returned to the previous screen.
+   */
   public void acceptEvent() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
         ButtonType.YES, ButtonType.CANCEL);
@@ -89,12 +92,16 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     }
   }
 
+  /**
+   * When the cancel button gets pressed, the server gets returned to the previous screen, and all
+   * the ingredients gets set back to their base amounts.
+   */
   public void cancelEvent() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
         ButtonType.YES, ButtonType.CANCEL);
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES) {
-      if(this.dish != null) {
+      if (this.dish != null) {
         this.dish.setToBaseIngredients();
       }
       this.closeWindow(cancel);
@@ -105,28 +112,40 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     this.dishStatusLabel.setText(this.dish.toString());
   }
 
+  /**
+   * When the add or subtract button get pressed. The selected ingredient gets increased or
+   * decreased by 1.
+   *
+   * @param event mouse click.
+   */
   public void addAndSubtractEvent(ActionEvent event) {
 
     if ((event.getSource()) == addition) {
       if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
         this.dish.addIngredient(selectedIngredient, 1);
       }
-      System.out.println(dish.getIngredients().get(selectedIngredient).getAmount());
     } else if ((event.getSource()) == subtract) {
       if (this.dish.getIngredients().get(selectedIngredient).amountCanBeSubtracted(1)) {
         this.dish.subtractIngredient(selectedIngredient, 1);
       }
     }
-    System.out.println(this.dish);
     this.updateDishLabel();
   }
 
+
+  /**
+   * Updates the selected row ingredient.
+   */
   public void updateSelectedIngredient() {
     DishIngredient ingredient = (DishIngredient) getTableView().getSelectionModel()
         .getSelectedItem();
     this.selectedIngredient = ingredient.getName();
   }
 
+  /**
+   * Disables the add and subtract buttons respectively when you can no longer subtract from that
+   * ingredient (Whether it reached its lower bound or upper bound).
+   */
   public void updateButtonAddSubDisabled() {
     if (!this.selectedIngredient.equals("")) {
       if (this.dish.getIngredients().get(selectedIngredient).amountCanBeAdded(1)) {
@@ -142,25 +161,22 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     }
   }
 
+  /**
+   * When a row gets selected, the add and subtraction buttons get updated. The
+   * selectedDishIngredient also gets changed to the selected row ingredient.
+   */
   private void setRowAction() {
     getTableView().setRowFactory(tv -> {
       TableRow<DishIngredient> row = new TableRow<>();
       row.setOnMouseClicked(event -> {
         if (!row.isEmpty()) {
           DishIngredient rowData = row.getItem();
-          System.out.println("Click on: " + rowData.getName());
           updateSelectedIngredient();
           updateButtonAddSubDisabled();
         }
       });
       return row;
     });
-  }
-
-
-  public void closeWindow(Button button) {
-    Stage stage = (Stage) button.getScene().getWindow();
-    stage.close();
   }
 
 
@@ -174,19 +190,6 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     window.setScene(new Scene(root));
     window.show();
 
-  }
-
-  private TableColumn getAmountColumn() {
-    return amountColumn;
-  }
-
-
-  private TableColumn getIngredientColumn() {
-    return ingredientColumn;
-  }
-
-  private TableView getTableView() {
-    return tableView;
   }
 
 
@@ -205,12 +208,22 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
     return dishIngredients;
   }
 
+  /**
+   * Sets the dish for the complement controller.
+   *
+   * @param dish dish being set.
+   */
   public void setDish(Dish dish) {
     this.dish = dish;
     this.ingredients = dish.getIngredients();
   }
 
-  public void setSelectedIngredient(String ingredient) {
+  /**
+   * Sets the selectedIngredient
+   *
+   * @param ingredient ingredient that selectedIngredient is being changed to
+   */
+  private void setSelectedIngredient(String ingredient) {
     this.selectedIngredient = ingredient;
   }
 
@@ -223,7 +236,51 @@ public class ComplementScreenController implements EventHandler<ActionEvent>, In
 
   }
 
+
+  /**
+   * returns the priceColumn.
+   *
+   * @return priceColumn
+   */
   private TableColumn getPriceColumn() {
     return priceColumn;
+  }
+
+  /**
+   * returns the amountColumn.
+   *
+   * @return amountColumn
+   */
+  private TableColumn getAmountColumn() {
+    return amountColumn;
+  }
+
+
+  /**
+   * returns the ingredientColumn.
+   *
+   * @return ingredientColumn
+   */
+  private TableColumn getIngredientColumn() {
+    return ingredientColumn;
+  }
+
+  /**
+   * returns the tableView.
+   *
+   * @return tableView
+   */
+  private TableView getTableView() {
+    return tableView;
+  }
+
+  /**
+   * Closes the window
+   *
+   * @param button Button that's being used to close the scene.
+   */
+  private void closeWindow(Button button) {
+    Stage stage = (Stage) button.getScene().getWindow();
+    stage.close();
   }
 }

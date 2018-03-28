@@ -38,11 +38,5 @@ public enum DishStatus {
       return "Ordered";
     }
   },
-  NOTSENT {
-    @Override
-    public String toString() {
-      return "Not Sent";
-    }
-  };
 
 }
