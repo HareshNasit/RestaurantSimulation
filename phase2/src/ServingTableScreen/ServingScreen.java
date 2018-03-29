@@ -1,5 +1,6 @@
 package ServingTableScreen;
 
+import ComplementScreen.ComplementScreenController;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
@@ -317,7 +318,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   public void addIngredientsIfEnough() {
     try {
       Dish dish = (Dish) this.tab1Table.getSelectionModel().getSelectedItem();
-      HashMap<String, DishIngredient> dishIngredientsCopy = dish.cloneIngredients();
       if (dish != null) {
 
         Stage primaryStage = new Stage();
@@ -335,24 +335,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           controller.cancelEvent();
         });
         primaryStage.show();
-        
-        Cook cook = new Cook("jeff");
-        HashMap<String, DishIngredient> differences = dish
-            .getPosDifBetweenTwoIngredientsList(dishIngredientsCopy);
-        Dish newIngredients = dish.clone();
-        newIngredients.setIngredients(differences);
-        if (cook.canBePrepared(newIngredients, restaurant.getInventory())) {
-          for (String key : differences.keySet()) {
-            restaurant.getInventory().removeStock(key, differences.get(key).getAmount());
-          }
-        } else {
-          Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-              "Sorry, there is not enough ingredients in stock right now to fulfill this order.",
-              ButtonType.OK);
-          alert.showAndWait();
-          dish.setIngredients(controller.getIngredientsCopy());
-        }
-
 
       }
 
@@ -362,6 +344,27 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       System.out.println("Choose a dish to add compliments");
     }
 
+  }
+
+  public void firstThread(ComplementScreenController controller, Dish dish,
+      HashMap<String, DishIngredient> dishIngredientsCopy) {
+
+    Cook cook = new Cook("jeff");
+    HashMap<String, DishIngredient> differences = dish
+        .getPosDifBetweenTwoIngredientsList(dishIngredientsCopy);
+    Dish newIngredients = dish.clone();
+    newIngredients.setIngredients(differences);
+    if (cook.canBePrepared(newIngredients, restaurant.getInventory())) {
+      for (String key : differences.keySet()) {
+        restaurant.getInventory().removeStock(key, differences.get(key).getAmount());
+      }
+    } else {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+          "Sorry, there is not enough ingredients in stock right now to fulfill this order.",
+          ButtonType.OK);
+      alert.showAndWait();
+      dish.setIngredients(controller.getIngredientsCopy());
+    }
   }
 
   public Restaurant getRestaurant() {

@@ -52,7 +52,6 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   private HashMap<String, DishIngredient> ingredients;
   private HashMap<String, DishIngredient> ingredientsCopy;
   private String selectedIngredient;
-  private boolean done = false;
 
 
   /**
@@ -97,7 +96,6 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
         ButtonType.YES, ButtonType.CANCEL);
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES) {
-      this.done = true;
       this.closeWindow(accept);
     }
   }
@@ -114,7 +112,6 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
       if (this.dish != null) {
         dish.setIngredients(this.ingredientsCopy);
       }
-      this.done = true;
       this.closeWindow(cancel);
     }
   }
@@ -299,13 +296,10 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
    *
    * @param button Button that's being used to close the scene.
    */
-  private void closeWindow(Button button) {
+  protected void closeWindow(Button button) {
     Stage stage = (Stage) button.getScene().getWindow();
     stage.close();
   }
 
-  public boolean isDone() {
-    return this.done;
-  }
 
 }
