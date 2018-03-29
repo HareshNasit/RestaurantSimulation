@@ -65,10 +65,18 @@ public class Manager implements IWorker, Notifiable {
     inventory.writeToInventory();
   }
 
+  /**
+   * Starts the restaurant system for the day.
+   * @param restaurant The restaurant that is being started
+   */
   public void startSystem(Restaurant restaurant){
     restaurant.startSystem();
   }
 
+  /**
+   * Shuts down the restaurant system for the day.
+   * @param restaurant The restaurant that is being shut down
+   */
   public void shutDownSystem(Restaurant restaurant){
     restaurant.shutDownSystem();
   }
