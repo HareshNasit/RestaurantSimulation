@@ -91,6 +91,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   private TabPane tabsPane;
   @FXML
   private TableColumn columnDishStatus;
+  @FXML
+  private Button addExtra;
   private Notification notification;
 
 
@@ -203,7 +205,9 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
           setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
           setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
+            addExtra.setDisable(true);
         } else {
+            addExtra.setDisable(false);
           ((Cook) getCook()).acceptNoCook(dish, getRestaurant().getServingTable());
         }
       }
