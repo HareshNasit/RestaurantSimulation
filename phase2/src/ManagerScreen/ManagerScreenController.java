@@ -1,11 +1,13 @@
 package ManagerScreen;
 
+import Restaurant.DishStatus;
 import Restaurant.IWorker;
 import Restaurant.Inventory;
 import Restaurant.InventoryIngredient;
 import Restaurant.Manager;
 import Restaurant.Restaurant;
 import Restaurant.ModelControllerInterface;
+import Restaurant.Dish;
 
 
 import java.io.BufferedReader;
@@ -76,6 +78,13 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   private Pane paneNotification;
   @FXML
   private TabPane tabsPane;
+  @FXML TableColumn columnDishName;
+  @FXML TableColumn columnTime;
+  @FXML TableColumn columnDishTable;
+  @FXML TableColumn columnCustomerNum;
+  @FXML TableColumn columnDishStatus;
+  @FXML TableView tableViewDishes;
+
   Notification notification;
 
   public ManagerScreenController(Manager manager, Restaurant restaurant) {
@@ -105,14 +114,18 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
 
-    columnIngredient
-        .setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
-    columnAmount.setCellValueFactory(
-        new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
-    columnRestock.setCellValueFactory(
-        new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
-    columnThreshold.setCellValueFactory(
-        new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+    columnIngredient.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
+    columnAmount.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
+    columnRestock.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
+    columnThreshold.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+
+    columnDishName.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
+    columnDishStatus.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
+    columnDishTable.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
+    columnCustomerNum.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
+    //columnTime.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("lowerThreshold"));
+
+
 
     this.setIngredientTableRowAction();
     notification = new Notification();
@@ -131,6 +144,10 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   }
 
+  public void buttonTestAction(){
+    tableViewDishes.setItems(getDishData());
+  }
+
   /**
    * Generates an ObservableList of IWorkers
    *
@@ -140,6 +157,13 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     ObservableList<IWorker> workers = FXCollections.observableArrayList();
     workers.addAll(getManager().getWorkers());
     return workers;
+  }
+
+  private ObservableList<Dish> getDishData(){
+    ObservableList<Dish> dishes = FXCollections.observableArrayList();
+    dishes.addAll(restaurant.getServingTable().getUndeliveredDishes());
+    return dishes;
+
   }
 
   /**

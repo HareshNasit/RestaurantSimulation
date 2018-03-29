@@ -194,6 +194,14 @@ public class ServingTable {
     return finalString + System.lineSeparator();
   }
 
+  public ArrayList<Dish> getUndeliveredDishes(){
+    ArrayList<Dish> dishes = new ArrayList<Dish>();
+    dishes.addAll(dishesBeingCooked);
+    dishes.addAll(dishesToBeCooked);
+    dishes.addAll(dishesToBeServed);
+    return dishes;
+  }
+
   /**
    * Getter for Dishes to be cooked.
    *
