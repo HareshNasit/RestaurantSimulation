@@ -426,7 +426,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
-
     //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());

@@ -46,7 +46,7 @@ public class ServingTable {
     dishesToBeCooked.add(order);
     String message = String.format("Table%s%d's %s has been placed on serving table ",
         order.getTableName(), order.getCustomerNum(), order.getName());
-    notifyCooks(message);
+    notifyWorkers(cooks,message);
   }
 
   /**
@@ -79,7 +79,7 @@ public class ServingTable {
     dishesRejected.add(dish);
     String message = String.format("Table%s%d's %s has been rejected",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    notifyWorkers(servers,message);
   }
 
   /**
@@ -93,7 +93,7 @@ public class ServingTable {
     dishesToBeServed.add(dish);
     String message = String.format("Table%s%d's %s is ready to be served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    notifyWorkers(servers,message);
     System.out.println(this);
   }
 
@@ -106,7 +106,8 @@ public class ServingTable {
     dishesBeingCooked.add(dish);
     String message = String.format("Table%s%d's %s is now cooking",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    dish.setDishStatus(DishStatus.COOKING);
+    notifyWorkers(servers, message);
   }
 
   /**
@@ -120,7 +121,8 @@ public class ServingTable {
     String message = String.format(String.format(
         "Table%s%d's %s has been served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-    notifyCooks(message);
+    notifyWorkers(cooks,message);
+    updateWorkers(servers);
     return dish;
   }
 
@@ -151,6 +153,18 @@ public class ServingTable {
     System.out.println(message);
     for (Notifiable server : servers) {
       server.sendNotifications(message);
+    }
+  }
+
+  private void notifyWorkers(ArrayList<Notifiable> type, String message){
+    for (Notifiable worker : type) {
+      worker.sendNotifications(message);
+    }
+  }
+
+  private void updateWorkers(ArrayList<Notifiable> type){
+    for (Notifiable worker : type) {
+      worker.update();
     }
   }
 

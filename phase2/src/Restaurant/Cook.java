@@ -87,7 +87,6 @@ public class Cook implements IWorker, Notifiable {
   public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
     prepareDish(dish, inventory);
     servingTable.addToBeCooking(dish);
-    dish.setDishStatus(DishStatus.COOKING);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
