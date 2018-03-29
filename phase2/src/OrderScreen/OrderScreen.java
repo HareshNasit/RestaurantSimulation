@@ -35,6 +35,11 @@ import notification.Notification;
 
 public class OrderScreen extends VBox implements ModelControllerInterface {
 
+  private Server server;
+  private Table table;
+  private Restaurant restaurant;
+  private Notification notification;
+
   @FXML
   private Button buttonSend;
   @FXML
@@ -45,9 +50,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private TableColumn customerNumberColumn;
   @FXML
   private Button addComplimentsButton;
-  private Server server;
-  private Table table;
-  private Restaurant restaurant;
   @FXML
   private Label tableOrderTitle;
   @FXML
@@ -70,7 +72,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private TableColumn menuIngredientsColumn;
   @FXML
   private Button openBillScreen;
-
   @FXML
   private TableColumn commentColumn;
   @FXML
@@ -83,18 +84,10 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private Button addCommentButton;
   @FXML
   private Pane paneBox;
-
-  private double menuSelectedDishId;
-  private String menuSelectedDishName;
-  private int menuSelectedDishCustomerNum;
-  private ArrayList<Dish> dishes;
-
-  private Notification notification;
   @FXML
   private Pane notificationArea;
   @FXML
   private VBox vBox;
-
   @FXML
   private Button buttonReturn;
   @FXML
@@ -529,9 +522,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     restaurant.restaurantLogger.logOrderMessage(order);
     updateScreen();
   }
-
-  //-----------------------GETTERS AND SETTERS BELOW---------------------------
-
+  
   public Server getServer() {
     return server;
   }
@@ -556,16 +547,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
-
-  public ArrayList<Dish> getDishes() {
-    return dishes;
-  }
-
-  public void setDishes(ArrayList<Dish> dishes) {
-    this.dishes = dishes;
-    getOrderTableView().setItems(getOrderDish());
-  }
-
 
   public TableView<Dish> getOrderTableView() {
     return orderTableView;
