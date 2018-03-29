@@ -6,185 +6,195 @@ import MenuDishes.MenuItem;
 /** Server class records orders taken from customers and relays them to the chef. */
 public class Server implements IWorker, Notifiable {
 
-  private String name; // name of a server
-  private ModelControllerInterface screen;
-  private WorkerType type = WorkerType.SERVER;
+    private String name; // name of a server
+    private ModelControllerInterface screen; // This server's screen.
+    private WorkerType type = WorkerType.SERVER; // The Type of this worker.
 
 
-  /**
-   * Creates a new server for this restaurant
-   *
-   * @param name The name of the server
-   */
-  public Server(String name) {
-    this.name = name;
-  }
-
-  /**
-   * return name of the server.
-   *
-   * @return String
-   */
-  public String getName() {
-    return name;
-  }
-
-  @Override
-  public WorkerType getType() {
-    return type;
-  }
-
-  /**
-   * The server takes the order from a table and adds it to the list of orders to be cooked.
-   *
-   * @param table the table that places the order
-   */
-  public void passOrder(Table table, ServingTable servingTable) {
-    System.out.println(String.format("%s sending Table %s's orders to cooks", getName(), table.getTableID()));
-    for(Dish dish: table.getTableOrder()){
-      if(dish.getDishStatus() == DishStatus.ORDERED ) {
-        servingTable.addToBeCooked(dish);
-        dish.setDishStatus(DishStatus.SENT);
-      } else if (dish.getDishStatus() == DishStatus.RETURNED) {
-        servingTable.addToBeCooked(dish);
-      }
+    /**
+     * Creates a new server for this restaurant
+     *
+     * @param name The name of the server
+     */
+    public Server(String name) {
+        this.name = name;
     }
-    System.out.println(servingTable);
-  }
 
-  /**
-   * Serves a dish to the customer.
-   *
-   * @param dish the dish.
-   * @param restaurant the restaurant.
-   */
-  public void serveDish(Dish dish, Restaurant restaurant) {
-      restaurant.getServingTable().serveDish(dish);
-      dish.setDishStatus(DishStatus.SERVED);
-      screen.updateScreen();
-    System.out.println(
-        String.format(
-            "%s serving Table%s%d order: %s",
-            getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-    System.out.println(restaurant.getServingTable());
+    /**
+     * return name of the server.
+     *
+     * @return String
+     */
+    public String getName() {
+        return name;
+    }
 
-  }
+    @Override
+    public WorkerType getType() {
+        return type;
+    }
 
-  /**
-   * The server informs the customer that a particular dish has been rejected.
-   *
-   * @param index index of the dish.
-   * @param restaurant the restaurant.
-   */
-  public void rejectDish(int index, Restaurant restaurant) {
-    Dish dish = restaurant.getServingTable().getRejectedDish(index);
-    restaurant.getTable(dish.getTableName()).removeDish(dish);
-    System.out.println(
-        String.format(
-            "%s informs Table%s%d that %s has been rejected by kitchen",
-            getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-    System.out.println(restaurant.getServingTable());
-    dish.setDishStatus(DishStatus.REJECTED);
-  }
+    /**
+     * The server takes the order from a table and adds it to the list of orders to be cooked.
+     *
+     * @param table the table that places the order
+     */
+    public void passOrder(Table table, ServingTable servingTable) {
+        for(Dish dish: table.getTableOrder()){
+            if(dish.getDishStatus() == DishStatus.ORDERED ) {
+                servingTable.addToBeCooked(dish);
+                dish.setDishStatus(DishStatus.SENT);
+            } else if (dish.getDishStatus() == DishStatus.RETURNED) {
+                servingTable.addToBeCooked(dish);
+            }
+        }
+    }
 
-  /**
-   * The customer returns a dish for a particular reason.
-   *
-   * @param restaurant the restaurant.
-   * @param index the index of the dish.
-   * @param comment the reason the customer returned the dish.
-   * @param tableID the table id.
-   */
-  public void returnDish(int index, String tableID, Restaurant restaurant, String comment) {
-    Dish dish = restaurant.getTable(tableID).getDish(index);
-    dish.addComment(comment);
-    System.out.println(
-        String.format(
-            "Table%s%d %s returned for %s",
-            dish.getTableName(), dish.getCustomerNum(), dish.getName(), dish.getComment()));
-    restaurant.getServingTable().addToBeCooked(dish);
-    System.out.println(restaurant.getServingTable());
-    dish.setDishStatus(DishStatus.RETURNED);
-  }
+    /**
+     * Serves a dish to the customer.
+     *
+     * @param dish the dish.
+     * @param restaurant the restaurant.
+     */
+    public void serveDish(Dish dish, Restaurant restaurant) {
+        restaurant.getServingTable().serveDish(dish);
+        dish.setDishStatus(DishStatus.SERVED);
+        screen.updateScreen();
+    }
 
-  /**
-   * Adds a dish to a table's Order.
-   *
-   * @param table table to which dish will be added.
-   * @param dish dish to be added to the tables order.
-   */
-  public void addOrder(Table table, int customerNumber, MenuItem dish) {
-    Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
-    table.addSingleOrder(dish1);
-    dish1.setDishStatus(DishStatus.ORDERED);
-  }
+    /**
+     * The server informs the customer that a particular dish has been rejected.
+     *
+     * @param index index of the dish.
+     * @param restaurant the restaurant.
+     */
+    public void rejectDish(int index, Restaurant restaurant) {
+        Dish dish = restaurant.getServingTable().getRejectedDish(index);
+        restaurant.getTable(dish.getTableName()).removeDish(dish);
+        dish.setDishStatus(DishStatus.REJECTED);
+    }
 
+    /**
+     * The customer returns a dish for a particular reason.
+     *
+     * @param restaurant the restaurant.
+     * @param index the index of the dish.
+     * @param comment the reason the customer returned the dish.
+     * @param tableID the table id.
+     */
+    public void returnDish(int index, String tableID, Restaurant restaurant, String comment) {
+        Dish dish = restaurant.getTable(tableID).getDish(index);
+        dish.addComment(comment);
+        restaurant.getServingTable().addToBeCooked(dish);
+        dish.setDishStatus(DishStatus.RETURNED);
+    }
 
-  public void seatCustomer(Table table, int numberOfCustomers) {
-    table.setOccupied(numberOfCustomers);
+    /**
+     * Adds a dish to a table's Order.
+     *
+     * @param table table to which dish will be added.
+     * @param dish dish to be added to the tables order.
+     */
+    public void addOrder(Table table, int customerNumber, MenuItem dish) {
+        Dish dish1 = new Dish(dish, table.getTableID(), customerNumber);
+        table.addSingleOrder(dish1);
+        dish1.setDishStatus(DishStatus.ORDERED);
+    }
 
-
-  }
-
-  /**
-   * Generates a bill one table.
-   *
-   * @param table The table that asked for the bill
-   */
-  public void generateTableBill(Table table) {
-    Bill.outputBill(table);
-  }
-
-  /**
-   * Generates a bill for the table customer.
-   *
-   * @param table The table that asked for the bill
-   */
-  public void generateSingleBill(Table table, int seatNum) {
-    Bill.outputSingleBill(table, seatNum);
-  }
-
-  public void clearTable(Table table) {
-    System.out.println(String.format("Table %s is now free", table.getTableID()));
-    table.clearTable();
-  }
-
-  /** When new stock has been received, updateScreen the stock. */
-  @Override
-  public void scanStock(Inventory inventory, String ingredient, int amount) {
-    screen.openReceiverFunction(inventory, ingredient,amount);
-  }
-
-  @Override
-  public void sendNotification(String message) {
-    screen.openNotification(message);
-  }
-
-  @Override
-  public void sendNotifications(String message) {
-      screen.updateScreen();
-      screen.openNotification(message);
-  }
-
-  @Override
-  public void update() {
-    screen.updateScreen();
-  }
+    /**
+     * Occupies the table.
+     *
+     * @param table the table which is to be occupied.
+     * @param numberOfCustomers The number of customers.
+     */
+    public void seatCustomer(Table table, int numberOfCustomers) {
+        table.setOccupied(numberOfCustomers);
 
 
-  public void removeDish(Table table, Dish dish) {
-    table.removeDish(dish);
-    System.out.println(
-        String.format(
-            "Cancelled %s from Table%s%d",
-            dish.getName(), dish.getTableName(), dish.getCustomerNum()));
-  }
+    }
 
-  public ModelControllerInterface getScreen() {
-    return screen;
-  }
+    /**
+     * Generates a bill one table.
+     *
+     * @param table The table that asked for the bill
+     */
+    public void generateTableBill(Table table) {
+        Bill.outputBill(table);
+    }
 
-  public void setScreen(ModelControllerInterface screen) {
-    this.screen = screen;
-  }
+    /**
+     * Generates a bill for the table customer.
+     *
+     * @param table The table that asked for the bill
+     */
+    public void generateSingleBill(Table table, int seatNum) {
+        Bill.outputSingleBill(table, seatNum);
+    }
+
+    /**
+     * Clear the table and set it to be unoccupied.
+     *
+     * @param table The table to be cleared.
+     */
+    public void clearTable(Table table) {
+        table.clearTable();
+    }
+
+    /** When new stock has been received, updateScreen the stock.
+     * @param amount the amount of the ingredient received.
+     * @param ingredient The ingredient received
+     * @param inventory the inventory
+     *
+     */
+    @Override
+    public void scanStock(Inventory inventory, String ingredient, int amount) {
+        screen.openReceiverFunction(inventory, ingredient,amount);
+    }
+    /** Send a notification to the cook.
+     * @param message The message to be sent.
+     *
+     */
+    @Override
+    public void sendNotification(String message) {
+        screen.openNotification(message);
+    }
+
+    /** Send notifications
+     * @param message The message to be sent.
+     *
+     */
+    @Override
+    public void sendNotifications(String message) {
+        screen.updateScreen();
+        screen.openNotification(message);
+    }
+    /** Update the screen.
+     */
+    @Override
+    public void update() {
+        screen.updateScreen();
+    }
+
+    /** Cancel a dish from a particular table.
+     * @param table The table from which a dish is to be cancelled.
+     * @param dish The dish to be cancelled.
+     *
+     */
+    public void removeDish(Table table, Dish dish) {
+        table.removeDish(dish);
+    }
+    /** Getter for the screen
+     * @return the screen to be returned.
+     *
+     */
+    public ModelControllerInterface getScreen() {
+        return screen;
+    }
+    /** Setter for the screen.
+     * @param screen The screen to be set.
+     *
+     */
+    public void setScreen(ModelControllerInterface screen) {
+        this.screen = screen;
+    }
 }

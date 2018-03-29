@@ -80,7 +80,6 @@ public class ServingTable {
    * @param dish to be rejected
    */
   public void rejectDish(Dish dish) {
-    // Dish dish = dishesToBeCooked.remove(index);
     dishesToBeCooked.remove(dish);
     dishesRejected.add(dish);
     String message = String.format("Table%s%d's %s has been rejected",
@@ -94,13 +93,11 @@ public class ServingTable {
    * @param dish which is ready to be served
    */
   public void addToBeServed(Dish dish) {
-    // Dish dish = dishesBeingCooked.remove(index);
     dishesBeingCooked.remove(dish);
     dishesToBeServed.add(dish);
     String message = String.format("Table%s%d's %s is ready to be served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
     notifyWorkers(servers,message);
-    System.out.println(this);
   }
 
   /**

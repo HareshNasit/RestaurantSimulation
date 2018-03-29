@@ -76,24 +76,24 @@ public class Restaurant {
     this.servers = new ArrayList<Notifiable>();
     this.cooks = new ArrayList<Notifiable>();
     this.workers = new ArrayList<IWorker>();
-    isActive = false;
+    setActive(false);
     startSystem();
   }
-
+    /** Start the Restaurant system.
+     */
   public void startSystem(){
-    isActive = true;
+    setActive(true);
     generateTables(TABLEFILE);
     createNewReceiptFile();
     createNewLogFile();
   }
-
+    /** Shutdown the Restaurant system.
+     */
   public void shutDownSystem(){
-    isActive = false;
+    setActive(false);
     inventory.writeToInventory();
     System.exit(0);
   }
-
-
   /**
    * Returns the table with the given id.
    *
@@ -156,50 +156,6 @@ public class Restaurant {
     }
   }
 
-//  /**
-//   * Generates workers by taking input from a .txt file
-//   *
-//   * @param fileName the file that has the info of the workers
-//   * @param servingTable the serving table that they belong to
-//   */
-//  private void generateWorkers(String fileName, ServingTable servingTable) {
-//    this.workers = new ArrayList<>();
-//    this.servers = new HashMap<>();
-//    this.cooks = new HashMap<>();
-//    try {
-//      Scanner line = new Scanner(new File(fileName));
-//      while (line.hasNextLine()) {
-//
-//        String tableLine = line.nextLine();
-//        String[] splitString = tableLine.split("\\|");
-//
-//        if (splitString[0].equals("Server")) {
-//
-//          Server server = new Server(splitString[1].trim());
-//          servingTable.addServer(server);
-//          this.workers.add(server);
-//          this.servers.put(server.getName(), server);
-//
-//        } else if (splitString[0].equals("Manager")) {
-//          Manager manager = new Manager(splitString[1]);
-//          this.workers.add(manager);
-//          inventory.setManager(manager);
-//          this.manager = manager;
-//
-//        } else if (splitString[0].equals("Cook")) {
-//
-//          Cook cook = new Cook(splitString[1]);
-//          servingTable.addCook(cook);
-//          this.workers.add(cook);
-//          this.cooks.put(cook.getName(), cook);
-//        }
-//      }
-//      line.close();
-//    } catch (FileNotFoundException e) {
-//      e.printStackTrace();
-//    }
-//  }
-
   /**
    * Returns Manager with the given name.
    *
@@ -249,5 +205,13 @@ public class Restaurant {
 
   public void setWorkers(ArrayList<IWorker> workers) {
     this.workers = workers;
+  }
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive(boolean active) {
+    isActive = active;
   }
 }

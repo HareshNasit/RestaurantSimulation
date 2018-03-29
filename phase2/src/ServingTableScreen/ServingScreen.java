@@ -177,7 +177,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         checkLabel.setText("Can be Prepared");
         checkLabel.setTextFill(Paint.valueOf("Green"));
       } else {
-        // checkLabel.setText("OOPS NOT ENOUGH INGREDIENTS");
         checkLabel.setText(getRestaurant().getInventory().getLowIngredientStrings(dish));
         checkLabel.setTextFill(Paint.valueOf("Red"));
       }
@@ -248,7 +247,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   public void dishReadyToBeServed() {
     try {
       Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you?",
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure?",
           ButtonType.YES, ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {

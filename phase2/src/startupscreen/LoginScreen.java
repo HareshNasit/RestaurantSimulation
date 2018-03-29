@@ -1,5 +1,13 @@
 package startupscreen;
 
+import ManagerScreen.ManagerScreenController;
+import Restaurant.Restaurant;
+import Restaurant.Manager;
+import Restaurant.Cook;
+import Restaurant.Server;
+
+import ServingTableScreen.ServingScreen;
+import TablesScreen.TablesScreen;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -22,7 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class LoginScreen implements Initializable{
+public class LoginScreen extends AnchorPane{
 
     public PasswordField password;
     public TextField userName;
@@ -31,10 +40,23 @@ public class LoginScreen implements Initializable{
     public AnchorPane workerLoginScreenAnchorPane;
     private boolean systemOn = false;
     private final String WORKERS = "workers.txt";
+    private Restaurant restaurant;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {}
-    public void checkWorkerLogin(ActionEvent actionEvent) {
+    public LoginScreen(Restaurant restaurant){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginScreen.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+            this.restaurant = restaurant;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+
+    public void checkWorkerLogin() {
         try (BufferedReader fileReader = new BufferedReader(new FileReader(WORKERS))) {
             String line = fileReader.readLine();
             ArrayList workers = new ArrayList();
@@ -51,20 +73,37 @@ public class LoginScreen implements Initializable{
                     if (((String[])details)[0].equals("Manager")) {
                         canLogin.setText("Logged in");
                         canLogin.setTextFill(Paint.valueOf("Green"));
-                        systemOn = true;
+
+                        Manager manager = new Manager(userName.getText());
+                        Stage window = new Stage();
+                        ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
+                        restaurant.getInventory().setManager(manager);
+                        window.initModality(Modality.WINDOW_MODAL);
+                        window.setTitle("Manager");
+                        window.setScene(new Scene(controller));
+                        window.show();
+
+                    } else if (restaurant.isActive() && ((String[])details)[0].equals("Server")) {
+                        Stage window = new Stage();
+                        Server server = new Server(userName.getText());
+                        restaurant.addServer(server);
+                        TablesScreen screen = new TablesScreen(server, restaurant);
+                        window.initModality(Modality.WINDOW_MODAL);
+                        window.setTitle("Server");
+                        window.setScene(new Scene(screen));
+                        window.show();
                         break;
-                    } else if (systemOn) {
-                        canLogin.setText("Logged in");
-                        canLogin.setTextFill(Paint.valueOf("Green"));
-                        break;
-                    } else if (!systemOn) {
-                        canLogin.setText("Sorry system off");
-                        canLogin.setTextFill(Paint.valueOf("Red"));
-                        break;
-                    }
-                }
-                else{
-                    canLogin.setText("Sorry wrong username or pass");
+                    }else if (restaurant.isActive() && ((String[])details)[0].equals("Cook")){}
+                        Stage window = new Stage();
+                        Cook cook = new Cook(userName.getText());
+                        restaurant.addCook(cook);
+                        ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
+                        window.initModality(Modality.WINDOW_MODAL);
+                        window.setTitle("Serving Screen");
+                        window.setScene(new Scene(screen));
+                        window.show();
+                    } else{
+                    canLogin.setText("Sorry wrong username or pass or system off");
                     canLogin.setTextFill(Paint.valueOf("Red"));
                 }
             }

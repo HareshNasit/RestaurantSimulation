@@ -354,7 +354,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
         entered = result.get();
         table.setOccupied(Integer.parseInt(entered));
         restaurant.notifyWorker(WorkerType.SERVER,String.format("Table %s has been seated", table.getTableID()));
-        System.out.println(entered);
       }
     } catch (Exception e) {
       System.out.println("Enter the number of people occupying the table");
@@ -469,7 +468,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void setServer(Server server) {
     this.server = server;
     server.setScreen(this);
-    System.out.println("New Screen has been changed");
   }
 
   public Table getTable() {
