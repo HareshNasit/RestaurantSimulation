@@ -151,7 +151,7 @@ public class MenuItem {
       HashMap<String, DishIngredient> compIngredients) {
     HashMap<String, DishIngredient> differences = new HashMap<>();
     for (String key : compIngredients.keySet()) {
-      int dif = compIngredients.get(key).getAmount() - this.ingredients.get(key).getAmount();
+      int dif = this.ingredients.get(key).getAmount() - compIngredients.get(key).getAmount();
       DishIngredient dishIngredientCopy = compIngredients.get(key).clone();
       if (dif > 0) {
         dishIngredientCopy.setAmount(dif);
