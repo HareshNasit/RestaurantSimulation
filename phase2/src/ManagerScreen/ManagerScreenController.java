@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -73,6 +74,8 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   private TableView tableInventory;
   @FXML
   private Pane paneNotification;
+  @FXML
+  private TabPane tabsPane;
   Notification notification;
 
   public ManagerScreenController(Manager manager, Restaurant restaurant) {
@@ -83,6 +86,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     try {
       fxmlLoader.load();
       initialize();
+
       this.manager = manager;
       manager.setScreen(this);
       this.restaurant = restaurant;
@@ -96,6 +100,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
 
   public void initialize() {
+    tabsPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
     //Sets the columns of each table to their respective types
     columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
@@ -281,9 +286,9 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     manager.startSystem(restaurant);
   }
 
-  public void shutDownSystem(){}
-
-
+  public void shutDownSystem(){
+    manager.shutDownSystem(restaurant);
+  }
 
   public void callWorker() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();

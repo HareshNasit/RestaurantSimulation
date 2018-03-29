@@ -8,7 +8,7 @@
 
 <fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="600.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane prefHeight="405.0" prefWidth="600.0">
+      <TabPane fx:id="tabsPane" prefHeight="405.0" prefWidth="600.0">
          <tabs>
             <Tab fx:id="workersTab" text="Workers">
                <content>
