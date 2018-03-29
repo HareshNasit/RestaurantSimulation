@@ -41,7 +41,7 @@ public enum DishStatus {
   SENT {
     @Override
     public String toString() {
-      return "Ordered";
+      return "Sent";
     }
   },
 

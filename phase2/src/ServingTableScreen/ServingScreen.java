@@ -1,6 +1,7 @@
 package ServingTableScreen;
 
 import ComplementScreen.ComplementScreenController;
+import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
@@ -10,13 +11,11 @@ import Restaurant.ServingTableListener;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Stack;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -31,9 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import Restaurant.ModelControllerInterface;
 import Restaurant.IWorker;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.stage.Stage;
 import notification.Notification;
 
@@ -90,6 +87,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   private AnchorPane tab3;
   @FXML
   private TabPane tabsPane;
+  @FXML
+  private TableColumn columnDishStatus;
   private Notification notification;
 
 
@@ -148,6 +147,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
 
+    columnDishStatus.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
+
     notification = new Notification();
     notificationArea.getChildren().setAll(notification);
 
@@ -184,6 +185,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   }
 
   public void acceptDish(ActionEvent actionEvent) {
+      // TODO: 2018-03-29 check when dish is returned. 
 
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
@@ -254,8 +256,9 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   }
 
   @Override
-  public void openReceiverFunction() {
+  public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
     notification.openScanner();
+    notification.getButtonPickUp().setOnAction(event -> inventory.addStock(ingredient, amount));
 
   }
 

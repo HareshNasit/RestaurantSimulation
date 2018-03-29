@@ -14,8 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -32,6 +35,8 @@ public class LoginScreen implements Initializable{
     public AnchorPane loginScreenAnchorPane;
     public Button loginBtn;
     public AnchorPane workerLoginScreenAnchorPane;
+    private boolean systemOn = false;
+    private final String WORKERS = "workers.txt";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -90,13 +95,48 @@ public class LoginScreen implements Initializable{
     }
 
     public void checkWorkerLogin(ActionEvent actionEvent) {
-        if(userName.getText().equals("harsh") && password.getText().equals("Messi>Ronaldo")){
-            canLogin.setText("Login successful");
-            canLogin.setTextFill(Paint.valueOf("Green"));
-        }
-        else{
-            canLogin.setText("Sorry, login unsuccessful");
-            canLogin.setTextFill(Paint.valueOf("Red"));
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(WORKERS))) {
+            String line = fileReader.readLine();
+            while (line != null) {
+                String[] details = line.split("\\|");
+                if((details[1].equals(userName.getText())) && (details[2].equals(password.getText()))) {
+                    System.out.println("Yallaa it workssss");
+
+                    if (details[0].equals("Manager")) {
+                        canLogin.setText("Logged in");
+                        canLogin.setTextFill(Paint.valueOf("Green"));
+                        systemOn = true;
+                    } else if (systemOn) {
+                        canLogin.setText("Logged in");
+                        canLogin.setTextFill(Paint.valueOf("Green"));
+                    } else if (!systemOn) {
+                        canLogin.setText("Sorry system off");
+                        canLogin.setTextFill(Paint.valueOf("Red"));
+                    }
+                }
+                line = fileReader.readLine();
+            }
+        } catch (java.io.FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            "'");
+        } catch (IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + "'");
         }
     }
+        public boolean checkUserIds(String username, String password, String[] details){
+            if((details[1].equals(username)) && (details[2].equals(password))){
+                canLogin.setText("Logged in");
+                canLogin.setTextFill(Paint.valueOf("Green"));
+                systemOn = true;
+                System.out.println("Yallaa it workssss");
+                return true;
+            }
+            else {
+                System.out.println("FAILLLLLLL");
+                return false;
+            }
+        }
 }

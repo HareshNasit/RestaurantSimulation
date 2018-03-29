@@ -1,5 +1,5 @@
-Manager|Adam
-Cook|Harsh
-Server|Akarsh
-Cook|John
-Server|Yosef
+Manager|Adam|adamnnotgiven
+Cook|Harsh|harshn12
+Server|Akarsh|akarshana
+Cook|John|johncena
+Server|Yosef|yawsef
