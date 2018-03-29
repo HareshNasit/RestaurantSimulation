@@ -48,7 +48,7 @@ public class Cook implements IWorker, ServingTableListener {
    * the manager.
    */
   public void scanStock(Inventory inventory, String ingredient, int amount) {
-    screen.openReceiverFunction();
+    screen.openReceiverFunction(inventory, ingredient,amount );
   }
 
   @Override
@@ -117,6 +117,7 @@ public class Cook implements IWorker, ServingTableListener {
     // Dish dish = servingTable.getDishToBeCooked(index);
     // servingTable.rejectDish(index);
       servingTable.rejectDish(dish);
+      dish.setDishStatus(DishStatus.REJECTED);
     System.out.println(
         String.format(
             "%s has rejected to cook Table%s%d %s",

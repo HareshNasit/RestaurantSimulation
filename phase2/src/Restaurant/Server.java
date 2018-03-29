@@ -147,7 +147,7 @@ public class Server implements IWorker, ServingTableListener {
   /** When new stock has been received, updateScreen the stock. */
   @Override
   public void scanStock(Inventory inventory, String ingredient, int amount) {
-    screen.openReceiverFunction();
+    screen.openReceiverFunction(inventory, ingredient,amount);
   }
 
   @Override

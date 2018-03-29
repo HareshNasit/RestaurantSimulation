@@ -1,34 +1,32 @@
 package OrderScreen;
 
 import BillScreen.BillScreenController;
-import ComplementScreen.ComplementScreenController;
 import Restaurant.Dish;
+import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
+import Restaurant.DishStatus;
 import TablesScreen.TablesScreen;
+
 // import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import notification.Notification;
@@ -260,8 +258,23 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder() {
+    //TODO: Open A Dialog that asks the server if he wants to remove the dish.
+
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
-    server.removeDish(table, dish);
+
+    String message = "";
+
+    if (dish.getDishStatus() == DishStatus.REJECTED || dish.getDishStatus() == DishStatus.ORDERED ||
+        dish.getDishStatus() == DishStatus.SENT ){
+      server.removeDish(table, dish);
+    } else {
+      message = String.format("Dish is %s. Are you sure you want to remove it?", dish.getDishStatus());
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES, ButtonType.CANCEL);
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES) {
+        server.removeDish(table, dish);
+      }}
+
     updateScreen();
   }
 
@@ -427,8 +440,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   }
 
   @Override
-  public void openReceiverFunction() {
+  public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
     notification.openScanner();
+    notification.getButtonPickUp().setOnAction(event -> inventory.addStock(ingredient, amount));
   }
 
   public ObservableList<MenuItem> getMenuItem() {
