@@ -29,3 +29,4 @@ bell pepper(green)#100#70#30
 bun#148#150#50
 tortilla wraps#100#80#20
 chocolate#52#50#50
+anchovies#0#40#40
