@@ -41,7 +41,7 @@
                     </ImageView>
                   </graphic>
                 </Button>
-                <Label fx:id="checkLabel" layoutX="347.0" layoutY="110.0" prefHeight="96.0" prefWidth="217.0" />
+                <Label fx:id="checkLabel" layoutX="450.0" layoutY="270.0" prefHeight="95.0" prefWidth="146.0" />
                 <Button layoutX="490.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#addIngredientsIfEnough" text="Add Extra" />
               </children>
             </AnchorPane>
@@ -58,12 +58,14 @@
                     <TableColumn fx:id="tab2Comment" prefWidth="96.0" text="Comment" />
                   </columns>
                 </TableView>
-                <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready" />
-                <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" layoutX="489.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                    <Image url="@tick.png" />
-                  </image>
-                </ImageView>
+                <Button fx:id="DishReadyButton" layoutX="442.0" layoutY="279.0" mnemonicParsing="false" onAction="#dishReadyToBeServed" prefHeight="80.0" prefWidth="147.0" text="Dish Ready">
+                           <graphic>
+                      <ImageView fx:id="tick1" fitHeight="35.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                          <Image url="@tick.png" />
+                        </image>
+                      </ImageView>
+                           </graphic></Button>
               </children>
             </AnchorPane>
           </content>

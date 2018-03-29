@@ -7,7 +7,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import sun.tools.jconsole.Worker;
 
 /** This is the Restaurant class. This is where all the moving parts move around. */
 public class Restaurant {
