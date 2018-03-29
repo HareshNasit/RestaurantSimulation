@@ -54,14 +54,15 @@ public class Server implements IWorker, ServingTableListener {
    * @param restaurant the restaurant.
    */
   public void serveDish(Dish dish, Restaurant restaurant) {
-      restaurant.getServingTable().getDishesToBeServed().remove(dish);
+      restaurant.getServingTable().serveDish(dish);
+      dish.setDishStatus(DishStatus.SERVED);
+      screen.updateScreen();
     System.out.println(
         String.format(
             "%s serving Table%s%d order: %s",
             getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
-    dish.setDishStatus(DishStatus.SERVED);
-    screen.updateScreen();
+
   }
 
   /**
