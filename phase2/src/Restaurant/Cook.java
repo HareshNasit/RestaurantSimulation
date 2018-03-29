@@ -4,7 +4,7 @@ package Restaurant;
  * A cook reads the order being taken by the server and confirms with
  * the server if the dish can be prepared and prepares the dish.
  */
-public class Cook implements IWorker, ServingTableListener {
+public class Cook implements IWorker, Notifiable {
 
   private String name; // Name of the cook.
   private ModelControllerInterface screen;
@@ -67,9 +67,14 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   /** Notify the cook that dish has been served. */
-  public void update(String message) {
+  public void sendNotifications(String message) {
     screen.updateScreen();
     screen.openNotification(message);
+  }
+
+  @Override
+  public void update() {
+    screen.updateScreen();
   }
 
   /**

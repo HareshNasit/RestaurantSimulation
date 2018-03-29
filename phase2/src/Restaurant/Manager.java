@@ -11,7 +11,7 @@ import java.util.Date;
  * A Manager manages the overall restaurant and gets the ingredients if there
  * is a shortage.
  */
-public class Manager implements IWorker, InventoryListener {
+public class Manager implements IWorker, Notifiable {
 
   private String name;
   private final String RECEIVEDFILE = "receivedShipments.txt";
@@ -46,11 +46,6 @@ public class Manager implements IWorker, InventoryListener {
   public IWorker callWorker(IWorker worker) {
     //TODO: WORKER FUNCTION
     return worker;
-  }
-
-  @Override
-  public void notifyLowStock(String message) {
-    screen.openNotification(message);
   }
 
   /** The server receives and adds ingredients to the inventory. */
@@ -102,5 +97,15 @@ public class Manager implements IWorker, InventoryListener {
 
   public void setScreen(ModelControllerInterface screen) {
     this.screen = screen;
+  }
+
+  @Override
+  public void sendNotifications(String message) {
+    screen.openNotification(message);
+  }
+
+  @Override
+  public void update() {
+    screen.updateScreen();
   }
 }

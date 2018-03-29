@@ -7,7 +7,7 @@ import Restaurant.Server;
 import Restaurant.ServingTable;
 import Restaurant.DishStatus;
 import Restaurant.DishIngredient;
-import Restaurant.ServingTableListener;
+import Restaurant.Notifiable;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
 import java.util.HashMap;
@@ -278,7 +278,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     this.cook = cook;
 
     if (cook.getType().equals("Cook")) {
-      servingTable.addCook((ServingTableListener) cook);
+      servingTable.addCook((Notifiable) cook);
       ((Cook) cook).setScreen(this);
     } else if (cook.getType().equals("Server")) {
       tab1.getChildren().remove(accept);
@@ -311,7 +311,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       serveDishBtn.setText("Serve Dish");
       tab3.getChildren().add(serveDishBtn);
       back.setText("Back");
-      servingTable.addServer((ServingTableListener) cook);
+      servingTable.addServer((Notifiable) cook);
       ((Server) cook).setScreen(this);
     }
 

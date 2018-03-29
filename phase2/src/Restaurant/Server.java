@@ -1,7 +1,7 @@
 package Restaurant;
 
 /** Server class records orders taken from customers and relays them to the chef. */
-public class Server implements IWorker, ServingTableListener {
+public class Server implements IWorker, Notifiable {
 
   private String name; // name of a server
   private ModelControllerInterface screen;
@@ -156,9 +156,14 @@ public class Server implements IWorker, ServingTableListener {
   }
 
   @Override
-  public void update(String message) {
+  public void sendNotifications(String message) {
       screen.updateScreen();
       screen.openNotification(message);
+  }
+
+  @Override
+  public void update() {
+    screen.updateScreen();
   }
 
 
