@@ -14,7 +14,7 @@ public class LoginTestSuite extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Parent root = FXMLLoader.load((getClass().getResource("Login.fxml")));
+        Parent root = FXMLLoader.load((getClass().getResource("loginScreen.fxml")));
         primaryStage.setTitle("Start Up Screen");
         primaryStage.setScene(new Scene(root,600,400));
         primaryStage.show();

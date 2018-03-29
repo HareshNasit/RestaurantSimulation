@@ -79,10 +79,10 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
 
       if (table != null) {
         OrderScreen controller = new OrderScreen(server,table,restaurant);
-        controller.addOptionsToComboBox(table);
-        if(table.getTableSize() != 0){
-          vBox.getChildren().setAll(controller);
-        }
+        if (!table.getIsOccupied()){
+        controller.addOptionsToComboBox(table);}
+        vBox.getChildren().setAll(controller);
+
       }
 
 

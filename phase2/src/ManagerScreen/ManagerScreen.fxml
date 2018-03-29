@@ -8,7 +8,7 @@
 
 <fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="600.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane prefHeight="405.0" prefWidth="600.0">
+      <TabPane fx:id="tabsPane" prefHeight="405.0" prefWidth="600.0">
          <tabs>
             <Tab fx:id="workersTab" text="Workers">
                <content>
@@ -93,8 +93,8 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="buttonStartSystem" layoutX="191.0" layoutY="77.0" mnemonicParsing="false" onAction="#startSysten" prefHeight="65.0" prefWidth="196.0" text="Start System" />
-                        <Button fx:id="buttonShutdownSystem" layoutX="191.0" layoutY="186.0" mnemonicParsing="false" onAction="#shutdownSystem" prefHeight="65.0" prefWidth="196.0" text="Shutdown System" />
+                        <Button fx:id="buttonStartSystem" layoutX="191.0" layoutY="77.0" mnemonicParsing="false" onAction="#startSystem" prefHeight="65.0" prefWidth="196.0" text="Start System" />
+                        <Button fx:id="buttonShutdownSystem" layoutX="191.0" layoutY="186.0" mnemonicParsing="false" onAction="#shutDownSystem" prefHeight="65.0" prefWidth="196.0" text="Shutdown System" />
                      </children>
                   </AnchorPane>
               </content>

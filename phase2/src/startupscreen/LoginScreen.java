@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class LoginScreen implements Initializable{
@@ -29,6 +30,8 @@ public class LoginScreen implements Initializable{
     public Button cookLoginBtn;
     public TextField cookNameLbl;
     public AnchorPane loginScreenAnchorPane;
+    public Button loginBtn;
+    public AnchorPane workerLoginScreenAnchorPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,8 +46,11 @@ public class LoginScreen implements Initializable{
             Button back1 = new Button();
             back1.setOnAction(event -> {
                 LoginScreen loginScreen = new LoginScreen();
-                
+                loginScreenAnchorPane.getChildren().setAll((Collection<? extends Node>) loginScreen);
             });
+            back1.setLayoutX(50);
+            back1.setLayoutY(10);
+            workerLoginScreenAnchorPane.getChildren().add(back1);
             mainScreen.setScene(managerScene);
             mainScreen.show();
             
