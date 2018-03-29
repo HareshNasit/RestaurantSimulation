@@ -184,6 +184,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   }
 
   public void acceptDish(ActionEvent actionEvent) {
+      // TODO: 2018-03-29 check when dish is returned. 
 
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
