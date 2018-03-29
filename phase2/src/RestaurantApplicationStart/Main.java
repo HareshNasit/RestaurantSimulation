@@ -47,7 +47,6 @@ public class Main extends Application {
       Server server = new Server(name);
       restaurant.addServer(server);
       TablesScreen screen = new TablesScreen(server, restaurant);
-      manager.addWorker(server);
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Server");
       window.setScene(new Scene(screen));
@@ -62,6 +61,7 @@ public class Main extends Application {
     Stage window = new Stage();
     ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
     restaurant.getInventory().setManager(manager);
+    restaurant.addManager(manager);
     window.initModality(Modality.WINDOW_MODAL);
     window.setTitle("Manager");
     window.setScene(new Scene(controller));
@@ -74,7 +74,6 @@ public class Main extends Application {
       Stage window = new Stage();
       Cook cook = new Cook(name);
       restaurant.addCook(cook);
-      manager.addWorker(cook);
       ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
       window.initModality(Modality.WINDOW_MODAL);
       window.setTitle("Serving Screen");

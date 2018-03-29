@@ -53,13 +53,34 @@ public class Restaurant {
 
   }
 
+
+  public void updateWorker(WorkerType workerType){
+
+    if (workerType == WorkerType.SERVER){
+      for(Notifiable server: servers){
+        server.update();
+      }
+    } else if (workerType == WorkerType.COOK) {
+      for(Notifiable cook: cooks){
+        cook.update();
+      }
+    } else if (workerType == WorkerType.MANAGER){
+      for(Notifiable manager: managers){
+        manager.update();
+      }
+    }
+
+  }
   public void addServer(Server server){
     servers.add(server);
     getWorkers().add(server);
+    updateWorker(WorkerType.MANAGER);
+
   }
   public void addCook(Cook cook){
     cooks.add(cook);
     getWorkers().add(cook);
+    updateWorker(WorkerType.MANAGER);
   }
 
   /**
@@ -76,6 +97,8 @@ public class Restaurant {
     this.servers = new ArrayList<Notifiable>();
     this.cooks = new ArrayList<Notifiable>();
     this.workers = new ArrayList<IWorker>();
+    this.managers = new ArrayList<Notifiable>();
+    generateTables(TABLEFILE);
     setActive(false);
     startSystem();
   }
@@ -83,7 +106,6 @@ public class Restaurant {
      */
   public void startSystem(){
     setActive(true);
-    generateTables(TABLEFILE);
     createNewReceiptFile();
     createNewLogFile();
   }
@@ -162,6 +184,7 @@ public class Restaurant {
    * @param managerName name of the Manager.
    */
   public void setManager(String managerName) {
+
     this.manager = new Manager(managerName);
   }
 

@@ -172,7 +172,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
    */
   private ObservableList<IWorker> getWorkerData() {
     ObservableList<IWorker> workers = FXCollections.observableArrayList();
-    workers.addAll(getManager().getWorkers());
+    workers.addAll(restaurant.getWorkers());
     return workers;
   }
 

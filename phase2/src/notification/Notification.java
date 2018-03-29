@@ -30,6 +30,11 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+//TODO: Finalized Notifications
+//TODO: Account for DishStatus
+//TODO: Finalized Notifications
+
+
 package notification;
 
 import java.io.IOException;
