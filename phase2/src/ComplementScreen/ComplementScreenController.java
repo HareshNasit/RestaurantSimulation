@@ -104,7 +104,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
 
   /**
    * When the cancel button gets pressed, the server gets returned to the previous screen, and all
-   * the ingredients gets set back to their base amounts.
+   * the ingredients gets set back to their original amounts.
    */
   public void cancelEvent() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to cancel?",
@@ -112,7 +112,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES) {
       if (this.dish != null) {
-        this.ingredients = this.ingredientsCopy;
+        dish.setIngredients(this.ingredientsCopy);
       }
       this.done = true;
       this.closeWindow(cancel);
@@ -304,7 +304,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
     stage.close();
   }
 
-  public boolean isDone(){
+  public boolean isDone() {
     return this.done;
   }
 

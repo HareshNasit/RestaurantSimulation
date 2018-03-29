@@ -36,6 +36,8 @@ public class Main extends Application {
     Manager manager = managerStart("Alfred", restaurant);
 
     serverStart("John", restaurant, manager);
+    serverStart("HOng", restaurant, manager);
+    serverStart("Chong", restaurant, manager);
     cookStart("harsh", restaurant, manager);
   }
 
@@ -44,6 +46,7 @@ public class Main extends Application {
 
       Stage window = new Stage();
       Server server = new Server(name);
+      restaurant.addServer(server);
       TablesScreen screen = new TablesScreen(server, restaurant);
       manager.addWorker(server);
       window.initModality(Modality.WINDOW_MODAL);

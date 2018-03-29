@@ -14,7 +14,6 @@ public class Restaurant {
   private Inventory inventory; // The inventory of the restaurant.
   private Menu menu; // The menu of the restaurant.
   private ArrayList<IWorker> workers; // All the workers in this restaurant.
-  private HashMap<String, Server> servers; // HashMap of servers name and the server.
   private HashMap<String, Cook> cooks; // HashMap of cooks name and the cook.
   public HashMap<String, Table> getTables() {
     return tables;
@@ -31,6 +30,20 @@ public class Restaurant {
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
   private boolean isActive;
+  private ArrayList<Server> servers;
+
+  public void addServer(Server server){
+    servers.add(server);
+  }
+
+  public void updateServers(String message){
+    for(Server server: servers){
+      server.update(message);
+    }
+
+  }
+
+
   public SimpleLogger receiptsLogger = new SimpleLogger("");
   public RestaurantLogger restaurantLogger = new RestaurantLogger("");
 
@@ -45,6 +58,7 @@ public class Restaurant {
     this.inventory = inventory;
     this.menu = menu;
     this.servingTable = servingTable;
+    this.servers = new ArrayList<Server>();
     isActive = false;
     startSystem();
   }
@@ -62,15 +76,7 @@ public class Restaurant {
     System.exit(0);
   }
 
-  /**
-   * Returns a server with the given name.
-   *
-   * @param name of the server.
-   * @return Server.
-   */
-  public Server getServer(String name) {
-    return servers.get(name);
-  }
+
 
   /**
    * Returns a cook with the given name.
@@ -144,49 +150,49 @@ public class Restaurant {
     }
   }
 
-  /**
-   * Generates workers by taking input from a .txt file
-   *
-   * @param fileName the file that has the info of the workers
-   * @param servingTable the serving table that they belong to
-   */
-  private void generateWorkers(String fileName, ServingTable servingTable) {
-    this.workers = new ArrayList<>();
-    this.servers = new HashMap<>();
-    this.cooks = new HashMap<>();
-    try {
-      Scanner line = new Scanner(new File(fileName));
-      while (line.hasNextLine()) {
-
-        String tableLine = line.nextLine();
-        String[] splitString = tableLine.split("\\|");
-
-        if (splitString[0].equals("Server")) {
-
-          Server server = new Server(splitString[1].trim());
-          servingTable.addServer(server);
-          this.workers.add(server);
-          this.servers.put(server.getName(), server);
-
-        } else if (splitString[0].equals("Manager")) {
-          Manager manager = new Manager(splitString[1]);
-          this.workers.add(manager);
-          inventory.setManager(manager);
-          this.manager = manager;
-
-        } else if (splitString[0].equals("Cook")) {
-
-          Cook cook = new Cook(splitString[1]);
-          servingTable.addCook(cook);
-          this.workers.add(cook);
-          this.cooks.put(cook.getName(), cook);
-        }
-      }
-      line.close();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-  }
+//  /**
+//   * Generates workers by taking input from a .txt file
+//   *
+//   * @param fileName the file that has the info of the workers
+//   * @param servingTable the serving table that they belong to
+//   */
+//  private void generateWorkers(String fileName, ServingTable servingTable) {
+//    this.workers = new ArrayList<>();
+//    this.servers = new HashMap<>();
+//    this.cooks = new HashMap<>();
+//    try {
+//      Scanner line = new Scanner(new File(fileName));
+//      while (line.hasNextLine()) {
+//
+//        String tableLine = line.nextLine();
+//        String[] splitString = tableLine.split("\\|");
+//
+//        if (splitString[0].equals("Server")) {
+//
+//          Server server = new Server(splitString[1].trim());
+//          servingTable.addServer(server);
+//          this.workers.add(server);
+//          this.servers.put(server.getName(), server);
+//
+//        } else if (splitString[0].equals("Manager")) {
+//          Manager manager = new Manager(splitString[1]);
+//          this.workers.add(manager);
+//          inventory.setManager(manager);
+//          this.manager = manager;
+//
+//        } else if (splitString[0].equals("Cook")) {
+//
+//          Cook cook = new Cook(splitString[1]);
+//          servingTable.addCook(cook);
+//          this.workers.add(cook);
+//          this.cooks.put(cook.getName(), cook);
+//        }
+//      }
+//      line.close();
+//    } catch (FileNotFoundException e) {
+//      e.printStackTrace();
+//    }
+//  }
 
   /**
    * Returns Manager with the given name.
