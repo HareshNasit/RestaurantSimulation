@@ -265,9 +265,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             });
             back.setLayoutX(400);
             back.setLayoutY(3);
-            tab1.getChildren().add(back);
-
-          Button serveDishBtn = new Button();
+            tab3.getChildren().add(back);
+            Button serveDishBtn = new Button();
             serveDishBtn.setOnAction(event -> {
                 try {
                     Dish dish = (Dish) tab3Table.getSelectionModel().getSelectedItem();
@@ -282,8 +281,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
             serveDishBtn.setLayoutY(282);
             serveDishBtn.setText("Serve Dish");
             tab3.getChildren().add(serveDishBtn);
-            tab2.getChildren().add(serveDishBtn);
-            tab1.getChildren().add(serveDishBtn);
             back.setText("Back");
             servingTable.addServer((ServingTableListener) cook);
             ((Server) cook).setScreen(this);

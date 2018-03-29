@@ -19,7 +19,7 @@
       <Label layoutX="57.0" layoutY="123.0" text="Password:" textFill="#0eab5a" />
       <PasswordField fx:id="password" layoutX="136.0" layoutY="118.0" />
       <TextField fx:id="userName" layoutX="136.0" layoutY="78.0" />
-      <Button fx:id="loginBtn" layoutX="170.0" layoutY="180.0" mnemonicParsing="false" onAction="#checkManagerLogin" text="Login" textFill="#10a13e" />
+      <Button fx:id="loginBtn" layoutX="170.0" layoutY="180.0" mnemonicParsing="false" onAction="#checkWorkerLogin" text="Login" textFill="#10a13e" />
       <Label fx:id="canLogin" layoutX="225.0" layoutY="155.0" prefHeight="17.0" prefWidth="156.0" />
    </children>
 </AnchorPane>

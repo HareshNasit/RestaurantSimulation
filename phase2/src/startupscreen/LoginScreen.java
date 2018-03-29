@@ -35,7 +35,7 @@ public class LoginScreen implements Initializable{
 
     public void cookLoginScreen(javafx.event.ActionEvent mouseEvent) {
         try {
-            Parent managerScreen = FXMLLoader.load(getClass().getResource("WorkerLogin.fxml"));
+            Parent managerScreen = FXMLLoader.load(getClass().getResource("loginScreen.fxml"));
             Scene managerScene = new Scene(managerScreen);
             Stage mainScreen = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             mainScreen.setScene(managerScene);
@@ -47,7 +47,7 @@ public class LoginScreen implements Initializable{
 
     public void serverLoginScreen(ActionEvent mouseEvent) {
         try {
-            Parent managerScreen = FXMLLoader.load(getClass().getResource("WorkerLogin.fxml"));
+            Parent managerScreen = FXMLLoader.load(getClass().getResource("loginScreen.fxml"));
             Scene managerScene = new Scene(managerScreen);
             Stage mainScreen = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             mainScreen.setScene(managerScene);
@@ -57,9 +57,9 @@ public class LoginScreen implements Initializable{
         }
     }
 
-    public void managerLoginScreen(javafx.event.ActionEvent actionEvent) {
+    public void workerLoginScreen(javafx.event.ActionEvent actionEvent) {
         try {
-            Parent managerScreen = FXMLLoader.load(getClass().getResource("ManagerLogin.fxml"));
+            Parent managerScreen = FXMLLoader.load(getClass().getResource("loginScreen.fxml"));
             Scene managerScene = new Scene(managerScreen);
             Stage mainScreen = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             mainScreen.setScene(managerScene);
@@ -69,7 +69,13 @@ public class LoginScreen implements Initializable{
         }
     }
 
-    public void checkManagerLogin(javafx.event.ActionEvent actionEvent) {
+    public void checkCookLogin(javafx.event.ActionEvent actionEvent) {
+        if(cookNameLbl.getText().equals("harsh")){
+            System.out.println("yayyy login successfull");
+        }
+    }
+
+    public void checkWorkerLogin(ActionEvent actionEvent) {
         if(userName.getText().equals("harsh") && password.getText().equals("halamadrid")){
             canLogin.setText("Login successfull");
             canLogin.setTextFill(Paint.valueOf("Green"));
@@ -77,12 +83,6 @@ public class LoginScreen implements Initializable{
         else{
             canLogin.setText("Sorry, login Unsuccessful");
             canLogin.setTextFill(Paint.valueOf("Red"));
-        }
-    }
-
-    public void checkCookLogin(javafx.event.ActionEvent actionEvent) {
-        if(cookNameLbl.getText().equals("harsh")){
-            System.out.println("yayyy login successfull");
         }
     }
 }
