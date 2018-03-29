@@ -35,6 +35,9 @@ public class ComplementScreen extends Application {
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Complement Screen");
         window.setScene(new Scene(root));
+        window.setOnCloseRequest(event -> {
+            controller.cancelEvent();
+        });
         window.show();
     }
 

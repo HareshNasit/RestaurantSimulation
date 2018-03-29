@@ -68,6 +68,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
     this.selectedIngredient = "";
     this.dishStatusLabel.setText("Pick a complement");
     this.setRowAction();
+
   }
 
 
