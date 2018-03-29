@@ -48,7 +48,7 @@ public class MenuItem {
    *
    * @return Hashmap
    */
-  private HashMap<String, DishIngredient> cloneIngredients() {
+  public HashMap<String, DishIngredient> cloneIngredients() {
 
     HashMap<String, DishIngredient> copy = new HashMap<>();
 
@@ -140,4 +140,25 @@ public class MenuItem {
   public String getName() {
     return name;
   }
+
+
+  /**
+   * Precondition: the two hashmaps have the same ingredients
+   *
+   * @param compIngredients hashmap you are comparing to.
+   */
+  public HashMap<String, Integer> getPosDifBetweenTwoIngredientsList(
+      HashMap<String, DishIngredient> compIngredients) {
+    HashMap<String, Integer> differences = new HashMap<>();
+    for (String key : compIngredients.keySet()) {
+      int dif = compIngredients.get(key).getAmount() - this.ingredients.get(key).getAmount();
+      if (dif > 0) {
+        differences.put(key, dif);
+      } else {
+        differences.put(key, 0);
+      }
+    }
+    return differences;
+  }
+
 }
