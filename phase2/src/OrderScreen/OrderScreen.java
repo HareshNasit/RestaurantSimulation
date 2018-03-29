@@ -233,15 +233,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    */
   public void openBillScreen() throws IOException {
     Stage primaryStage = new Stage();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/billScreen/bill.fxml"));
-    Parent root = loader.load();
-    BillScreenController controller = loader.getController();
 
-    controller.setTable(table);
-    controller.setRestaurant(restaurant);
+    BillScreenController controller = new BillScreenController(restaurant,table);
 
     primaryStage.setTitle("Bill Menu");
-    primaryStage.setScene(new Scene(root));
+    primaryStage.setScene(new Scene(controller));
 
     primaryStage.show();
 
