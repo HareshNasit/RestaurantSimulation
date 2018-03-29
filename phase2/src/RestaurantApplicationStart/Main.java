@@ -41,7 +41,7 @@ public class Main extends Application {
   }
 
 
-  private void serverStart(String name, Restaurant restaurant, Manager manager) {
+  public static void serverStart(String name, Restaurant restaurant, Manager manager) {
 
       Stage window = new Stage();
       Server server = new Server(name);
@@ -57,7 +57,7 @@ public class Main extends Application {
 
   }
 
-  private Manager managerStart(String name, Restaurant restaurant) {
+  public static  Manager managerStart(String name, Restaurant restaurant) {
     Manager manager = new Manager(name);
     Stage window = new Stage();
     ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
