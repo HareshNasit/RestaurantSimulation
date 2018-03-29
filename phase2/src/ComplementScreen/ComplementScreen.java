@@ -26,9 +26,9 @@ public class ComplementScreen extends Application {
         System.out.println(dish);
 
         Stage window = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("complements.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("complementsCookExtra.fxml"));
         Parent root = loader.load();
-        ComplementScreenController controller = loader.getController();
+        ComplementScreenCookExtra controller = loader.getController();
 
         //make method
         controller.setDish(dish);
