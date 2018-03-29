@@ -117,7 +117,7 @@ public class Inventory {
     if (amount <= inventory.get(ingredient.trim()).getCurrentQuantity()) {
       writeToRequest(ingredient, amount);
       inventory.get(ingredient.trim()).decreaseQuantity(amount);
-
+      writeToInventory();
 
       }
     }

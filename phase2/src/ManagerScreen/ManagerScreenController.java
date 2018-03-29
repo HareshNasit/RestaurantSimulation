@@ -88,6 +88,10 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   TableColumn columnDishStatus;
   @FXML
   TableView tableViewDishes;
+  @FXML
+      private TextArea textAreaLog;
+  @FXML
+  private Button buttonRefreshLog;
 
   Notification notification;
 
@@ -207,6 +211,15 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
       }
     } catch (java.io.IOException e) {
     }
+  }
+
+  private void updateLogger(){
+    textAreaLog.setText(restaurant.restaurantLogger.returnAllContent());
+
+  }
+
+  public void buttonRefreshAction(){
+    updateLogger();
   }
 
   /**
