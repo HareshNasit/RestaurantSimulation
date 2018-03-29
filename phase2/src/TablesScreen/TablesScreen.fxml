@@ -36,7 +36,14 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="servingTableButton" layoutX="11.0" layoutY="178.0" mnemonicParsing="false" onAction="#openServingTable" prefHeight="40.0" prefWidth="273.0" text="Open Serving Table" />
+                  <Button fx:id="servingTableButton" layoutX="11.0" layoutY="178.0" mnemonicParsing="false" onAction="#openServingTable" prefHeight="40.0" prefWidth="273.0" text="Open Serving Table">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@servingtable.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Button fx:id="managerButton" layoutX="11.0" layoutY="238.0" mnemonicParsing="false" onAction="#callManager" prefHeight="40.0" prefWidth="273.0" text="Call Manager">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +52,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Label fx:id="labelServerName" layoutX="196.0" layoutY="14.0" prefHeight="18.0" prefWidth="87.0" text="Server Name">
+                  <Label fx:id="labelServerName" layoutX="174.0" layoutY="14.0" prefHeight="32.0" prefWidth="109.0" text="Server Name">
                      <font>
                         <Font size="14.0" />
                      </font>
