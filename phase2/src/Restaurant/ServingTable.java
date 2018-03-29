@@ -11,8 +11,8 @@ public class ServingTable {
   private ArrayList<Dish> dishesToBeCooked; // List of dishes to be cooked.
   private ArrayList<Dish> dishesToBeServed; // List of dishes cooked and ready to be served.
   private ArrayList<Dish> dishesBeingCooked; // List of dishes which are being cooked
-  private ArrayList<ServingTableListener> servers; // List of all the servers.
-  private ArrayList<ServingTableListener> cooks; // List of all the cooks.
+  private ArrayList<Notifiable> servers; // List of all the servers.
+  private ArrayList<Notifiable> cooks; // List of all the cooks.
 
 
   /**
@@ -129,7 +129,7 @@ public class ServingTable {
    *
    * @param server the server.
    */
-  public void addServer(ServingTableListener server) {
+  public void addServer(Notifiable server) {
     servers.add(server);
   }
 
@@ -138,7 +138,7 @@ public class ServingTable {
    *
    * @param cook cook
    */
-  public void addCook(ServingTableListener cook) {
+  public void addCook(Notifiable cook) {
     cooks.add(cook);
   }
 
@@ -149,8 +149,8 @@ public class ServingTable {
    */
   private void notifyServers(String message) {
     System.out.println(message);
-    for (ServingTableListener server : servers) {
-      server.update(message);
+    for (Notifiable server : servers) {
+      server.sendNotifications(message);
     }
   }
 
@@ -161,8 +161,8 @@ public class ServingTable {
    */
   private void notifyCooks(String message) {
     System.out.println(message);
-    for (ServingTableListener cook : cooks) {
-      cook.update(message);
+    for (Notifiable cook : cooks) {
+      cook.sendNotifications(message);
     }
   }
 
