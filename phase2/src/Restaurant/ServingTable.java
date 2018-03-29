@@ -110,6 +110,10 @@ public class ServingTable {
     notifyWorkers(servers, message);
   }
 
+  public boolean hasDishesToServe(){
+    return !dishesToBeServed.isEmpty();
+  }
+
   /**
    * Removes and returns dish at index on dishesToBeServed. Cooks are notified that the dish has
    * been served.
