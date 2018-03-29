@@ -56,10 +56,10 @@ public class RestaurantLogger extends SimpleLogger {
    * @param reason Reason for the return.
    */
   public void logDishReturned(Dish dish, String reason) {
-    String content = "[NEW LOG - DISH DELIVERED] ";
+    String content = "[NEW LOG - DISH RETURNED] ";
     content += "[ " + dish.toString() + "] has been returned" + System.lineSeparator();
     content += "Reason: " + reason;
-    content += "[END LOG]" + System.lineSeparator();
+    content += " [END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
 
@@ -71,7 +71,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param amount amount being changed.
    */
   public void logInventoryChanged(InventoryIngredient inventoryIngredient, int amount) {
-    String content = "[NEW LOG - DISH DELIVERED] ";
+    String content = "[NEW LOG - INVENTORY CHANGED] ";
     content += "[ " + inventoryIngredient.toString() + "] has changed by: " + amount;
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
@@ -86,7 +86,7 @@ public class RestaurantLogger extends SimpleLogger {
   public void logRequest(IWorker worker, String request) {
     String content = "[NEW LOG - WORKER REQUEST] ";
     content += "[ " + worker.getName() + "] has been sent request from Manager: " + request;
-    content += "[END LOG]" + System.lineSeparator();
+    content += " [END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
 
@@ -96,11 +96,14 @@ public class RestaurantLogger extends SimpleLogger {
    * @param worker worker that has logged in.
    */
   public void logWorkerLogin(IWorker worker) {
-    String content = "[NEW LOG - ] ";
+    String content = "[NEW LOG - WORKER LOGIN] ";
     content += "[ " + worker.getName() + "] has logged into the system: ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
+
+
+
 
 
 }
