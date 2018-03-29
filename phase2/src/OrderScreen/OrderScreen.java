@@ -135,6 +135,10 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   }
 
+  /**
+   * Opens a dialog when a row in the menu order table view is clicked. The dialog shows the dish price and the
+   * ingredients including the extra added compliments.
+   */
   public void setRowAction() {
     getOrderTableView().setRowFactory(tv -> {
       TableRow<Dish> row = new TableRow<>();
@@ -202,17 +206,14 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void printTableBill(ActionEvent actionEvent) {
   }
 
+  /**
+   * Makes the order appear on the menu table order view
+   * @param orderedDishes the dishes that the table ordered
+   */
   public void setOrderTable(ArrayList<Dish> orderedDishes) {
     ObservableList<Dish> dishes = FXCollections.observableArrayList();
     dishes.addAll(orderedDishes);
     this.idColumn.getTableView().setItems(dishes);
-  }
-
-  public void rowSelectedId(javafx.scene.input.MouseEvent mouseEvent) {
-//    this.menuSelectedDish = (Dish) menuTableView.getSelectionModel().getSelectedItem();
-//    menuSelectedDishId = menuSelectedDish.getId();
-//    menuSelectedDishName = menuSelectedDish.getName();
-//    menuSelectedDishCustomerNum = menuSelectedDish.getCustomerNum();
   }
 
   /**
