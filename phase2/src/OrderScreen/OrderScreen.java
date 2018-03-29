@@ -95,6 +95,10 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   @FXML
   private VBox vBox;
 
+  @FXML
+  private Button buttonReturn;
+  @FXML
+  private Button buttonServe;
 
   public OrderScreen(Server server, Table table, Restaurant restaurant) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orders.fxml"));
@@ -126,6 +130,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
     menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
 
+    buttonReturn.setVisible(false);
+    buttonServe.setVisible(false);
+
     this.setRowAction();
     System.out.println(getOrderTableView());
     notification = new Notification();
@@ -141,8 +148,17 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     getOrderTableView().setRowFactory(tv -> {
       TableRow<Dish> row = new TableRow<>();
       row.setOnMouseClicked(event -> {
+        Dish rowData = row.getItem();
+
+        if (!row.isEmpty()){
+          buttonReturn.setVisible(rowData.getDishStatus() == DishStatus.SERVED);
+          buttonServe.setVisible(rowData.getDishStatus() == DishStatus.PICKUP);
+        }
+
+        //buttonReturn.setVisible(rowData.getDishStatus() == DishStatus.PICKUP);
+
         if (!row.isEmpty() && event.getClickCount() == 2) {
-          Dish rowData = row.getItem();
+
           System.out.println("Click on: " + rowData.getName());
           String finalString =
               "The price of this dish is: " + rowData.getPrice() + System.lineSeparator() +
@@ -160,6 +176,40 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     });
   }
 
+  public void returnButtonAction(){
+
+    Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+    if (dish.getComment().equals("")){
+      TextInputDialog dialog = new TextInputDialog();
+      dialog.setTitle("Please put a comment before returning");
+      dialog.setContentText("Comment");
+
+      Optional<String> result = dialog.showAndWait();
+      if (result.isPresent()){
+        dish.setComment(result.get());
+        server.returnDish(dish, restaurant.getServingTable());
+        restaurant.restaurantLogger.logDishReturned(dish, dish.getComment());
+      } else {
+        server.sendNotification("Please input a message");
+      }
+
+    } else {
+      server.returnDish(dish, restaurant.getServingTable());
+      restaurant.restaurantLogger.logDishReturned(dish, dish.getComment());
+
+    }
+
+    buttonReturn.setVisible(false);
+
+  }
+
+  public void buttonServeAction(){
+    Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+    server.serveDish(dish, restaurant);
+    restaurant.restaurantLogger.logDishDelivered(dish);
+    buttonServe.setVisible(false);
+
+  }
   /**
    * Opens the bill screen GUI when the print bill button is clicked
    */

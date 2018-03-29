@@ -80,17 +80,13 @@ public class Server implements IWorker, Notifiable {
     }
 
     /**
-     * The customer returns a dish for a particular reason.
-     *
-     * @param restaurant the restaurant.
-     * @param index the index of the dish.
-     * @param comment the reason the customer returned the dish.
-     * @param tableID the table id.
+     * TODO: DO THIS LOL
+     * @param comment
+     * @param servingTable
      */
-    public void returnDish(int index, String tableID, Restaurant restaurant, String comment) {
-        Dish dish = restaurant.getTable(tableID).getDish(index);
-        dish.addComment(comment);
-        restaurant.getServingTable().addToBeCooked(dish);
+    public void returnDish(Dish dish, ServingTable servingTable) {
+
+        servingTable.addToBeCooked(dish);
         dish.setDishStatus(DishStatus.RETURNED);
     }
 

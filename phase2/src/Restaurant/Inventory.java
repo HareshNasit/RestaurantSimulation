@@ -42,6 +42,7 @@ public class Inventory {
     } else {
       inventory.put(ingredient, new InventoryIngredient(ingredient, 0));
     }
+    writeToInventory();
   }
 
   /**
