@@ -2,6 +2,7 @@ package Restaurant;
 
 import MenuDishes.Dish;
 import MenuDishes.MenuItem;
+import java.util.ArrayList;
 
 /** Server class records orders taken from customers and relays them to the chef. */
 public class Server implements IWorker, Notifiable {
@@ -39,15 +40,19 @@ public class Server implements IWorker, Notifiable {
      *
      * @param table the table that places the order
      */
-    public void passOrder(Table table, ServingTable servingTable) {
+    public ArrayList<Dish> passOrder(Table table, ServingTable servingTable) {
+        ArrayList<Dish> order = new ArrayList<>();
         for(Dish dish: table.getTableOrder()){
             if(dish.getDishStatus() == DishStatus.ORDERED ) {
                 servingTable.addToBeCooked(dish);
                 dish.setDishStatus(DishStatus.SENT);
+                order.add(dish);
             } else if (dish.getDishStatus() == DishStatus.RETURNED) {
                 servingTable.addToBeCooked(dish);
+                order.add(dish);
             }
         }
+        return order;
     }
 
     /**

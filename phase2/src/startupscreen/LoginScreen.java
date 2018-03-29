@@ -142,6 +142,7 @@ public class LoginScreen extends AnchorPane {
     Stage window = new Stage();
     restaurant.addManager(manager);
     ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
+    restaurant.restaurantLogger.logWorkerLogin(manager);
     restaurant.getInventory().setManager(manager);
     window.initModality(Modality.WINDOW_MODAL);
     window.setTitle("Manager");
@@ -154,6 +155,7 @@ public class LoginScreen extends AnchorPane {
     Server server = new Server(name);
     restaurant.addServer(server);
     TablesScreen screen = new TablesScreen(server, restaurant);
+    restaurant.restaurantLogger.logWorkerLogin(server);
     window.initModality(Modality.WINDOW_MODAL);
     window.setTitle("Server");
     window.setScene(new Scene(screen));
@@ -164,6 +166,7 @@ public class LoginScreen extends AnchorPane {
     Stage window = new Stage();
     Cook cook = new Cook(name);
     restaurant.addCook(cook);
+    restaurant.restaurantLogger.logWorkerLogin(cook);
     ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
     window.initModality(Modality.WINDOW_MODAL);
     window.setTitle("Serving Screen");

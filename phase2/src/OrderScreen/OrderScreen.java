@@ -455,7 +455,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   }
 
   public void sendOrder() {
-    server.passOrder(table, restaurant.getServingTable());
+    ArrayList<Dish> order = server.passOrder(table, restaurant.getServingTable());
+    restaurant.restaurantLogger.logOrderMessage(order);
     updateScreen();
   }
 

@@ -28,7 +28,7 @@ public class RestaurantLogger extends SimpleLogger {
   }
 
   /**
-   * Sends a message about a dish being delivered.
+   * Sends a message about a dish being prepared.
    */
   public void logDishPrepared(Dish dish) {
     String content = "[NEW LOG - DISH PREPARED] ";
