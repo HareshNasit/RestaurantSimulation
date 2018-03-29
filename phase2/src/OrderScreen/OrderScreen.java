@@ -378,7 +378,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
-
+  /**
+   * Reopens the table screen when the back button is clicked
+   */
   public void backButtonAction() {
 
     TablesScreen tablesScreen = new TablesScreen(server, restaurant);
@@ -420,6 +422,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * checks the ingredients required to make a dish in a selected row in the menu table view to see if there are enough
+   * ingredients to make that dish. If there are not enough ingredients the add dish button is disabled for the dish
+   * @param mouseEvent The mouse pointer that chooses a row in the menu table view
+   */
   public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
     try {
@@ -433,9 +440,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Updates the screen so all menu items and order items are up to date
+   */
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
-    //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
     orderTableView.refresh();
