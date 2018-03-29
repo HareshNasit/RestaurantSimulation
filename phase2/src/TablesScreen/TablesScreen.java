@@ -116,7 +116,7 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
    */
   public void initialize() {
     tableIDColumn.setCellValueFactory(new PropertyValueFactory<Table, String>("tableID"));
-    tableStatusColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
+    occupiedTableColumn.setCellValueFactory(new PropertyValueFactory<Table, Boolean>("isOccupied"));
 
     notification = new Notification();
     notificationArea.getChildren().setAll(notification);
@@ -139,6 +139,7 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
    */
   public void updateScreen() {
     tableView.setItems(getObservableTablesList(restaurant.getTables().values()));
+    tableView.refresh();
     labelServerName.setText(server.getName());
   }
 
