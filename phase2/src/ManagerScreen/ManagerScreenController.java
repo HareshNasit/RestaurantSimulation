@@ -380,7 +380,15 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
    */
   public void callWorker() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
-    worker.sendNotification("Come to my office");
+    TextInputDialog dialog = new TextInputDialog();
+    dialog.setTitle("Worker Notification");
+    dialog.setContentText("Send Message");
+
+// Traditional way to get the response value.
+    Optional<String> result = dialog.showAndWait();
+    if (result.isPresent()){
+      worker.sendNotification(result.get());
+    }
   }
 
   /**
