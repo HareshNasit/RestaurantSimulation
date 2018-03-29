@@ -107,6 +107,7 @@ public class LoginScreen extends AnchorPane {
 
         generateManagerScreen(details.getUserCredentials().getKey());
 
+
       } else if (restaurant.isActive() && details.getType() == WorkerType.SERVER) {
         generateServerScreen(details.getUserCredentials().getKey());
 
@@ -139,6 +140,7 @@ public class LoginScreen extends AnchorPane {
 
     Manager manager = new Manager(name);
     Stage window = new Stage();
+    restaurant.addManager(manager);
     ManagerScreenController controller = new ManagerScreenController(manager, restaurant);
     restaurant.getInventory().setManager(manager);
     window.initModality(Modality.WINDOW_MODAL);

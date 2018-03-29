@@ -98,10 +98,12 @@ public class Inventory {
 
   public void addNewIngredient(InventoryIngredient ingredient){
     inventory.put(ingredient.getName(), ingredient);
+    writeToInventory();
   }
 
   public void removeIngredient(String ingredientName){
     inventory.remove(ingredientName);
+    writeToInventory();
   }
 
   /**

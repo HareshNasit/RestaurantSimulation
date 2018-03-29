@@ -42,7 +42,7 @@
                   </graphic>
                 </Button>
                 <Label fx:id="checkLabel" layoutX="450.0" layoutY="270.0" prefHeight="95.0" prefWidth="146.0" />
-                <Button layoutX="490.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#addIngredientsIfEnough" text="Add Extra" />
+                <Button fx:id="addExtra" layoutX="490.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#addIngredientsIfEnough" text="Add Extra" />
               </children>
             </AnchorPane>
           </content>
