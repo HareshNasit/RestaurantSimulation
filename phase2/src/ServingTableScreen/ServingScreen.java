@@ -191,7 +191,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
 
-      String message = getCookMessage(((Cook) cook).hasDishes());
+      String message = getCookMessage(servingTable.checkPriority(dish),((Cook) cook).hasDishes());
 
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES,
           ButtonType.CANCEL);
@@ -214,12 +214,17 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     this.updateScreen();
   }
 
-  private String getCookMessage(boolean hasDishes){
-    if (hasDishes){
-      return "You have dishes cooking. Are you sure you want to accept?";
-    }else {
-      return "Are you sure you want to accept?";
+  private String getCookMessage(boolean priority,boolean hasDishes){
+    StringBuilder message = new StringBuilder();
+    if (priority){
+      message.append("There are dishes that have been ordered first but not cooked" + System.lineSeparator());
     }
+    if (hasDishes){
+      message.append("You have dishes that are currently cooking" + System.lineSeparator());
+    }
+
+    message.append("Are you sure you want to accept?");
+    return message.toString();
   }
 
   public void rejectDish(ActionEvent actionEvent) {

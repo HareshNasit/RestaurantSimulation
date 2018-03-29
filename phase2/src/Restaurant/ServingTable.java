@@ -61,6 +61,11 @@ public class ServingTable {
     return dish;
   }
 
+  public boolean checkPriority(Dish dish){
+    return (dishesToBeCooked.indexOf(dish) != 0);
+
+  }
+
   /**
    * Get the dish that needs to be cooked at index from the list of dishes that need to be cooked.
    */
