@@ -221,7 +221,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void addCommentToDish(String comment) {
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
     dish.setComment(comment);
-    updateScreen();
   }
 
   public void openCommentDialog() {
@@ -290,6 +289,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void addOptionsToComboBox(Table table) {
     this.table = table;
     int tableSize = setTableOccupied();
+    restaurant.updateServers(String.format("Table %s has been seated", table.getTableID()));
     setCustomerLables(tableSize);
   }
 
@@ -336,6 +336,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       if (result.isPresent()) {
         entered = result.get();
         table.setOccupied(Integer.parseInt(entered));
+        restaurant.updateServers(String.format("Table %s has been seated", table.getTableID()));
         System.out.println(entered);
       }
     } catch (Exception e) {
@@ -440,7 +441,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     server.passOrder(table, restaurant.getServingTable());
   }
 
-  //-----------------------GETTERS AND SETTERS BELOW
+  //-----------------------GETTERS AND SETTERS BELOW---------------------------
 
   public Server getServer() {
     return server;

@@ -25,9 +25,9 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="addDish" layoutX="10.0" layoutY="242.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="34.0" prefWidth="109.0" text="Add dish" />
-            <Button fx:id="removeDish" layoutX="130.0" layoutY="242.0" mnemonicParsing="false" onAction="#removeDishFromOrder" prefHeight="34.0" prefWidth="101.0" text="Remove dish" />
-            <Button fx:id="openBillScreen" layoutX="241.0" layoutY="242.0" mnemonicParsing="false" onAction="#openBillScreen" prefHeight="34.0" prefWidth="144.0" text="     Open bill screen" />
+            <Button fx:id="addDish" layoutX="10.0" layoutY="242.0" mnemonicParsing="false" onAction="#addDishToOrder" prefHeight="34.0" prefWidth="101.0" text="     Add dish" />
+            <Button fx:id="removeDish" layoutX="120.0" layoutY="242.0" mnemonicParsing="false" onAction="#removeDishFromOrder" prefHeight="34.0" prefWidth="128.0" text="     Remove dish" />
+            <Button fx:id="openBillScreen" layoutX="257.0" layoutY="242.0" mnemonicParsing="false" onAction="#openBillScreen" prefHeight="34.0" prefWidth="144.0" text="     Open bill screen" />
             <TableView fx:id="orderTableView" layoutX="10.0" layoutY="33.0" prefHeight="200.0" prefWidth="438.0">
                <columns>
                   <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
@@ -44,7 +44,7 @@
                   <TableColumn fx:id="menuIngredientsColumn" prefWidth="87.0" text="Ingredients" />
                </columns>
             </TableView>
-            <Button fx:id="addCommentButton" layoutX="2.0" layoutY="323.0" mnemonicParsing="false" onAction="#openCommentDialog" prefHeight="48.0" prefWidth="128.0" text="           Comment" />
+            <Button fx:id="addCommentButton" layoutX="2.0" layoutY="297.0" mnemonicParsing="false" onAction="#openCommentDialog" prefHeight="48.0" prefWidth="128.0" text="           Comment" />
             <Button fx:id="buttonBack" layoutX="770.0" layoutY="9.0" mnemonicParsing="false" onAction="#backButtonAction" prefHeight="27.0" prefWidth="48.0">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -54,24 +54,32 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="buttonSend" layoutX="138.0" layoutY="323.0" mnemonicParsing="false" onAction="#sendOrder" prefHeight="48.0" prefWidth="83.0" text="        Send" />
+            <Button fx:id="buttonSend" layoutX="138.0" layoutY="297.0" mnemonicParsing="false" onAction="#sendOrder" prefHeight="48.0" prefWidth="83.0" text="        Send" />
             <ComboBox fx:id="customerNumberDropDown" layoutX="481.0" layoutY="242.0" prefHeight="34.0" prefWidth="128.0" promptText="customer no." />
-            <Button fx:id="addComplimentsButton" layoutX="230.0" layoutY="323.0" mnemonicParsing="false" onAction="#openComplimentMenu" prefHeight="48.0" prefWidth="128.0" text="Add compliments" />
-            <ImageView fitHeight="54.0" fitWidth="40.0" layoutX="10.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true">
+            <Button fx:id="addComplimentsButton" layoutX="230.0" layoutY="297.0" mnemonicParsing="false" onAction="#openComplimentMenu" prefHeight="48.0" prefWidth="128.0" text="Add compliments" />
+            <ImageView fitHeight="54.0" fitWidth="40.0" layoutX="10.0" layoutY="305.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@comment.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="134.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="134.0" layoutY="298.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@send.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="24.0" fitWidth="31.0" layoutX="245.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="31.0" layoutX="261.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@bill.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="33.0" layoutX="9.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@plus.png" />
+               </image></ImageView>
+            <ImageView fitHeight="29.0" fitWidth="33.0" layoutX="120.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@minus.png" />
+               </image></ImageView>
          </children>
       </Pane>
       <Pane fx:id="notificationArea" prefHeight="37.0" prefWidth="829.0" />

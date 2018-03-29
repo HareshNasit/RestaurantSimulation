@@ -114,15 +114,11 @@ public class Server implements IWorker, ServingTableListener {
     dish1.setDishStatus(DishStatus.ORDERED);
   }
 
-  /**
-   * sets a table to be occupied.
-   *
-   * @param tableID id of the table.
-   * @param restaurant restaurant.
-   */
-  public void seatCustomer(String tableID, Restaurant restaurant) {
-    restaurant.getTable(tableID).setOccupied(5);
-    System.out.println(String.format("%s seats Table %s", getName(), tableID));
+
+  public void seatCustomer(Table table, int numberOfCustomers) {
+    table.setOccupied(numberOfCustomers);
+
+
   }
 
   /**
