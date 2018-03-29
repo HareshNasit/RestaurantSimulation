@@ -79,17 +79,29 @@ public class Bill {
     return billText + finalPaymentHelper(subtotal, tip, table);
   }
 
-  private static double get2Decimals(double number) {
+  /**
+   * Returns the number with two decimals
+   * @param number the number that is being rounded
+   * @return the new number with rounded to two decimal places
+   */
+  private static double roundToCents(double number) {
     BigDecimal bd = new BigDecimal(number);
     bd = bd.setScale(2, RoundingMode.FLOOR);
     return bd.doubleValue();
   }
 
+  /**
+   * Returns the final bill inclusive of tip and tax
+   * @param subtotal the final price of all the dishes together
+   * @param tip the tip paid by the customer
+   * @param tax the tax on the bill
+   * @return the final price
+   */
   public static double getTotal(double subtotal, double tip, double tax) {
     BigDecimal bd = new BigDecimal(subtotal);
     bd = bd.add(new BigDecimal(tip));
     bd = bd.add(new BigDecimal(tax));
-    return get2Decimals(bd.doubleValue());
+    return roundToCents(bd.doubleValue());
   }
 
   /**
@@ -101,7 +113,7 @@ public class Bill {
     BigDecimal bd = new BigDecimal(subtotal);
     BigDecimal multiplier = new BigDecimal(salesTax);
     bd = bd.multiply(multiplier);
-    return get2Decimals(bd.doubleValue());
+    return roundToCents(bd.doubleValue());
   }
 
   /**
@@ -114,13 +126,25 @@ public class Bill {
     for (Dish order : dishes) {
       subtotal += order.getPrice();
     }
-    return get2Decimals(subtotal);
+    return roundToCents(subtotal);
   }
 
+  /**
+   * Returns the tip if it is paid as a percentage of the subtotal
+   * @param subtotal the final price of all the dishes together
+   * @param tip the tip that the customer gave as a percentage of the subtotal
+   * @return the tip as a double
+   */
   public static double getPercentWithTip(double subtotal, double tip) {
-    return Bill.get2Decimals(subtotal * tip / 100);
+    return Bill.roundToCents(subtotal * tip / 100);
   }
 
+  /**
+   * a helper method for the bill which returns the final bill text without the tip usually for the customer to check
+   * @param subtotal the final price of all the dishes together
+   * @param table the table that is paying the bill
+   * @return the final bill text
+   */
   private static String billTextHelper(double subtotal, Table table) {
     String billText = "";
     double tax = getTax(subtotal);
@@ -130,9 +154,9 @@ public class Bill {
     if (table.getTableSize() >= 8) {
       billText +=
           "Tip: $"
-              + doubleToCurrency(get2Decimals(subtotal * autoGratuity))
+              + doubleToCurrency(roundToCents(subtotal * autoGratuity))
               + System.lineSeparator();
-      tip = get2Decimals(subtotal * autoGratuity);
+      tip = roundToCents(subtotal * autoGratuity);
     }
     double total = getTotal(subtotal, tip, tax);
     billText += "Tax: $" + doubleToCurrency(tax) + System.lineSeparator();
@@ -140,13 +164,20 @@ public class Bill {
     return billText;
   }
 
+  /**
+   * a helper method for the bill which returns the final bill text with the tip which is kept by the restaurant
+   * @param subtotal the final price of all the dishes together
+   * @param tip the tip entered by the customer
+   * @param table the table that is paying the bill
+   * @return the final bill text
+   */
   private static String finalPaymentHelper(double subtotal, double tip, Table table) {
     String billText = "";
     double tipAm = 0;
     if (table.getTableSize() >= 8) {
       tipAm += subtotal * autoGratuity;
     }
-    double tipAmount = get2Decimals(tip + tipAm);
+    double tipAmount = roundToCents(tip + tipAm);
     double tax = getTax(subtotal);
     double total = getTotal(subtotal, tipAmount, tax);
     System.out.println(tipAmount + subtotal + tax);
