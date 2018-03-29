@@ -36,7 +36,14 @@ public class Server implements IWorker, ServingTableListener {
    */
   public void passOrder(Table table, ServingTable servingTable) {
     System.out.println(String.format("%s sending Table %s's orders to cooks", getName(), table.getTableID()));
-    servingTable.addToBeCooked(table.getTableOrder());
+    for(Dish dish: table.getTableOrder()){
+      if(dish.getDishStatus() == DishStatus.ORDERED ) {
+        servingTable.addToBeCooked(dish);
+        dish.setDishStatus(DishStatus.SENT);
+      } else if (dish.getDishStatus() == DishStatus.RETURNED) {
+        servingTable.addToBeCooked(dish);
+      }
+    }
     System.out.println(servingTable);
   }
 
