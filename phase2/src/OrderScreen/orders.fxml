@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="829.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="829.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="paneBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="715.0">
          <children>
@@ -30,10 +35,11 @@
             <Button fx:id="openBillScreen" layoutX="257.0" layoutY="242.0" mnemonicParsing="false" onAction="#openBillScreen" prefHeight="34.0" prefWidth="144.0" text="     Open bill screen" />
             <TableView fx:id="orderTableView" layoutX="10.0" layoutY="33.0" prefHeight="200.0" prefWidth="438.0">
                <columns>
-                  <TableColumn fx:id="idColumn" prefWidth="29.0" text="Id" />
-                  <TableColumn fx:id="nameColumn" prefWidth="114.0" text=" Dish name" />
                   <TableColumn fx:id="customerNumberColumn" text="Customer" />
-                  <TableColumn fx:id="commentColumn" prefWidth="214.0" text="Comment" />
+                  <TableColumn fx:id="idColumn" prefWidth="41.0" text="Id" />
+                  <TableColumn fx:id="nameColumn" prefWidth="137.0" text=" Dish name" />
+                  <TableColumn fx:id="commentColumn" prefWidth="89.0" text="Comment" />
+                  <TableColumn fx:id="dishStatusColumn" prefWidth="89.0" text="DishStatus" />
                </columns>
             </TableView>
             <TableView fx:id="menuTableView" layoutX="480.0" layoutY="33.0" onMouseClicked="#rowSelectedCheckIngredients" prefHeight="200.0" prefWidth="258.0">

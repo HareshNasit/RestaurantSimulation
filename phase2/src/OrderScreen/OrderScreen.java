@@ -79,6 +79,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   @FXML
   private TableColumn nameColumn;
   @FXML
+  private TableColumn dishStatusColumn;
+  @FXML
   private Button addCommentButton;
   @FXML
   private Pane paneBox;
@@ -119,6 +121,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     customerNumberColumn
         .setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
     commentColumn.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
+    dishStatusColumn.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
 
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
@@ -442,6 +445,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   public void sendOrder() {
     server.passOrder(table, restaurant.getServingTable());
+    updateScreen();
   }
 
   //-----------------------GETTERS AND SETTERS BELOW---------------------------
