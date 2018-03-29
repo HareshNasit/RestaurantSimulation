@@ -4,6 +4,7 @@ import MenuDishes.Dish;
 import Restaurant.IWorker;
 import Restaurant.InventoryIngredient;
 
+import Restaurant.Table;
 import java.util.ArrayList;
 
 public class RestaurantLogger extends SimpleLogger {
@@ -45,6 +46,19 @@ public class RestaurantLogger extends SimpleLogger {
   public void logDishDelivered(Dish dish) {
     String content = this.getTime() + "[NEW LOG - DISH DELIVERED] ";
     content += "[ " + dish.toString() + "] has been delivered ";
+    content += "[END LOG]" + System.lineSeparator();
+    this.writeToLogger(content);
+  }
+
+
+  /**
+   * Logs a dish being rejected by a cook.
+   *
+   * @param dish Dish being delivered.
+   */
+  public void logDishRejected(Dish dish) {
+    String content = this.getTime() + "[NEW LOG - DISH REJECTED] ";
+    content += "[ " + dish.toString() + "] has been rejected ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
@@ -97,7 +111,19 @@ public class RestaurantLogger extends SimpleLogger {
    */
   public void logWorkerLogin(IWorker worker) {
     String content = this.getTime() + "[NEW LOG - WORKER LOGIN] ";
-    content += "[ " + worker.getName() + "] has logged into the system: ";
+    content += "[ " + worker.getName() + "] has logged into the system ";
+    content += "[END LOG]" + System.lineSeparator();
+    this.writeToLogger(content);
+  }
+
+  /**
+   * Sends a log when a table gets cleared.
+   *
+   * @param table Table being cleared.
+   */
+  public void logTableCleared(Table table) {
+    String content = this.getTime() + "[NEW LOG - TABLE CLEAR] ";
+    content += "[ " + table.getTableID() + "] has been cleared ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
