@@ -221,6 +221,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void addCommentToDish(String comment) {
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
     dish.setComment(comment);
+    updateScreen();
+
   }
 
   public void openCommentDialog() {
@@ -412,6 +414,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
+    orderTableView.refresh();
   }
 
   @Override
