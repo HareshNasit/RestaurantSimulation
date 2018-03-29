@@ -80,7 +80,6 @@ public class Cook implements IWorker, ServingTableListener {
    * @param inventory inventory of restaurant
    */
   public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
-    dish.setComment("Cook");
     prepareDish(dish, inventory);
     servingTable.addToBeCooking(dish);
     dish.setDishStatus(DishStatus.COOKING);
@@ -101,7 +100,6 @@ public class Cook implements IWorker, ServingTableListener {
     // Dish dish = servingTable.getDishToBeCooked(index);
     // servingTable.addToBeCooking(index);
       servingTable.addToBeCooking(dish);
-      dish.setComment("returned");
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
