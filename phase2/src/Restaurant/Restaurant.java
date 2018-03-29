@@ -30,6 +30,7 @@ public class Restaurant {
   private final String TABLEFILE = "tables.txt";
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
+  private boolean isActive;
   public SimpleLogger receiptsLogger = new SimpleLogger("");
   public RestaurantLogger restaurantLogger = new RestaurantLogger("");
 
@@ -43,11 +44,22 @@ public class Restaurant {
   public Restaurant(Menu menu, Inventory inventory, ServingTable servingTable) {
     this.inventory = inventory;
     this.menu = menu;
-    generateTables(TABLEFILE);
     this.servingTable = servingTable;
-   // this.generateWorkers(WORKERFILE, this.servingTable);
+    isActive = false;
+    startSystem();
+  }
+
+  public void startSystem(){
+    isActive = true;
+    generateTables(TABLEFILE);
     createNewReceiptFile();
     createNewLogFile();
+  }
+
+  public void shutDownSystem(){
+    isActive = false;
+    inventory.writeToInventory();
+    System.exit(0);
   }
 
   /**

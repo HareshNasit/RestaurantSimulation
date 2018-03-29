@@ -277,6 +277,13 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     });
   }
 
+  public void startSystem(){
+    manager.startSystem(restaurant);
+  }
+
+  public void shutDownSystem(){}
+
+
 
   public void callWorker() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
