@@ -88,6 +88,7 @@
                </image></ImageView>
             <Button fx:id="buttonReturn" layoutX="365.0" layoutY="292.0" mnemonicParsing="false" onAction="#returnButtonAction" prefHeight="24.0" prefWidth="101.0" text="Return" />
             <Button fx:id="buttonServe" layoutX="365.0" layoutY="326.0" mnemonicParsing="false" onAction="#buttonServeAction" prefHeight="27.0" prefWidth="101.0" text="Serve" />
+            <Button fx:id="buttonClear" layoutX="715.0" layoutY="241.0" mnemonicParsing="false" onAction="#buttonClearAction" prefHeight="34.0" prefWidth="101.0" text="Clear Table" />
          </children>
       </Pane>
       <Pane fx:id="notificationArea" prefHeight="43.0" prefWidth="829.0" />

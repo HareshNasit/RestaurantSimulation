@@ -92,6 +92,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private Button buttonReturn;
   @FXML
   private Button buttonServe;
+  @FXML
+  private Button buttonClear;
 
   /**
    * Generates a new order screen
@@ -244,6 +246,14 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     primaryStage.show();
 
 
+  }
+
+  /**
+   * Table is cleared when clear table button is pressed
+   */
+  public void buttonClearAction(){
+    server.clearTable(table);
+    restaurant.notifyWorker(WorkerType.SERVER, table.getTableID() +" is cleared");
   }
 
   /**
