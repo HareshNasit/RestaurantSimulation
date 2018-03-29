@@ -89,6 +89,16 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="System">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="buttonStartSystem" layoutX="191.0" layoutY="77.0" mnemonicParsing="false" onAction="#startSysten" prefHeight="65.0" prefWidth="196.0" text="Start System" />
+                        <Button fx:id="buttonShutdownSystem" layoutX="191.0" layoutY="186.0" mnemonicParsing="false" onAction="#shutdownSystem" prefHeight="65.0" prefWidth="196.0" text="Shutdown System" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
          </tabs>
       </TabPane>
       <Pane fx:id="paneNotification" prefHeight="85.0" prefWidth="600.0" />
