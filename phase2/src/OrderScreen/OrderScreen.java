@@ -95,6 +95,10 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   @FXML
   private VBox vBox;
 
+  @FXML
+  private Button buttonReturn;
+  @FXML
+  private Button buttonServe;
 
   public OrderScreen(Server server, Table table, Restaurant restaurant) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orders.fxml"));
@@ -195,12 +199,15 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
     }
 
+    buttonReturn.setVisible(false);
+
   }
 
   public void buttonServeAction(){
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
     server.serveDish(dish, restaurant);
     restaurant.restaurantLogger.logDishDelivered(dish);
+    buttonServe.setVisible(false);
 
   }
   /**
