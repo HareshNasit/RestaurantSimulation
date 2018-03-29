@@ -8,6 +8,9 @@ import java.util.HashMap;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+/**
+ *
+ */
 public class ComplementScreenCookExtra extends ComplementScreenController {
 
   private Restaurant restaurant;

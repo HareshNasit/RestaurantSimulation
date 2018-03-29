@@ -35,6 +35,11 @@ import notification.Notification;
 
 public class OrderScreen extends VBox implements ModelControllerInterface {
 
+  private Server server;
+  private Table table;
+  private Restaurant restaurant;
+  private Notification notification;
+
   @FXML
   private Button buttonSend;
   @FXML
@@ -45,9 +50,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private TableColumn customerNumberColumn;
   @FXML
   private Button addComplimentsButton;
-  private Server server;
-  private Table table;
-  private Restaurant restaurant;
   @FXML
   private Label tableOrderTitle;
   @FXML
@@ -70,7 +72,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private TableColumn menuIngredientsColumn;
   @FXML
   private Button openBillScreen;
-
   @FXML
   private TableColumn commentColumn;
   @FXML
@@ -83,19 +84,22 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private Button addCommentButton;
   @FXML
   private Pane paneBox;
-
-  private double menuSelectedDishId;
-  private String menuSelectedDishName;
-  private int menuSelectedDishCustomerNum;
-  private ArrayList<Dish> dishes;
-
-  private Notification notification;
   @FXML
   private Pane notificationArea;
   @FXML
   private VBox vBox;
+  @FXML
+  private Button buttonReturn;
+  @FXML
+  private Button buttonServe;
 
-
+  /**
+   * Generates a new order screen
+   *
+   * @param server server that is operating on this screen
+   * @param table table that the server is attending
+   * @param restaurant restaurant that the server works at
+   */
   public OrderScreen(Server server, Table table, Restaurant restaurant) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orders.fxml"));
     fxmlLoader.setRoot(this);
@@ -106,15 +110,17 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       setServer(server);
       this.restaurant = restaurant;
       this.table = table;
-      setCustomerLabels(table.getTableSize());
       initialize();
-      updateScreen();
+
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  public void initialize() {
+  /**
+   * Generates and sets GUI component
+   */
+  private void initialize() {
     idColumn.setCellValueFactory(new PropertyValueFactory<Dish, Double>("id"));
     nameColumn.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     customerNumberColumn
@@ -126,40 +132,98 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
     menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
 
-
-
+    buttonReturn.setVisible(false);
+    buttonServe.setVisible(false);
+    setCustomerLabels(table.getTableSize());
     this.setRowAction();
     System.out.println(getOrderTableView());
     notification = new Notification();
     notificationArea.getChildren().setAll(notification);
-
+    updateScreen();
   }
 
   /**
-   * Opens a dialog when a row in the menu order table view is clicked. The dialog shows the dish price and the
-   * ingredients including the extra added compliments.
+   * Actions that are performed when a dish is selected on a table
    */
-  public void setRowAction() {
+  private void setRowAction() {
     getOrderTableView().setRowFactory(tv -> {
       TableRow<Dish> row = new TableRow<>();
       row.setOnMouseClicked(event -> {
+        Dish rowData = row.getItem();
+
+        //Checks if the dish can be served or returned
+        if (!row.isEmpty()) {
+          buttonReturn.setVisible(rowData.getDishStatus() == DishStatus.SERVED);
+          buttonServe.setVisible(rowData.getDishStatus() == DishStatus.PICKUP);
+        }
+
+        //Opens dish information when double clicked
         if (!row.isEmpty() && event.getClickCount() == 2) {
-          Dish rowData = row.getItem();
-          System.out.println("Click on: " + rowData.getName());
-          String finalString =
-              "The price of this dish is: " + rowData.getPrice() + System.lineSeparator() +
-                  "The ingredients of this dish are: " + System.lineSeparator() + rowData
-                  .getIngredientString()
-                  + "Comment: " + rowData.getComment();
-          Alert alert = new Alert(Alert.AlertType.NONE, finalString,
-              ButtonType.OK);
-          alert.setTitle("Dish details");
-          alert.showAndWait();
-          System.out.println(rowData.getPrice());
+
+          openDishAlertBox(rowData);
         }
       });
       return row;
     });
+  }
+
+  /**
+   * Opens an alert information box about the dish
+   *
+   * @param dish the dish that was selcted
+   */
+  private void openDishAlertBox(Dish dish) {
+
+    String finalString =
+        "The price of this dish is: " + dish.getPrice() + System.lineSeparator() +
+            "The ingredients of this dish are: " + System.lineSeparator() + dish
+            .getIngredientString()
+            + "Comment: " + dish.getComment();
+    Alert alert = new Alert(Alert.AlertType.NONE, finalString,
+        ButtonType.OK);
+    alert.setTitle("Dish details");
+    alert.showAndWait();
+  }
+
+  /**
+   * Returns the selected dish
+   */
+  public void returnButtonAction() {
+
+    Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+    if (dish.getComment().equals("")) {
+      TextInputDialog dialog = new TextInputDialog();
+      dialog.setTitle("Please put a comment before returning");
+      dialog.setContentText("Comment");
+
+      Optional<String> result = dialog.showAndWait();
+      if (result.isPresent()) {
+        dish.setComment(result.get());
+        server.returnDish(dish, restaurant.getServingTable());
+        restaurant.restaurantLogger.logDishReturned(dish, dish.getComment());
+      } else {
+        server.sendNotification("Please input a message");
+      }
+
+    } else {
+      server.returnDish(dish, restaurant.getServingTable());
+      restaurant.restaurantLogger.logDishReturned(dish, dish.getComment());
+
+    }
+
+    buttonReturn.setVisible(false);
+
+  }
+
+  /**
+   * Serves the selected dish
+   */
+  public void buttonServeAction() {
+    Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
+    server.serveDish(dish, restaurant);
+    restaurant.restaurantLogger.logDishDelivered(dish);
+    buttonServe.setVisible(false);
+
   }
 
   /**
@@ -202,6 +266,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   /**
    * Makes the order appear on the menu table order view
+   *
    * @param orderedDishes the dishes that the table ordered
    */
   public void setOrderTable(ArrayList<Dish> orderedDishes) {
@@ -222,6 +287,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   }
 
+  /**
+   * Opens the dialog box to enter a comment for a dish when the comment button is clicked
+   */
   public void openCommentDialog() {
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Comment Dialog");
@@ -241,6 +309,12 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Checks if the comment entered is an acceptable value
+   *
+   * @param comment the comment being entered
+   * @return true or false based on whether the comment is acceptable or not
+   */
   private boolean validCommentEntry(String comment) {
     try {
       return comment instanceof String;
@@ -260,15 +334,18 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     String message = "";
 
     if (dish.getDishStatus() == DishStatus.REJECTED || dish.getDishStatus() == DishStatus.ORDERED ||
-        dish.getDishStatus() == DishStatus.SENT ){
+        dish.getDishStatus() == DishStatus.SENT) {
       server.removeDish(table, dish);
     } else {
-      message = String.format("Dish is %s. Are you sure you want to remove it?", dish.getDishStatus());
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES, ButtonType.CANCEL);
+      message = String
+          .format("Dish is %s. Are you sure you want to remove it?", dish.getDishStatus());
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES,
+          ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
         server.removeDish(table, dish);
-      }}
+      }
+    }
 
     updateScreen();
   }
@@ -277,8 +354,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Adds dishes to a specific customer's order
    */
   public void addDishToOrder() {
-    // TODO: Create a way to give customer number
-    // TODO: Add Compliments Somehow
     try {
       MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
       String customer = (String) customerNumberDropDown.getValue();
@@ -302,15 +377,17 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void addOptionsToComboBox(Table table) {
     this.table = table;
     int tableSize = setTableOccupied();
-    restaurant.notifyWorker(WorkerType.SERVER,String.format("Table %s has been seated", table.getTableID()) );
+    restaurant.notifyWorker(WorkerType.SERVER,
+        String.format("Table %s has been seated", table.getTableID()));
     setCustomerLabels(tableSize);
   }
 
-    /**
-     * Produces a list of customers for a table based on the number of people entered
-     * @param tableSize the number of people of the table
-     */
-  private void setCustomerLabels(int tableSize){
+  /**
+   * Produces a list of customers for a table based on the number of people entered
+   *
+   * @param tableSize the number of people of the table
+   */
+  private void setCustomerLabels(int tableSize) {
     ArrayList<String> customerLabels = new ArrayList<>();
     for (int k = 1; k <= tableSize; k++) {
       customerLabels.add("Customer " + k);
@@ -335,6 +412,13 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Opens a dialog which allows the server to enter the number of people sitting at a table and
+   * also handles the case where the cancel button is pressed on the dialog so the method does not
+   * throw an error
+   *
+   * @return the number of people seated at a table
+   */
   public int setTableOccupied() {
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Table Dialog");
@@ -353,7 +437,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       if (result.isPresent()) {
         entered = result.get();
         table.setOccupied(Integer.parseInt(entered));
-        restaurant.notifyWorker(WorkerType.SERVER,String.format("Table %s has been seated", table.getTableID()));
+        restaurant.notifyWorker(WorkerType.SERVER,
+            String.format("Table %s has been seated", table.getTableID()));
       }
     } catch (Exception e) {
       System.out.println("Enter the number of people occupying the table");
@@ -367,7 +452,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
-
+  /**
+   * Reopens the table screen when the back button is clicked
+   */
   public void backButtonAction() {
 
     TablesScreen tablesScreen = new TablesScreen(server, restaurant);
@@ -409,6 +496,13 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * checks the ingredients required to make a dish in a selected row in the menu table view to see
+   * if there are enough ingredients to make that dish. If there are not enough ingredients the add
+   * dish button is disabled for the dish
+   *
+   * @param mouseEvent The mouse pointer that chooses a row in the menu table view
+   */
   public void rowSelectedCheckIngredients(MouseEvent mouseEvent) {
     MenuItem dish = (MenuItem) menuTableView.getSelectionModel().getSelectedItem();
     try {
@@ -422,9 +516,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Updates the screen so all menu items and order items are up to date
+   */
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
-    //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());
     orderTableView.refresh();
@@ -442,25 +538,36 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     notification.getButtonPickUp().setOnAction(event -> inventory.addStock(ingredient, amount));
   }
 
+  /**
+   * Returns an observable list of menuitems
+   *
+   * @return Returns an observable list of menuitems
+   */
   public ObservableList<MenuItem> getMenuItem() {
     ObservableList<MenuItem> menu = FXCollections.observableArrayList();
     menu.addAll(restaurant.getMenu().getMenuItems());
     return menu;
   }
 
+  /**
+   * Returns an observable list of this tables orders
+   *
+   * @return ObservableList<Dish> of orders
+   */
   public ObservableList<Dish> getOrderDish() {
     ObservableList<Dish> orderedDishes = FXCollections.observableArrayList();
     orderedDishes.addAll(table.getTableOrder());
     return orderedDishes;
   }
 
+  /**
+   * Sends this tables orders to the serving table
+   */
   public void sendOrder() {
     ArrayList<Dish> order = server.passOrder(table, restaurant.getServingTable());
     restaurant.restaurantLogger.logOrderMessage(order);
     updateScreen();
   }
-
-  //-----------------------GETTERS AND SETTERS BELOW---------------------------
 
   public Server getServer() {
     return server;
@@ -486,16 +593,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
-
-  public ArrayList<Dish> getDishes() {
-    return dishes;
-  }
-
-  public void setDishes(ArrayList<Dish> dishes) {
-    this.dishes = dishes;
-    getOrderTableView().setItems(getOrderDish());
-  }
-
 
   public TableView<Dish> getOrderTableView() {
     return orderTableView;

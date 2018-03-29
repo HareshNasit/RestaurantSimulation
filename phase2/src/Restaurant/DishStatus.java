@@ -32,7 +32,7 @@ public enum DishStatus {
   SERVED {
     @Override
     public String toString() {
-      return "Serving";
+      return "Served";
     }
   },
   ORDERED {
