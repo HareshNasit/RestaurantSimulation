@@ -146,6 +146,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   public void buttonTestAction(){
     tableViewDishes.setItems(getDishData());
+    tableViewDishes.refresh();
   }
 
   /**
