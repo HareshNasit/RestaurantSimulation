@@ -261,6 +261,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
         setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
         setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
+        restaurant.restaurantLogger.logDishPrepared(dish);
       }
     } catch (NullPointerException e) {
       System.out.println("No row selected");
@@ -324,6 +325,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         try {
           Dish dish = (Dish) tab3Table.getSelectionModel().getSelectedItem();
           ((Server) cook).serveDish(dish, restaurant);
+          restaurant.restaurantLogger.logDishDelivered(dish);
         } catch (NullPointerException e) {
           System.out.println("No row selected");
         }

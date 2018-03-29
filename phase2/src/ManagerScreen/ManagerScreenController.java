@@ -257,6 +257,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
       String[] outputResult = result.get().split("\\,");
       String ingredient = outputResult[0].trim();
+      restaurant.restaurantLogger.logRequest(worker, ingredient);
 
       try{
       int amount = Integer.valueOf(outputResult[1].trim());
@@ -285,6 +286,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
         lowerThreshold);
     restaurant.getInventory().addNewIngredient(ingredient);
     //There should be a better way to set this
+    restaurant.restaurantLogger.logInventoryChanged(ingredient, amount);
     tableInventory.setItems(getIngredients(restaurant.getInventory()));
     clearTextFields();
 
@@ -388,7 +390,10 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     Optional<String> result = dialog.showAndWait();
     if (result.isPresent()){
       worker.sendNotification(result.get());
+      restaurant.restaurantLogger.logRequest(worker, result.get());
     }
+
+
   }
 
   /**
