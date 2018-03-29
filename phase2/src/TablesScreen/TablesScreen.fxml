@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.layout.VBox">
+<fx:root fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="600.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox fx:id="hBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="600.0">
          <children>
@@ -27,9 +28,23 @@
             </Pane>
             <Pane fx:id="ButtonsPane" prefHeight="400.0" prefWidth="295.0">
                <children>
-                  <Button fx:id="tableButton" layoutX="11.0" layoutY="123.0" mnemonicParsing="false" onAction="#openTableMenu" prefHeight="40.0" prefWidth="273.0" text="Open Table" />
+                  <Button fx:id="tableButton" layoutX="11.0" layoutY="123.0" mnemonicParsing="false" onAction="#openTableMenu" prefHeight="40.0" prefWidth="273.0" text="Open Table">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@table.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Button fx:id="servingTableButton" layoutX="11.0" layoutY="178.0" mnemonicParsing="false" onAction="#openServingTable" prefHeight="40.0" prefWidth="273.0" text="Open Serving Table" />
-                  <Button fx:id="managerButton" layoutX="11.0" layoutY="238.0" mnemonicParsing="false" onAction="#callManager" prefHeight="40.0" prefWidth="273.0" text="Call Manager" />
+                  <Button fx:id="managerButton" layoutX="11.0" layoutY="238.0" mnemonicParsing="false" onAction="#callManager" prefHeight="40.0" prefWidth="273.0" text="Call Manager">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@manager.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <Label fx:id="labelServerName" layoutX="196.0" layoutY="14.0" prefHeight="18.0" prefWidth="87.0" text="Server Name">
                      <font>
                         <Font size="14.0" />
