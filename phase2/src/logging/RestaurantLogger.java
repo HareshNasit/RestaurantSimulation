@@ -103,7 +103,4 @@ public class RestaurantLogger extends SimpleLogger {
   }
 
 
-
-
-
 }

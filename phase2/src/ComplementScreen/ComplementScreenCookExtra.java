@@ -12,6 +12,13 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
 
   private Restaurant restaurant;
 
+
+  /**
+   * For the add extras button. If the cook adds ingredients that are in the inventory, the
+   * ingredients get removed. Otherwise, an alert pops up and tells the cook that there is not
+   * enough of an ingredient. The cook should only be able to press the button if the dish was
+   * returned.s
+   */
   public void addIfIngredientsEnough() {
 
     HashMap<String, DishIngredient> dishIngredientsCopy = dish.cloneIngredients();
