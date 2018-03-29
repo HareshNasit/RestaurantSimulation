@@ -38,5 +38,11 @@ public enum DishStatus {
       return "Ordered";
     }
   },
+  SENT {
+    @Override
+    public String toString() {
+      return "Ordered";
+    }
+  },
 
 }
