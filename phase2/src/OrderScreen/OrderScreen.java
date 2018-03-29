@@ -106,7 +106,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       setServer(server);
       this.restaurant = restaurant;
       this.table = table;
-      setCustomerLables(table.getTableSize());
+      setCustomerLabels(table.getTableSize());
       initialize();
       updateScreen();
     } catch (IOException e) {
@@ -201,12 +201,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   }
 
   /**
-   * Prints the bill for the table.
-   */
-  public void printTableBill(ActionEvent actionEvent) {
-  }
-
-  /**
    * Makes the order appear on the menu table order view
    * @param orderedDishes the dishes that the table ordered
    */
@@ -244,7 +238,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     if (result.isPresent()) {
       entered = result.get();
       addCommentToDish(entered);
-      System.out.println(entered);
     }
   }
 
@@ -310,10 +303,14 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     this.table = table;
     int tableSize = setTableOccupied();
     restaurant.notifyWorker(WorkerType.SERVER,String.format("Table %s has been seated", table.getTableID()) );
-    setCustomerLables(tableSize);
+    setCustomerLabels(tableSize);
   }
 
-  private void setCustomerLables(int tableSize){
+    /**
+     * Produces a list of customers for a table based on the number of people entered
+     * @param tableSize the number of people of the table
+     */
+  private void setCustomerLabels(int tableSize){
     ArrayList<String> customerLabels = new ArrayList<>();
     for (int k = 1; k <= tableSize; k++) {
       customerLabels.add("Customer " + k);

@@ -10,10 +10,10 @@ import java.util.HashMap;
  */
 public class Dish extends MenuItem {
 
-  private String tableName;
-  private int customerNum;
-  private String comment;
-  private DishStatus dishStatus;
+  protected String tableName;
+  protected int customerNum;
+  protected String comment;
+  protected DishStatus dishStatus;
 
   /**
    * A dish that a customer orders. The Dishes get passed around the restaurant until the customer
