@@ -16,5 +16,5 @@ public interface IWorker {
 
   public String getName();
 
-  public String getType();
+  public WorkerType getType();
 }

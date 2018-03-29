@@ -7,22 +7,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import sun.tools.jconsole.Worker;
 
 /** This is the Restaurant class. This is where all the moving parts move around. */
 public class Restaurant {
 
   private Inventory inventory; // The inventory of the restaurant.
   private Menu menu; // The menu of the restaurant.
-  private ArrayList<IWorker> workers; // All the workers in this restaurant.
-  private HashMap<String, Cook> cooks; // HashMap of cooks name and the cook.
-  public HashMap<String, Table> getTables() {
-    return tables;
-  }
-
-  public void setTables(HashMap<String, Table> tables) {
-    this.tables = tables;
-  }
-
   private HashMap<String, Table> tables; // HashMap of table name and the table.
   private Manager manager; // The manager of the restaurant.
   private ServingTable servingTable; // The serving table of this restaurant.
@@ -30,22 +21,47 @@ public class Restaurant {
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
   private boolean isActive;
-  private ArrayList<Server> servers;
+  private ArrayList<IWorker> workers; // All the workers in this restaurant.
+  private ArrayList<Notifiable> servers;
+  private ArrayList<Notifiable> cooks;
+  private ArrayList<Notifiable> managers;
 
-  public void addServer(Server server){
-    servers.add(server);
+  public SimpleLogger receiptsLogger = new SimpleLogger("");
+  public RestaurantLogger restaurantLogger = new RestaurantLogger("");
+
+  public HashMap<String, Table> getTables() { return tables; }
+
+  public void addManager(Manager manager){
+    managers.add(manager);
+
   }
 
-  public void updateServers(String message){
-    for(Server server: servers){
-      server.sendNotifications(message);
+  public void notifyWorker(WorkerType workerType,String message){
+
+    if (workerType == WorkerType.SERVER){
+      for(Notifiable server: servers){
+        server.sendNotifications(message);
+      }
+    } else if (workerType == WorkerType.COOK) {
+      for(Notifiable cook: cooks){
+        cook.sendNotifications(message);
+      }
+    } else if (workerType == WorkerType.MANAGER){
+      for(Notifiable manager: managers){
+        manager.sendNotifications(message);
+      }
     }
 
   }
 
-
-  public SimpleLogger receiptsLogger = new SimpleLogger("");
-  public RestaurantLogger restaurantLogger = new RestaurantLogger("");
+  public void addServer(Server server){
+    servers.add(server);
+    getWorkers().add(server);
+  }
+  public void addCook(Cook cook){
+    cooks.add(cook);
+    getWorkers().add(cook);
+  }
 
   /**
    * Generates a new restaurant with menu, inventory, and serving table
@@ -58,7 +74,9 @@ public class Restaurant {
     this.inventory = inventory;
     this.menu = menu;
     this.servingTable = servingTable;
-    this.servers = new ArrayList<Server>();
+    this.servers = new ArrayList<Notifiable>();
+    this.cooks = new ArrayList<Notifiable>();
+    this.workers = new ArrayList<IWorker>();
     isActive = false;
     startSystem();
   }
@@ -76,17 +94,6 @@ public class Restaurant {
     System.exit(0);
   }
 
-
-
-  /**
-   * Returns a cook with the given name.
-   *
-   * @param name of the cook.
-   * @return Cook.
-   */
-  public Cook getCook(String name) {
-    return cooks.get(name);
-  }
 
   /**
    * Returns the table with the given id.
@@ -123,7 +130,7 @@ public class Restaurant {
    */
   public HashMap<String, IWorker> MapOfWorkers() {
     HashMap<String, IWorker> workersMap = new HashMap<>();
-    for (IWorker worker : this.workers) {
+    for (IWorker worker : this.getWorkers()) {
       workersMap.put(worker.getName(), worker);
     }
     return workersMap;
@@ -235,5 +242,13 @@ public class Restaurant {
 
   public SimpleLogger getReceiptsLogger() {
     return receiptsLogger;
+  }
+
+  public ArrayList<IWorker> getWorkers() {
+    return workers;
+  }
+
+  public void setWorkers(ArrayList<IWorker> workers) {
+    this.workers = workers;
   }
 }

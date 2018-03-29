@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Cook implements IWorker, Notifiable {
 
   private String name; // Name of the cook.
+  private WorkerType type = WorkerType.COOK;
   private ModelControllerInterface screen;
   private ArrayList<Dish> currentDishes;
 
@@ -39,8 +40,8 @@ public class Cook implements IWorker, Notifiable {
   }
 
   @Override
-  public String getType() {
-    return "Cook";
+  public WorkerType getType() {
+    return type;
   }
 
   /**

@@ -8,6 +8,8 @@ public class Server implements IWorker, Notifiable {
 
   private String name; // name of a server
   private ModelControllerInterface screen;
+  private WorkerType type = WorkerType.SERVER;
+
 
   /**
    * Creates a new server for this restaurant
@@ -28,8 +30,8 @@ public class Server implements IWorker, Notifiable {
   }
 
   @Override
-  public String getType() {
-    return "Server";
+  public WorkerType getType() {
+    return type;
   }
 
   /**
