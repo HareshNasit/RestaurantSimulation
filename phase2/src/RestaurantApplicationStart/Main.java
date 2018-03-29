@@ -36,7 +36,7 @@ public class Main extends Application {
     Manager manager = managerStart("Alfred", restaurant);
 
     serverStart("John", restaurant, manager);
-    
+
     cookStart("harsh", restaurant, manager);
   }
 

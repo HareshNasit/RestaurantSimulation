@@ -1,26 +1,22 @@
 package TablesScreen;
 
 import OrderScreen.OrderScreen;
+import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.ModelControllerInterface;
-import java.util.Stack;
 import javafx.scene.layout.VBox;
 import notification.Notification;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collection;
 import ServingTableScreen.ServingScreen;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -153,8 +149,9 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
   }
 
   @Override
-  public void openReceiverFunction() {
+  public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
     notification.openScanner();
+    notification.getButtonPickUp().setOnAction(event -> inventory.addStock(ingredient, amount));
   }
 
   /**

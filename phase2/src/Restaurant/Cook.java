@@ -48,7 +48,7 @@ public class Cook implements IWorker, ServingTableListener {
    * the manager.
    */
   public void scanStock(Inventory inventory, String ingredient, int amount) {
-    screen.openReceiverFunction();
+    screen.openReceiverFunction(inventory, ingredient,amount );
   }
 
   @Override

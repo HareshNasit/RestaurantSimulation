@@ -1,6 +1,5 @@
 package ManagerScreen;
 
-import Restaurant.DishStatus;
 import Restaurant.IWorker;
 import Restaurant.Inventory;
 import Restaurant.InventoryIngredient;
@@ -13,14 +12,11 @@ import Restaurant.Dish;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.Stack;
+import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -30,6 +26,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -234,9 +231,12 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   /**
    * Open the receiver function for the manager
+   * @param inventory
+   * @param ingredient
+   * @param amount
    */
   @Override
-  public void openReceiverFunction() {
+  public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
     //Future implementation
   }
 
@@ -245,7 +245,29 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
    */
   public void buttonStockAction() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
-    worker.scanStock(restaurant.getInventory(), "meems", 123);
+
+    TextInputDialog dialog = new TextInputDialog("stock, amount");
+    dialog.setTitle("Receiver");
+    dialog.setHeaderText("New Stock");
+    dialog.setContentText("Enter stock name and amount as followed:");
+
+// Traditional way to get the response value.
+    Optional<String> result = dialog.showAndWait();
+    if (result.isPresent()){
+
+      String[] outputResult = result.get().split("\\,");
+      String ingredient = outputResult[0].trim();
+
+      try{
+      int amount = Integer.valueOf(outputResult[1].trim());
+      worker.scanStock(restaurant.getInventory(), ingredient, amount);
+      } catch(NumberFormatException e){
+        e.printStackTrace();
+        buttonStockAction();
+      }
+
+    }
+
   }
 
 

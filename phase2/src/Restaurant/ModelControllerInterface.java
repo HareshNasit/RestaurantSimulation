@@ -6,6 +6,6 @@ public interface ModelControllerInterface {
 
   public void openNotification(String message);
 
-  public void openReceiverFunction();
+  public void openReceiverFunction(Inventory inventory, String ingredient, int amount);
 
 }
