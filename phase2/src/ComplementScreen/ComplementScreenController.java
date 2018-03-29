@@ -50,7 +50,9 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   public TextArea dishStatusLabel;
 
   private HashMap<String, DishIngredient> ingredients;
+  private HashMap<String, DishIngredient> ingredientsCopy;
   private String selectedIngredient;
+
 
   /**
    * After the constructor is called, this is called.
@@ -107,7 +109,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
     alert.showAndWait();
     if (alert.getResult() == ButtonType.YES) {
       if (this.dish != null) {
-        this.dish.setToBaseIngredients();
+        this.ingredients = this.ingredientsCopy;
       }
       this.closeWindow(cancel);
     }
@@ -221,6 +223,15 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   public void setDish(Dish dish) {
     this.dish = dish;
     this.ingredients = dish.getIngredients();
+    this.ingredientsCopy = new HashMap<>();
+    for (String ingredient : this.ingredients.keySet()) {
+      this.ingredientsCopy.put(ingredient, this.ingredients.get(ingredient).clone());
+    }
+
+  }
+
+  public HashMap<String, DishIngredient> getIngredientsCopy() {
+    return ingredientsCopy;
   }
 
   /**
