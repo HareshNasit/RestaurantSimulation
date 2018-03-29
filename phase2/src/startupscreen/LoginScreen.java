@@ -99,20 +99,27 @@ public class LoginScreen implements Initializable{
             String line = fileReader.readLine();
             while (line != null) {
                 String[] details = line.split("\\|");
-                if((details[1].equals(userName.getText())) && (details[2].equals(password.getText()))) {
+                if(checkUserIds(userName.getText(),password.getText(),details)) {
                     System.out.println("Yallaa it workssss");
 
                     if (details[0].equals("Manager")) {
                         canLogin.setText("Logged in");
                         canLogin.setTextFill(Paint.valueOf("Green"));
                         systemOn = true;
+                        break;
                     } else if (systemOn) {
                         canLogin.setText("Logged in");
                         canLogin.setTextFill(Paint.valueOf("Green"));
+                        break;
                     } else if (!systemOn) {
                         canLogin.setText("Sorry system off");
                         canLogin.setTextFill(Paint.valueOf("Red"));
+                        break;
                     }
+                }
+                else{
+                    canLogin.setText("Sorry wrong username or pass");
+                    canLogin.setTextFill(Paint.valueOf("Red"));
                 }
                 line = fileReader.readLine();
             }
@@ -128,10 +135,6 @@ public class LoginScreen implements Initializable{
     }
         public boolean checkUserIds(String username, String password, String[] details){
             if((details[1].equals(username)) && (details[2].equals(password))){
-                canLogin.setText("Logged in");
-                canLogin.setTextFill(Paint.valueOf("Green"));
-                systemOn = true;
-                System.out.println("Yallaa it workssss");
                 return true;
             }
             else {
