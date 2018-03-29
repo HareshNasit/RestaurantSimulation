@@ -201,12 +201,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   }
 
   /**
-   * Prints the bill for the table.
-   */
-  public void printTableBill(ActionEvent actionEvent) {
-  }
-
-  /**
    * Makes the order appear on the menu table order view
    * @param orderedDishes the dishes that the table ordered
    */
@@ -244,7 +238,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     if (result.isPresent()) {
       entered = result.get();
       addCommentToDish(entered);
-      System.out.println(entered);
     }
   }
 
