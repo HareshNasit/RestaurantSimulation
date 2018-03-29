@@ -35,6 +35,11 @@ public class Restaurant {
 
   }
 
+  /**
+   * Notifies the workers
+   * @param workerType
+   * @param message
+   */
   public void notifyWorker(WorkerType workerType,String message){
 
     if (workerType == WorkerType.SERVER){
