@@ -213,11 +213,17 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     }
   }
 
+  /**
+   * Updates the logger with content
+   */
   private void updateLogger(){
     textAreaLog.setText(restaurant.restaurantLogger.returnAllContent());
 
   }
 
+  /**
+   * When the button is clicked, the log text area is refreshed
+   */
   public void buttonRefreshAction(){
     updateLogger();
   }
