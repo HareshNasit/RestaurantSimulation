@@ -80,7 +80,7 @@ public class Menu {
   }
 
   /**
-   * Returns a menuitem which is a dish which includes the dish's id, the table that ordered it and
+   * Returns a menu item which is a dish which includes the dish's id, the table that ordered it and
    * the customer that placed the order.
    *
    * @param id the id of the dish
