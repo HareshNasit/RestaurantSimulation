@@ -1,4 +1,4 @@
-package BillScreen;
+package billScreen;
 
 import Restaurant.Bill;
 import Restaurant.Restaurant;

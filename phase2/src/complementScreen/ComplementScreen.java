@@ -1,4 +1,4 @@
-package ComplementScreen;
+package complementScreen;
 
 import MenuDishes.Dish;
 import Restaurant.Inventory;

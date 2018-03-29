@@ -1,6 +1,6 @@
 package OrderScreen;
 
-import BillScreen.BillScreenController;
+import billScreen.BillScreenController;
 import MenuDishes.Dish;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
@@ -167,7 +167,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    */
   public void openBillScreen() throws IOException {
     Stage primaryStage = new Stage();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/BillScreen/bill.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/billScreen/bill.fxml"));
     Parent root = loader.load();
     BillScreenController controller = loader.getController();
 
@@ -386,9 +386,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/ComplementScreen/complements.fxml"));
+            getClass().getResource("/complementScreen/complements.fxml"));
         Parent root = loader.load();
-        ComplementScreen.ComplementScreenController controller = loader.getController();
+        complementScreen.ComplementScreenController controller = loader.getController();
 
         controller.setDish(dish);
         controller.setIngredients();
