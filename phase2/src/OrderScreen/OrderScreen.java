@@ -105,6 +105,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       setServer(server);
       this.restaurant = restaurant;
       this.table = table;
+      setCustomerLables(table.getTableSize());
       initialize();
       updateScreen();
     } catch (IOException e) {
@@ -122,6 +123,8 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     menuIdColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("id"));
     menuDishColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, String>("name"));
     menuPriceColumn.setCellValueFactory(new PropertyValueFactory<MenuItem, Double>("price"));
+
+
 
     this.setRowAction();
     System.out.println(getOrderTableView());
@@ -286,10 +289,13 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    */
   public void addOptionsToComboBox(Table table) {
     this.table = table;
-    ArrayList<String> customerLabels = new ArrayList<>();
     int tableSize = setTableOccupied();
-    table.setOccupied(tableSize);
-    for (int k = 1; k <= table.getTableSize(); k++) {
+    setCustomerLables(tableSize);
+  }
+
+  private void setCustomerLables(int tableSize){
+    ArrayList<String> customerLabels = new ArrayList<>();
+    for (int k = 1; k <= tableSize; k++) {
       customerLabels.add("Customer " + k);
     }
     ObservableList<String> labels = FXCollections.observableArrayList();
