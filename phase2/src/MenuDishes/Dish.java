@@ -178,14 +178,26 @@ public class Dish extends MenuItem {
     return decim.format(number);
   }
 
+  /**
+   * Returns a dish's status, i.e. whether it is ordered, cooked, rejected, etc.
+   * @return the dish's status
+   */
   public DishStatus getDishStatus() {
     return dishStatus;
   }
 
+  /**
+   * Sets the dish's status
+   * @param dishStatus the dish's status
+   */
   public void setDishStatus(DishStatus dishStatus) {
     this.dishStatus = dishStatus;
   }
 
+  /**
+   * Returns a dish which is a menuItem along with the table that ordered it and the customer that ordered it
+   * @return
+   */
   public Dish clone() {
     MenuItem menuItem = new MenuItem(this.name, this.id, this.price, this.cloneIngredients());
     return new Dish(menuItem, this.tableName, this.customerNum);

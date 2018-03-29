@@ -94,10 +94,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   private Pane notificationArea;
   @FXML
   private VBox vBox;
-  @FXML
-  private Button buttonReturn;
-  @FXML
-  private Button buttonServe;
 
 
   public OrderScreen(Server server, Table table, Restaurant restaurant) {
@@ -171,7 +167,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
           alert.showAndWait();
           System.out.println(rowData.getPrice());
         }
-
       });
       return row;
     });
@@ -268,6 +263,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   }
 
+  /**
+   * Opens the dialog box to enter a comment for a dish when the comment button is clicked
+   */
   public void openCommentDialog() {
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Comment Dialog");
@@ -287,6 +285,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Checks if the comment entered is an acceptable value
+   * @param comment the comment being entered
+   * @return true or false based on whether the comment is acceptable or not
+   */
   private boolean validCommentEntry(String comment) {
     try {
       return comment instanceof String;
@@ -381,6 +384,11 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+  /**
+   * Opens a dialog which allows the server to enter the number of people sitting at a table and also handles the case
+   * where the cancel button is pressed on the dialog so the method does not throw an error
+   * @return the number of people seated at a table
+   */
   public int setTableOccupied() {
     Dialog dialog = new TextInputDialog();
     dialog.setTitle("Table Dialog");

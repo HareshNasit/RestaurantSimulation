@@ -3,6 +3,9 @@ package MenuDishes;
 import Restaurant.DishIngredient;
 import java.util.HashMap;
 
+/**
+ * This is a dish that is displayed in the menu which can be ordered by customers
+ */
 public class MenuItem {
 
   protected String name; // name of the dish

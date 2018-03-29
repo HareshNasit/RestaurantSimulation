@@ -184,6 +184,12 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         checkLabel.setTextFill(Paint.valueOf("Red"));
         accept.setDisable(true);
       }
+      if(dish.getDishStatus().equals(DishStatus.RETURNED)){
+        addExtra.setDisable(false);
+        }
+        else if(dish.getDishStatus().equals(DishStatus.SENT)){
+          addExtra.setDisable(true);
+      }
     } catch (NullPointerException e) {
       System.out.println("No row selected");
     }
@@ -207,9 +213,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
           setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
           setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
-            addExtra.setDisable(true);
-        } else {
-            addExtra.setDisable(false);
+        } else if(dish.getDishStatus().equals(DishStatus.RETURNED)){
           ((Cook) getCook()).acceptNoCook(dish, getRestaurant().getServingTable());
         }
       }
