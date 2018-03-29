@@ -13,6 +13,8 @@ import Restaurant.WorkerType;
 import TablesScreen.TablesScreen;
 
 // import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+import complementScreen.ComplementScreen;
+import complementScreen.ComplementScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -234,7 +236,10 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void openBillScreen() throws IOException {
     Stage primaryStage = new Stage();
 
+
     BillScreenController controller = new BillScreenController(restaurant,table);
+
+
 
     primaryStage.setTitle("Bill Menu");
     primaryStage.setScene(new Scene(controller));
@@ -478,25 +483,18 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       if (dish != null) {
 
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/complementScreen/complements.fxml"));
-        Parent root = loader.load();
-        complementScreen.ComplementScreenController controller = loader.getController();
 
-        controller.setDish(dish);
-        controller.setIngredients();
+        ComplementScreenController complementScreen = new ComplementScreenController(dish);
 
         primaryStage.setTitle("Complement Menu");
         primaryStage.setOnCloseRequest(event -> {
-          controller.cancelEvent();
+          complementScreen.cancelEvent();
         });
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(complementScreen));
 
         primaryStage.show();
       }
 
-    } catch (IOException e) {
-      e.printStackTrace();
     } catch (NullPointerException e) {
       System.out.println("Choose a dish to add compliments");
     }

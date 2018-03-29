@@ -14,7 +14,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="complementScreen.ComplementScreenController">
+<fx:root fx:id="gridPane" alignment="CENTER" hgap="10.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" type="javafx.scene.layout.GridPane">
   <children>
     <Pane prefHeight="503.0" prefWidth="492.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <children>
@@ -47,4 +47,4 @@
   <rowConstraints>
     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
-</GridPane>
+</fx:root>
