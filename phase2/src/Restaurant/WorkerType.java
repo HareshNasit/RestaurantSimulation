@@ -1,5 +1,6 @@
 package Restaurant;
 
+
 public enum WorkerType {
 
   SERVER {
