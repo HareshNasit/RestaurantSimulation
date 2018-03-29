@@ -1,5 +1,6 @@
 package startupscreen;
 
+import Restaurant.Restaurant;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class LoginScreen implements Initializable{
+public class LoginScreen extends AnchorPane{
 
     public PasswordField password;
     public TextField userName;
@@ -31,8 +32,22 @@ public class LoginScreen implements Initializable{
     public AnchorPane workerLoginScreenAnchorPane;
     private boolean systemOn = false;
     private final String WORKERS = "workers.txt";
+    private Restaurant restaurant;
 
-    @Override
+    public LoginScreen(Restaurant restaurant){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginScreen.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+            this.restaurant = restaurant;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+
     public void initialize(URL location, ResourceBundle resources) {}
     public void checkWorkerLogin(ActionEvent actionEvent) {
         try (BufferedReader fileReader = new BufferedReader(new FileReader(WORKERS))) {
