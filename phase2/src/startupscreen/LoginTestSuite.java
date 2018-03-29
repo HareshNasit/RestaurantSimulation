@@ -16,7 +16,7 @@ public class LoginTestSuite extends Application {
 
         Parent root = FXMLLoader.load((getClass().getResource("loginScreen.fxml")));
         primaryStage.setTitle("Start Up Screen");
-        primaryStage.setScene(new Scene(root,600,400));
+        primaryStage.setScene(new Scene(root,400,250));
         primaryStage.show();
 
 
