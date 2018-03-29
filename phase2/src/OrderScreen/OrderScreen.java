@@ -222,6 +222,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
     dish.setComment(comment);
     updateScreen();
+
   }
 
   public void openCommentDialog() {
