@@ -8,7 +8,9 @@ import Restaurant.Server;
 import Restaurant.Table;
 import Restaurant.MenuItem;
 import Restaurant.ModelControllerInterface;
+import Restaurant.DishStatus;
 import TablesScreen.TablesScreen;
+
 // import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -260,8 +262,25 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder() {
+    //TODO: Open A Dialog that asks the server if he wants to remove the dish.
+
+
+
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
-    server.removeDish(table, dish);
+
+    String message = "";
+
+    if (dish.getDishStatus() == DishStatus.REJECTED || dish.getDishStatus() == DishStatus.ORDERED ||
+        dish.getDishStatus() == DishStatus.SENT ){
+      server.removeDish(table, dish);
+    } else {
+      message = String.format("Dish is %s. Are you sure you want to remove it?", dish.getDishStatus());
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES, ButtonType.CANCEL);
+      alert.showAndWait();
+      if (alert.getResult() == ButtonType.YES) {
+        server.removeDish(table, dish);
+      }}
+
     updateScreen();
   }
 
