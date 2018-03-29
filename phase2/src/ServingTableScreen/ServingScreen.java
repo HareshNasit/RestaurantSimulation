@@ -90,6 +90,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   private AnchorPane tab3;
   @FXML
   private TabPane tabsPane;
+  @FXML
+  private TableColumn columnDishStatus;
   private Notification notification;
 
 
@@ -147,6 +149,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     tab3TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
     tab3Dish.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     tab3Comment.setCellValueFactory(new PropertyValueFactory<Dish, String>("comment"));
+    
+    columnDishStatus.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
 
     notification = new Notification();
     notificationArea.getChildren().setAll(notification);
