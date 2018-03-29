@@ -1,5 +1,8 @@
 package Restaurant;
 
+/**
+ * This represents the status of the dish, i.e. whether it is being cooked, served, returned or rejected
+ */
 public enum DishStatus {
   COOKING {
     @Override

@@ -1,5 +1,9 @@
 package Restaurant;
 
+/**
+ * This class represents an ingredient in the inventory which allows us to check if we are running low and need to
+ * restock the ingredient
+ */
 public class InventoryIngredient {
 
     private String name;
