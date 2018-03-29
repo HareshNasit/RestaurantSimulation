@@ -77,8 +77,9 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
         OrderScreen controller = new OrderScreen(server,table,restaurant);
         if (!table.getIsOccupied()){
         controller.addOptionsToComboBox(table);}
-        vBox.getChildren().setAll(controller);
-
+        if(table.getTableSize() != 0){
+          vBox.getChildren().setAll(controller);
+        }
       }
 
 
@@ -134,9 +135,20 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
    * Updates the screen to show new changes
    */
   public void updateScreen() {
+
+    restrictToDeliver(restaurant.getServingTable().hasDishesToServe());
     tableView.setItems(getObservableTablesList(restaurant.getTables().values()));
     tableView.refresh();
     labelServerName.setText(server.getName());
+  }
+
+  private void restrictToDeliver(boolean restrict){
+    tableButton.setDisable(restrict);
+    if (restrict){
+      tableButton.setText("Dishes Need To Be Delivered First");
+    } else {
+      tableButton.setText("Open Table");
+    }
   }
 
   @Override

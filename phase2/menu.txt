@@ -9,3 +9,4 @@
 8 #Chocolate Shake# 9.5 #Chocolate, 5, 2, 10, 5.5 # Milk, 10, 5, 15, 10 #
 9 #Chocolate brownie# 7.5 #Chocolate, 5, 2, 10, 5.5 # Milk, 1, 1, 2, 2 # Flour, 4, 2, 6, 2 #
 10 #Strawberry Shake# 3.5 #Strawberry, 5, 2, 10, 5.5 # Milk, 10, 5, 15, 10 #
+11 #Special Pizza# 13.50 # Pizza base, 1, 1, 1, 5.00 # Cheese, 5, 2, 10, 6.05 # Tomato, 2, 1, 5, 4.4 # Anchovies, 0, 0, 5, 3.3 #

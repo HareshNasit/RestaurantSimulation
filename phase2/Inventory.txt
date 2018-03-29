@@ -15,7 +15,7 @@ flour#200#150#50
 bell pepper(red)#100#70#30
 veg patty#100#80#20
 potato#200#130#70
-pizza base#0#50#20
+pizza base#10#50#20
 garlic#150#125#25
 bread#200#150#50
 salmon#100#70#30
@@ -29,3 +29,4 @@ bell pepper(green)#100#70#30
 bun#148#150#50
 tortilla wraps#100#80#20
 chocolate#52#50#50
+anchovies#0#40#40

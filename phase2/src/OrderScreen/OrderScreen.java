@@ -1,12 +1,12 @@
 package OrderScreen;
 
 import BillScreen.BillScreenController;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
-import Restaurant.MenuItem;
+import MenuDishes.MenuItem;
 import Restaurant.ModelControllerInterface;
 import Restaurant.DishStatus;
 import TablesScreen.TablesScreen;
@@ -426,7 +426,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
   public void updateScreen() {
     tableOrderTitle.setText("Table" + table.getTableID() + " Order");
-
     //TODO: Disable or not show certain MenuItems that have not enough ingredients
     menuTableView.setItems(getMenuItem());
     orderTableView.setItems(getOrderDish());

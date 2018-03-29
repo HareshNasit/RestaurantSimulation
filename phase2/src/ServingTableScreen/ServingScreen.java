@@ -1,13 +1,14 @@
 package ServingTableScreen;
 
 import ComplementScreen.ComplementScreenController;
+import ComplementScreen.ComplementScreenCookExtra;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
 import Restaurant.DishStatus;
 import Restaurant.DishIngredient;
-import Restaurant.ServingTableListener;
+import Restaurant.Notifiable;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -189,8 +190,11 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
-          ButtonType.YES, ButtonType.CANCEL);
+
+      String message = getCookMessage(servingTable.checkPriority(dish),((Cook) cook).hasDishes());
+
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES,
+          ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
         if (dish.getDishStatus().equals(DishStatus.ORDERED)) {
@@ -208,6 +212,19 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     }
     checkLabel.setText("");
     this.updateScreen();
+  }
+
+  private String getCookMessage(boolean priority,boolean hasDishes){
+    StringBuilder message = new StringBuilder();
+    if (priority){
+      message.append("There are dishes that have been ordered first but not cooked" + System.lineSeparator());
+    }
+    if (hasDishes){
+      message.append("You have dishes that are currently cooking" + System.lineSeparator());
+    }
+
+    message.append("Are you sure you want to accept?");
+    return message.toString();
   }
 
   public void rejectDish(ActionEvent actionEvent) {
@@ -278,7 +295,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     this.cook = cook;
 
     if (cook.getType().equals("Cook")) {
-      servingTable.addCook((ServingTableListener) cook);
+      servingTable.addCook((Notifiable) cook);
       ((Cook) cook).setScreen(this);
     } else if (cook.getType().equals("Server")) {
       tab1.getChildren().remove(accept);
@@ -311,7 +328,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       serveDishBtn.setText("Serve Dish");
       tab3.getChildren().add(serveDishBtn);
       back.setText("Back");
-      servingTable.addServer((ServingTableListener) cook);
+      servingTable.addServer((Notifiable) cook);
       ((Server) cook).setScreen(this);
     }
 
@@ -325,14 +342,15 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/ComplementScreen/complements.fxml"));
+            getClass().getResource("/ComplementScreen/complementsCookExtra.fxml"));
         Parent root = loader.load();
-        ComplementScreen.ComplementScreenController controller = loader.getController();
+        ComplementScreenCookExtra controller = loader.getController();
 
         controller.setDish(dish);
         controller.setIngredients();
+        controller.setRestaurant(this.restaurant);
 
-        primaryStage.setTitle("Complement Menu");
+        primaryStage.setTitle("Complements Cook Menu");
         primaryStage.setScene(new Scene(root));
         primaryStage.setOnCloseRequest(event -> {
           controller.cancelEvent();

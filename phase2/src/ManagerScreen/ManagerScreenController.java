@@ -6,7 +6,7 @@ import Restaurant.InventoryIngredient;
 import Restaurant.Manager;
 import Restaurant.Restaurant;
 import Restaurant.ModelControllerInterface;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 
 
 import java.io.BufferedReader;

@@ -1,5 +1,6 @@
 package Restaurant;
 
+import MenuDishes.Dish;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +12,8 @@ public class ServingTable {
   private ArrayList<Dish> dishesToBeCooked; // List of dishes to be cooked.
   private ArrayList<Dish> dishesToBeServed; // List of dishes cooked and ready to be served.
   private ArrayList<Dish> dishesBeingCooked; // List of dishes which are being cooked
-  private ArrayList<ServingTableListener> servers; // List of all the servers.
-  private ArrayList<ServingTableListener> cooks; // List of all the cooks.
+  private ArrayList<Notifiable> servers; // List of all the servers.
+  private ArrayList<Notifiable> cooks; // List of all the cooks.
 
 
   /**
@@ -46,7 +47,7 @@ public class ServingTable {
     dishesToBeCooked.add(order);
     String message = String.format("Table%s%d's %s has been placed on serving table ",
         order.getTableName(), order.getCustomerNum(), order.getName());
-    notifyCooks(message);
+    notifyWorkers(cooks,message);
   }
 
   /**
@@ -58,6 +59,11 @@ public class ServingTable {
   public Dish getRejectedDish(int index) {
     Dish dish = dishesRejected.remove(index);
     return dish;
+  }
+
+  public boolean checkPriority(Dish dish){
+    return (dishesToBeCooked.indexOf(dish) != 0);
+
   }
 
   /**
@@ -79,7 +85,7 @@ public class ServingTable {
     dishesRejected.add(dish);
     String message = String.format("Table%s%d's %s has been rejected",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    notifyWorkers(servers,message);
   }
 
   /**
@@ -93,7 +99,7 @@ public class ServingTable {
     dishesToBeServed.add(dish);
     String message = String.format("Table%s%d's %s is ready to be served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    notifyWorkers(servers,message);
     System.out.println(this);
   }
 
@@ -106,7 +112,12 @@ public class ServingTable {
     dishesBeingCooked.add(dish);
     String message = String.format("Table%s%d's %s is now cooking",
         dish.getTableName(), dish.getCustomerNum(), dish.getName());
-    notifyServers(message);
+    dish.setDishStatus(DishStatus.COOKING);
+    notifyWorkers(servers, message);
+  }
+
+  public boolean hasDishesToServe(){
+    return !dishesToBeServed.isEmpty();
   }
 
   /**
@@ -120,7 +131,8 @@ public class ServingTable {
     String message = String.format(String.format(
         "Table%s%d's %s has been served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));
-    notifyCooks(message);
+    notifyWorkers(cooks,message);
+    updateWorkers(servers);
     return dish;
   }
 
@@ -129,7 +141,7 @@ public class ServingTable {
    *
    * @param server the server.
    */
-  public void addServer(ServingTableListener server) {
+  public void addServer(Notifiable server) {
     servers.add(server);
   }
 
@@ -138,7 +150,7 @@ public class ServingTable {
    *
    * @param cook cook
    */
-  public void addCook(ServingTableListener cook) {
+  public void addCook(Notifiable cook) {
     cooks.add(cook);
   }
 
@@ -149,8 +161,20 @@ public class ServingTable {
    */
   private void notifyServers(String message) {
     System.out.println(message);
-    for (ServingTableListener server : servers) {
-      server.update(message);
+    for (Notifiable server : servers) {
+      server.sendNotifications(message);
+    }
+  }
+
+  private void notifyWorkers(ArrayList<Notifiable> type, String message){
+    for (Notifiable worker : type) {
+      worker.sendNotifications(message);
+    }
+  }
+
+  private void updateWorkers(ArrayList<Notifiable> type){
+    for (Notifiable worker : type) {
+      worker.update();
     }
   }
 
@@ -161,8 +185,8 @@ public class ServingTable {
    */
   private void notifyCooks(String message) {
     System.out.println(message);
-    for (ServingTableListener cook : cooks) {
-      cook.update(message);
+    for (Notifiable cook : cooks) {
+      cook.sendNotifications(message);
     }
   }
 

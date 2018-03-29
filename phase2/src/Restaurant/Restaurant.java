@@ -38,7 +38,7 @@ public class Restaurant {
 
   public void updateServers(String message){
     for(Server server: servers){
-      server.update(message);
+      server.sendNotifications(message);
     }
 
   }

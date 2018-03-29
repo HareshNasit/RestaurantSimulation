@@ -1,5 +1,6 @@
 package Restaurant;
 
+import MenuDishes.Dish;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class Inventory {
 
   private final String INVENTORYFILE = "Inventory.txt";
   private final String REQUESTSFILE = "request.txt";
-  private InventoryListener manager;
+  private Notifiable manager;
   private HashMap<String, InventoryIngredient> inventory;
   private ArrayList<InventoryIngredient> lowIngredients;
 
@@ -132,7 +133,7 @@ public class Inventory {
         writer.write(ingredient1.getName() + ": " + ingredient1.getRestockQuantity() + System.lineSeparator());
         lowIngredients.add(ingredient1);
         writer.close();
-        manager.notifyLowStock("request.txt updated");
+        manager.sendNotifications("request.txt updated");
       } catch (IOException e){}
 
     }
@@ -224,7 +225,7 @@ public class Inventory {
    *
    * @param manager manager of restaurant
    */
-  public void setManager(InventoryListener manager) {
+  public void setManager(Notifiable manager) {
     this.manager = manager;
   }
 }

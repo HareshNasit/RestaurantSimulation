@@ -1,18 +1,34 @@
 package Restaurant;
 
+import MenuDishes.Dish;
+import java.util.ArrayList;
+
 /*
  * A cook reads the order being taken by the server and confirms with
  * the server if the dish can be prepared and prepares the dish.
  */
-public class Cook implements IWorker, ServingTableListener {
+public class Cook implements IWorker, Notifiable {
 
   private String name; // Name of the cook.
   private ModelControllerInterface screen;
+  private ArrayList<Dish> currentDishes;
 
   public Cook(String name) {
     this.name = name;
+    currentDishes = new ArrayList<Dish>();
   }
 
+  public void addDish(Dish dish){
+    currentDishes.add(dish);
+  }
+
+  public void removeDish(Dish dish){
+    currentDishes.remove(dish);
+  }
+
+  public boolean hasDishes(){
+    return !currentDishes.isEmpty();
+  }
   /**
    * Getter for the name of the cook.
    *
@@ -67,9 +83,14 @@ public class Cook implements IWorker, ServingTableListener {
   }
 
   /** Notify the cook that dish has been served. */
-  public void update(String message) {
+  public void sendNotifications(String message) {
     screen.updateScreen();
     screen.openNotification(message);
+  }
+
+  @Override
+  public void update() {
+    screen.updateScreen();
   }
 
   /**
@@ -82,7 +103,7 @@ public class Cook implements IWorker, ServingTableListener {
   public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
     prepareDish(dish, inventory);
     servingTable.addToBeCooking(dish);
-    dish.setDishStatus(DishStatus.COOKING);
+    currentDishes.add(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -100,6 +121,7 @@ public class Cook implements IWorker, ServingTableListener {
     // Dish dish = servingTable.getDishToBeCooked(index);
     // servingTable.addToBeCooking(index);
       servingTable.addToBeCooking(dish);
+    currentDishes.add(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -133,7 +155,7 @@ public class Cook implements IWorker, ServingTableListener {
    */
   public void serveDish(Dish dish, ServingTable servingTable) {
     servingTable.addToBeServed(dish);
-    servingTable.getDishesBeingCooked().remove(dish);
+    currentDishes.remove(dish);
     dish.setDishStatus(DishStatus.PICKUP);
   }
 
