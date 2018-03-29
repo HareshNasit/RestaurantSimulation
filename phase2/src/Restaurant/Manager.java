@@ -69,6 +69,13 @@ public class Manager implements IWorker, InventoryListener {
     inventory.writeToInventory();
   }
 
+  public void startSystem(Restaurant restaurant){
+    restaurant.startSystem();
+  }
+
+  public void shutDownSystem(Restaurant restaurant){
+    restaurant.shutDownSystem();
+  }
   /**
    * The Manager inputs how much of an ingredient the Restaurant has received. This gets printed to
    * a new txt. The manager will compare between the request txt and receivedShipments txt to see

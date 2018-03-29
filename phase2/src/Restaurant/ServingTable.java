@@ -43,9 +43,10 @@ public class ServingTable {
    * @param order A dish being ordered.
    */
   public void addToBeCooked(Dish order) {
-
     dishesToBeCooked.add(order);
-    notifyCooks("New Orders have been placed on the serving table");
+    String message = String.format("Table%s%d's %s has been placed on serving table ",
+        order.getTableName(), order.getCustomerNum(), order.getName());
+    notifyCooks(message);
   }
 
   /**
@@ -76,8 +77,8 @@ public class ServingTable {
     // Dish dish = dishesToBeCooked.remove(index);
     dishesToBeCooked.remove(dish);
     dishesRejected.add(dish);
-    String message = String
-        .format("Table %s%d has been rejected", dish.getTableName(), dish.getCustomerNum());
+    String message = String.format("Table%s%d's %s has been rejected",
+        dish.getTableName(), dish.getCustomerNum(), dish.getName());
     notifyServers(message);
   }
 
@@ -90,9 +91,8 @@ public class ServingTable {
     // Dish dish = dishesBeingCooked.remove(index);
     dishesBeingCooked.remove(dish);
     dishesToBeServed.add(dish);
-    String message = String
-        .format("Table %s%d %s is ready to be served", dish.getTableName(), dish.getCustomerNum(),
-            dish.getName());
+    String message = String.format("Table%s%d's %s is ready to be served",
+        dish.getTableName(), dish.getCustomerNum(), dish.getName());
     notifyServers(message);
     System.out.println(this);
   }
@@ -104,7 +104,9 @@ public class ServingTable {
     // Dish dish = dishesToBeCooked.remove(index);
     dishesToBeCooked.remove(dish);
     dishesBeingCooked.add(dish);
-    notifyServers("Dish is now cooking");
+    String message = String.format("Table%s%d's %s is now cooking",
+        dish.getTableName(), dish.getCustomerNum(), dish.getName());
+    notifyServers(message);
   }
 
   /**
@@ -116,7 +118,7 @@ public class ServingTable {
   public Dish serveDish(Dish dish) {
     getDishesToBeServed().remove(dish);
     String message = String.format(String.format(
-        "Table %s%d %s has been served",
+        "Table%s%d's %s has been served",
         dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     notifyCooks(message);
     return dish;

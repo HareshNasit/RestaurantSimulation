@@ -36,7 +36,14 @@ public class Server implements IWorker, ServingTableListener {
    */
   public void passOrder(Table table, ServingTable servingTable) {
     System.out.println(String.format("%s sending Table %s's orders to cooks", getName(), table.getTableID()));
-    servingTable.addToBeCooked(table.getTableOrder());
+    for(Dish dish: table.getTableOrder()){
+      if(dish.getDishStatus() == DishStatus.ORDERED ) {
+        servingTable.addToBeCooked(dish);
+        dish.setDishStatus(DishStatus.SENT);
+      } else if (dish.getDishStatus() == DishStatus.RETURNED) {
+        servingTable.addToBeCooked(dish);
+      }
+    }
     System.out.println(servingTable);
   }
 
@@ -47,14 +54,15 @@ public class Server implements IWorker, ServingTableListener {
    * @param restaurant the restaurant.
    */
   public void serveDish(Dish dish, Restaurant restaurant) {
-      restaurant.getServingTable().getDishesToBeServed().remove(dish);
+      restaurant.getServingTable().serveDish(dish);
+      dish.setDishStatus(DishStatus.SERVED);
+      screen.updateScreen();
     System.out.println(
         String.format(
             "%s serving Table%s%d order: %s",
             getName(), dish.getTableName(), dish.getCustomerNum(), dish.getName()));
     System.out.println(restaurant.getServingTable());
-    dish.setDishStatus(DishStatus.SERVED);
-    screen.updateScreen();
+
   }
 
   /**
