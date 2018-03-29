@@ -3,10 +3,15 @@ package billScreen;
 import Restaurant.Bill;
 import Restaurant.Restaurant;
 import Restaurant.Table;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.IO;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 
 import java.math.BigDecimal;
@@ -15,17 +20,31 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class BillScreenController implements Initializable {
+public class BillScreenController extends GridPane {
 
-  public ComboBox scrollMenu;
-  public Button payButton;
-  public Button receiptButton;
-  public Table table;
-  public Restaurant restaurant;
+  @FXML
+  private ComboBox scrollMenu;
+  @FXML
+  private Button payButton;
+  @FXML
+  private Button receiptButton;
+  private Table table;
+  private Restaurant restaurant;
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-  }
+  public BillScreenController(Restaurant restaurant, Table table){
+
+
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("bill.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+    try {
+      fxmlLoader.load();
+      this.restaurant = restaurant;
+      setTable(table);
+  }catch (IOException e){
+
+
+    }}
 
   /** */
   public void createReceiptWindow() {
