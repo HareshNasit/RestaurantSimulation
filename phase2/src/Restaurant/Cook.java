@@ -1,5 +1,7 @@
 package Restaurant;
 
+import MenuDishes.Dish;
+
 /*
  * A cook reads the order being taken by the server and confirms with
  * the server if the dish can be prepared and prepares the dish.

@@ -1,5 +1,7 @@
 package ServingTableScreen;
 
+import MenuDishes.Dish;
+import MenuDishes.MenuItem;
 import Restaurant.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

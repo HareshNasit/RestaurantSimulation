@@ -1,9 +1,8 @@
 package logging;
 
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.IWorker;
 import Restaurant.InventoryIngredient;
-import Restaurant.Restaurant;
 
 import java.util.ArrayList;
 

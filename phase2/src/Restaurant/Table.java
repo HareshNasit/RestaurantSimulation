@@ -1,5 +1,6 @@
 package Restaurant;
 
+import MenuDishes.Dish;
 import java.util.ArrayList;
 
 /** The table is where the customers sit and order food and also where their cooked food arrives. */

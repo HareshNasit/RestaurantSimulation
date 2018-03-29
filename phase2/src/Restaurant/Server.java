@@ -1,5 +1,8 @@
 package Restaurant;
 
+import MenuDishes.Dish;
+import MenuDishes.MenuItem;
+
 /** Server class records orders taken from customers and relays them to the chef. */
 public class Server implements IWorker, Notifiable {
 

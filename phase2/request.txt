@@ -1,0 +1,12 @@
+pizza base: 50
+anchovies: 40
+pizza base: 50
+anchovies: 40
+pizza base: 50
+anchovies: 40
+pizza base: 50
+anchovies: 40
+pizza base: 50
+anchovies: 40
+pizza base: 50
+anchovies: 40

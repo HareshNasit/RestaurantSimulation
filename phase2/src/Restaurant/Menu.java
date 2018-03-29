@@ -1,5 +1,7 @@
 package Restaurant;
 
+import MenuDishes.Dish;
+import MenuDishes.MenuItem;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;

@@ -1,7 +1,6 @@
 package BillScreen;
 
 import Restaurant.Bill;
-import Restaurant.Dish;
 import Restaurant.Restaurant;
 import Restaurant.Table;
 import javafx.collections.FXCollections;
