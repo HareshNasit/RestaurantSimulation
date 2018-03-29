@@ -25,6 +25,9 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
+/**
+ * This class handles the complements screen and its methods
+ */
 public class ComplementScreenController extends VBox implements EventHandler<ActionEvent>,
     Initializable {
 
@@ -218,6 +221,10 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
 
   }
 
+  /**
+   * Returns a hashMap of the ingredients
+   * @return the hash map of the ingredients
+   */
   public HashMap<String, DishIngredient> getIngredientsCopy() {
     return ingredientsCopy;
   }

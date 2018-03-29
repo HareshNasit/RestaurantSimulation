@@ -178,9 +178,11 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       if (((Cook) getCook()).canBePrepared(dish, getRestaurant().getInventory())) {
         checkLabel.setText("Can be Prepared");
         checkLabel.setTextFill(Paint.valueOf("Green"));
+        accept.setDisable(false);
       } else {
         checkLabel.setText(getRestaurant().getInventory().getLowIngredientStrings(dish));
         checkLabel.setTextFill(Paint.valueOf("Red"));
+        accept.setDisable(true);
       }
     } catch (NullPointerException e) {
       System.out.println("No row selected");
@@ -199,7 +201,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
-        if (dish.getDishStatus().equals(DishStatus.ORDERED)) {
+        if (dish.getDishStatus().equals(DishStatus.SENT)) {
           ((Cook) getCook()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
               .getInventory());
           setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
