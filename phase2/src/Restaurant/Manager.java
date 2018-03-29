@@ -15,6 +15,7 @@ public class Manager implements IWorker, Notifiable {
 
   private String name;
   private final String RECEIVEDFILE = "receivedShipments.txt";
+  private WorkerType type = WorkerType.MANAGER;
   private ArrayList<IWorker> workers;
   private ModelControllerInterface screen;
 
@@ -29,8 +30,8 @@ public class Manager implements IWorker, Notifiable {
   }
 
   @Override
-  public String getType() {
-    return "Manager";
+  public WorkerType getType() {
+    return type;
   }
 
   public void addWorker(IWorker worker){

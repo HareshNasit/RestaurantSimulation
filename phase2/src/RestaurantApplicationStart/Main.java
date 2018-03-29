@@ -71,9 +71,9 @@ public class Main extends Application {
   }
 
   private void cookStart(String name, Restaurant restaurant, Manager manager) {
-
       Stage window = new Stage();
       Cook cook = new Cook(name);
+      restaurant.addCook(cook);
       manager.addWorker(cook);
       ServingScreen screen = new ServingScreen(restaurant, restaurant.getServingTable(), cook);
       window.initModality(Modality.WINDOW_MODAL);
