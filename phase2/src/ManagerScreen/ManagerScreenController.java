@@ -41,6 +41,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   private Manager manager;
   private Restaurant restaurant;
   private final String REQUESTFILE = "request.txt";
+  private final String MANAGERSCREEN = "ManagerScreen.fxml";
 
   @FXML
   private TableColumn columnIngredient;
@@ -78,17 +79,29 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   private Pane paneNotification;
   @FXML
   private TabPane tabsPane;
-  @FXML TableColumn columnDishName;
-  @FXML TableColumn columnTime;
-  @FXML TableColumn columnDishTable;
-  @FXML TableColumn columnCustomerNum;
-  @FXML TableColumn columnDishStatus;
-  @FXML TableView tableViewDishes;
+  @FXML
+  TableColumn columnDishName;
+  @FXML
+  TableColumn columnTime;
+  @FXML
+  TableColumn columnDishTable;
+  @FXML
+  TableColumn columnCustomerNum;
+  @FXML
+  TableColumn columnDishStatus;
+  @FXML
+  TableView tableViewDishes;
 
   Notification notification;
 
+  /**
+   * Creates a new manager screen with a given manager on the given restaurant
+   *
+   * @param manager manager that will operate on this screen
+   * @param restaurant restaurant that the manager operates on
+   */
   public ManagerScreenController(Manager manager, Restaurant restaurant) {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ManagerScreen.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(MANAGERSCREEN));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
 
@@ -107,25 +120,29 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     }
   }
 
-
-  public void initialize() {
+  /**
+   * Initializes GUI components with appropriate settings
+   */
+  private void initialize() {
     tabsPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
     //Sets the columns of each table to their respective types
     columnType.setCellValueFactory(new PropertyValueFactory<IWorker, String>("type"));
     columnName.setCellValueFactory(new PropertyValueFactory<IWorker, String>("name"));
 
-    columnIngredient.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
-    columnAmount.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
-    columnRestock.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
-    columnThreshold.setCellValueFactory(new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
+    columnIngredient
+        .setCellValueFactory(new PropertyValueFactory<InventoryIngredient, String>("name"));
+    columnAmount.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("currentQuantity"));
+    columnRestock.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("restockQuantity"));
+    columnThreshold.setCellValueFactory(
+        new PropertyValueFactory<InventoryIngredient, Integer>("lowerThreshold"));
 
     columnDishName.setCellValueFactory(new PropertyValueFactory<Dish, String>("name"));
     columnDishStatus.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
     columnDishTable.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
     columnCustomerNum.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
     //columnTime.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("lowerThreshold"));
-
-
 
     this.setIngredientTableRowAction();
     notification = new Notification();
@@ -134,17 +151,19 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
     updateRequestText();
 
-
   }
 
-  public void testInventory(){
+  public void testInventory() {
     System.out.println("CHECKING Inventory");
     restaurant.getInventory().removeStock("chocolate", 2);
     this.updateRequestText();
 
   }
 
-  public void buttonTestAction(){
+  /**
+   * Generates the list of undelivered dishes (i.e dishes that are still in the serving table)
+   */
+  public void requestUndelivered() {
     tableViewDishes.setItems(getDishData());
     tableViewDishes.refresh();
   }
@@ -160,7 +179,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     return workers;
   }
 
-  private ObservableList<Dish> getDishData(){
+  private ObservableList<Dish> getDishData() {
     ObservableList<Dish> dishes = FXCollections.observableArrayList();
     dishes.addAll(restaurant.getServingTable().getUndeliveredDishes());
     return dishes;
@@ -193,6 +212,9 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     }
   }
 
+  /**
+   * Updates the GUI components when new changes occurs
+   */
   public void updateScreen() {
     tableViewWorkers.setItems(getWorkerData());
     tableInventory.setItems(getIngredients(restaurant.getInventory()));
@@ -200,20 +222,30 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   }
 
+  /**
+   * Opens message notification on this screen
+   *
+   * @param message message to be delivered
+   */
   @Override
   public void openNotification(String message) {
     notification.pushNotification(message);
   }
 
+  /**
+   * Open the receiver function for the manager
+   */
   @Override
   public void openReceiverFunction() {
-
+    //Future implementation
   }
 
+  /**
+   * Calls an a worker to receive stock;
+   */
   public void buttonStockAction() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
     worker.scanStock(restaurant.getInventory(), "meems", 123);
-
   }
 
 
@@ -307,33 +339,60 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     });
   }
 
-  public void startSystem(){
+  /**
+   * Starts the main restaurant system
+   */
+  public void startSystem() {
     manager.startSystem(restaurant);
   }
 
-  public void shutDownSystem(){
+  /**
+   * Closes the main restaurant system
+   */
+  public void shutDownSystem() {
     manager.shutDownSystem(restaurant);
   }
 
+  /**
+   * Calls the desired worker to manager's office
+   */
   public void callWorker() {
     IWorker worker = (IWorker) tableViewWorkers.getSelectionModel().getSelectedItem();
     worker.sendNotification("Come to my office");
   }
 
+  /**
+   * Returns the manager operating this screen
+   *
+   * @return manager operating this screen
+   */
   public Manager getManager() {
     return manager;
   }
 
+  /**
+   * Sets the manager of this screen
+   */
   public void setManager(Manager manager) {
     this.manager = manager;
     tableViewWorkers.setItems(getWorkerData());
     manager.setScreen(this);
   }
 
+  /**
+   * Gets the restaurant of this screen
+   *
+   * @return restaurant of this screen
+   */
   public Restaurant getRestaurant() {
     return restaurant;
   }
 
+  /**
+   * Sets the restaurant of this screen.
+   *
+   * @param restaurant restaurant of this screen
+   */
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
