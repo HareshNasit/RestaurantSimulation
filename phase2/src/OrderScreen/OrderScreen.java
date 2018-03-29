@@ -371,6 +371,9 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
         controller.setIngredients();
 
         primaryStage.setTitle("Complement Menu");
+        primaryStage.setOnCloseRequest(event -> {
+          controller.cancelEvent();
+        });
         primaryStage.setScene(new Scene(root));
 
         primaryStage.show();
