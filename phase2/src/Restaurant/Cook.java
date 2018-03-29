@@ -1,6 +1,7 @@
 package Restaurant;
 
 import MenuDishes.Dish;
+import java.util.ArrayList;
 
 /*
  * A cook reads the order being taken by the server and confirms with
@@ -10,11 +11,24 @@ public class Cook implements IWorker, Notifiable {
 
   private String name; // Name of the cook.
   private ModelControllerInterface screen;
+  private ArrayList<Dish> currentDishes;
 
   public Cook(String name) {
     this.name = name;
+    currentDishes = new ArrayList<Dish>();
   }
 
+  public void addDish(Dish dish){
+    currentDishes.add(dish);
+  }
+
+  public void removeDish(Dish dish){
+    currentDishes.remove(dish);
+  }
+
+  public boolean hasDishes(){
+    return !currentDishes.isEmpty();
+  }
   /**
    * Getter for the name of the cook.
    *
@@ -89,6 +103,7 @@ public class Cook implements IWorker, Notifiable {
   public void acceptCook(Dish dish, ServingTable servingTable, Inventory inventory) {
     prepareDish(dish, inventory);
     servingTable.addToBeCooking(dish);
+    currentDishes.add(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -106,6 +121,7 @@ public class Cook implements IWorker, Notifiable {
     // Dish dish = servingTable.getDishToBeCooked(index);
     // servingTable.addToBeCooking(index);
       servingTable.addToBeCooking(dish);
+    currentDishes.add(dish);
     System.out.println(
         String.format(
             "%s has agreed to cook Table%s%d %s",
@@ -139,7 +155,7 @@ public class Cook implements IWorker, Notifiable {
    */
   public void serveDish(Dish dish, ServingTable servingTable) {
     servingTable.addToBeServed(dish);
-    servingTable.getDishesBeingCooked().remove(dish);
+    currentDishes.remove(dish);
     dish.setDishStatus(DishStatus.PICKUP);
   }
 

@@ -190,8 +190,11 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to accept?",
-          ButtonType.YES, ButtonType.CANCEL);
+
+      String message = getCookMessage(((Cook) cook).hasDishes());
+
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES,
+          ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
         if (dish.getDishStatus().equals(DishStatus.ORDERED)) {
@@ -209,6 +212,14 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     }
     checkLabel.setText("");
     this.updateScreen();
+  }
+
+  private String getCookMessage(boolean hasDishes){
+    if (hasDishes){
+      return "You have dishes cooking. Are you sure you want to accept?";
+    }else {
+      return "Are you sure you want to accept?";
+    }
   }
 
   public void rejectDish(ActionEvent actionEvent) {
