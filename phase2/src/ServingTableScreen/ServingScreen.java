@@ -1,7 +1,7 @@
 package ServingTableScreen;
 
-import ComplementScreen.ComplementScreenController;
-import ComplementScreen.ComplementScreenCookExtra;
+import complementScreen.ComplementScreenController;
+import complementScreen.ComplementScreenCookExtra;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -342,7 +342,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/ComplementScreen/complementsCookExtra.fxml"));
+            getClass().getResource("/complementScreen/complementsCookExtra.fxml"));
         Parent root = loader.load();
         ComplementScreenCookExtra controller = loader.getController();
 
