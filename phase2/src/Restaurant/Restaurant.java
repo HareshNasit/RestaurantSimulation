@@ -76,19 +76,19 @@ public class Restaurant {
     this.servers = new ArrayList<Notifiable>();
     this.cooks = new ArrayList<Notifiable>();
     this.workers = new ArrayList<IWorker>();
-    isActive = false;
+    setActive(false);
     startSystem();
   }
 
   public void startSystem(){
-    isActive = true;
+    setActive(true);
     generateTables(TABLEFILE);
     createNewReceiptFile();
     createNewLogFile();
   }
 
   public void shutDownSystem(){
-    isActive = false;
+    setActive(false);
     inventory.writeToInventory();
     System.exit(0);
   }
@@ -249,5 +249,13 @@ public class Restaurant {
 
   public void setWorkers(ArrayList<IWorker> workers) {
     this.workers = workers;
+  }
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive(boolean active) {
+    isActive = active;
   }
 }
