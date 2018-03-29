@@ -3,7 +3,9 @@ package Restaurant;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
-/** A dish inherits the properties of a menuitem but is tailored to a table. */
+/**
+ * A dish inherits the properties of a menuitem but is tailored to a table.
+ */
 public class Dish extends MenuItem {
 
   private String tableName;
@@ -27,6 +29,7 @@ public class Dish extends MenuItem {
     this.comment = "";
     this.setDishStatus(DishStatus.ORDERED);
   }
+
 
   /**
    * Adds a comment to the dish for the Cook. The server will add specs in the comment that the
@@ -77,8 +80,6 @@ public class Dish extends MenuItem {
 
   /**
    * Returns a string with each ingredient and the amount.
-   *
-   * @return
    */
   public String getIngredientString() {
     String ingredientOutput = "";
@@ -91,8 +92,6 @@ public class Dish extends MenuItem {
 
   /**
    * Returns a string with all the complements.
-   *
-   * @return
    */
   public String getComplementsString() {
     String extras = "";
@@ -158,7 +157,9 @@ public class Dish extends MenuItem {
     this.comment = comment;
   }
 
-  /** Sets the dish ingredients to back to baseAmounts. */
+  /**
+   * Sets the dish ingredients to back to baseAmounts.
+   */
   public void setToBaseIngredients() {
     HashMap<String, DishIngredient> ingredients = this.getIngredients();
     for (String key : ingredients.keySet()) {
@@ -169,9 +170,6 @@ public class Dish extends MenuItem {
 
   /**
    * Adds necessary 0's to the number. Ex. "3.0" turns into "3.00"
-   *
-   * @param number
-   * @return
    */
   private static String doubleToCurrency(double number) {
     DecimalFormat decim = new DecimalFormat("0.00");
@@ -185,4 +183,11 @@ public class Dish extends MenuItem {
   public void setDishStatus(DishStatus dishStatus) {
     this.dishStatus = dishStatus;
   }
+
+  public Dish clone() {
+    MenuItem menuItem = new MenuItem(this.name, this.id, this.price, this.cloneIngredients());
+    return new Dish(menuItem, this.tableName, this.customerNum);
+  }
+
+
 }

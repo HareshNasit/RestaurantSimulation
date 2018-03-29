@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class MenuItem {
 
-  private String name; // name of the dish
-  private double id; // id of the dish
+  protected String name; // name of the dish
+  protected double id; // id of the dish
   protected double price; // price of the dish
-  private HashMap<String, DishIngredient> ingredients; // the ingredients of this dish.
+  protected HashMap<String, DishIngredient> ingredients; // the ingredients of this dish.
 
   /**
    * This is a food item that is on the Menu.
@@ -147,18 +147,29 @@ public class MenuItem {
    *
    * @param compIngredients hashmap you are comparing to.
    */
-  public HashMap<String, Integer> getPosDifBetweenTwoIngredientsList(
+  public HashMap<String, DishIngredient> getPosDifBetweenTwoIngredientsList(
       HashMap<String, DishIngredient> compIngredients) {
-    HashMap<String, Integer> differences = new HashMap<>();
+    HashMap<String, DishIngredient> differences = new HashMap<>();
     for (String key : compIngredients.keySet()) {
       int dif = compIngredients.get(key).getAmount() - this.ingredients.get(key).getAmount();
+      DishIngredient dishIngredientCopy = compIngredients.get(key).clone();
       if (dif > 0) {
-        differences.put(key, dif);
+        dishIngredientCopy.setAmount(dif);
+        differences.put(key, dishIngredientCopy);
       } else {
-        differences.put(key, 0);
+        dishIngredientCopy.setAmount(0);
+        differences.put(key, dishIngredientCopy);
       }
     }
     return differences;
   }
 
+  /**
+   * Ingredients setter.
+   *
+   * @param setIngredients new ingredients.
+   */
+  public void setIngredients(HashMap<String, DishIngredient> setIngredients) {
+    this.ingredients = setIngredients;
+  }
 }
