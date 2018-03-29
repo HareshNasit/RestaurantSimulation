@@ -335,9 +335,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           controller.cancelEvent();
         });
         primaryStage.show();
-        while (!controller.isDone()) {
-
-        }
+        
         Cook cook = new Cook("jeff");
         HashMap<String, DishIngredient> differences = dish
             .getPosDifBetweenTwoIngredientsList(dishIngredientsCopy);
