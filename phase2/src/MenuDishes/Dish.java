@@ -1,5 +1,7 @@
-package Restaurant;
+package MenuDishes;
 
+import Restaurant.DishIngredient;
+import Restaurant.DishStatus;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 

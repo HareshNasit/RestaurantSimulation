@@ -1,5 +1,6 @@
 package Restaurant;
 
+import MenuDishes.Dish;
 import java.util.ArrayList;
 
 /**

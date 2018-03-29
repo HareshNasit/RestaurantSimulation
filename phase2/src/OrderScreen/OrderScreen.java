@@ -1,12 +1,12 @@
 package OrderScreen;
 
 import BillScreen.BillScreenController;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.Table;
-import Restaurant.MenuItem;
+import MenuDishes.MenuItem;
 import Restaurant.ModelControllerInterface;
 import Restaurant.DishStatus;
 import TablesScreen.TablesScreen;

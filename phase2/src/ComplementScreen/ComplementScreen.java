@@ -1,16 +1,14 @@
 package ComplementScreen;
 
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.Inventory;
 import Restaurant.Menu;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class ComplementScreen extends Application {
 

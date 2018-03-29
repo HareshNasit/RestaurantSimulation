@@ -1,7 +1,7 @@
 package ComplementScreen;
 
 import Restaurant.Cook;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.DishIngredient;
 import Restaurant.Restaurant;
 import java.util.HashMap;

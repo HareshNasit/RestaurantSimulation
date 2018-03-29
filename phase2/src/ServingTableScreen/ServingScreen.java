@@ -20,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import Restaurant.Dish;
+import MenuDishes.Dish;
 import Restaurant.Cook;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;

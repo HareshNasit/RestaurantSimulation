@@ -1,5 +1,6 @@
 package Restaurant;
 
+import MenuDishes.Dish;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

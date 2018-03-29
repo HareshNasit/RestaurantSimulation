@@ -1,5 +1,6 @@
-package Restaurant;
+package MenuDishes;
 
+import Restaurant.DishIngredient;
 import java.util.HashMap;
 
 public class MenuItem {
