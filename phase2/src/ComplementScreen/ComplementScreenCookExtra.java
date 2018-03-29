@@ -18,15 +18,25 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
     Cook cook = new Cook("jeff");
     HashMap<String, DishIngredient> differences = dish
         .getPosDifBetweenTwoIngredientsList(dishIngredientsCopy);
+
     Dish newIngredients = dish.clone();
+
     newIngredients.setIngredients(differences);
     if (cook.canBePrepared(newIngredients, restaurant.getInventory())) {
       for (String key : differences.keySet()) {
         restaurant.getInventory().removeStock(key, differences.get(key).getAmount());
       }
     } else {
+      String missingIngredients = "";
+      for (String key : differences.keySet()) {
+        int missingAmount = differences.get(key).getAmount();
+        if (missingAmount > 0) {
+          missingIngredients += "Missing: " + key + System.lineSeparator();
+        }
+      }
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Sorry, there is not enough ingredients in stock right now to fulfill this order.",
+          "Sorry, there is not enough ingredients in stock right now to fulfill this order."
+              + System.lineSeparator() + missingIngredients,
           ButtonType.OK);
       alert.showAndWait();
       dish.setIngredients(this.getIngredientsCopy());
@@ -43,5 +53,9 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
       this.addIfIngredientsEnough();
       this.closeWindow(accept);
     }
+  }
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
   }
 }

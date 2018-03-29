@@ -1,6 +1,7 @@
 package ServingTableScreen;
 
 import ComplementScreen.ComplementScreenController;
+import ComplementScreen.ComplementScreenCookExtra;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
@@ -325,14 +326,15 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
         Stage primaryStage = new Stage();
         FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/ComplementScreen/complements.fxml"));
+            getClass().getResource("/ComplementScreen/complementsCookExtra.fxml"));
         Parent root = loader.load();
-        ComplementScreen.ComplementScreenController controller = loader.getController();
+        ComplementScreenCookExtra controller = loader.getController();
 
         controller.setDish(dish);
         controller.setIngredients();
+        controller.setRestaurant(this.restaurant);
 
-        primaryStage.setTitle("Complement Menu");
+        primaryStage.setTitle("Complements Cook Menu");
         primaryStage.setScene(new Scene(root));
         primaryStage.setOnCloseRequest(event -> {
           controller.cancelEvent();
