@@ -1,7 +1,10 @@
 package ComplementScreen;
 
 import MenuDishes.Dish;
-import Restaurant.*;
+import Restaurant.DishIngredient;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +14,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 import java.net.URL;
-import java.util.*;
 
 public class ComplementScreenController extends VBox implements EventHandler<ActionEvent>,
     Initializable {
@@ -185,22 +192,8 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
     });
   }
 
-
-  public void displayScreen() throws Exception {
-    Stage window = new Stage();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("complements.fxml"));
-    //This means that you can't change any other windows besides this one.
-    window.initModality(Modality.APPLICATION_MODAL);
-    window.setTitle("Table Screen");
-    Parent root = loader.load();
-    window.setScene(new Scene(root));
-    window.show();
-
-  }
-
-
   /**
-   * Returns an ObservableList of the Restaurant's table list
+   * Returns an ObservableList of the Restaurant's table list.
    *
    * @return ObservableList of Tables
    */
@@ -234,7 +227,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   }
 
   /**
-   * Sets the selectedIngredient
+   * Sets the selectedIngredient.
    *
    * @param ingredient ingredient that selectedIngredient is being changed to
    */
@@ -244,7 +237,7 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
 
 
   /**
-   * Sets the UI tables to show the Restaurant list of tables
+   * Sets the UI tables to show the Restaurant list of tables.
    */
   public void setIngredients() {
     getTableView().setItems(getDishIngredient());
@@ -290,11 +283,11 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   }
 
   /**
-   * Closes the window
+   * Closes the window.
    *
    * @param button Button that's being used to close the scene.
    */
-  protected void closeWindow(Button button) {
+  public void closeWindow(Button button) {
     Stage stage = (Stage) button.getScene().getWindow();
     stage.close();
   }

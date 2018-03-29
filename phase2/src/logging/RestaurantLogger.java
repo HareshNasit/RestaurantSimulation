@@ -18,7 +18,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param dishes The dishes that the server got from the table and is sending to the cooks.
    */
   public void logOrderMessage(ArrayList<Dish> dishes) {
-    String content = "[NEW LOG - DISH ORDER]" + System.lineSeparator();
+    String content = this.getTime() + "[NEW LOG - DISH ORDER]" + System.lineSeparator();
 
     for (Dish dish : dishes) {
       content += dish.toString() + System.lineSeparator();
@@ -43,7 +43,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param dish Dish being delivered.
    */
   public void logDishDelivered(Dish dish) {
-    String content = "[NEW LOG - DISH DELIVERED] ";
+    String content = this.getTime() + "[NEW LOG - DISH DELIVERED] ";
     content += "[ " + dish.toString() + "] has been delivered ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
@@ -56,7 +56,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param reason Reason for the return.
    */
   public void logDishReturned(Dish dish, String reason) {
-    String content = "[NEW LOG - DISH RETURNED] ";
+    String content = this.getTime() + "[NEW LOG - DISH RETURNED] ";
     content += "[ " + dish.toString() + "] has been returned" + System.lineSeparator();
     content += "Reason: " + reason;
     content += " [END LOG]" + System.lineSeparator();
@@ -71,7 +71,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param amount amount being changed.
    */
   public void logInventoryChanged(InventoryIngredient inventoryIngredient, int amount) {
-    String content = "[NEW LOG - INVENTORY CHANGED] ";
+    String content = this.getTime() + "[NEW LOG - INVENTORY CHANGED] ";
     content += "[ " + inventoryIngredient.toString() + "] has changed by: " + amount;
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
@@ -84,7 +84,7 @@ public class RestaurantLogger extends SimpleLogger {
    * @param request request info
    */
   public void logRequest(IWorker worker, String request) {
-    String content = "[NEW LOG - WORKER REQUEST] ";
+    String content = this.getTime() + "[NEW LOG - WORKER REQUEST] ";
     content += "[ " + worker.getName() + "] has been sent request from Manager: " + request;
     content += " [END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
@@ -96,14 +96,11 @@ public class RestaurantLogger extends SimpleLogger {
    * @param worker worker that has logged in.
    */
   public void logWorkerLogin(IWorker worker) {
-    String content = "[NEW LOG - WORKER LOGIN] ";
+    String content = this.getTime() + "[NEW LOG - WORKER LOGIN] ";
     content += "[ " + worker.getName() + "] has logged into the system: ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
-
-
-
 
 
 }

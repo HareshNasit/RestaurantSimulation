@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SimpleLogger {
@@ -87,6 +88,16 @@ public class SimpleLogger {
    */
   public String getFilePath() {
     return this.filePath;
+  }
+
+
+  /**
+   * Returns a string representation of the current Hour, Minute, and Second.
+   */
+  public String getTime() {
+    Calendar cal = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    return "[" + sdf.format(cal.getTime()) + "]";
   }
 
 }
