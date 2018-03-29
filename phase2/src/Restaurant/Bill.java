@@ -63,6 +63,7 @@ public class Bill {
   }
 
   /**
+   * Returns the final bill that includes tips
    * @param table
    * @param tip
    * @return
@@ -91,6 +92,11 @@ public class Bill {
     return get2Decimals(bd.doubleValue());
   }
 
+  /**
+   * Returns amount of tax for a bill
+   * @param subtotal the sum of the dishes' prices'
+   * @return the tax depending on the subtotal value
+   */
   public static double getTax(double subtotal) {
     BigDecimal bd = new BigDecimal(subtotal);
     BigDecimal multiplier = new BigDecimal(salesTax);
@@ -98,6 +104,11 @@ public class Bill {
     return get2Decimals(bd.doubleValue());
   }
 
+  /**
+   * Returns the sum of all the dishes'prices'
+   * @param dishes the dishes ordered
+   * @return the final price of all the dishes together
+   */
   public static double getSubtotal(ArrayList<Dish> dishes) {
     double subtotal = 0;
     for (Dish order : dishes) {
