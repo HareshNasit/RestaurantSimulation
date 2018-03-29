@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * This allows the program to log actions. All the log messages get sent to a txt.
+ */
 public class SimpleLogger {
 
   protected String filePath;
