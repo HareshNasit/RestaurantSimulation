@@ -67,7 +67,6 @@ public class LoginScreen extends AnchorPane {
   private void generateLoginObjects() {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(WORKERS))) {
       String line = fileReader.readLine();
-      ArrayList workers = new ArrayList();
       while (line != null) {
         String[] details = line.split("\\|");
         WorkerType type = checkWorkerType(details[0]);

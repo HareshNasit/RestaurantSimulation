@@ -273,7 +273,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
 
 // this gives the value in the selected cell:
     String data = (String) col.getCellObservableValue(item).getValue();
-    System.out.println(data);
   }
 
   /**
@@ -339,7 +338,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
    * Removes dishes from a specific customer's order
    */
   public void removeDishFromOrder() {
-    //TODO: Open A Dialog that asks the server if he wants to remove the dish.
 
     Dish dish = (Dish) orderTableView.getSelectionModel().getSelectedItem();
 
@@ -375,7 +373,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       server.addOrder(getTable(), customerNumber - 48, dish);
       updateScreen();
     } catch (NullPointerException e) {
-      System.out.println("Choose a customer from the drop down menu");
     }
 
   }
@@ -497,7 +494,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
       }
 
     } catch (NullPointerException e) {
-      System.out.println("Choose a dish to add compliments");
     }
   }
 
@@ -517,7 +513,6 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
         addDish.setDisable(false);
       }
     } catch (NullPointerException e) {
-      System.out.println("No row selected");
     }
   }
 
