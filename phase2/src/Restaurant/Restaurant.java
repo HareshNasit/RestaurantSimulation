@@ -16,7 +16,7 @@ public class Restaurant {
   private HashMap<String, Table> tables; // HashMap of table name and the table.
   private Manager manager; // The manager of the restaurant.
   private ServingTable servingTable; // The serving table of this restaurant.
-  private final String TABLEFILE = "tables.txt";
+  private final String TABLEFILE = "restaurantData/tables.txt";
   private final String WORKERFILE = "workers.txt";
   private String RECEIPTFILE;
   private boolean isActive;
