@@ -2,6 +2,7 @@ package complementScreen;
 
 import MenuDishes.Dish;
 import Restaurant.DishIngredient;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -10,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Alert;
@@ -20,6 +22,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -28,8 +31,7 @@ import java.net.URL;
 /**
  * This class handles the complements screen and its methods
  */
-public class ComplementScreenController extends VBox implements EventHandler<ActionEvent>,
-    Initializable {
+public class ComplementScreenController extends GridPane implements EventHandler<ActionEvent> {
 
 
   @FXML
@@ -57,12 +59,43 @@ public class ComplementScreenController extends VBox implements EventHandler<Act
   private HashMap<String, DishIngredient> ingredientsCopy;
   private String selectedIngredient;
 
+  public ComplementScreenController(Dish dish){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("complements.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+
+    try {
+      fxmlLoader.load();
+      initialize();
+      setDish(dish);
+      setIngredients();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
+
+  public ComplementScreenController(){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("complements.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+
+    try {
+      fxmlLoader.load();
+      initialize();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
+
 
   /**
-   * After the constructor is called, this is called.
+   * Sets up the main GUI components
    */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
+  public void initialize() {
     getIngredientColumn()
         .setCellValueFactory(new PropertyValueFactory<DishIngredient, String>("name"));
     getAmountColumn()
