@@ -353,17 +353,11 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       if (dish != null) {
 
         Stage primaryStage = new Stage();
-        FXMLLoader loader = new FXMLLoader(
-            getClass().getResource("/complementScreen/complementsCookExtra.fxml"));
-        Parent root = loader.load();
-        ComplementScreenCookExtra controller = loader.getController();
 
-        controller.setDish(dish);
-        controller.setIngredients();
-        controller.setRestaurant(this.restaurant);
+        ComplementScreenCookExtra controller = new ComplementScreenCookExtra(dish,restaurant);
 
         primaryStage.setTitle("Complements Cook Menu");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(controller));
         primaryStage.setOnCloseRequest(event -> {
           controller.cancelEvent();
         });
@@ -371,8 +365,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
       }
 
-    } catch (IOException e) {
-      e.printStackTrace();
     } catch (NullPointerException e) {
       System.out.println("Choose a dish to add compliments");
     }

@@ -88,9 +88,7 @@ public class ComplementScreenController extends GridPane implements EventHandler
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
-
 
   /**
    * Sets up the main GUI components

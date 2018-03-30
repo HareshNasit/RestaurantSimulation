@@ -4,7 +4,9 @@ import Restaurant.Cook;
 import MenuDishes.Dish;
 import Restaurant.DishIngredient;
 import Restaurant.Restaurant;
+import java.io.IOException;
 import java.util.HashMap;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -15,6 +17,23 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
 
   private Restaurant restaurant;
 
+  public ComplementScreenCookExtra(Dish dish, Restaurant restaurant){
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("complementsCookExtra.fxml"));
+    fxmlLoader.setRoot(this);
+    fxmlLoader.setController(this);
+
+    try {
+      fxmlLoader.load();
+      initialize();
+      setDish(dish);
+      setRestaurant(restaurant);
+      setIngredients();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+  }
 
   /**
    * For the add extras button. If the cook adds ingredients that are in the inventory, the
