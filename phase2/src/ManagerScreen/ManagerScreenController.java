@@ -31,7 +31,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import notification.Notification;
-// import sun.tools.jconsole.Worker;
 
 public class ManagerScreenController extends VBox implements ModelControllerInterface {
 
@@ -65,8 +64,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   @FXML
   private TableColumn columnName;
   @FXML
-  private TableColumn columnStatus;
-  @FXML
   private TextArea textAreaRequest;
   @FXML
   private Tab tabInventory;
@@ -78,8 +75,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   private TabPane tabsPane;
   @FXML
   TableColumn columnDishName;
-  @FXML
-  TableColumn columnTime;
   @FXML
   TableColumn columnDishTable;
   @FXML
