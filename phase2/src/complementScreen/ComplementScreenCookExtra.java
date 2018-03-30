@@ -3,6 +3,7 @@ package complementScreen;
 import Restaurant.Cook;
 import MenuDishes.Dish;
 import Restaurant.DishIngredient;
+import Restaurant.InventoryIngredient;
 import Restaurant.Restaurant;
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
         int diff = differences.get(key).getAmount();
         if (diff != 0) {
           restaurant.getInventory().removeStock(key, diff);
-          Restaurant.InventoryIngredient ing = restaurant.getInventory()
+          InventoryIngredient ing = restaurant.getInventory()
               .getInventoryIngredient(key);
           restaurant.getRestaurantLogger().logInventoryChanged(ing, -diff);
         }
