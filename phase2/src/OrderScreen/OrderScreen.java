@@ -255,6 +255,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
   public void buttonClearAction(){
     server.clearTable(table);
     restaurant.notifyWorker(WorkerType.SERVER, table.getTableID() +" is cleared");
+    restaurant.restaurantLogger.logTableCleared(table);
   }
 
   /**

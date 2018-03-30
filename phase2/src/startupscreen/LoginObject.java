@@ -7,8 +7,8 @@ package startupscreen;
  */
 public class LoginObject<T, U> {
 
-  private T type;
-  private U userCredentials;
+  private T type; // the type of worker, i.e. server, cook, manager
+  private U userCredentials; // the username and password of the workers
 
   public LoginObject(T type, U userCredentials){
     this.type = type;

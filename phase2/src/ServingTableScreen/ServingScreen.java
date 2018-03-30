@@ -261,6 +261,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       if (alert1.getResult() == ButtonType.YES) {
         ((Cook) getWorker()).rejectDish(dish, getRestaurant().getServingTable());
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
+        restaurant.restaurantLogger.logDishRejected(dish);
       }
     } catch (NullPointerException e) {
       System.out.println("No row selected");
