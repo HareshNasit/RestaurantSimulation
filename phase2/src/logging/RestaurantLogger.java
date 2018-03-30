@@ -89,7 +89,7 @@ public class RestaurantLogger extends SimpleLogger {
    */
   public void logInventoryChanged(InventoryIngredient inventoryIngredient, int amount) {
     String content = this.getTime() + "[NEW LOG - INVENTORY CHANGED] ";
-    content += "[ " + inventoryIngredient.toString() + "] has changed by: " + amount;
+    content += "[ " + inventoryIngredient.getName() + "] has changed by: " + amount;
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
   }
