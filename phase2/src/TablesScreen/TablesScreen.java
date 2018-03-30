@@ -82,7 +82,7 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
 
 
     } catch (NullPointerException e){
-      System.out.println("Choose a file bro");
+      e.printStackTrace();
     }
 
 
