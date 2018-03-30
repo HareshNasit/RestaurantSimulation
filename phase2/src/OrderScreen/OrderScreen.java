@@ -216,6 +216,7 @@ public class OrderScreen extends VBox implements ModelControllerInterface {
     }
 
     buttonReturn.setVisible(false);
+    updateScreen();
 
   }
 
