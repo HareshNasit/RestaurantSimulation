@@ -42,7 +42,7 @@ public class LoginScreen extends AnchorPane {
   private TextField userName; // The username entered by the user.
     @FXML
   private Label canLogin; // Text to display the login status.
-  private final String WORKERS = "workers.txt"; // The workers file.
+  private final String WORKERS = "restaurantData/workers.txt"; // The workers file.
   private Restaurant restaurant; // The restaurant
   private ArrayList<LoginObject<WorkerType, Pair<String, String>>> userNames; // The details about the workers.
 
