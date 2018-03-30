@@ -37,7 +37,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   private Manager manager;
   private Restaurant restaurant;
-  private final String REQUESTFILE = "request.txt";
+  private final String REQUESTFILE = "request.txt"; // the text file that saves requests
   private final String MANAGERSCREEN = "ManagerScreen.fxml";
 
   @FXML
