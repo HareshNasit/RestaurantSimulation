@@ -14,20 +14,19 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewWorkers" prefHeight="367.0" prefWidth="315.0">
+                        <TableView fx:id="tableViewWorkers" prefHeight="371.0" prefWidth="225.0">
                            <columns>
-                              <TableColumn fx:id="columnType" prefWidth="90.0" text="Type" />
-                              <TableColumn fx:id="columnName" prefWidth="106.0" text="Name" />
-                              <TableColumn fx:id="columnStatus" prefWidth="118.0" text="Status" />
+                              <TableColumn fx:id="columnType" prefWidth="104.0" text="Type" />
+                              <TableColumn fx:id="columnName" prefWidth="120.0" text="Name" />
                            </columns>
                         </TableView>
                         <VBox prefHeight="367.0" prefWidth="292.0">
                            <children>
                               <Pane prefHeight="375.0" prefWidth="289.0">
                                  <children>
-                                    <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" onAction="#buttonStockAction" prefHeight="27.0" prefWidth="148.0" text="Send to Get Stock" />
-                                    <Button fx:id="buttonOffice" layoutX="71.0" layoutY="76.0" mnemonicParsing="false" onAction="#callWorker" prefHeight="27.0" prefWidth="148.0" text="Call To Office" />
-                                    <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" onAction="#testInventory" text="Send to Attend Table" />
+                                    <Button fx:id="buttonStock" layoutX="71.0" layoutY="157.0" mnemonicParsing="false" onAction="#buttonStockAction" prefHeight="48.0" prefWidth="173.0" text="Send to Get Stock" />
+                                    <Button fx:id="buttonOffice" layoutX="71.0" layoutY="60.0" mnemonicParsing="false" onAction="#callWorker" prefHeight="43.0" prefWidth="169.0" text="Call To Office" />
+                                    <Button fx:id="buttonAttend" layoutX="71.0" layoutY="235.0" mnemonicParsing="false" onAction="#testInventory" prefHeight="55.0" prefWidth="172.0" text="Send to Attend Table" />
                                  </children>
                               </Pane>
                            </children>
@@ -104,9 +103,8 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewDishes" layoutX="34.0" layoutY="14.0" prefHeight="326.0" prefWidth="502.0">
+                        <TableView fx:id="tableViewDishes" layoutX="34.0" layoutY="14.0" prefHeight="326.0" prefWidth="427.0">
                           <columns>
-                            <TableColumn fx:id="columnTime" prefWidth="75.0" text="Time" />
                             <TableColumn fx:id="columnDishTable" prefWidth="75.0" text="Table" />
                               <TableColumn fx:id="columnCustomerNum" prefWidth="88.0" text="Customer" />
                               <TableColumn fx:id="columnDishName" prefWidth="139.0" text="Dish Name" />
