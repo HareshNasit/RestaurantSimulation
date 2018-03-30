@@ -3,7 +3,6 @@ package billScreen;
 import Restaurant.Bill;
 import Restaurant.Restaurant;
 import Restaurant.Table;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.IO;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

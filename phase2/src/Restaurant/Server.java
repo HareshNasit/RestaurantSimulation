@@ -80,8 +80,8 @@ public class Server implements IWorker, Notifiable {
     }
 
     /**
-     * TODO: DO THIS LOL
-     * @param comment
+     * Return a dish back to the kitchen.
+     * @param dish the dish to be returned.
      * @param servingTable
      */
     public void returnDish(Dish dish, ServingTable servingTable) {
