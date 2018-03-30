@@ -36,7 +36,6 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
   @FXML private Button tableButton; //Button that will open the Table's menu
   @FXML private Button servingTableButton; // Button that will open the ServingTableMenu
   @FXML private Button managerButton; //Button that will call the manager
-  @FXML private TableColumn tableStatusColumn;
   @FXML private TableColumn occupiedTableColumn;
   @FXML private TableColumn tableIDColumn;
   @FXML private HBox hBox; //The container that contains all of this
