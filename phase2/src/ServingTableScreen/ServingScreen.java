@@ -40,66 +40,71 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
 
   @FXML
-  private TableView tab1Table;
+  private TableView tab1Table; // The 1st tab table of this screen which displays the dishes to be cooked.
   @FXML
-  private TableColumn tab1TableId;
+  private TableColumn tab1TableId; // The table column for the table numbers in the 1st tab.
   @FXML
-  private TableColumn tab1Dish;
+  private TableColumn tab1Dish; // The table column for the dishes in the 1st tab.
   @FXML
   private Button accept;
   @FXML
   private Button reject;
   @FXML
-  private TableView tab2Table;
+  private TableView tab2Table;  // The table for the dishes being cooked in the 2nd tab.
   @FXML
-  private TableColumn tab2TableId;
+  private TableColumn tab2TableId; // The table column for the table numbers in the 2nd tab.
   @FXML
-  private TableColumn tab2Dish;
+  private TableColumn tab2Dish;// The table column for the dishes in the 2nd tab.
   @FXML
-  private TableView tab3Table;
+  private TableView tab3Table; // The table for the dishes to be served in the 3rd tab.
   @FXML
-  private TableColumn tab3TableId;
+  private TableColumn tab3TableId; // The table column for the table numbers in the 3rd tab.
   @FXML
-  private TableColumn tab3Dish;
+  private TableColumn tab3Dish; // The table column for the dishes in the 3rd tab.
   @FXML
-  private AnchorPane tab1;
+  private AnchorPane tab1; // The tab1 on the screen.
   @FXML
-  private Button DishReadyButton;
+  private Button DishReadyButton; // Button to check if the dish is ready on the 2nd tab.
   @FXML
-  private TableColumn tab1Comment;
+  private TableColumn tab1Comment; // The table column for the comments of the dishes in the tab1.
   @FXML
-  private TableColumn tab2Comment;
+  private TableColumn tab2Comment;// The table column for the comments of the dishes in the tab2.
   @FXML
-  private TableColumn tab3Comment;
+  private TableColumn tab3Comment; // The table column for the comments of the dishes in the tab3.
   @FXML
-  private Label checkLabel;
+  private Label checkLabel; // Label which displays if the dish can be prepared to the cook.
   @FXML
-  private ImageView tick;
+  private ImageView tick; // Tick image.
   @FXML
-  private ImageView cross;
+  private ImageView cross; // X image/
   @FXML
-  private AnchorPane tab2;
+  private AnchorPane tab2; // The 2nd tab on this screen.
   @FXML
-  private ImageView tick1;
+  private ImageView tick1; // Tick image.
   @FXML
-  private Pane notificationArea;
+  private Pane notificationArea; // Area for displaying notifications to the cook.
   @FXML
-  private VBox vBox;
+  private VBox vBox; // The background screen for this screen.
   @FXML
-  private AnchorPane tab3;
+  private AnchorPane tab3; // The 3rd tab on this screen.
   @FXML
-  private TabPane tabsPane;
+  private TabPane tabsPane; // The tab pane.
   @FXML
   private TableColumn columnDishStatus;
   @FXML
-  private Button addExtra;
-  private Notification notification;
+  private Button addExtra; // Button for the cook to add extra ingredients.
+  private Notification notification; // The notification.
 
 
-  private Restaurant restaurant;
-  private ServingTable servingTable;
-  private IWorker cook;
+  private Restaurant restaurant; // The restaurant.
+  private ServingTable servingTable; // The serving table.
+  private IWorker cook; // The cook who is going to see this screen.
 
+    /** Initializing the screen.
+     * @param restaurant the restaurant.
+     * @param servingTable  the serving table.
+     * @param worker the worker.
+     * */
   public ServingScreen(Restaurant restaurant, ServingTable servingTable, IWorker worker) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ServingTableScreen.fxml"));
     fxmlLoader.setRoot(this);
@@ -118,25 +123,32 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
 
   }
-
+    /**Set the Dishes to be cooked table on the first tab
+     * @param Dishes Array list of the dishes.
+     */
   public void setCookTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesToBeCooked = FXCollections.observableArrayList();
     dishesToBeCooked.addAll(Dishes);
     this.tab1Dish.getTableView().setItems(dishesToBeCooked);
   }
-
+    /**Set the Dishes being cooked table on the second tab
+     * @param Dishes Array list of the dishes.
+     */
   public void setBeingCookedTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesBeingCooked = FXCollections.observableArrayList();
     dishesBeingCooked.addAll(Dishes);
     this.tab2Dish.getTableView().setItems(dishesBeingCooked);
   }
-
+    /**Set the Dishes to be served table on the third tab
+     * @param Dishes Array list of the dishes.
+     */
   public void setReadyTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesToBeServed = FXCollections.observableArrayList();
     dishesToBeServed.addAll(Dishes);
     this.tab3Dish.getTableView().setItems(dishesToBeServed);
   }
-
+    /* Initialize the tables when the screen is constructed.
+    * */
   public void initialize() {
 
     tab1TableId.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
@@ -171,7 +183,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   public TableView getCookTable() {
     return tab1Table;
   }
-
+    /** The method is called when the user selects a row on the table on the first tab*/
   public void rowSelected(MouseEvent mouseEvent) {
     Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
     try {
@@ -194,10 +206,10 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       System.out.println("No row selected");
     }
   }
-
+    /** The method is called when the cook presses the accept button and calls methods from the cook class
+     * accordingly.
+     */
   public void acceptDish(ActionEvent actionEvent) {
-      // TODO: 2018-03-29 check when dish is returned. 
-
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
 
@@ -236,7 +248,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     message.append("Are you sure you want to accept?");
     return message.toString();
   }
-
+  /** The method is called when the reject dish is pressed which rejects the dish accordingly.
+  */
   public void rejectDish(ActionEvent actionEvent) {
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
@@ -253,7 +266,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     checkLabel.setText("");
 
   }
-
+    /** The method is called when the dishReady button is pressed which sets the dish on the serving table.
+     */
   public void dishReadyToBeServed() {
     try {
       Dish dish = (Dish) tab2Table.getSelectionModel().getSelectedItem();
@@ -302,6 +316,10 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     return cook;
   }
 
+    /**
+     *
+     * @param cook
+     */
   public void setCook(IWorker cook) {
     this.cook = cook;
 
