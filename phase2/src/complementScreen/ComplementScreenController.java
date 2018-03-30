@@ -55,9 +55,9 @@ public class ComplementScreenController extends GridPane implements EventHandler
   @FXML
   public TextArea dishStatusLabel;
 
-  private HashMap<String, DishIngredient> ingredients;
-  private HashMap<String, DishIngredient> ingredientsCopy;
-  private String selectedIngredient;
+  private HashMap<String, DishIngredient> ingredients; // the hashmap for ingredients required to make dishes
+  private HashMap<String, DishIngredient> ingredientsCopy; //copy of the hashmap for ingredients required to make dishes
+  private String selectedIngredient; // the selected ingredient that is to be added to the dish as a compliment
 
   public ComplementScreenController(Dish dish){
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("complements.fxml"));

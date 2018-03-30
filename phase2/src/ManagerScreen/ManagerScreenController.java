@@ -246,7 +246,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   @Override
   public void openNotification(String message) {
     notification.pushNotification(message);
-    updateScreen();
   }
 
   /**

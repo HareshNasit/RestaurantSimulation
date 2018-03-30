@@ -8,10 +8,14 @@ Adam
 Akarsh
 -OrderScreen Package
 -Connecting TableScreen with OrderScreen
+-LoginScreen and GUI formatting
+-Javadocs for classes
 
 Harsh
 -ServingTableScreen Package
 -startupscreen Package
+-Images on the buttons
+-Javadocs for the classes
 
 Yosef
 -ComplementScreen Package
