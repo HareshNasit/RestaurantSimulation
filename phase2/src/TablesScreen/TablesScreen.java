@@ -56,7 +56,6 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
       initialize();
       setServer(server);
       this.restaurant = restaurant;
-      restaurant.getServingTable().addServer(server);
       updateScreen();
 
     } catch (IOException exception) {

@@ -78,12 +78,14 @@ public class Restaurant {
   }
   public void addServer(Server server){
     servers.add(server);
+    servingTable.addServer(server);
     getWorkers().add(server);
     updateWorker(WorkerType.MANAGER);
 
   }
   public void addCook(Cook cook){
     cooks.add(cook);
+    servingTable.addCook(cook);
     getWorkers().add(cook);
     updateWorker(WorkerType.MANAGER);
   }
