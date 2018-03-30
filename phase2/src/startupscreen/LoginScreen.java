@@ -11,6 +11,7 @@ import ServingTableScreen.ServingScreen;
 import TablesScreen.TablesScreen;
 import java.lang.reflect.Type;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -35,13 +36,12 @@ import java.util.ResourceBundle;
 import javafx.util.Pair;
 
 public class LoginScreen extends AnchorPane {
-
-  public PasswordField password;
-  public TextField userName;
-  public Label canLogin;
-  public Button loginBtn;
-  public AnchorPane workerLoginScreenAnchorPane;
-  private boolean systemOn = false;
+  @FXML
+  private PasswordField password; // The password entered by the user.
+  @FXML
+  private TextField userName; // The username entered by the user.
+    @FXML
+  private Label canLogin;
   private final String WORKERS = "workers.txt";
   private Restaurant restaurant;
   private ArrayList<LoginObject<WorkerType, Pair<String, String>>> userNames;
@@ -81,7 +81,8 @@ public class LoginScreen extends AnchorPane {
 
     }
   }
-
+    /**Check the type of worker
+     * @param type The type of the worker*/
   private WorkerType checkWorkerType(String type) {
     if (type.equals("Cook")) {
       return WorkerType.COOK;
