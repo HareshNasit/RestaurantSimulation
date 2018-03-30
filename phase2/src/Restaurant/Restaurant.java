@@ -213,7 +213,6 @@ public class Restaurant {
 
   public void createNewReceiptFile(){
     this.receiptsLogger.createAndSetNewLoggerFile("receipts", "receipt");
-    System.out.println(this.receiptsLogger.getFilePath() + "2");
   }
   public void createNewLogFile(){
     this.restaurantLogger.createAndSetNewLoggerFile("logger", "log");
