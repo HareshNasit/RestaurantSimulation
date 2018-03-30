@@ -235,6 +235,12 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     this.updateScreen();
   }
 
+  /**
+   *
+   * @param priority The boolean
+   * @param hasDishes The boolean if there are dishes.
+   * @return String the message.
+   */
   private String getCookMessage(boolean priority,boolean hasDishes){
     StringBuilder message = new StringBuilder();
     if (priority){
@@ -286,6 +292,9 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     }
   }
 
+    /**
+     * Update the screen.
+     */
   public void updateScreen() {
     setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
     setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
@@ -317,8 +326,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   }
 
     /**
-     *
-     * @param cook
+     * Set the worker depending on the type of the worker.
+     * @param cook The Worker
      */
   public void setCook(IWorker cook) {
     this.cook = cook;
@@ -387,28 +396,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     }
 
   }
-
-  public void firstThread(ComplementScreenController controller, Dish dish,
-      HashMap<String, DishIngredient> dishIngredientsCopy) {
-
-    Cook cook = new Cook("jeff");
-    HashMap<String, DishIngredient> differences = dish
-        .getPosDifBetweenTwoIngredientsList(dishIngredientsCopy);
-    Dish newIngredients = dish.clone();
-    newIngredients.setIngredients(differences);
-    if (cook.canBePrepared(newIngredients, restaurant.getInventory())) {
-      for (String key : differences.keySet()) {
-        restaurant.getInventory().removeStock(key, differences.get(key).getAmount());
-      }
-    } else {
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-          "Sorry, there is not enough ingredients in stock right now to fulfill this order.",
-          ButtonType.OK);
-      alert.showAndWait();
-      dish.setIngredients(controller.getIngredientsCopy());
-    }
-  }
-
   public Restaurant getRestaurant() {
     return restaurant;
   }

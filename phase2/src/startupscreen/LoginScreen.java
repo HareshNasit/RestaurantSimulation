@@ -61,6 +61,9 @@ public class LoginScreen extends AnchorPane {
     }
   }
 
+  /**
+   * this method creates the username and password credentials for workers
+   */
   private void generateLoginObjects() {
     try (BufferedReader fileReader = new BufferedReader(new FileReader(WORKERS))) {
       String line = fileReader.readLine();
