@@ -97,7 +97,15 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
     controller.updateScreen();
     hBox.getChildren().setAll(controller);
   }
-  
+
+  /**
+   * Calls the manager for special events
+   */
+  public void callManager() throws IOException {
+
+
+  }
+
   /**
    * After the constructor is called, this is called.
    */
