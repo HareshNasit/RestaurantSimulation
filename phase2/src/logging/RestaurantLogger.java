@@ -7,6 +7,9 @@ import Restaurant.InventoryIngredient;
 import Restaurant.Table;
 import java.util.ArrayList;
 
+/**
+ * This allows the program to log restaurant actions. All the log messages get sent to a txt.
+ */
 public class RestaurantLogger extends SimpleLogger {
 
   public RestaurantLogger(String filePath) {
@@ -32,7 +35,7 @@ public class RestaurantLogger extends SimpleLogger {
    * Sends a message about a dish being prepared.
    */
   public void logDishPrepared(Dish dish) {
-    String content = "[NEW LOG - DISH PREPARED] ";
+    String content = this.getTime() + "[NEW LOG - DISH PREPARED] ";
     content += "[ " + dish.toString() + "] has been prepared ";
     content += "[END LOG]" + System.lineSeparator();
     this.writeToLogger(content);
