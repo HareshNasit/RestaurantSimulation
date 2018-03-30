@@ -21,12 +21,12 @@ public class Inventory {
   private final String REQUESTSFILE = "request.txt";
   private Notifiable manager;
   private HashMap<String, InventoryIngredient> inventory;
-  private ArrayList<InventoryIngredient> lowIngredients;
+  private ArrayList<String> lowIngredients;
 
   /** Constructs a new Inventory object */
   public Inventory() {
     inventory = new HashMap<String, InventoryIngredient>();
-    lowIngredients = new ArrayList<InventoryIngredient>();
+    lowIngredients = new ArrayList<String>();
   }
 
   /**
@@ -130,11 +130,11 @@ public class Inventory {
   private void writeToRequest(String ingredient, int amount){
     InventoryIngredient ingredient1 = inventory.get(ingredient.trim());
     if (ingredient1.getCurrentQuantity() - amount < ingredient1.getLowerThreshold() &&
-        !lowIngredients.contains(ingredient1)){
+        !checkIfRequested(ingredient1.getName())){
       try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(REQUESTSFILE, true));
         writer.write(ingredient1.getName() + ": " + ingredient1.getRestockQuantity() + System.lineSeparator());
-        lowIngredients.add(ingredient1);
+        lowIngredients.add(ingredient1.getName());
         writer.close();
         manager.sendNotifications("request.txt updated");
       } catch (IOException e){}
@@ -159,6 +159,23 @@ public class Inventory {
     } catch (Exception e) {
 
     }
+
+  }
+
+  /**
+   * Checks if an ingredient has been requested
+   * @param ingredientName Ingredient to be checked
+   * @return if dish has been requested
+   */
+  private boolean checkIfRequested(String ingredientName){
+
+    for (String name: lowIngredients){
+      if (name.equals(ingredientName)){
+        return true;
+      }
+    }
+    return false;
+
   }
 
   /** Reads the inventory from Inventory.txt */
@@ -181,18 +198,23 @@ public class Inventory {
     }
   }
 
-  /** Writes the list of ingredients that need to be requested in request.txt */
-  private void getLowIngredients() {
-    try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(REQUESTSFILE)))) {
-      for (InventoryIngredient ingredient : inventory.values()) {
-        if (ingredient.getCurrentQuantity() < ingredient.getLowerThreshold()) {
-          out.println(ingredient.getName() + ": " + ingredient.getRestockQuantity());
-        }
+  /**
+   * Reads request to lowIngrdients
+   */
+  public void readRequest(){
+    try (BufferedReader fileReader = new BufferedReader(new FileReader(REQUESTSFILE))) {
+      String line = fileReader.readLine();
+      while (line != null) {
+        String name = line.split(":")[0].toLowerCase().trim();
+        lowIngredients.add(name);
+
+        line = fileReader.readLine();
       }
 
     } catch (java.io.IOException e) {
     }
   }
+
 
   /**
    * Returns the amount of ingredient
