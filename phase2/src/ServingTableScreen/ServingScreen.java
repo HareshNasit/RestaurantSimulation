@@ -301,8 +301,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
   @Override
   public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
-    notification.openScanner();
-    notification.getButtonPickUp().setOnAction(event -> inventory.addStock(ingredient, amount));
+    notification.openScanner(inventory, ingredient, amount);
 
   }
 

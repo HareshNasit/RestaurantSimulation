@@ -147,12 +147,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   }
 
-  public void testInventory() {
-    System.out.println("CHECKING Inventory");
-    restaurant.getInventory().removeStock("chocolate", 2);
-    this.updateRequestText();
-
-  }
 
   /**
    * Generates the list of undelivered dishes (i.e dishes that are still in the serving table)
@@ -275,7 +269,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
       int amount = Integer.valueOf(outputResult[1].trim());
       worker.scanStock(restaurant.getInventory(), ingredient, amount);
       } catch(NumberFormatException e){
-        e.printStackTrace();
         buttonStockAction();
       }
 

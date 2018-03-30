@@ -37,6 +37,7 @@
 
 package notification;
 
+import Restaurant.Inventory;
 import java.io.IOException;
 
 import java.util.EmptyStackException;
@@ -44,7 +45,9 @@ import java.util.Stack;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -80,8 +83,6 @@ public class Notification extends Pane {
     try {
       fxmlLoader.load();
       labelNotification.setText("");
-      closeScanner();
-
 
     } catch (IOException exception) {
       throw new RuntimeException(exception);
@@ -132,18 +133,15 @@ public class Notification extends Pane {
   /**
    * Creates a confirm button.
    */
-  public void openScanner(){
-    labelPickUp.setVisible(true);
-    buttonPickUp.setVisible(true);
+  public void openScanner(Inventory inventory, String name, int amount){
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "NEW STOCK AWAITING PICKUP",
+        ButtonType.YES);
+    alert.showAndWait();
+    if (alert.getResult() == ButtonType.YES){
+      inventory.addStock(name,amount);
+    }
   }
 
-  /**
-   * Closes the button. Makes it disappear.
-   */
-  public void closeScanner(){
-    labelPickUp.setVisible(false);
-    buttonPickUp.setVisible(false);
-  }
 
   /**
    * Getter method for buttonPickUp.
