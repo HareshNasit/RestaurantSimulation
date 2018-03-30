@@ -6,7 +6,7 @@ package Restaurant;
 public interface ModelControllerInterface {
 
   /**
-   * Updates the screens to make sure all items that appear on the  screen are up to date 
+   * Updates the screens to make sure all items that appear on the  screen are up to date
    */
   public void updateScreen();
 
@@ -18,9 +18,9 @@ public interface ModelControllerInterface {
 
   /**
    * opens the receiver function which allows workers to collect stock when they click it
-   * @param inventory
-   * @param ingredient
-   * @param amount
+   * @param inventory the inventory of the restaurant
+   * @param ingredient the ingredient being received
+   * @param amount the amount being restocked
    */
   public void openReceiverFunction(Inventory inventory, String ingredient, int amount);
 
