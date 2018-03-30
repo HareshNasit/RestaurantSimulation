@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-  private final String FILENAME = "menu.txt";
+  private final String FILENAME = "restaurantData/menu.txt";
   private HashMap<Double, MenuItem> menuItems;
 
   public Collection<MenuItem> getMenuItems(){
