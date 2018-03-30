@@ -55,7 +55,7 @@ public class Manager implements IWorker, Notifiable {
 
   @Override
   public void sendNotification(String message) {
-
+    screen.openNotification(message);
   }
 
   /** The Manager shuts the system and updates the inventory.txt file. */

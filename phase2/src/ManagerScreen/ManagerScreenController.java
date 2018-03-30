@@ -37,7 +37,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   private Manager manager;
   private Restaurant restaurant;
-  private final String REQUESTFILE = "request.txt";
+  private final String REQUESTFILE = "restaurantData/request.txt";
   private final String MANAGERSCREEN = "ManagerScreen.fxml";
 
   @FXML
@@ -246,6 +246,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
   @Override
   public void openNotification(String message) {
     notification.pushNotification(message);
+    updateScreen();
   }
 
   /**
