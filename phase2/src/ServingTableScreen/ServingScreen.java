@@ -72,7 +72,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   @FXML
   private ImageView tick; // Tick image.
   @FXML
-  private ImageView cross; // X image/
+  private ImageView cross; // X image.
   @FXML
   private AnchorPane tab2; // The 2nd tab on this screen.
   @FXML
@@ -122,7 +122,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     /**Set the Dishes to be cooked table on the first tab
      * @param Dishes Array list of the dishes.
      */
-  public void setCookTable(ArrayList<Dish> Dishes) {
+  private void setCookTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesToBeCooked = FXCollections.observableArrayList();
     dishesToBeCooked.addAll(Dishes);
     this.tab1Dish.getTableView().setItems(dishesToBeCooked);
@@ -130,7 +130,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     /**Set the Dishes being cooked table on the second tab
      * @param Dishes Array list of the dishes.
      */
-  public void setBeingCookedTable(ArrayList<Dish> Dishes) {
+  private void setBeingCookedTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesBeingCooked = FXCollections.observableArrayList();
     dishesBeingCooked.addAll(Dishes);
     this.tab2Dish.getTableView().setItems(dishesBeingCooked);
@@ -138,7 +138,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     /**Set the Dishes to be served table on the third tab
      * @param Dishes Array list of the dishes.
      */
-  public void setReadyTable(ArrayList<Dish> Dishes) {
+  private void setReadyTable(ArrayList<Dish> Dishes) {
     ObservableList<Dish> dishesToBeServed = FXCollections.observableArrayList();
     dishesToBeServed.addAll(Dishes);
     this.tab3Dish.getTableView().setItems(dishesToBeServed);
@@ -370,6 +370,8 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
 
   }
 
+    /** When the dish is returned back and extra ingredients need to be added.
+     */
   public void addIngredientsIfEnough() {
     try {
       Dish dish = (Dish) this.tab1Table.getSelectionModel().getSelectedItem();

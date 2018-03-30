@@ -121,7 +121,7 @@ public class Notification extends Pane {
   /**
    * Pushes the notification message to the top of the list. GUI will now show the most recent
    * notification
-   * @param message
+   * @param message the message being sent
    */
   @FXML public void pushNotification(String message) {
     notifications.push(message);

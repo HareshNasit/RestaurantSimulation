@@ -3,13 +3,15 @@ Adam
 -ManagerScreen Package
 -Connecting Screens Together
 -Notification System
+-RestaurantApplication
+-DishStatus
 
 
 Akarsh
 -OrderScreen Package
 -Connecting TableScreen with OrderScreen
 -LoginScreen and GUI formatting
--Javadocs for classes
+-Javadocs for classes/interfaces
 
 Harsh
 -ServingTableScreen Package
