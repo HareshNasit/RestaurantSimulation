@@ -138,12 +138,10 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
     columnDishStatus.setCellValueFactory(new PropertyValueFactory<Dish, String>("dishStatus"));
     columnDishTable.setCellValueFactory(new PropertyValueFactory<Dish, String>("tableName"));
     columnCustomerNum.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("customerNum"));
-    //columnTime.setCellValueFactory(new PropertyValueFactory<Dish, Integer>("lowerThreshold"));
 
     this.setIngredientTableRowAction();
     notification = new Notification();
     paneNotification.getChildren().setAll(notification);
-    //getColumnName().setCellValueFactory(new PropertyValueFactory<IWorker, String>("tableID"));
 
     updateRequestText();
 
@@ -245,9 +243,9 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
 
   /**
    * Open the receiver function for the manager
-   * @param inventory
-   * @param ingredient
-   * @param amount
+   * @param inventory the inventory
+   * @param ingredient the ingredient
+   * @param amount the amount
    */
   @Override
   public void openReceiverFunction(Inventory inventory, String ingredient, int amount) {
@@ -319,7 +317,6 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
       ingredient.setLowerThreshold(Integer.valueOf(textFieldThreshold.getText().trim()));
     }
 
-    //Only works when editing objects directlty
     tableInventory.refresh();
     clearTextFields();
 

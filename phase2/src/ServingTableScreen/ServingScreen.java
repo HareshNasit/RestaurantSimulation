@@ -199,7 +199,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           addExtra.setDisable(true);
       }
     } catch (NullPointerException e) {
-      System.out.println("No row selected");
     }
   }
     /** The method is called when the worker presses the accept button and calls methods from the worker class
@@ -226,7 +225,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         }
       }
     } catch (NullPointerException e) {
-      System.out.println("No row selected");
     }
     checkLabel.setText("");
     this.updateScreen();
@@ -264,7 +262,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         restaurant.restaurantLogger.logDishRejected(dish);
       }
     } catch (NullPointerException e) {
-      System.out.println("No row selected");
     }
     checkLabel.setText("");
 
@@ -285,7 +282,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
         restaurant.restaurantLogger.logDishPrepared(dish);
       }
     } catch (NullPointerException e) {
-      System.out.println("No row selected");
     }
   }
 
@@ -391,7 +387,6 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       }
 
     } catch (NullPointerException e) {
-      System.out.println("Choose a dish to add compliments");
     }
 
   }
