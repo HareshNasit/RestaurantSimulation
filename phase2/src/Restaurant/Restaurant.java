@@ -103,16 +103,18 @@ public class Restaurant {
     this.cooks = new ArrayList<Notifiable>();
     this.workers = new ArrayList<IWorker>();
     this.managers = new ArrayList<Notifiable>();
+    createNewReceiptFile();
+    createNewLogFile();
+    inventory.readInventory();
+    inventory.readRequest();
     generateTables(TABLEFILE);
     setActive(false);
-    startSystem();
+
   }
     /** Start the Restaurant system.
      */
   public void startSystem(){
     setActive(true);
-    createNewReceiptFile();
-    createNewLogFile();
   }
     /** Shutdown the Restaurant system.
      */

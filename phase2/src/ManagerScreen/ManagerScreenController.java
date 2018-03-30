@@ -387,6 +387,7 @@ public class ManagerScreenController extends VBox implements ModelControllerInte
    */
   public void startSystem() {
     manager.startSystem(restaurant);
+    manager.getScreen().updateScreen();
   }
 
   /**
