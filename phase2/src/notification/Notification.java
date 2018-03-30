@@ -129,16 +129,27 @@ public class Notification extends Pane {
 
   }
 
+  /**
+   * Creates a confirm button.
+   */
   public void openScanner(){
     labelPickUp.setVisible(true);
     buttonPickUp.setVisible(true);
   }
 
+  /**
+   * Closes the button. Makes it disappear.
+   */
   public void closeScanner(){
     labelPickUp.setVisible(false);
     buttonPickUp.setVisible(false);
   }
 
+  /**
+   * Getter method for buttonPickUp.
+   *
+   * @return Button.
+   */
   public Button getButtonPickUp() {
     return buttonPickUp;
   }

@@ -11,6 +11,7 @@ import ServingTableScreen.ServingScreen;
 import TablesScreen.TablesScreen;
 import java.lang.reflect.Type;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -35,16 +36,15 @@ import java.util.ResourceBundle;
 import javafx.util.Pair;
 
 public class LoginScreen extends AnchorPane {
-
-  public PasswordField password;
-  public TextField userName;
-  public Label canLogin;
-  public Button loginBtn;
-  public AnchorPane workerLoginScreenAnchorPane;
-  private boolean systemOn = false;
-  private final String WORKERS = "workers.txt";
-  private Restaurant restaurant;
-  private ArrayList<LoginObject<WorkerType, Pair<String, String>>> userNames;
+  @FXML
+  private PasswordField password; // The password entered by the user.
+  @FXML
+  private TextField userName; // The username entered by the user.
+    @FXML
+  private Label canLogin; // Text to display the login status.
+  private final String WORKERS = "restaurantData/workers.txt"; // The workers file.
+  private Restaurant restaurant; // The restaurant
+  private ArrayList<LoginObject<WorkerType, Pair<String, String>>> userNames; // The details about the workers.
 
   public LoginScreen(Restaurant restaurant) {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("loginScreen.fxml"));
@@ -81,7 +81,10 @@ public class LoginScreen extends AnchorPane {
 
     }
   }
-
+    /**Check the type of worker
+     * @param type The type of the worker
+     * @return Returns the WorkerType
+     */
   private WorkerType checkWorkerType(String type) {
     if (type.equals("Cook")) {
       return WorkerType.COOK;
@@ -92,7 +95,10 @@ public class LoginScreen extends AnchorPane {
     }
     return null;
   }
-
+    /**
+     *Checks whether the input from the user is correct and displays data essentially.
+     * It also checks if the manager has not started the system, then the other workers cannot log in to the system.
+     */
   public void checkWorkerLogin() {
 
     LoginObject<WorkerType, Pair<String, String>> details =
@@ -121,7 +127,10 @@ public class LoginScreen extends AnchorPane {
     }
 
   }
-
+    /**Checks the credentials from the user
+     * @param credentials the username and password of the user
+     * @return the credentials.
+     */
   private LoginObject<WorkerType, Pair<String, String>> checkUserIds(
       Pair<String, String> credentials) {
     for (LoginObject<WorkerType, Pair<String, String>> details : userNames) {
@@ -134,6 +143,9 @@ public class LoginScreen extends AnchorPane {
 
   }
 
+    /** Generate the Managers screen after being logged in.
+    * @param name the name of the worker.
+    */
   private void generateManagerScreen(String name) {
     canLogin.setText("Logged in");
     canLogin.setTextFill(Paint.valueOf("Green"));
@@ -149,7 +161,9 @@ public class LoginScreen extends AnchorPane {
     window.setScene(new Scene(controller));
     window.show();
   }
-
+    /** Generate the Servers screen after being logged in.
+     * @param name the name of the worker.
+     */
   private void generateServerScreen(String name) {
     Stage window = new Stage();
     Server server = new Server(name);
@@ -161,7 +175,9 @@ public class LoginScreen extends AnchorPane {
     window.setScene(new Scene(screen));
     window.show();
   }
-
+    /** Generate the Cooks screen after being logged in.
+     * @param name the name of the worker.
+     */
   private void generateCookScreen(String name) {
     Stage window = new Stage();
     Cook cook = new Cook(name);

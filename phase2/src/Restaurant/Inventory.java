@@ -17,8 +17,8 @@ import java.io.FileReader;
  */
 public class Inventory {
 
-  private final String INVENTORYFILE = "Inventory.txt";
-  private final String REQUESTSFILE = "request.txt";
+  private final String INVENTORYFILE = "restaurantData/Inventory.txt";
+  private final String REQUESTSFILE = "restaurantData/request.txt";
   private Notifiable manager;
   private HashMap<String, InventoryIngredient> inventory;
   private ArrayList<String> lowIngredients;

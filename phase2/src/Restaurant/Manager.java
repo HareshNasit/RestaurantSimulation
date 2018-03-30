@@ -14,7 +14,6 @@ import java.util.Date;
 public class Manager implements IWorker, Notifiable {
 
   private String name;
-  private final String RECEIVEDFILE = "receivedShipments.txt";
   private WorkerType type = WorkerType.MANAGER;
   private ArrayList<IWorker> workers;
   private ModelControllerInterface screen;
@@ -80,25 +79,7 @@ public class Manager implements IWorker, Notifiable {
   public void shutDownSystem(Restaurant restaurant){
     restaurant.shutDownSystem();
   }
-  /**
-   * The Manager inputs how much of an ingredient the Restaurant has received. This gets printed to
-   * a new txt. The manager will compare between the request txt and receivedShipments txt to see
-   * which shipments have been received. This is useful if a shipment has not come in, so the
-   * manager can send an email to the supplier.
-   *
-   * @param ingredient ingredient that has been received
-   * @param amount amount of ingredient that is received
-   */
-  public void confirmReceived(String ingredient, int amount) {
-    try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(RECEIVEDFILE)))) {
 
-      String shipmentMessage = ingredient + ": " + amount;
-      out.println(shipmentMessage);
-
-    } catch (Exception e) {
-
-    }
-  }
 
   public ModelControllerInterface getScreen() {
     return screen;

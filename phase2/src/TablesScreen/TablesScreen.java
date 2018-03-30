@@ -185,7 +185,7 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
 
   /**
    * Gets the Restaurant object of this class
-   * @return
+   * @return Return the restaurant.
    */
   public Restaurant getRestaurant() {
     return restaurant;
@@ -193,7 +193,7 @@ public class TablesScreen extends VBox implements ModelControllerInterface  {
 
   /**
    * Sets the restaurant object of this class
-   * @param restaurant
+   * @param restaurant The restaurant to be set.
    */
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
