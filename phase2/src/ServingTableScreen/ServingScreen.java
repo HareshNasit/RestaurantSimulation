@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import MenuDishes.Dish;
@@ -358,6 +357,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       serveDishBtn.setText("Serve Dish");
       tab3.getChildren().add(serveDishBtn);
       back.setText("Back");
+      servingTable.addServer((Notifiable) cook);
       ((Server) cook).setScreen(this);
     }
 

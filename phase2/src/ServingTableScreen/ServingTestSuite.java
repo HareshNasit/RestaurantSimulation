@@ -36,7 +36,7 @@ public class ServingTestSuite extends Application{
         controller.setCookTable(restaurant.getServingTable().getDishesToBeCooked());
         // controller.setReadyTable(dishes);
         controller.setRestaurant(restaurant);
-        controller.setCook(new Server("harsh"));
+        controller.setUser(new Server("harsh"));
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Serving Screen");
         window.setScene(new Scene(root));
