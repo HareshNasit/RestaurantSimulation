@@ -34,7 +34,13 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
     newIngredients.setIngredients(differences);
     if (cook.canBePrepared(newIngredients, restaurant.getInventory())) {
       for (String key : differences.keySet()) {
-        restaurant.getInventory().removeStock(key, differences.get(key).getAmount());
+        int diff = differences.get(key).getAmount();
+        if (diff != 0) {
+          restaurant.getInventory().removeStock(key, diff);
+          Restaurant.InventoryIngredient ing = restaurant.getInventory()
+              .getInventoryIngredient(key);
+          restaurant.getRestaurantLogger().logInventoryChanged(ing, -diff);
+        }
       }
     } else {
       String missingIngredients = "";
