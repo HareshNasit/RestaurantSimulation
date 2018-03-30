@@ -1,18 +1,15 @@
 package ServingTableScreen;
 
-import complementScreen.ComplementScreenController;
 import complementScreen.ComplementScreenCookExtra;
 import Restaurant.Inventory;
 import Restaurant.Restaurant;
 import Restaurant.Server;
 import Restaurant.ServingTable;
 import Restaurant.DishStatus;
-import Restaurant.DishIngredient;
 import Restaurant.Notifiable;
 import Restaurant.WorkerType;
 import TablesScreen.TablesScreen;
 import java.io.IOException;
-import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,7 +68,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   @FXML
   private TableColumn tab3Comment; // The table column for the comments of the dishes in the tab3.
   @FXML
-  private Label checkLabel; // Label which displays if the dish can be prepared to the cook.
+  private Label checkLabel; // Label which displays if the dish can be prepared to the worker.
   @FXML
   private ImageView tick; // Tick image.
   @FXML
@@ -81,7 +78,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   @FXML
   private ImageView tick1; // Tick image.
   @FXML
-  private Pane notificationArea; // Area for displaying notifications to the cook.
+  private Pane notificationArea; // Area for displaying notifications to the worker.
   @FXML
   private VBox vBox; // The background screen for this screen.
   @FXML
@@ -91,13 +88,13 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   @FXML
   private TableColumn columnDishStatus;
   @FXML
-  private Button addExtra; // Button for the cook to add extra ingredients.
+  private Button addExtra; // Button for the worker to add extra ingredients.
   private Notification notification; // The notification.
 
 
   private Restaurant restaurant; // The restaurant.
   private ServingTable servingTable; // The serving table.
-  private IWorker cook; // The cook who is going to see this screen.
+  private IWorker worker; // The worker who is going to see this screen.
 
     /** Initializing the screen.
      * @param restaurant the restaurant.
@@ -113,7 +110,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       fxmlLoader.load();
       this.restaurant = restaurant;
       this.servingTable = servingTable;
-      setCook(worker);
+      setWorker(worker);
       initialize();
       updateScreen();
     } catch (IOException exception) {
@@ -186,7 +183,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
   public void rowSelected(MouseEvent mouseEvent) {
     Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
     try {
-      if (((Cook) getCook()).canBePrepared(dish, getRestaurant().getInventory())) {
+      if (((Cook) getWorker()).canBePrepared(dish, getRestaurant().getInventory())) {
         checkLabel.setText("Can be Prepared");
         checkLabel.setTextFill(Paint.valueOf("Green"));
         accept.setDisable(false);
@@ -205,27 +202,27 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       System.out.println("No row selected");
     }
   }
-    /** The method is called when the cook presses the accept button and calls methods from the cook class
+    /** The method is called when the worker presses the accept button and calls methods from the worker class
      * accordingly.
      */
   public void acceptDish(ActionEvent actionEvent) {
     try {
       Dish dish = (Dish) tab1Table.getSelectionModel().getSelectedItem();
 
-      String message = getCookMessage(servingTable.checkPriority(dish),((Cook) cook).hasDishes());
+      String message = getCookMessage(servingTable.checkPriority(dish),((Cook) worker).hasDishes());
 
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION, message, ButtonType.YES,
           ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
         if (dish.getDishStatus().equals(DishStatus.SENT)) {
-          ((Cook) getCook()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
+          ((Cook) getWorker()).acceptCook(dish, getRestaurant().getServingTable(), getRestaurant()
               .getInventory());
           setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
           setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
           setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
         } else if(dish.getDishStatus().equals(DishStatus.RETURNED)){
-          ((Cook) getCook()).acceptNoCook(dish, getRestaurant().getServingTable());
+          ((Cook) getWorker()).acceptNoCook(dish, getRestaurant().getServingTable());
         }
       }
     } catch (NullPointerException e) {
@@ -262,7 +259,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           ButtonType.YES, ButtonType.CANCEL);
       alert1.showAndWait();
       if (alert1.getResult() == ButtonType.YES) {
-        ((Cook) getCook()).rejectDish(dish, getRestaurant().getServingTable());
+        ((Cook) getWorker()).rejectDish(dish, getRestaurant().getServingTable());
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
         restaurant.restaurantLogger.logDishRejected(dish);
       }
@@ -281,7 +278,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
           ButtonType.YES, ButtonType.CANCEL);
       alert.showAndWait();
       if (alert.getResult() == ButtonType.YES) {
-        ((Cook) getCook()).serveDish(dish, getRestaurant().getServingTable());
+        ((Cook) getWorker()).serveDish(dish, getRestaurant().getServingTable());
         setCookTable(getRestaurant().getServingTable().getDishesToBeCooked());
         setBeingCookedTable(getRestaurant().getServingTable().getDishesBeingCooked());
         setReadyTable(getRestaurant().getServingTable().getDishesToBeServed());
@@ -321,21 +318,21 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
     this.servingTable = servingTable;
   }
 
-  public IWorker getCook() {
-    return cook;
+  public IWorker getWorker() {
+    return worker;
   }
 
     /**
      * Set the worker depending on the type of the worker.
-     * @param cook The Worker
+     * @param worker The Worker
      */
-  public void setCook(IWorker cook) {
-    this.cook = cook;
+  public void setWorker(IWorker worker) {
+    this.worker = worker;
 
-    if (cook.getType().equals(WorkerType.COOK)) {
-      servingTable.addCook((Notifiable) cook);
-      ((Cook) cook).setScreen(this);
-    } else if (cook.getType().equals(WorkerType.SERVER)) {
+    if (worker.getType().equals(WorkerType.COOK)) {
+      servingTable.addCook((Notifiable) worker);
+      ((Cook) worker).setScreen(this);
+    } else if (worker.getType().equals(WorkerType.SERVER)) {
       tab1.getChildren().remove(accept);
       tab1.getChildren().remove(checkLabel);
       tab1.getChildren().remove(reject);
@@ -345,7 +342,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       tab2.getChildren().remove(DishReadyButton);
       Button back = new Button();
       back.setOnAction(event -> {
-        TablesScreen tablesScreen = new TablesScreen((Server) cook, restaurant);
+        TablesScreen tablesScreen = new TablesScreen((Server) worker, restaurant);
         vBox.getChildren().setAll(tablesScreen);
       });
       back.setLayoutX(400);
@@ -355,7 +352,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       serveDishBtn.setOnAction(event -> {
         try {
           Dish dish = (Dish) tab3Table.getSelectionModel().getSelectedItem();
-          ((Server) cook).serveDish(dish, restaurant);
+          ((Server) worker).serveDish(dish, restaurant);
           restaurant.restaurantLogger.logDishDelivered(dish);
         } catch (NullPointerException e) {
           System.out.println("No row selected");
@@ -367,7 +364,7 @@ public class ServingScreen extends VBox implements ModelControllerInterface {
       serveDishBtn.setText("Serve Dish");
       tab3.getChildren().add(serveDishBtn);
       back.setText("Back");
-      ((Server) cook).setScreen(this);
+      ((Server) worker).setScreen(this);
     }
 
 
