@@ -13,7 +13,6 @@ import Restaurant.WorkerType;
 import TablesScreen.TablesScreen;
 
 // import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-import complementScreen.ComplementScreen;
 import complementScreen.ComplementScreenController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
