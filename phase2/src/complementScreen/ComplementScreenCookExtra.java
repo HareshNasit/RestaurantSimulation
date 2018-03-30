@@ -40,7 +40,7 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
    * For the add extras button. If the cook adds ingredients that are in the inventory, the
    * ingredients get removed. Otherwise, an alert pops up and tells the cook that there is not
    * enough of an ingredient. The cook should only be able to press the button if the dish was
-   * returned.s
+   * returned. 
    */
   public void addIfIngredientsEnough() {
 
@@ -79,7 +79,9 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
     }
   }
 
-
+  /**
+   * this method creates an alert that asks if the cook wants to accept a dish to cook
+   */
   @Override
   public void acceptEvent() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you are finished?",
@@ -91,6 +93,10 @@ public class ComplementScreenCookExtra extends ComplementScreenController {
     }
   }
 
+  /**
+   * setter for the restaurant
+   * @param restaurant the restaurant
+   */
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
