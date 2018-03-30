@@ -31,8 +31,13 @@ public class BillScreenController extends GridPane {
   private Table table;
   private Restaurant restaurant;
 
-  public BillScreenController(Restaurant restaurant, Table table){
-
+  /**
+   * Creates a bill screen window that allows customers to pay their bill.
+   *
+   * @param restaurant Restaurant the table is at.
+   * @param table table which is paying.
+   */
+  public BillScreenController(Restaurant restaurant, Table table) {
 
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("bill.fxml"));
     fxmlLoader.setRoot(this);
@@ -41,17 +46,19 @@ public class BillScreenController extends GridPane {
       fxmlLoader.load();
       this.restaurant = restaurant;
       setTable(table);
-  }catch (IOException e){
+    } catch (IOException e) {
 
+    }
+  }
 
-    }}
-
-  /** */
+  /**
+   * Creates a receipt window, so the customer can see how much they owe and which dishes they
+   * ordered.
+   */
   public void createReceiptWindow() {
     String customer = (String) scrollMenu.getValue();
     if (!(customer == null)) {
       if (customer.equals("All")) {
-        System.out.println(customer + "haha");
         Alert alert =
             new Alert(
                 Alert.AlertType.CONFIRMATION,
@@ -81,6 +88,9 @@ public class BillScreenController extends GridPane {
     }
   }
 
+  /**
+   * Creates a receipt window for the whole table.
+   */
   public void createRestaurantReceiptWindow(Table table) {
     Alert alert =
         new Alert(
@@ -90,6 +100,9 @@ public class BillScreenController extends GridPane {
     alert.showAndWait();
   }
 
+  /**
+   * Sets the table and adds labels to drop down menu.
+   */
   public void setTable(Table table) {
     this.table = table;
     ArrayList<String> menuLabels = new ArrayList<String>();
@@ -103,6 +116,11 @@ public class BillScreenController extends GridPane {
     scrollMenu.setItems(labels);
   }
 
+  /**
+   * Gets the tip from the customer.
+   *
+   * @param subtotal if the customer selects a percent tip, then subtotal is used.
+   */
   public double getTip(double subtotal) {
     double tip = -1;
     ButtonType percent = new ButtonType("%");
@@ -130,6 +148,12 @@ public class BillScreenController extends GridPane {
     return tip;
   }
 
+
+  /**
+   * Gets a valid tip input.
+   *
+   * @return String
+   */
   private String getTextTipInput() {
 
     Dialog dialog = new TextInputDialog();
@@ -153,6 +177,11 @@ public class BillScreenController extends GridPane {
     return entered;
   }
 
+  /**
+   * Checks if the String is a number and has no more than 2 decimals.
+   *
+   * @param tip text passed in from the TextInputDialog.
+   */
   private boolean validTipEntry(String tip) {
     try {
       double tipAmount = Double.parseDouble(tip);
@@ -162,8 +191,11 @@ public class BillScreenController extends GridPane {
       return false;
     }
   }
-  
 
+
+  /**
+   * Creates the payment window for the customer.
+   */
   public void createPaymentWindow() {
     String customer = (String) scrollMenu.getValue();
     if (!(customer == null)) {
@@ -187,10 +219,21 @@ public class BillScreenController extends GridPane {
     }
   }
 
+  /**
+   * Sets the restaurant.
+   *
+   * @param restaurant The Restaurant.
+   */
   public void setRestaurant(Restaurant restaurant) {
     this.restaurant = restaurant;
   }
 
+  /**
+   * Helper method for writing receipt to txt (if the customer accepts).
+   *
+   * @param customer Customer from the drop down menu.
+   * @param tip tip that the customer payed.
+   */
   private void customerBillConfirmationHelper(String customer, double tip) {
     int customerNum =
         Integer.parseInt(customer.substring(customer.length() - 1, customer.length()));
@@ -201,6 +244,11 @@ public class BillScreenController extends GridPane {
     }
   }
 
+  /**
+   * Helper method for writing receipt to txt for the whole table (if the person paying accepts).
+   *
+   * @param tip tip that the customer payed.
+   */
   private void allBillConfirmationHelper(double tip) {
     if (alertBillHelper(Bill.finalPaymentBillTable(table, tip), tip) == ButtonType.YES) {
       restaurant.writeToRECEIPTFILE("##################################" + System.lineSeparator());
@@ -208,6 +256,13 @@ public class BillScreenController extends GridPane {
     }
   }
 
+
+  /**
+   * Helper method for getting customer input.
+   *
+   * @param bill The String representation of the bill.
+   * @param tip The tip amount.
+   */
   private ButtonType alertBillHelper(String bill, double tip) {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bill, ButtonType.YES, ButtonType.CANCEL);
     alert.setTitle("Is this all correct?");
