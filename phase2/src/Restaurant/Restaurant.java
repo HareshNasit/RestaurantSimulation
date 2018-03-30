@@ -106,6 +106,7 @@ public class Restaurant {
     createNewReceiptFile();
     createNewLogFile();
     inventory.readInventory();
+    inventory.readRequest();
     generateTables(TABLEFILE);
     setActive(false);
 
